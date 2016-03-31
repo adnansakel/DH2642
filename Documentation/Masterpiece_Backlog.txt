@@ -1,0 +1,53 @@
+Jahidul/Sakel - finish the started (Firebase
+DM - starts with UI (e.g. overview page, scroll views) or works on Views/Activites
+DD - starts with setup logic (e.g. starting cash value, painting distribution,...)
+Geoff - is sick
+
+UI Link: https://masterpiece.mybalsamiq.com/projects/masterpiece/grid 
+
+UI Layouts
+ - Welcome Screen (partially done - screen and navigation)
+ - Create New Game (partially done - screen and navigation)
+ - Join Game Screen (partially done - screen and navigation)
+ - Waiting for Players Screen (partially done - screen and navigation)
+ - Split screen in 2 segments (done)
+ - Top Section: Player Selection Buttons
+ - Top Section: Scrollview of images (partially done)
+ - Individual Images (done)
+ - Bottom Section: Scrollview of images with value
+ - Bottom Section: Current Cash value
+ - Game Mode Selection (Shake) (S. 6)
+ - Private Auction: Approval (Screen 7)
+ - Private Auction: Select Painting (swipe up to select a painting for the auction)
+ - Private Auction: Ongoing Screen (S9)
+ - Private Auction: finished (S10)
+ - Bank Auction: Start (S14)
+ - Bank Auction: Active Player View (Owner of Turn) (Bottom Section View)
+ - Bank/Private Auction: Active Bidding View (Bottom and Top Section View)
+ - Bank/Private Auction: Win + Lose Screen (S12+13)
+ - Detailed Painting View (S16) (almost done)
+ - Final Score Screen (S17)
+ - Status Bar top (Active Turn / 10, Active Player, Current Activity e.g. Bank Auction)
+
+Activities (Controls):
+ - Welcome
+ - Create Game
+ - Join Game
+ - Lobby
+ - Main Game
+
+Java Views:
+ - Welcome
+ - Create Game
+ - Join Game
+ - Lobby
+ - Main Game (e.g. Private Auction, Bank Auction, Game Mode Selection,...)
+
+Model:
+ - Masterpiece Game Model (e.g. Turn, Active Player,...)
+ - Player
+ - Painting
+
+Other:
+ - Setup Logic (Start Value, 2 Paintings, ...)
+ - Turn Management (Variables, Logic)
