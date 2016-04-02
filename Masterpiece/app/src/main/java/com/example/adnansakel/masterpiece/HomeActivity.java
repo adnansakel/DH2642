@@ -13,6 +13,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Button button_create_game;
     Button button_join_game;
     Firebase masterpieceGameNumberRef;
-    Firebase masterpieceRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Default call to load previous state
@@ -40,74 +41,28 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         // Creating the view class instance
         HomeView homeView = new HomeView(findViewById(R.id.home_view));
 
-        //find the create and join buttons
         button_create_game = (Button)findViewById(R.id.buttonCreateGame);
         button_join_game = (Button)findViewById(R.id.buttonJoinGame);
 
-        //add click listeners to the current object
         button_create_game.setOnClickListener(this);
         button_join_game.setOnClickListener(this);
 
-        //find the firebase database and add a test value
-        //masterpieceGameNumberRef = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.GameNumber);
-        try{
-            Firebase.setAndroidContext(this);
-            masterpieceRef = new Firebase(AppConstants.FireBaseUri);
-            Map<String,Object> newGameNumber = new HashMap<String,Object>();
-            newGameNumber.put("test2", "123");
-            //masterpieceRef.setValue(newGameNumber);
-            masterpieceRef.child("GameNumber").setValue(newGameNumber);
-            //masterpieceRef.push().setValue(newGameNumber);
-        }
-        catch (Exception ex){
-            System.out.println(ex.getMessage().toString());
-           // button_join_game.setText(ex.getMessage().toString());
-        }
+
+
 
 
     }
 
     @Override
     public void onClick(View v) {
-
-        //if the create button is clicked
         if(v == button_create_game){
-
             //go to create game activity
+
+
             startActivity(new Intent(HomeActivity.this, CreateGameActivity.class));
-
-            //read some data from firebase one time only (take a data snapshot)
-            masterpieceRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    //get GameNumber
-                    String game_number = dataSnapshot.child(AppConstants.GameNumber).getValue().toString();
-
-                    //if there isn't a GameNumber, create a new one and add it to firebase
-                    if(!dataSnapshot.child(game_number).exists()){
-
-                        Map<String,Object> newGameNumber = new HashMap<String,Object>();
-                        newGameNumber.put(AppConstants.GameNumber, String.valueOf(Integer.valueOf(game_number) + 1));
-                        masterpieceRef.updateChildren(newGameNumber);
-                        newGameNumber.put("Game_1114",null);
-
-                        masterpieceRef.setValue(newGameNumber);
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
         }
         else if(v == button_join_game){
             //go to join game activity
-            startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
         }
     }
 }
