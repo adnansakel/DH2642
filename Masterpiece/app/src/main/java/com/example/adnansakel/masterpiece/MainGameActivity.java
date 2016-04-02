@@ -5,18 +5,23 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.model.Painting;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Daniel on 02/04/2016.
  */
 public class MainGameActivity extends Activity {
+    MasterpieceGameModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
         // Adding the model
-        MasterpieceGameModel model = ((MasterpieceApplication) this.getApplication()).getModel();
+        model = ((MasterpieceApplication) this.getApplication()).getModel();
 
         /* DM TODO: OLD WAY OF CREATING IMAGES - Remove later
         LinearLayout test = (LinearLayout)findViewById(R.id.llPersonalImages);
@@ -36,5 +41,19 @@ public class MainGameActivity extends Activity {
         return true;
     }*/
 
+    //sets up the game, and is executed only by the game creator
+    public void gameStart() {
+
+        //randomize order of paintings
+        List<Painting> thePaintings = model.getAllPaintings1();
+        Collections.shuffle(thePaintings);
+        model.setAllPaintings(thePaintings);
+
+        //randomize order of painting values
+        List<Integer> thePaintingValues = model.getAllPaintingValues();
+        Collections.shuffle(thePaintingValues);
+        model.setAllPaintingValues(thePaintingValues);
+
+    }
 
 }

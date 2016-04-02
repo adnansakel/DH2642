@@ -6,8 +6,12 @@ import android.graphics.BitmapFactory;
 
 import com.example.adnansakel.masterpiece.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static android.content.Context.*;
@@ -18,6 +22,8 @@ import static android.content.Context.*;
 public class MasterpieceGameModel {
     private String gameNumber;
     private Set<Player> allPlayers = new HashSet<Player>();
+    private List<Painting> allPaintings = new ArrayList<Painting>();
+    private List<Integer> allPaintingValues = Arrays.asList(200000,200000,200000,500000,500000,1000000); //prepopulated with fixed values
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -52,6 +58,23 @@ public class MasterpieceGameModel {
 
     public Set<Player> getAllPlayers(){
         return allPlayers;
+    }
+
+    //the paintings and values are in a list in order to easily randomize them
+    public void setAllPaintings(List<Painting> allPaintings){
+        this.allPaintings = allPaintings;
+    }
+
+    public List<Painting> getAllPaintings1(){ //name has 1 because of duplicate getAllPaintings below
+        return allPaintings;
+    }
+
+    public void setAllPaintingValues(List<Integer> allPaintingValues){
+        this.allPaintingValues = allPaintingValues;
+    }
+
+    public List<Integer> getAllPaintingValues(){
+        return allPaintingValues;
     }
 
     public Set<Painting> getPaintingsByPlayerID(){
