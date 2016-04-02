@@ -18,6 +18,7 @@
         <activity android:name=".CreateGameActivity"></activity>
         <activity android:name=".JoinGameActivity"></activity>
         <activity android:name=".LobbyActivity"></activity>
+        <activity android:name=".MainGameActivity"></activity>
     </application>
 
 </manifest>
