@@ -9,6 +9,7 @@ import java.util.Set;
  */
 public class MasterpieceGameModel {
     private String gameNumber;
+    private Set<Player> allPlayers = new HashSet<Player>();
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -20,6 +21,10 @@ public class MasterpieceGameModel {
         Player p2 = new Player("P2","2",200000,setofpaintings);
         Player p3 = new Player("P3","3",200000,setofpaintings);
         Player p4 = new Player("P4","4",200000,setofpaintings);
+        allPlayers.add(p1);
+        allPlayers.add(p2);
+        allPlayers.add(p3);
+        allPlayers.add(p4);
 
         System.out.println("Player 1: " + p1);
         System.out.println("Player 1 Paintings: " + p1.ownedPaintings);
@@ -34,5 +39,9 @@ public class MasterpieceGameModel {
 
     public String getGameNumber(){
         return gameNumber;
+    }
+
+    public Set<Player> getAllPlayers(){
+        return allPlayers;
     }
 }

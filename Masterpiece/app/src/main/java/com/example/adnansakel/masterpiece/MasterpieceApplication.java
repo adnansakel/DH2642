@@ -6,6 +6,7 @@ import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 
 /**
  * Created by Daniel on 02/04/2016.
+ * Responsible for getting and setting the model (MasterpieceGameModel)
  */
 public class MasterpieceApplication extends Application{
 

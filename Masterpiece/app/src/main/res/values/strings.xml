@@ -5,4 +5,5 @@
     <string name="game_number">Game number :</string>
     <string name="hint_choose_user_name">User name in game</string>
     <string name="waiting_for_player">Waiting for player ...</string>
+    <string name="action_settings">Settings</string>
 </resources>
