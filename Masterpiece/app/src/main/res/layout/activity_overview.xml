@@ -32,10 +32,10 @@
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:id="@+id/horizontalscroll_bottomPanel">
+            android:id="@+id/hsvBottomPanel">
 
             <LinearLayout
-                android:id="@+id/horizontalscroll_bottomPanel_linearlayout"
+                android:id="@+id/llPersonalImages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >

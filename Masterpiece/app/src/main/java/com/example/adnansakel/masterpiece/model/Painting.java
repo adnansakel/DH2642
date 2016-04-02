@@ -1,5 +1,7 @@
 package com.example.adnansakel.masterpiece.model;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Daniel on 02/04/2016.
  */
@@ -7,12 +9,14 @@ public class Painting {
 
     // Variable Definition
     String name;
-    String image;
+    String imageURL;
+    Bitmap image;
     String description;
     Integer value;
 
-    public Painting(String name, String image, String description, Integer value) {
+    public Painting(String name, String imageURL, Bitmap image, String description, Integer value) {
         this.name = name;
+        this.imageURL = imageURL;
         this.image = image;
         this.description = description;
         this.value = value;
@@ -24,10 +28,16 @@ public class Painting {
     public void setName(String name) {
         this.name = name;
     }
-    public String getImage() {
+    public String getImageURL() {
+        return imageURL;
+    }
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+    public Bitmap getImage() {
         return image;
     }
-    public void setImage(String image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
     public String getDescription() {

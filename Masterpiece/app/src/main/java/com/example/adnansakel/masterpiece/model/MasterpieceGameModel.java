@@ -1,8 +1,16 @@
 package com.example.adnansakel.masterpiece.model;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.adnansakel.masterpiece.R;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import static android.content.Context.*;
 
 /**
  * Created by Adnan Sakel on 3/28/2016.
@@ -13,8 +21,9 @@ public class MasterpieceGameModel {
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
-        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg","A description",100000);
-        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg","A description",300000);
+        Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
+        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
         Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
 
         Player p1 = new Player("P1","1",200000,setofpaintings);
@@ -43,5 +52,23 @@ public class MasterpieceGameModel {
 
     public Set<Player> getAllPlayers(){
         return allPlayers;
+    }
+
+    public Set<Painting> getPaintingsByPlayerID(){
+        //TODO: Define proper function with by ID or object
+        Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
+        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
+        Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
+        return setofpaintings;
+    }
+
+    public Set<Painting> getAllPaintings(){
+        //TODO: Define proper function with by ID or object
+        Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
+        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
+        Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
+        return setofpaintings;
     }
 }
