@@ -27,6 +27,10 @@ public class MasterpieceGameModel {
     private List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
     private Player turnTaker;
     private String turnAction;
+    private Painting paintingBeingAuctioned;
+    private Player currentBidder;
+    private Player myPlayer;
+    private Player nextPlayer;
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -96,6 +100,46 @@ public class MasterpieceGameModel {
 
     public String getTurnAction() {
         return turnAction;
+    }
+
+    public void setPaintingBeingAuctioned(Painting paintingBeingAuctioned){
+        this.paintingBeingAuctioned = paintingBeingAuctioned;
+    }
+
+    public Painting getPaintingBeingAuctioned(){
+        return paintingBeingAuctioned;
+    }
+
+    public void setCurrentBidder(Player currentBidder){
+        this.currentBidder = currentBidder;
+    }
+
+    public Player getCurrentBidder(){
+        return currentBidder;
+    }
+
+    public void setMyPlayer(Player myPlayer){
+        this.myPlayer = myPlayer;
+    }
+    //TODO: myPlayer is empty. need to set it when joining the game
+
+    public Player getMyPlayer(){
+        return myPlayer;
+    }
+
+    public void setNextPlayer(){
+        Integer myPlayerIndex = allPlayers.indexOf(myPlayer);
+        //if I'm player 4, next player will be player 1
+        if (myPlayerIndex <= 2) {
+            this.nextPlayer = allPlayers.get(myPlayerIndex + 1);
+        } else {
+            this.nextPlayer = allPlayers.get(0);
+        }
+    }
+    //TODO: need to call this when joining the game
+
+    public Player getNextPlayer(){
+        return nextPlayer;
     }
 
     public Set<Painting> getPaintingsByPlayerID(){

@@ -100,18 +100,42 @@ public class MainGameActivity extends Activity {
 
         if(roll == 0){
 
-            //Private Auction
+            //PRIVATE AUCTION
 
             //set turn action
             model.setTurnAction("privateAuction");
 
+            //choose painting being auctioned (for now I'm just choosing my player's first painting)
+            Painting chosenPaintingToAuction = model.getMyPlayer().getOwnedPaintings().get(0);
+            //TODO: allow my player to select a painting, or allow another player to
+
+            //set painting being auctioned
+            model.setPaintingBeingAuctioned(chosenPaintingToAuction);
+
+            //set current bidder as the next person in allPlayers[]
+            model.setCurrentBidder(model.getNextPlayer());
+
         } else if(roll == 1){
 
-            //Bank Auction
+            //BANK AUCTION
 
             //set turn action
             model.setTurnAction("bankAuction");
+
+            //choose painting being auctioned (first painting in Paintings[])
+            Painting chosenPaintingToAuction = model.getAllPaintings1().get(0);
+
+            //set painting being auctioned
+            model.setPaintingBeingAuctioned(chosenPaintingToAuction);
+
+            //set current bidder as the next person in allPlayers[]
+            model.setCurrentBidder(model.getNextPlayer());
         }
+
+    }
+
+    //executed when currentBidder = myPlayer
+    public void Auction() {
 
     }
 
