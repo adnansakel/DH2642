@@ -20,22 +20,26 @@ import static android.content.Context.*;
  * Created by Adnan Sakel on 3/28/2016.
  */
 public class MasterpieceGameModel {
+
     private String gameNumber;
-    private Set<Player> allPlayers = new HashSet<Player>();
+    private List<Player> allPlayers = new ArrayList<Player>();
     private List<Painting> allPaintings = new ArrayList<Painting>();
-    private List<Integer> allPaintingValues = Arrays.asList(200000,200000,200000,500000,500000,1000000); //prepopulated with fixed values
+    private List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
+    private Player turnTaker;
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
         Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
         Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
         Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
-        Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
+        List<Painting> listOfPaintings = new ArrayList<Painting>();
+        listOfPaintings.add(pa1);
+        listOfPaintings.add(pa2);
 
-        Player p1 = new Player("P1","1",200000,setofpaintings);
-        Player p2 = new Player("P2","2",200000,setofpaintings);
-        Player p3 = new Player("P3","3",200000,setofpaintings);
-        Player p4 = new Player("P4","4",200000,setofpaintings);
+        Player p1 = new Player("P1","1",200000,listOfPaintings);
+        Player p2 = new Player("P2","2",200000,listOfPaintings);
+        Player p3 = new Player("P3","3",200000,listOfPaintings);
+        Player p4 = new Player("P4","4",200000,listOfPaintings);
         allPlayers.add(p1);
         allPlayers.add(p2);
         allPlayers.add(p3);
@@ -56,7 +60,7 @@ public class MasterpieceGameModel {
         return gameNumber;
     }
 
-    public Set<Player> getAllPlayers(){
+    public List<Player> getAllPlayers(){
         return allPlayers;
     }
 
@@ -75,6 +79,14 @@ public class MasterpieceGameModel {
 
     public List<Integer> getAllPaintingValues(){
         return allPaintingValues;
+    }
+
+    public void setTurnTaker(Player turnTaker){
+        this.turnTaker = turnTaker;
+    }
+
+    public Player getTurnTaker(){
+        return turnTaker;
     }
 
     public Set<Painting> getPaintingsByPlayerID(){

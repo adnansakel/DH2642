@@ -6,15 +6,20 @@ import android.widget.LinearLayout;
 
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import com.example.adnansakel.masterpiece.model.Painting;
+import com.example.adnansakel.masterpiece.model.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Daniel on 02/04/2016.
  */
 public class MainGameActivity extends Activity {
+
     MasterpieceGameModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +49,11 @@ public class MainGameActivity extends Activity {
     //sets up the game, and is executed only by the game creator
     public void gameStart() {
 
-        //randomize order of paintings
+        //access list of paintings and players
         List<Painting> thePaintings = model.getAllPaintings1();
+        List<Player> thePlayers =  model.getAllPlayers();
+
+        //randomize order of paintings
         Collections.shuffle(thePaintings);
         model.setAllPaintings(thePaintings);
 
@@ -54,6 +62,32 @@ public class MainGameActivity extends Activity {
         Collections.shuffle(thePaintingValues);
         model.setAllPaintingValues(thePaintingValues);
 
+        //randomly select a player and set them as TurnTaker
+        Random rn = new Random();
+        int answer = rn.nextInt(3);
+        Player selectedPlayer = thePlayers.get(answer);
+        model.setTurnTaker(selectedPlayer);
+
+        //for each player in the game
+        for(int i=0; i<4; i++){
+
+            //assign the first value in PaintingValues[] to the first painting in Paintings[]
+            thePaintings.get(0).setValue(thePaintingValues.get(0));
+
+            //add the first painting in Paintings[] to player’s painting list
+            Player thisPlayer = thePlayers.get(i);
+            thisPlayer.addPainting(thePaintings.get(0));
+
+            //remove the first painting and value from their lists
+            thePaintings.remove(0);
+            thePaintingValues.remove(0);
+
+        }
+
+        //since 4 paintings and 4 values have been removed, we need to update the model
+        model.setAllPaintings(thePaintings);
+        model.setAllPaintingValues(thePaintingValues);
+        //*** maybe we'll need a separate list for available paintings? (which would be different than all paintings)
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.adnansakel.masterpiece.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,9 +18,9 @@ public class Player {
     Integer totalvalue;
     Integer cash;
     //TODO: Question: Should this be private?
-    Set<Painting> ownedPaintings = new HashSet<Painting>();
+    List<Painting> ownedPaintings = new ArrayList<>();
 
-    public Player(String name, String firebaseid, Integer cash, Set<Painting> ownedPaintings) {
+    public Player(String name, String firebaseid, Integer cash, List<Painting> ownedPaintings) {
         this.name = name;
         this.firebaseid = firebaseid;
         this.cash = cash;
@@ -44,7 +46,7 @@ public class Player {
         this.cash = cash;
     }
 
-    public Set<Painting> getOwnedPaintings(){
+    public List<Painting> getOwnedPaintings(){
         return ownedPaintings;
     }
 
