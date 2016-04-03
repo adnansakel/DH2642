@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Set;
 
 import static android.content.Context.*;
@@ -19,12 +20,12 @@ import static android.content.Context.*;
 /**
  * Created by Adnan Sakel on 3/28/2016.
  */
-public class MasterpieceGameModel {
+public class MasterpieceGameModel extends Observable{
 
     private String gameNumber;
-    private List<Player> allPlayers = new ArrayList<Player>();
-    private List<Painting> allPaintings = new ArrayList<Painting>();
-    private List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
+    private List<Player> allPlayers;
+    private List<Painting> allPaintings;
+    private List<Integer> allPaintingValues;
     private Player turnTaker;
     private String turnAction;
     private Painting paintingBeingAuctioned;
@@ -33,6 +34,11 @@ public class MasterpieceGameModel {
     private Player nextPlayer;
 
     public MasterpieceGameModel(){
+
+        allPlayers = new ArrayList<Player>();
+        allPaintings = new ArrayList<Painting>();
+        List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
+        /*
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
         Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
         Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
@@ -55,6 +61,7 @@ public class MasterpieceGameModel {
         System.out.println("Player 2: " + p2);
         System.out.println("Player 3: " + p3);
         System.out.println("Player 4: " + p4);
+        */
     }
 
     public void setGameNumber(String gameNumber){
@@ -145,8 +152,8 @@ public class MasterpieceGameModel {
     public Set<Painting> getPaintingsByPlayerID(){
         //TODO: Define proper function with by ID or object
         Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
-        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
+        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000,"artist");
+        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000,"artist");
         Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
         return setofpaintings;
     }
@@ -154,9 +161,21 @@ public class MasterpieceGameModel {
     public Set<Painting> getAllPaintings(){
         //TODO: Define proper function with by ID or object
         Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
-        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
+        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000,"artist");
+        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000,"artist");
         Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
         return setofpaintings;
+    }
+
+    public void addPlayer(Player player){
+        allPlayers.add(player);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void removeAllPlayer(){
+        allPlayers.clear();
+        setChanged();
+        notifyObservers();
     }
 }
