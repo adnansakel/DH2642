@@ -8,18 +8,24 @@ import android.graphics.Bitmap;
 public class Painting {
 
     // Variable Definition
-    String name;
-    String imageURL;
-    Bitmap image;
-    String description;
-    Integer value;
+    private String name;
+    private String imageURL;
+    private Bitmap image;
+    private String description;
+    private Integer value;
+    private String artist;
 
-    public Painting(String name, String imageURL, Bitmap image, String description, Integer value) {
+    public Painting(String name, String imageURL, Bitmap image, String description, Integer value, String artist) {
         this.name = name;
         this.imageURL = imageURL;
         this.image = image;
         this.description = description;
         this.value = value;
+        this.artist = artist;
+    }
+
+    public Painting(){
+
     }
 
     public String getName() {
@@ -53,6 +59,14 @@ public class Painting {
     // Can be used to set the value of the painting in the initial setup
     public void setValue(int type) {
         this.value = type;
+    }
+
+    public void setArtist(String artist){
+        this.artist = artist;
+    }
+
+    public String getArtist(){
+        return artist;
     }
 
 }

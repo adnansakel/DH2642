@@ -63,6 +63,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         }
         else if(v == button_join_game){
             //go to join game activity
+            startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
         }
     }
 }

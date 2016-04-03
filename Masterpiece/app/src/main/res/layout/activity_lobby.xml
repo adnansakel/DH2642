@@ -105,13 +105,13 @@
 
 
     <Button
-        android:id="@+id/buttonCreateGame"
+        android:id="@+id/buttonStartGame"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:text="@string/create_game"
+        android:text="@string/start_game"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"/>

@@ -116,7 +116,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
             player.put("Cash","");
             player.put("BidAmount","");
             progress = ProgressDialog.show(this,"","joining game ...", true);
-            new Firebase(AppConstants.GameRef+"/"+"Players").setValue(player, new Firebase.CompletionListener() {
+            new Firebase(AppConstants.GameRef+"/"+"Players").push().setValue(player, new Firebase.CompletionListener() {
                 @Override
                 public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                     //progress.dismiss();

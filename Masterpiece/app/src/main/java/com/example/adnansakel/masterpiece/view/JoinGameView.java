@@ -22,6 +22,6 @@ public class JoinGameView {
     private void initialize(){
         button_join_game = (Button)view.findViewById(R.id.buttonJoinGame);
 
-        button_join_game.setText(R.string.create_game);
+        button_join_game.setText(R.string.join_game);
     }
 }

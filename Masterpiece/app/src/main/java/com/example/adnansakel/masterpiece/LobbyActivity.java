@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
+import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.model.Player;
 import com.example.adnansakel.masterpiece.view.CreateGameView;
 import com.example.adnansakel.masterpiece.view.HomeView;
 import com.example.adnansakel.masterpiece.view.LobbyView;
@@ -21,12 +23,18 @@ import com.firebase.client.ValueEventListener;
 
 // TODO: We have to distinguish the LobbyActivity for participants and the game creator, as only the game creator should be able to start/create the game in the lobby?
 // TODO: If it is complex, everybody can start it as long as it is 4 people.
+/*
+*I think lobby activity should finish itself as soon as there are four players are available and should proceed to MainGameActivity
+* immediately ---- Commented by Sakel
+ *  */
+
+
 
 public class LobbyActivity extends Activity implements View.OnClickListener {
 
     // Variable definition
     Button button_create_game;
-
+    MasterpieceGameModel masterpiecegamemodel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Default call to load previous state
@@ -37,11 +45,39 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_lobby);
 
+        masterpiecegamemodel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
-        LobbyView lobbyView = new LobbyView(findViewById(R.id.lobby_view));
+        LobbyView lobbyView = new LobbyView(findViewById(R.id.lobby_view),masterpiecegamemodel);
 
-        button_create_game = (Button)findViewById(R.id.buttonCreateGame);
+        button_create_game = (Button)findViewById(R.id.buttonStartGame);
         button_create_game.setOnClickListener(this);
+
+        listentoFirebaseforPlayers();
+
+    }
+
+    private void listentoFirebaseforPlayers(){
+        Firebase.setAndroidContext(this);
+        new Firebase(AppConstants.GameRef+"/"+"Players").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                masterpiecegamemodel.removeAllPlayer();
+                for(DataSnapshot dsplayer : dataSnapshot.getChildren()){
+                    //DataSnapshot dpl = (DataSnapshot)dsplayer.getValue();
+                    //System.out.println(dsplayer.child("Name"));
+                    Player player = new Player();
+                    player.setName(dsplayer.child("Name").getValue().toString());
+                    player.setFirebaseid(dsplayer.getKey().toString());
+                    masterpiecegamemodel.addPlayer(player);
+                   // masterpiecegamemodel.notifyObservers();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     @Override
