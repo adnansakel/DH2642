@@ -62,12 +62,6 @@ public class MainGameActivity extends Activity {
         Collections.shuffle(thePaintingValues);
         model.setAllPaintingValues(thePaintingValues);
 
-        //randomly select a player and set them as TurnTaker
-        Random rn = new Random();
-        int answer = rn.nextInt(3);
-        Player selectedPlayer = thePlayers.get(answer);
-        model.setTurnTaker(selectedPlayer);
-
         //for each player in the game
         for(int i=0; i<4; i++){
 
@@ -88,6 +82,37 @@ public class MainGameActivity extends Activity {
         model.setAllPaintings(thePaintings);
         model.setAllPaintingValues(thePaintingValues);
         //*** maybe we'll need a separate list for available paintings? (which would be different than all paintings)
+
+        //randomly select a player and set them as TurnTaker
+        Random rn = new Random();
+        int index = rn.nextInt(3);
+        Player selectedPlayer = thePlayers.get(index);
+        model.setTurnTaker(selectedPlayer);
+
+    }
+
+    //executed whenever the turnTaker changes and is equal to my player
+    public void startTurn() {
+
+        //randomly select a turn type (roll the dice)
+        Random rn = new Random();
+        int roll = rn.nextInt(1); //there are only 2 types so far
+
+        if(roll == 0){
+
+            //Private Auction
+
+            //set turn action
+            model.setTurnAction("privateAuction");
+
+        } else if(roll == 1){
+
+            //Bank Auction
+
+            //set turn action
+            model.setTurnAction("bankAuction");
+        }
+
     }
 
 }

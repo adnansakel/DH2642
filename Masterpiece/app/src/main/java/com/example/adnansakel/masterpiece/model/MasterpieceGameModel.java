@@ -26,6 +26,7 @@ public class MasterpieceGameModel {
     private List<Painting> allPaintings = new ArrayList<Painting>();
     private List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
     private Player turnTaker;
+    private String turnAction;
 
     public MasterpieceGameModel(){
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -87,6 +88,14 @@ public class MasterpieceGameModel {
 
     public Player getTurnTaker(){
         return turnTaker;
+    }
+
+    public void setTurnAction(String turnAction){
+        this.turnAction = turnAction;
+    }
+
+    public String getTurnAction() {
+        return turnAction;
     }
 
     public Set<Painting> getPaintingsByPlayerID(){
