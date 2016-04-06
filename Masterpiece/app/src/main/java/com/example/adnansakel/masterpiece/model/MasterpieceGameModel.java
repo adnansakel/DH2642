@@ -8,6 +8,7 @@ import com.example.adnansakel.masterpiece.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,12 +33,30 @@ public class MasterpieceGameModel extends Observable{
     private Player currentBidder;
     private Player myPlayer;
     private Player nextPlayer;
+    private List<String>turnTypes;
+    private List<Integer>paintingShuffler;//a list to shuffle the paintings
+
 
     public MasterpieceGameModel(){
 
         allPlayers = new ArrayList<Player>();
         allPaintings = new ArrayList<Painting>();
-        List<Integer> allPaintingValues = Arrays.asList(200000, 200000, 200000, 500000, 500000, 1000000); //prepopulated with fixed values
+
+        allPaintingValues = new ArrayList<Integer>();
+         //prepopulated with fixed values
+
+        turnTypes = new ArrayList<>();
+        turnTypes.add("PrivateAuction");
+        turnTypes.add("BankAuction");
+
+        paintingShuffler = new ArrayList<Integer>();
+        for(int i = 0; i < 20; i++){//assuming there are 20 paintings
+            paintingShuffler.add(i);
+            allPaintingValues.add((i+1)*100000);
+        }
+        Collections.shuffle(allPaintingValues);
+        Collections.shuffle(paintingShuffler);
+
         /*
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
         Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
@@ -167,6 +186,10 @@ public class MasterpieceGameModel extends Observable{
         return setofpaintings;
     }
 
+    public Player getPlayer(int position){
+        return allPlayers.get(position);
+    }
+
     public void addPlayer(Player player){
         allPlayers.add(player);
         setChanged();
@@ -178,4 +201,19 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers();
     }
+
+    public List<Integer> getShuffledPaintingValues(){
+        //Collections.shuffle(allPaintingValues);
+        return allPaintingValues;
+    }
+
+    public String getTurnType(int position){
+        return turnTypes.get(position);
+    }
+
+    public List<Integer> getPaintingShuffler(){
+        return paintingShuffler;
+    }
+
+
 }

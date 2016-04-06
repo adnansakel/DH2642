@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.model.Player;
@@ -38,6 +39,9 @@ public class MainGameActivity extends Activity {
             test.addView(tv);
         }
         */
+        if(AppConstants.IamCreator){
+            gameSetUp();
+        }
     }
 
     /*public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,7 +51,7 @@ public class MainGameActivity extends Activity {
     }*/
 
     //sets up the game, and is executed only by the game creator
-    public void gameStart() {
+    private void gameSetUp() {
 
         //access list of paintings and players
         List<Painting> thePaintings = model.getAllPaintings1();

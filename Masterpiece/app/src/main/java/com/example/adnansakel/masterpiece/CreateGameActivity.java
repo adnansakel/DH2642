@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
+import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.view.CreateGameView;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -18,6 +21,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Created by Adnan Sakel on 3/28/2016.
@@ -29,6 +33,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
     TextView textViewGameNumber;
     EditText editTextUserName;
 
+    MasterpieceGameModel masterpiecegamemodel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Default call to load previous state
@@ -38,6 +44,10 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         // it must come before any call to findViewById method
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_creategame);
+
+        masterpiecegamemodel = ((MasterpieceApplication)this.getApplication()).getModel();
+        // Creating the view class instance
+        CreateGameView createGameViewView = new CreateGameView(findViewById(R.id.creategame_view),masterpiecegamemodel);
         initializeComponent();
         createGame();
     }
@@ -62,20 +72,26 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
 
                 AppConstants.GameID = game_number;
+                masterpiecegamemodel.setGameNumber(game_number);
                 Map<String, Object> newGameNumber = new HashMap<String, Object>();
                 newGameNumber.put(AppConstants.GameNumber, String.valueOf(Integer.valueOf(game_number) + 1));
                 masterpieceRef.updateChildren(newGameNumber);
                 Map<String, Object> game = new HashMap<String, Object>();
-                game.put("Game", String.valueOf(Integer.valueOf(game_number)));
-                game.put("Inplay", "True");
-                game.put("NumberofPlayers", "1");
+                game.put("Game", masterpiecegamemodel.getGameNumber());
+                game.put("Inplay", "false");
+                game.put("NumberofPlayers", "4");
 
                 //Map<String,Object>p1 = new HashMap<String, Object>();
 
                 game.put("Players", "");
-                game.put("TurnTaker", "P1");
-                game.put("TurnAction", "Bank Auction");
-                game.put("GamePhase", "Turns");
+                game.put("TurnTaker", "");
+
+                game.put("TurnAction", "");
+                game.put("GameState", "Setup");
+                game.put("ShuffledPaintingValues",masterpiecegamemodel.getShuffledPaintingValues());
+                game.put("ShuffledPaintings", masterpiecegamemodel.getPaintingShuffler());
+                game.put("PaintingBeingAuctioned","");
+                game.put("CurrentBidder","");
 
                 Firebase gamesRef = masterpieceRef.child("Games");
                 final Firebase newGameRef = gamesRef.push();
@@ -84,11 +100,14 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                         //progress.dismiss();
                         if (firebaseError != null) {
-                            textViewGameNumber.setText(firebaseError.getMessage().toString());
+                            progress.dismiss();
+                            Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
+                            //textViewGameNumber.setText(firebaseError.getMessage().toString());
                         } else {
                             progress.dismiss();
                             textViewGameNumber.setText(game_number);
                             AppConstants.GameRef = newGameRef.toString();
+                            AppConstants.IamCreator = true;
                         }
                     }
 
@@ -122,6 +141,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                     //progress.dismiss();
                     if (firebaseError != null) {
                         //textViewGameNumber.setText(firebaseError.getMessage().toString());
+                        progress.dismiss();
+                        Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
                     } else {
                         progress.dismiss();
                         //textViewGameNumber.setText(game_number);
