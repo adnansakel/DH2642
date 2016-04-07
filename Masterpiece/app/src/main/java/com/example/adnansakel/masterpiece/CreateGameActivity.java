@@ -88,7 +88,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
                 game.put("TurnAction", "");
                 game.put("GameState", "Setup");
-                game.put("ShuffledPaintingValues",masterpiecegamemodel.getShuffledPaintingValues());
+                game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpiecegamemodel.getPaintingShuffler());
                 game.put("PaintingBeingAuctioned","");
                 game.put("CurrentBidder","");
@@ -105,7 +105,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                             //textViewGameNumber.setText(firebaseError.getMessage().toString());
                         } else {
                             progress.dismiss();
-                            textViewGameNumber.setText(game_number);
+                            masterpiecegamemodel.setGameNumber(game_number);
                             AppConstants.GameRef = newGameRef.toString();
                             AppConstants.IamCreator = true;
                         }
@@ -131,8 +131,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
             Map<String, Object> player = new HashMap<String, Object>();
             String[]paintings = {"1","2","3","4"};
             player.put("Name",editTextUserName.getText().toString());
-            player.put("Paintings",paintings);
-            player.put("Cash","");
+            player.put("Paintings","");
+            player.put("Cash","1500000");
             player.put("BidAmount","");
             progress = ProgressDialog.show(this,"","joining game ...", true);
             new Firebase(AppConstants.GameRef+"/"+"Players").push().setValue(player, new Firebase.CompletionListener() {
@@ -147,6 +147,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                         progress.dismiss();
                         //textViewGameNumber.setText(game_number);
                         //lobby activity should come here
+                        startActivity(new Intent(CreateGameActivity.this,LobbyActivity.class));
                     }
                 }
             });

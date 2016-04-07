@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
+import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import com.example.adnansakel.masterpiece.view.HomeView;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -26,6 +27,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Button button_create_game;
     Button button_join_game;
     Firebase masterpieceGameNumberRef;
+    MasterpieceGameModel masterpieceGameModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +39,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_home);
 
-
+        masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
-        HomeView homeView = new HomeView(findViewById(R.id.home_view));
+        HomeView homeView = new HomeView(findViewById(R.id.home_view),masterpieceGameModel);
 
         button_create_game = (Button)findViewById(R.id.buttonCreateGame);
         button_join_game = (Button)findViewById(R.id.buttonJoinGame);

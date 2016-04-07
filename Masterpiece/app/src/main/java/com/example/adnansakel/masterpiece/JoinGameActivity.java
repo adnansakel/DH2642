@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
+import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import com.example.adnansakel.masterpiece.view.HomeView;
 import com.example.adnansakel.masterpiece.view.JoinGameView;
 import com.firebase.client.ChildEventListener;
@@ -31,6 +32,8 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
     ProgressDialog progress;
     EditText editTextUserName;
     EditText editTextGameNumber;
+
+    MasterpieceGameModel masterpieceGameModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Default call to load previous state
@@ -41,8 +44,9 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_joingame);
 
+        masterpieceGameModel = masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
-        JoinGameView joinGameView = new JoinGameView(findViewById(R.id.joingame_view));
+        JoinGameView joinGameView = new JoinGameView(findViewById(R.id.joingame_view),masterpieceGameModel);
 
         Firebase.setAndroidContext(this);
 
@@ -105,6 +109,7 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
                                 AppConstants.PlayerRef = firebase.getRef().toString();//Ref for player who is playing on this device
                                 System.out.println("Player ref:" + AppConstants.PlayerRef);
                                 AppConstants.GameID = editTextGameNumber.getText().toString();
+                                masterpieceGameModel.setGameNumber(AppConstants.GameID);
                                 startActivity(new Intent(JoinGameActivity.this, LobbyActivity.class));
                             }
                         }

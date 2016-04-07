@@ -17,11 +17,13 @@ import com.example.adnansakel.masterpiece.model.Painting;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Daniel on 02/04/2016.
  */
-public class MainGameView {
+public class MainGameView implements Observer{
     View view;
     MasterpieceGameModel gameModel;
     //Map<String, View> PaintingNameToViewMap = new HashMap<>();
@@ -30,6 +32,7 @@ public class MainGameView {
     LayoutInflater layoutInflater;
 
     public MainGameView(View view, MasterpieceGameModel gameModel) {
+        gameModel.addObserver(this);
         this.gameModel = gameModel;
         this.view = view;
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -58,5 +61,10 @@ public class MainGameView {
             //dishNameToViewMap.put(starterDish.getName(), starterView);
             personalImageLayout.addView(paintingView, layoutParams);
         }
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+
     }
 }

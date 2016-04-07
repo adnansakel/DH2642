@@ -2,6 +2,7 @@ package com.example.adnansakel.masterpiece.view;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.R;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -16,6 +17,8 @@ public class CreateGameView implements Observer {
     View view;
 
     Button button_join_game;
+
+    TextView textviewGameNumber;
     
     MasterpieceGameModel masterpieceGameModel;
 
@@ -29,12 +32,14 @@ public class CreateGameView implements Observer {
 
     private void initialize(){
         button_join_game = (Button)view.findViewById(R.id.buttonJoinGame);
-
+        textviewGameNumber = (TextView)view.findViewById(R.id.textviewGameNumber);
         button_join_game.setText(R.string.join_game);
     }
 
     @Override
     public void update(Observable observable, Object data) {
-
+            if(observable instanceof MasterpieceGameModel){
+                textviewGameNumber.setText(masterpieceGameModel.getGameNumber());
+            }
     }
 }

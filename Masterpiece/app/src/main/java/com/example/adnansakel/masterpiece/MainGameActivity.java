@@ -8,6 +8,7 @@ import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.model.Player;
+import com.example.adnansakel.masterpiece.view.MainGameView;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +29,7 @@ public class MainGameActivity extends Activity {
 
         // Adding the model
         model = ((MasterpieceApplication) this.getApplication()).getModel();
+        MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
         /* DM TODO: OLD WAY OF CREATING IMAGES - Remove later
         LinearLayout test = (LinearLayout)findViewById(R.id.llPersonalImages);
