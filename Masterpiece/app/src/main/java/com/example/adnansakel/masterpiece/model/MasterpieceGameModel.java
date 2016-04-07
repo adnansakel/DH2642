@@ -85,6 +85,8 @@ public class MasterpieceGameModel extends Observable{
 
     public void setGameNumber(String gameNumber){
         this.gameNumber = gameNumber;
+        setChanged();
+        notifyObservers();
     }
 
     public String getGameNumber(){
