@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -153,9 +154,9 @@ public class MainGameActivity extends Activity {
 
     //executed when currentBidder = myPlayer
     public void Auction() {
-
+        /*
         //full screen popup during auction
-       private Button popup;
+        private Button popup;
         private final PopupWindow popupWindow;
         private final LayoutInflater layoutInflater;
         private final RelativeLayout relativeLayout;
@@ -185,7 +186,7 @@ public class MainGameActivity extends Activity {
 
                     });
             }
-        }
+        }*/
 
     }
 
