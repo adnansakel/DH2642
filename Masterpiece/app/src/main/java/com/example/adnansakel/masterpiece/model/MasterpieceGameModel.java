@@ -35,7 +35,7 @@ public class MasterpieceGameModel extends Observable{
     private Player nextPlayer;
     private List<String>turnTypes;
     private List<Integer>paintingShuffler;//a list to shuffle the paintings
-
+    private String color;
 
     public MasterpieceGameModel(){
 
@@ -218,4 +218,13 @@ public class MasterpieceGameModel extends Observable{
     }
 
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+        setChanged();
+        notifyObservers();
+    }
 }
