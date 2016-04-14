@@ -2,7 +2,15 @@ package com.example.adnansakel.masterpiece;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -113,13 +121,17 @@ public class MainGameActivity extends Activity {
 
             //choose painting being auctioned (for now I'm just choosing my player's first painting)
             Painting chosenPaintingToAuction = model.getMyPlayer().getOwnedPaintings().get(0);
-            //TODO: allow my player to select a painting, or allow another player to
+
+            //TODO: allow my player to select a painting by swiping up
 
             //set painting being auctioned
             model.setPaintingBeingAuctioned(chosenPaintingToAuction);
 
             //set current bidder as the next person in allPlayers[]
             model.setCurrentBidder(model.getNextPlayer());
+
+            //bidding on private auction
+
 
         } else if(roll == 1){
 
@@ -142,6 +154,39 @@ public class MainGameActivity extends Activity {
 
     //executed when currentBidder = myPlayer
     public void Auction() {
+        /*
+        //full screen popup during auction
+        private Button popup;
+        private final PopupWindow popupWindow;
+        private final LayoutInflater layoutInflater;
+        private final RelativeLayout relativeLayout;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_auction);
+            popup = (Button) findViewById(R.id.Button);
+            relativeLayout = (relativeLayout) findViewById(R.id.relative);
+
+            popup.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick (View view) {
+
+                    layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    ViewGroup container  = (ViewGroup) layoutInflater.inflate(R.layout.activity_bid,null);
+
+                    popupWindow = new PopupWindow(container,400,400,true);
+                    popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY,500,500);
+
+                    container.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent)
+                        popupWindow.dismiss();
+                        return true;
+
+                    });
+            }
+        }*/
 
     }
 
