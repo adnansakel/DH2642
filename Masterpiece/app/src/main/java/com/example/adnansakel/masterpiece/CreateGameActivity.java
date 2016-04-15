@@ -98,7 +98,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 game.put("TurnAction", "");
                 game.put("GameState", AppConstants.GAMESTATE);
                 game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
-                game.put("ShuffledPaintings", masterpiecegamemodel.getPaintingShuffler());
+                game.put("ShuffledPaintings", masterpiecegamemodel.getShuffledPaintingIDs());
                 game.put("PaintingBeingAuctioned","");
                 game.put("CurrentBidder","");
                 game.put("CurrentBid",AppConstants.CURRENTBID);
