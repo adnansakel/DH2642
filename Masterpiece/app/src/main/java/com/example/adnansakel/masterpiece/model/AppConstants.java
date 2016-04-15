@@ -12,7 +12,7 @@ public class AppConstants {
     public static boolean IamCreator = false;
 
     // All values which just represent a string are in capital letters
-    public static String GAMENUMBER = "GAMENUMBER";
+    public static String GAMENUMBER = "GameNumber";
     public static String GAMESTATE = "Setup";
     public static String CURRENTBID = "0";
     public static String COUNTNONBIDDERS = "0";
