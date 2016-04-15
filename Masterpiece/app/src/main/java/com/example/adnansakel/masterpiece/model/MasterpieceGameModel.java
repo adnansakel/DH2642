@@ -1,22 +1,14 @@
 package com.example.adnansakel.masterpiece.model;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.adnansakel.masterpiece.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
-
-import static android.content.Context.*;
 
 /**
  * Created by Adnan Sakel on 3/28/2016.
@@ -27,6 +19,7 @@ public class MasterpieceGameModel extends Observable{
     private List<Player> allPlayers;
     private List<Painting> allPaintings;
     private List<Integer> allPaintingValues;
+    private List<Integer> allPaintingIDs;
     private Player turnTaker;
     private String turnAction;
     private Painting paintingBeingAuctioned;
@@ -34,8 +27,11 @@ public class MasterpieceGameModel extends Observable{
     private Player myPlayer;
     private Player nextPlayer;
     private List<String>turnTypes;
-    private List<Integer>paintingShuffler;//a list to shuffle the paintings
-    private List<Integer>shuffledPaintingID;
+    private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
+    private List<Integer>shuffledPaintingIDs;
+
+    private List<Integer>bankPaintingIDs;
+    private List<Integer>bankPaintingValues;
 
     private String color;
     private String CountNonBidders;
@@ -51,19 +47,21 @@ public class MasterpieceGameModel extends Observable{
         allPaintings = new ArrayList<Painting>();
 
         allPaintingValues = new ArrayList<Integer>();
+        setAllPaintingIDs(new ArrayList<Integer>());
+        setShuffledPaintingValues(new ArrayList<Integer>());
          //prepopulated with fixed values
 
         turnTypes = new ArrayList<>();
         turnTypes.add("PrivateAuction");
         turnTypes.add("BankAuction");
 
-        paintingShuffler = new ArrayList<Integer>();
+        setShuffledPaintingIDs(new ArrayList<Integer>());
         for(int i = 0; i < 20; i++){//assuming there are 20 paintings
-            paintingShuffler.add(i);
-            allPaintingValues.add((i+1)*100000);
+            getShuffledPaintingIDs().add(i);
+            getShuffledPaintingValues().add((i + 1) * 100000);
         }
-        Collections.shuffle(allPaintingValues);
-        Collections.shuffle(paintingShuffler);
+        Collections.shuffle(getShuffledPaintingIDs());
+        Collections.shuffle(getShuffledPaintingValues());
 
         /*
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -212,18 +210,13 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }
 
-    public List<Integer> getShuffledPaintingValues(){
-        //Collections.shuffle(allPaintingValues);
-        return allPaintingValues;
-    }
+
 
     public String getTurnType(int position){
         return turnTypes.get(position);
     }
 
-    public List<Integer> getPaintingShuffler(){
-        return paintingShuffler;
-    }
+
 
 
     public String getColor() {
@@ -252,13 +245,9 @@ public class MasterpieceGameModel extends Observable{
         CurrentBid = currentBid;
     }
 
-    public List<Integer> getShuffledPaintingID() {
-        return shuffledPaintingID;
-    }
 
-    public void setShuffledPaintingID(List<Integer> shuffledPaintingID) {
-        this.shuffledPaintingID = shuffledPaintingID;
-    }
+
+
 
     public void setShuffledPaintingValues(List<Integer> shuffledPaintingValues) {
         this.allPaintingValues = shuffledPaintingValues;
@@ -281,5 +270,49 @@ public class MasterpieceGameModel extends Observable{
 
     public Painting getPaintingbyPosition(int position){
         return allPaintings.get(position);
+    }
+
+    public List<Integer> getBankPaintingIDs() {
+        return bankPaintingIDs;
+    }
+
+    public void setBankPaintingIDs(List<Integer> bankPaintingIDs) {
+        this.bankPaintingIDs = bankPaintingIDs;
+    }
+
+    public List<Integer> getBankPaintingValues() {
+        return bankPaintingValues;
+    }
+
+    public void setBankPaintingValues(List<Integer> bankPaintingValues) {
+        this.bankPaintingValues = bankPaintingValues;
+    }
+
+    public void addBankPaintingID(int paintingID){
+        bankPaintingIDs.add(paintingID);
+    }
+
+    public void addBankPaintingValue(int paintingValue){
+        bankPaintingIDs.add(paintingValue);
+    }
+
+    public List<Integer> getShuffledPaintingIDs() {
+        return shuffledPaintingIDs;
+    }
+
+    public List<Integer> getShuffledPaintingValues() {
+        return shuffledPaintingValues;
+    }
+
+    public void setShuffledPaintingIDs(List<Integer> shuffledPaintingIDs) {
+        this.shuffledPaintingIDs = shuffledPaintingIDs;
+    }
+
+    public List<Integer> getAllPaintingIDs() {
+        return allPaintingIDs;
+    }
+
+    public void setAllPaintingIDs(List<Integer> allPaintingIDs) {
+        this.allPaintingIDs = allPaintingIDs;
     }
 }
