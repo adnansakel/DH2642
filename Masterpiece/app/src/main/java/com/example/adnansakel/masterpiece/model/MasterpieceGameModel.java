@@ -26,7 +26,7 @@ public class MasterpieceGameModel extends Observable{
     private Player currentBidder;
     private Player myPlayer;
     private Player nextPlayer;
-    private List<String>turnTypes;
+    //private List<String>turnTypes;
     private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
     private List<Integer>shuffledPaintingIDs;
 
@@ -47,21 +47,23 @@ public class MasterpieceGameModel extends Observable{
         allPaintings = new ArrayList<Painting>();
 
         allPaintingValues = new ArrayList<Integer>();
-        setAllPaintingIDs(new ArrayList<Integer>());
-        setShuffledPaintingValues(new ArrayList<Integer>());
+        allPaintingIDs = new ArrayList<Integer>();
+
          //prepopulated with fixed values
 
-        turnTypes = new ArrayList<>();
+        /*turnTypes = new ArrayList<>();
         turnTypes.add("PrivateAuction");
-        turnTypes.add("BankAuction");
+        turnTypes.add("BankAuction");*/
 
-        setShuffledPaintingIDs(new ArrayList<Integer>());
+        shuffledPaintingValues = new ArrayList<Integer>();
+        shuffledPaintingIDs = new ArrayList<Integer>();
+
         for(int i = 0; i < 20; i++){//assuming there are 20 paintings
-            getShuffledPaintingIDs().add(i);
-            getShuffledPaintingValues().add((i + 1) * 100000);
+            shuffledPaintingIDs.add(i);
+            shuffledPaintingValues.add((i + 1) * 100000);
         }
-        Collections.shuffle(getShuffledPaintingIDs());
-        Collections.shuffle(getShuffledPaintingValues());
+        Collections.shuffle(shuffledPaintingIDs);
+        Collections.shuffle(shuffledPaintingValues);
 
         /*
         // TEMPORARY: This is just for testing, will be replaced by firebase data model
@@ -212,9 +214,9 @@ public class MasterpieceGameModel extends Observable{
 
 
 
-    public String getTurnType(int position){
+    /*public String getTurnType(int position){
         return turnTypes.get(position);
-    }
+    }*/
 
 
 
@@ -307,6 +309,8 @@ public class MasterpieceGameModel extends Observable{
     public void setShuffledPaintingIDs(List<Integer> shuffledPaintingIDs) {
         this.shuffledPaintingIDs = shuffledPaintingIDs;
     }
+
+
 
     public List<Integer> getAllPaintingIDs() {
         return allPaintingIDs;
