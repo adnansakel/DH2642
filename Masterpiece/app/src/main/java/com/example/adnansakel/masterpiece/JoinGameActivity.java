@@ -87,9 +87,9 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
 
                     AppConstants.GameRef = AppConstants.FireBaseUri+"/"+"Games"+"/"+snapshot.getKey().toString();
                     Map<String, Object> player = new HashMap<String, Object>();
-                    String[]paintings = {"1","2","3","4"};
+                    //String[]paintings = {"1","2","3","4"};
                     player.put("Name",editTextUserName.getText().toString());
-                    player.put("Paintings",paintings);
+                    player.put("Paintings", "");
                     player.put("Cash", "");
                     player.put("BidAmount", "");
 
