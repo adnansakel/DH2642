@@ -92,6 +92,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 game.put("CurrentBidder","");
                 game.put("CurrentBid",AppConstants.CURRENTBID);
                 game.put("CountNonBidders",AppConstants.COUNTNONBIDDERS);
+                game.put("BankPaintings", "");
+
 
                 Firebase gamesRef = masterpieceRef.child("Games");
                 final Firebase newGameRef = gamesRef.push();
@@ -134,6 +136,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
             player.put("Paintings","");
             player.put("Cash","1500000");
             player.put("BidAmount","");
+            player.put("Bidding","");
             progress = ProgressDialog.show(this,"","joining game ...", true);
             new Firebase(AppConstants.GameRef+"/"+"Players").push().setValue(player, new Firebase.CompletionListener() {
                 @Override
