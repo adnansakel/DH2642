@@ -30,20 +30,30 @@ import java.util.Set;
 /**
  * Created by Daniel on 02/04/2016.
  */
-public class MainGameActivity extends Activity {
+public class MainGameActivity extends Activity implements View.OnClickListener {
 
     MasterpieceGameModel model;
     //Firebase masterpieceRef;
+    Button button_status_bar;
+    View fullscreen_status_popup;
     boolean turnIsHappening = false;
+    boolean statusPopupIsVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
         // Adding the model
         model = ((MasterpieceApplication) this.getApplication()).getModel();
         MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
+
+        //find the status bar button, hide popup button, and fullscreen status popup
+        button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
+        fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
+
+        button_status_bar.setOnClickListener(this);
 
         /* DM TODO: OLD WAY OF CREATING IMAGES - Remove later
         LinearLayout test = (LinearLayout)findViewById(R.id.llPersonalImages);
@@ -71,8 +81,10 @@ public class MainGameActivity extends Activity {
 
                 //if the TurnTaker is me
                 if (snapshot.getValue() == "playerPositionID") {
-                    //TODO: use the right variable to compare to in the above
-                    startTurn();
+                    //TODO: use the right variable to compare to in the above (my id)
+                    //startTurn();
+                    //show the start turn screen
+                    //TODO: show the above screen
                 }
             }
             @Override
@@ -134,6 +146,31 @@ public class MainGameActivity extends Activity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == button_status_bar) {
+
+            if(statusPopupIsVisible == false) {
+
+                //show the fullscreen popup
+                fullscreen_status_popup.setVisibility(View.VISIBLE);
+
+                //toggle the button to hide popup next time it's pressed
+                statusPopupIsVisible = true;
+            }
+            else {
+
+                //hide the fullscreen popup
+                fullscreen_status_popup.setVisibility(View.GONE);
+
+                //toggle the button to show popup next time it's pressed
+                statusPopupIsVisible = false;
+            }
+
+
+        }
     }
 
     /*public boolean onCreateOptionsMenu(Menu menu) {
