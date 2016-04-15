@@ -22,7 +22,6 @@ import cz.msebera.android.httpclient.Header;
  * Created by Adnan Sakel on 4/14/2016.
  */
 public class ImageDownloader {
-
     Context context;
     List<Bitmap> images;
     AsyncHttpClient client;

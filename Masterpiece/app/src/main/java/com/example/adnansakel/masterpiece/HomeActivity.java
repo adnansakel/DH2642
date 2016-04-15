@@ -24,6 +24,10 @@ import java.util.Objects;
  */
 public class HomeActivity extends Activity implements View.OnClickListener {
 
+    // Variables for checking the internet connection status
+    Boolean isConnected = false;
+    ConnectionCheck checkConnection;
+
     Button button_create_game;
     Button button_join_game;
     Firebase masterpieceGameNumberRef;
@@ -38,6 +42,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         // it must come before any call to findViewById method
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_home);
+
+        // Create Internet Check Instance
+        checkConnection = new ConnectionCheck(HomeActivity.this);
 
         masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
@@ -58,14 +65,18 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v == button_create_game){
-            //go to create game activity
-
-
-            startActivity(new Intent(HomeActivity.this, CreateGameActivity.class));
+            // check if connected to the internet = true
+            if (checkConnection.isConnected()) {
+                // if it is connected, then go to create game activity
+                startActivity(new Intent(HomeActivity.this, CreateGameActivity.class));
+            }
         }
         else if(v == button_join_game){
-            //go to join game activity
-            startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
+            // check if connected to the internet = true
+            if (checkConnection.isConnected()) {
+                // if it is connected, then go to join game activity
+                startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
+            }
         }
     }
 }

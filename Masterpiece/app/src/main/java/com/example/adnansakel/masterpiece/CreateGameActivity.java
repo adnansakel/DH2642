@@ -27,6 +27,10 @@ import java.util.Random;
  * Created by Adnan Sakel on 3/28/2016.
  */
 public class CreateGameActivity extends Activity implements View.OnClickListener{
+    // Variables for checking the internet connection status
+    Boolean isConnected = false;
+    ConnectionCheck checkConnection;
+
     Firebase masterpieceRef;
     Button buttonJoinGame;
     ProgressDialog progress;
@@ -45,11 +49,18 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_creategame);
 
+        // Create Internet Check Instance
+        checkConnection = new ConnectionCheck(CreateGameActivity.this);
+
         masterpiecegamemodel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
         CreateGameView createGameViewView = new CreateGameView(findViewById(R.id.creategame_view),masterpiecegamemodel);
         initializeComponent();
-        createGame();
+
+        // retrieve Internet status
+        if (checkConnection.isConnected()) {
+            createGame();
+        }
     }
 
     private void initializeComponent(){
@@ -120,7 +131,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                //progress.dismiss();
+                progress.dismiss();
+                Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
             }
         });
 
@@ -128,33 +140,33 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
     @Override
     public void onClick(View view){
-
-        if(view == buttonJoinGame){
-            Map<String, Object> player = new HashMap<String, Object>();
-            //String[]paintings = {"1","2","3","4"};
-            player.put("Name",editTextUserName.getText().toString());
-            player.put("Paintings","");
-            player.put("Cash","1500000");
-            player.put("BidAmount","");
-            player.put("Bidding","");
-            progress = ProgressDialog.show(this,"","joining game ...", true);
-            new Firebase(AppConstants.GameRef+"/"+"Players").push().setValue(player, new Firebase.CompletionListener() {
-                @Override
-                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                    //progress.dismiss();
-                    if (firebaseError != null) {
-                        //textViewGameNumber.setText(firebaseError.getMessage().toString());
-                        progress.dismiss();
-                        Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-                    } else {
-                        progress.dismiss();
-                        //textViewGameNumber.setText(game_number);
-                        //lobby activity should come here
-                        startActivity(new Intent(CreateGameActivity.this,LobbyActivity.class));
+        if (checkConnection.isConnected()) {
+            if (view == buttonJoinGame) {
+                Map<String, Object> player = new HashMap<String, Object>();
+                //String[]paintings = {"1","2","3","4"};
+                player.put("Name", editTextUserName.getText().toString());
+                player.put("Paintings", "");
+                player.put("Cash", "1500000");
+                player.put("BidAmount", "");
+                player.put("Bidding", "");
+                progress = ProgressDialog.show(this, "", "joining game ...", true);
+                new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
+                    @Override
+                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                        //progress.dismiss();
+                        if (firebaseError != null) {
+                            //textViewGameNumber.setText(firebaseError.getMessage().toString());
+                            progress.dismiss();
+                            Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
+                        } else {
+                            progress.dismiss();
+                            //textViewGameNumber.setText(game_number);
+                            //lobby activity should come here
+                            startActivity(new Intent(CreateGameActivity.this, LobbyActivity.class));
+                        }
                     }
-                }
-            });
+                });
+            }
         }
-
     }
 }

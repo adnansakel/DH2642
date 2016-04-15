@@ -31,6 +31,9 @@ import com.firebase.client.ValueEventListener;
 
 
 public class LobbyActivity extends Activity implements View.OnClickListener {
+    // Variables for checking the internet connection status
+    Boolean isConnected = false;
+    ConnectionCheck checkConnection;
 
     // Variable definition
     Button button_create_game;
@@ -45,6 +48,9 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_lobby);
 
+        // Create Internet Check Instance
+        checkConnection = new ConnectionCheck(LobbyActivity.this);
+
         masterpiecegamemodel = ((MasterpieceApplication)this.getApplication()).getModel();
         // Creating the view class instance
         LobbyView lobbyView = new LobbyView(findViewById(R.id.lobby_view),masterpiecegamemodel);
@@ -52,8 +58,9 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         button_create_game = (Button)findViewById(R.id.buttonStartGame);
         button_create_game.setOnClickListener(this);
 
-        listentoFirebaseforPlayers();
-
+        if (checkConnection.isConnected()) {
+            listentoFirebaseforPlayers();
+        }
     }
 
     private void listentoFirebaseforPlayers(){

@@ -22,4 +22,8 @@
         <activity android:name=".MainGameActivity"></activity>
     </application>
 
+    <!-- Permissions for checking the internet and network state -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 </manifest>
