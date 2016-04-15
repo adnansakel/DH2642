@@ -74,24 +74,24 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 AppConstants.GameID = game_number;
                 masterpiecegamemodel.setGameNumber(game_number);
                 Map<String, Object> newGameNumber = new HashMap<String, Object>();
-                newGameNumber.put(AppConstants.GameNumber, String.valueOf(Integer.valueOf(game_number) + 1));
+                newGameNumber.put(AppConstants.GAMENUMBER, String.valueOf(Integer.valueOf(game_number) + 1));
                 masterpieceRef.updateChildren(newGameNumber);
                 Map<String, Object> game = new HashMap<String, Object>();
-                game.put("Game", masterpiecegamemodel.getGameNumber());
-                game.put("Inplay", "false");
-                game.put("NumberofPlayers", "4");
+                game.put("GameNr", masterpiecegamemodel.getGameNumber());
+                game.put("CountPlayers", "");
 
                 //Map<String,Object>p1 = new HashMap<String, Object>();
 
                 game.put("Players", "");
                 game.put("TurnTaker", "");
-
                 game.put("TurnAction", "");
-                game.put("GameState", "Setup");
+                game.put("GameState", AppConstants.GAMESTATE);
                 game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpiecegamemodel.getPaintingShuffler());
                 game.put("PaintingBeingAuctioned","");
                 game.put("CurrentBidder","");
+                game.put("CurrentBid",AppConstants.CURRENTBID);
+                game.put("CountNonBidders",AppConstants.COUNTNONBIDDERS);
 
                 Firebase gamesRef = masterpieceRef.child("Games");
                 final Firebase newGameRef = gamesRef.push();
@@ -129,7 +129,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
         if(view == buttonJoinGame){
             Map<String, Object> player = new HashMap<String, Object>();
-            String[]paintings = {"1","2","3","4"};
+            //String[]paintings = {"1","2","3","4"};
             player.put("Name",editTextUserName.getText().toString());
             player.put("Paintings","");
             player.put("Cash","1500000");
