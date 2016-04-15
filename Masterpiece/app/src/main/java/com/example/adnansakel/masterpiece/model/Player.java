@@ -15,24 +15,26 @@ public class Player {
     // Variable Definition
     String name;
     String firebaseid;
-    Integer totalvalue;
     Integer cash;
+    private String playerpositionID;
     //TODO: Question: Should this be private?
     //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set ?
-    List<Painting> ownedPaintings;
+    List<Integer> ownedPaintingValues;
     List<Integer> ownedPaintingIDs;
+    private boolean bidding;
 
-    public Player(String name, String firebaseid, Integer cash, ArrayList<Painting> ownedPaintings) {
+    public Player(String name, String firebaseid, Integer cash) {
         this.name = name;
         this.firebaseid = firebaseid;
         this.cash = cash;
-        this.ownedPaintings = new ArrayList<Painting>();
-        this.ownedPaintings = ownedPaintings;
+        ownedPaintingIDs = new ArrayList<Integer>();
+        ownedPaintingValues = new ArrayList<Integer>();
+
     }
 
     public Player(){
         ownedPaintingIDs = new ArrayList<Integer>();
-        ownedPaintings = new ArrayList<Painting>();
+        ownedPaintingValues = new ArrayList<Integer>();
     }
 
     public String getName() {
@@ -54,25 +56,40 @@ public class Player {
         this.cash = cash;
     }
 
-    public List<Painting> getOwnedPaintings(){
-        return ownedPaintings;
+    public List<Integer> getOwnedPaintingValues(){
+        return ownedPaintingValues;
     }
 
     public List<Integer> getOwnedPaintingIDs(){ return ownedPaintingIDs; }
 
-    public void addOwnedPaintingIDs(int paintigID){
+    public void addOwnedPaintingID(int paintigID){
         ownedPaintingIDs.add(paintigID);
     }
 
-    // TODO: Once we have an interface, add @Override
-    public void addPainting(Painting painting) {
-        ownedPaintings.add(painting);
-        //setChanged();
-        //notifyObservers(painting);
+
+
+    public void addOenedPaintingValue(int paintingValue){
+        ownedPaintingValues.add(paintingValue);
     }
 
     // TODO: Once we have an interface, add @Override
-    public void removePainting(Painting painting) {
-        ownedPaintings.remove(painting); //TODO: Does this work?
+    public void removePaintingID(int paintingID) {
+        ownedPaintingIDs.remove(paintingID); //TODO: Does this work?
+    }
+
+    public String getPlayerpositionID() {
+        return playerpositionID;
+    }
+
+    public void setPlayerpositionID(String playerpositionID) {
+        this.playerpositionID = playerpositionID;
+    }
+
+    public boolean isBidding() {
+        return bidding;
+    }
+
+    public void setBidding(boolean bidding) {
+        this.bidding = bidding;
     }
 }
