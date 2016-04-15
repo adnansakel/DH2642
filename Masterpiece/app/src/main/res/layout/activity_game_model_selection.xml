@@ -1,0 +1,100 @@
+ <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/maingame_overview_view">
+
+    <!-- Status Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:id="@+id/statusbar"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/topPanel"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/txtPlayerTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:text="@string/player_title">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="It's your turn"
+            android:gravity="center"/>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp">
+
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/bottomPanel">
+
+        <TextView
+            android:id="@+id/txtPlayerCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:text="@string/player_cash"/>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/hsvBottomPanel"
+            android:fillViewport="false">
+
+            <LinearLayout
+                android:id="@+id/llPersonalImages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+<<<<<<< Updated upstream
+=======
+
+        <TextView
+        android:id="@+id/txtPlayerCash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:text="@string/player_cash"/>
+
+>>>>>>> Stashed changes
+    </LinearLayout>
+
+</LinearLayout>
