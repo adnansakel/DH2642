@@ -35,6 +35,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     MasterpieceGameModel model;
     //Firebase masterpieceRef;
     Button button_status_bar;
+    Button button_start_turn;
     View fullscreen_status_popup;
     boolean turnIsHappening = false;
     boolean statusPopupIsVisible = false;
@@ -49,11 +50,15 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         model = ((MasterpieceApplication) this.getApplication()).getModel();
         MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
-        //find the status bar button, hide popup button, and fullscreen status popup
+        //find the buttons and views that get hidden/shown
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
+        button_start_turn = (Button)findViewById(R.id.buttonStatusBar);
+        //TODO: need to replace the above id with start turn button's id
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
 
+        //set listeners
         button_status_bar.setOnClickListener(this);
+        button_start_turn.setOnClickListener(this);
 
         /* DM TODO: OLD WAY OF CREATING IMAGES - Remove later
         LinearLayout test = (LinearLayout)findViewById(R.id.llPersonalImages);
@@ -82,9 +87,16 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 //if the TurnTaker is me
                 if (snapshot.getValue() == "playerPositionID") {
                     //TODO: use the right variable to compare to in the above (my id)
-                    //startTurn();
-                    //show the start turn screen
-                    //TODO: show the above screen
+
+                    //show popup
+                    fullscreen_status_popup.setVisibility(View.VISIBLE);
+                    statusPopupIsVisible = true;
+
+                    //show the start turn popup layout
+                    //TODO: show the start turn layout
+
+                    //on the start turn layout there should be a button
+                    //button should call startTurn()
                 }
             }
             @Override
@@ -169,7 +181,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 statusPopupIsVisible = false;
             }
 
+        }
+        else if(v == button_start_turn) {
 
+            startTurn();
         }
     }
 
@@ -232,12 +247,13 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         Random rn = new Random();
         int roll = rn.nextInt(1); //there are only 2 types so far
 
-        //get reference to Firebase
-        //masterpieceRef = new Firebase(AppConstants.FireBaseUri);
+        //hide the start turn layout
 
         if(roll == 0){
 
             //PRIVATE AUCTION
+
+            //show the private auction select painting layout
 
             //set turn action
             //model.setTurnAction("privateAuction");
@@ -267,6 +283,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         } else if(roll == 1){
 
             //BANK AUCTION
+
+            //show the bank auction select painting layout
 
             //set turn action
             //model.setTurnAction("bankAuction");
