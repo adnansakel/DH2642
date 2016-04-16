@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -85,7 +86,7 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
                 * Step 1 as follows
                 * */
                 Firebase ref = new Firebase(AppConstants.FireBaseUri+"/"+"Games");
-                Query qref = ref.orderByChild("Game").equalTo(editTextGameNumber.getText().toString());
+                Query qref = ref.orderByChild(AppConstants.GAMENR).equalTo(editTextGameNumber.getText().toString());
                 qref.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot snapshot, String previousChild) {
@@ -109,6 +110,8 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
                                 //progress.dismiss();
                                 if (firebaseError != null) {
                                     //textViewGameNumber.setText(firebaseError.getMessage().toString());
+                                    progress.dismiss();
+                                    Toast.makeText(JoinGameActivity.this,firebaseError.getMessage().toString(),Toast.LENGTH_LONG).show();
                                 } else {
                                     progress.dismiss();
                                     //textViewGameNumber.setText(game_number);
