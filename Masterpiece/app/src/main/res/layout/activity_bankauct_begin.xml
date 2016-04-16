@@ -3,26 +3,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Private Auction"
-        android:id="@+id/textView9"
+        android:text="Bank Auction"
+        android:id="@+id/textView16"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Current Highest Bid: "
-        android:id="@+id/textView10"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="206dp" />
+        android:text="Bid Against Other Players for One"
+        android:id="@+id/textView17"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/textView16"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="of the Bank&apos;s Paintings"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView17"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,22 +45,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bid + $50,000"
-        android:id="@+id/button3"
-        android:layout_alignTop="@+id/textView10"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
-        android:layout_marginTop="81dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Don&apos;t Bid"
-        android:id="@+id/button4"
-        android:layout_alignBottom="@+id/button3"
-        android:layout_toRightOf="@+id/button3"
-        android:layout_toEndOf="@+id/button3"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp" />
-
+        android:text="Begin"
+        android:id="@+id/button6"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/textView18"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
