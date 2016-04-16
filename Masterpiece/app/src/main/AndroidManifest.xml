@@ -20,6 +20,7 @@
         <activity android:name=".JoinGameActivity"></activity>
         <activity android:name=".LobbyActivity"></activity>
         <activity android:name=".MainGameActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
 
 
     </application>

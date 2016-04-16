@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.view.CreateGameView;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -122,6 +123,32 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                             masterpiecegamemodel.setGameNumber(game_number);
                             AppConstants.GameRef = newGameRef.toString();
                             AppConstants.IamCreator = true;
+
+                            new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS).addListenerForSingleValueEvent(
+                                    new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                                                Painting painting = new Painting();
+                                                System.out.println(ds.getValue().toString());
+                                                System.out.println(ds.child("Artist").getValue().toString());
+                                                painting.setArtist(ds.child(AppConstants.ARTIST).getValue().toString());
+                                                painting.setImageURL(ds.child(AppConstants.IMAGE).getValue().toString());
+                                                painting.setName(ds.child(AppConstants.NAME).getValue().toString());
+                                                painting.setDescription(ds.child(AppConstants.DESCRIPTION).getValue().toString());
+                                                masterpiecegamemodel.addPaintingtoAllPaintings(painting);
+                                                progress.dismiss();
+
+                                            }
+                                            //startActivity(new Intent(LobbyActivity.this,MainActivity.class));
+                                        }
+
+                                        @Override
+                                        public void onCancelled(FirebaseError firebaseError) {
+                                            progress.dismiss();
+                                            Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                         }
                     }
 

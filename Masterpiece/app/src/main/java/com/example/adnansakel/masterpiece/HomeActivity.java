@@ -2,7 +2,10 @@ package com.example.adnansakel.masterpiece;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +17,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +60,107 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         button_create_game.setOnClickListener(this);
         button_join_game.setOnClickListener(this);
 
+        Firebase.setAndroidContext(this);
 
+        Firebase ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"0"+"Image");
+        Map<String,Object> mp = new HashMap<String,Object>();
+
+        /*Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 10, bytes);
+        String encodeImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);*/
+        /*
+        Bitmap bmp =  BitmapFactory. decodeResource(this.getApplication().getResources(), R.drawable.a);//your image
+        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byte[] byteArray = bYtE.toByteArray();
+        String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"1"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.b);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"2"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.c);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"3"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.d);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"4"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.e);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"5"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.f);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"6"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.g);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"7"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.h);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"8"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.i);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+
+        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"9"+"Image");
+        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.j);//your image
+        bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byteArray = bYtE.toByteArray();
+        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        ref.setValue(imageFile);
+*/
+
+       // ref.updateChildren(mp);
 
 
 

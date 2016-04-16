@@ -14,6 +14,7 @@ public class Painting {
     private String description;
     private Integer value;
     private String artist;
+    private byte[] imagebytearray;
 
     public Painting(String name, String imageURL, Bitmap image, String description, Integer value, String artist) {
         this.name = name;
@@ -70,4 +71,11 @@ public class Painting {
         return artist;
     }
 
+    public byte[] getImagebytearray() {
+        return imagebytearray;
+    }
+
+    public void setImagebytearray(byte[] imagebytearray) {
+        this.imagebytearray = imagebytearray;
+    }
 }

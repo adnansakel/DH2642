@@ -31,6 +31,11 @@ public class AppConstants {
     public static String TURNTAKER = "TurnTaker";
     public static String BIDDING = "Bidding";
     public static String GAMES = "Games";
+
+    public static String ARTIST = "Artist";
+    public static String IMAGE = "Image";
+    public static String DESCRIPTION = "Description";
+
     public static String SHUFFLEDPAINTINGVALUES = "ShuffledPaintingValues";
     public static String SHUFFLEDPAINTINGS = "ShuffledPaintings";
 

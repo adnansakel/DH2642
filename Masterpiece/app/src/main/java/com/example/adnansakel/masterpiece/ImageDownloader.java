@@ -32,6 +32,7 @@ public class ImageDownloader {
     int paintingCounter = 0;
     boolean mStopHandler = false;
 
+
     ImageDownloader(Context context, MasterpieceGameModel masterpieceGameModel){
         this.context = context;
         this.masterpieceGameModel = masterpieceGameModel;
@@ -40,7 +41,7 @@ public class ImageDownloader {
         handler = new Handler();
         IsDownloadCompleted = true;
         downloadFailed = false;
-
+        paintingCounter = 0;
     }
 
     public void downloadImages( final ProgressDialog progress){
@@ -50,20 +51,23 @@ public class ImageDownloader {
             @Override
             public void run() {
                 // do your stuff - don't create a new runnable here!
-                if(paintingCounter == 10 || downloadFailed){//10 images
+                if(paintingCounter == masterpieceGameModel.getAllPaintings().size() || downloadFailed){//10 images
                     handler.removeCallbacks(this);
                     progress.dismiss();
-                    System.out.println("done..."+images.size());
+                    System.out.println("done..."+paintingCounter);
                     mStopHandler = true;
 
                 }
                 else if(IsDownloadCompleted){
 
-                    downloadImage(masterpieceGameModel.getPaintingbyPosition(paintingCounter).getImageURL());
+                    if(paintingCounter<masterpieceGameModel.getAllPaintings().size()){
+                        downloadImage(masterpieceGameModel.getPaintingbyPosition(paintingCounter).getImageURL());
+                        System.out.println(masterpieceGameModel.getPaintingbyPosition(paintingCounter).getImageURL());
+                    }
 
                 }
                 if (!mStopHandler) {
-                    handler.postDelayed(this, 500);
+                    handler.postDelayed(this, 200);
                 }
             }
         };
@@ -88,11 +92,13 @@ public class ImageDownloader {
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 // called when response HTTP status is "200 OK"
                 //add painting in game model;
-                Bitmap imgbmp = BitmapFactory.decodeByteArray(response, 0, response.length);
+                //Bitmap imgbmp = BitmapFactory.decodeByteArray(response, 0, response.length);
                 //images.add(imgbmp);
-                masterpieceGameModel.getPaintingbyPosition(paintingCounter).setImage(imgbmp);
+                //masterpieceGameModel.getPaintingbyPosition(paintingCounter).setImage(imgbmp.copy(imgbmp.getConfig(),true));
+                masterpieceGameModel.getPaintingbyPosition(paintingCounter).setImagebytearray(response);
                 IsDownloadCompleted = true;
-                System.out.println("Success");
+                //imgbmp.recycle();
+                System.out.println("Success "+paintingCounter);
                 paintingCounter ++;
             }
 

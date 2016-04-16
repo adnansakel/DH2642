@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.model.Player;
 import com.example.adnansakel.masterpiece.view.CreateGameView;
 import com.example.adnansakel.masterpiece.view.HomeView;
@@ -72,8 +73,11 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         }
     }
 
+
+
+
     private void distributeShuffledPaintingandValues(){
-        progress = ProgressDialog.show(this, "", "creating game ...", true);
+        progress = ProgressDialog.show(this, "", "distributing paintings ...", true);
         //downloading the shuffled painting ids and values then assign a painting and value to my player and rest to bamk
         new Firebase(AppConstants.GameRef).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -87,14 +91,15 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
                         masterpiecegamemodel.setShuffledPaintingIDs(shuffledpaintinglist);
                         shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
                         masterpiecegamemodel.setShuffledPaintingValues(shuffledpaintinvalueglist);
-                        masterpiecegamemodel.getMyPlayer()
-                                .addOwnedPaintingID(shuffledpaintinglist.get(Integer.valueOf(masterpiecegamemodel.getMyPlayer().getPlayerpositionID())));
 
                         for(int i = 0; i < 4; i++){//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
                             masterpiecegamemodel.getAllPlayers().get(i).addOwnedPaintingID(shuffledpaintinglist.get(i));
+                            masterpiecegamemodel.getAllPlayers().get(i).addOenedPaintingValue(shuffledpaintinvalueglist.get(i));
                         }
                         progress.dismiss();
                         startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
+                        LobbyActivity.this.finish();
+
                     }
 
                     @Override
@@ -143,7 +148,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             // TODO: add the conditions that it only moves to MainGameActivity if the Game is successfully setup in Firebase
             if (checkConnection.isConnected()) {
                 distributeShuffledPaintingandValues();
-
+                //downloadImage();
             }
 
         }
