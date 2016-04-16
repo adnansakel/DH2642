@@ -1,6 +1,9 @@
 package com.example.adnansakel.masterpiece;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -60,10 +64,16 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_status_bar.setOnClickListener(this);
         button_start_turn.setOnClickListener(this);
 
-        /* DM TODO: OLD WAY OF CREATING IMAGES - Remove later
-        LinearLayout test = (LinearLayout)findViewById(R.id.llPersonalImages);
+        //DM TODO: OLD WAY OF CREATING IMAGES - Remove later
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.monalisa);
+        LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)findViewById(R.id.llPaintingsOfOtherPlayers);
 
+        for (int i = 0; i < 4; i++) {
+            layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(bm));
+            System.out.println("Test");
+        }
 
+        /*
         for (int i = 0; i < 4; i++) { // TODO: DM - Replace 4 with "getActivePlayer()" and the data of the player (e.g. image, title,...)
             LinearLayout tv = (LinearLayout)findViewById(R.id.llSinglePainting); // LinearLayout(getApplicationContext());
             //tv.setText(yourData.get(i));
@@ -377,6 +387,21 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             }
         }*/
 
+    }
+
+    public LinearLayout createLayoutWithBitmap(Bitmap bm){
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        layout.setLayoutParams(new LinearLayout.LayoutParams(250, 250));
+        layout.setGravity(Gravity.CENTER);
+
+        ImageView imageView = new ImageView(getApplicationContext());
+        LinearLayout.LayoutParams ivLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        imageView.setLayoutParams(ivLayout);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageBitmap(bm);
+
+        layout.addView(imageView);
+        return layout;
     }
 
 }

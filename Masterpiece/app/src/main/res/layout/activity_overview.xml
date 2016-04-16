@@ -70,7 +70,12 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="150dp">
-
+                <LinearLayout
+                    android:id="@+id/llPaintingsOfOtherPlayers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    />
             </HorizontalScrollView>
         </LinearLayout>
 
