@@ -9,4 +9,5 @@
     <string name="player_cash">Cash </string>
     <string name="start_game">Start Game</string>
     <string name="player_title">Player X</string>
+    <string name="cash">Cash:</string>
 </resources>
