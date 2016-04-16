@@ -26,15 +26,12 @@ import java.util.Random;
 /**
  * Created by Adnan Sakel on 3/28/2016.
  */
-<<<<<<< Updated upstream
+
 public class CreateGameActivity extends Activity implements View.OnClickListener{
     // Variables for checking the internet connection status
-    Boolean isConnected = false;
+
     ConnectionCheck checkConnection;
 
-=======
-public class  CreateGameActivity extends Activity implements View.OnClickListener{
->>>>>>> Stashed changes
     Firebase masterpieceRef;
     Button buttonJoinGame;
     ProgressDialog progress;
@@ -100,13 +97,13 @@ public class  CreateGameActivity extends Activity implements View.OnClickListene
                 game.put("Players", "");
                 game.put("TurnTaker", "");
                 game.put("TurnAction", "");
-                game.put("GameState", AppConstants.GAMESTATE);
+                game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpiecegamemodel.getShuffledPaintingIDs());
                 game.put("PaintingBeingAuctioned","");
                 game.put("CurrentBidder","");
-                game.put("CurrentBid",AppConstants.CURRENTBID);
-                game.put("CountNonBidders",AppConstants.COUNTNONBIDDERS);
+                game.put(AppConstants.CURRENTBID,"0");
+                game.put(AppConstants.COUNTNONBIDDERS,"0");
                 game.put("BankPaintings", "");
 
 
@@ -144,13 +141,15 @@ public class  CreateGameActivity extends Activity implements View.OnClickListene
 
     @Override
     public void onClick(View view){
-        if (checkConnection.isConnected()) {
+
             if (view == buttonJoinGame) {
+                if (checkConnection.isConnected()) {
                 Map<String, Object> player = new HashMap<String, Object>();
                 //String[]paintings = {"1","2","3","4"};
+                masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
                 player.put("Name", editTextUserName.getText().toString());
                 player.put("Paintings", "");
-                player.put("Cash", "1500000");
+                player.put("Cash", "1500000");//Initial cash
                 player.put("BidAmount", "");
                 player.put("Bidding", "");
                 progress = ProgressDialog.show(this, "", "joining game ...", true);

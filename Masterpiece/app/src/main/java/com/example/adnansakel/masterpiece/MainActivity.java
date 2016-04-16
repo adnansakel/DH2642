@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
-import com.example.adnansakel.masterpiece.view.MainView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         masterpieceGameModel = ((MasterpieceApplication) this.getApplication()).getModel();
-        MainView mainView = new MainView(findViewById(R.id.relative_layout_Hello),masterpieceGameModel);
+       // MainView mainView = new MainView(findViewById(R.id.relative_layout_Hello),masterpieceGameModel);
         txtHello = ((TextView)findViewById(R.id.textViewHello));
         txtHello.setOnClickListener(this);
     }
