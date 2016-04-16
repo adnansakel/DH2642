@@ -18,17 +18,11 @@ public class MasterpieceGameModel extends Observable{
     private String gameNumber;
     private List<Player> allPlayers;
     private String CurrentBid;
-    private Player myPlayer;
-    private Player nextPlayer;
+
     private String userName;
     private List<Painting> allPaintings;
     private List<Integer> allPaintingValues;
-<<<<<<< Updated upstream
     private List<Integer> allPaintingIDs;
-    private Player turnTaker;
-    private String turnAction;
-    private Painting paintingBeingAuctioned;
-    private Player currentBidder;
     private Player myPlayer;
     private Player nextPlayer;
     //private List<String>turnTypes;
@@ -38,16 +32,14 @@ public class MasterpieceGameModel extends Observable{
     private List<Integer>bankPaintingIDs;
     private List<Integer>bankPaintingValues;
 
-    private String color;
-=======
     private List<Integer>paintingShuffler;//A list to shuffle the paintings
     private List<Integer>shuffledPaintingID;
     private Painting paintingBeingAuctioned;
     private Player turnTaker;
     private String turnAction;
-    private List<String>turnTypes;
+
     private Player currentBidder;
->>>>>>> Stashed changes
+
     private String CountNonBidders;
     private String color;
 

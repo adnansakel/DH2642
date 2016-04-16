@@ -26,15 +26,12 @@ import java.util.Random;
 /**
  * Created by Adnan Sakel on 3/28/2016.
  */
-<<<<<<< Updated upstream
+
 public class CreateGameActivity extends Activity implements View.OnClickListener{
     // Variables for checking the internet connection status
-    Boolean isConnected = false;
+
     ConnectionCheck checkConnection;
 
-=======
-public class  CreateGameActivity extends Activity implements View.OnClickListener{
->>>>>>> Stashed changes
     Firebase masterpieceRef;
     Button buttonJoinGame;
     ProgressDialog progress;
