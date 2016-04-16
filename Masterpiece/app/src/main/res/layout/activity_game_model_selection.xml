@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/game_mode_selection">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Player X "
-        android:id="@+id/textView3"
+        android:text="Player X"
+        android:id="@+id/txtPlayerTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -20,16 +21,16 @@
         android:text="It&apos;s Your Turn!"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/txtPlayerTitle"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Roll"
-        android:id="@+id/button2"
+        android:id="@+id/btnRoll"
         android:layout_gravity="right|bottom"
         android:layout_marginRight="27dp"
         android:layout_marginEnd="27dp"
@@ -42,11 +43,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Shake your phone to define game mode"
+        android:text="Shake Your Phone to Define Game Mode"
         android:id="@+id/textView5"
-        android:layout_marginBottom="54dp"
-        android:layout_above="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="121dp"
+        android:layout_above="@+id/btnRoll"
+        android:layout_alignRight="@+id/btnRoll"
+        android:layout_alignEnd="@+id/btnRoll" />
 
 </RelativeLayout>
 
