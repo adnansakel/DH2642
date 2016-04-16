@@ -15,7 +15,11 @@ import com.example.adnansakel.masterpiece.view.LobbyView;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.GenericTypeIndicator;
 import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daniel on 02/04/2016.
@@ -58,25 +62,59 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         button_create_game = (Button)findViewById(R.id.buttonStartGame);
         button_create_game.setOnClickListener(this);
 
+        Firebase.setAndroidContext(this);
+
         if (checkConnection.isConnected()) {
             listentoFirebaseforPlayers();
+
+            //downloading the shuffled painting ids and values then assign a painting and value to my player and rest to bamk
+            new Firebase(AppConstants.GameRef).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {};
+                            List<Integer> shuffledpaintinglist = new ArrayList<Integer>();
+                            List<Integer> shuffledpaintinvalueglist = new ArrayList<Integer>();
+                            shuffledpaintinglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGS).getValue(t);
+                            masterpiecegamemodel.setShuffledPaintingIDs(shuffledpaintinglist);
+                            shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
+                            masterpiecegamemodel.setShuffledPaintingValues(shuffledpaintinvalueglist);
+                            masterpiecegamemodel.getMyPlayer()
+                                    .addOwnedPaintingID(shuffledpaintinglist.get(Integer.valueOf(masterpiecegamemodel.getMyPlayer().getPlayerpositionID())));
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+
+                        }
+                    }
+            );
         }
     }
 
     private void listentoFirebaseforPlayers(){
-        Firebase.setAndroidContext(this);
+
         new Firebase(AppConstants.GameRef+"/"+"Players").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 masterpiecegamemodel.removeAllPlayer();
+                int i = 0;
                 for(DataSnapshot dsplayer : dataSnapshot.getChildren()){
                     //DataSnapshot dpl = (DataSnapshot)dsplayer.getValue();
                     //System.out.println(dsplayer.child("Name"));
                     Player player = new Player();
                     player.setName(dsplayer.child("Name").getValue().toString());
+                    player.setPlayerpositionID(String.valueOf(i));
                     player.setFirebaseid(dsplayer.getKey().toString());
                     masterpiecegamemodel.addPlayer(player);
+                    if(player.getName().equals(masterpiecegamemodel.getUserName())){
+                        masterpiecegamemodel.setMyPlayer(player);
+                    }
                    // masterpiecegamemodel.notifyObservers();
+                    i++;
                 }
             }
 
@@ -92,7 +130,24 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         if (v == button_create_game) {
             //go to lobby activity
             // TODO: add the conditions that it only moves to MainGameActivity if the Game is successfully setup in Firebase
-            startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
+            if (checkConnection.isConnected()) {
+
+                new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.GAMES+"/"+AppConstants.GameRef).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                System.out.println(dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGS).getValue().toString());
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        }
+                );
+                startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
+            }
+
         }
     }
 }
