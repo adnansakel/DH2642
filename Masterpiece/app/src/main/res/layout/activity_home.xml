@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:id="@+id/home_view">
@@ -13,8 +14,7 @@
     android:layout_marginRight="10dp"
     android:text="@string/join_game"
     android:textSize="25sp"
-    android:textStyle="bold"
-    android:layout_gravity="center_vertical"/>
+    android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonCreateGame"

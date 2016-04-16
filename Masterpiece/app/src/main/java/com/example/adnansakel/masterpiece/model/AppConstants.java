@@ -17,5 +17,4 @@ public class AppConstants {
     public static String CURRENTBID = "0";
     public static String COUNTNONBIDDERS = "0";
 
-
 }

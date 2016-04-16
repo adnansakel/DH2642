@@ -12,7 +12,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:textSize="20sp"
-    android:hint="Game number"/>
+    android:hint="Game Number"/>
 
     <EditText
         android:id="@+id/edittext_userName"

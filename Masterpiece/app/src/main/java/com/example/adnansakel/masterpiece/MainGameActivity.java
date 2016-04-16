@@ -315,6 +315,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     public void Auction() {
         /*
         //full screen popup during auction
+<<<<<<< Updated upstream
         private Button popup;
         private final PopupWindow popupWindow;
         private final LayoutInflater layoutInflater;
@@ -342,6 +343,35 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                     public boolean onTouch(View view, MotionEvent motionEvent)
                         popupWindow.dismiss();
                         return true;
+=======
+       //private Button popup;
+        //private final PopupWindow popupWindow;
+        //private final LayoutInflater layoutInflater;
+        //private final RelativeLayout relativeLayout;
+
+        //@Override
+        //protected void onCreate(Bundle savedInstanceState) {
+            //super.onCreate(savedInstanceState);
+            //setContentView(R.layout.activity_auction);
+            //popup = (Button) findViewById(R.id.Button);
+            //relativeLayout = (relativeLayout) findViewById(R.id.relative);
+
+            //popup.setOnClickListener(new View.OnClickListener(){
+                //@Override
+                //public void onClick (View view) {
+
+                    //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    //ViewGroup container  = (ViewGroup) layoutInflater.inflate(R.layout.activity_bid,null);
+
+                    //popupWindow = new PopupWindow(container,400,400,true);
+                    //popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY,500,500);
+
+                    //container.setOnTouchListener(new View.OnTouchListener() {
+                    //@Override
+                    //public boolean onTouch(View view, MotionEvent motionEvent)
+                        //popupWindow.dismiss();
+                        //return true;
+>>>>>>> Stashed changes
 
                     });
             }

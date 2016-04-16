@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:text="$10000"
+                android:text="$10,000"
                 />
 
             <ImageView
@@ -74,6 +74,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="20sp"
-            android:text="Public auction"/>
+            android:text="Public Auction"/>
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+=======
+ <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+>>>>>>> Stashed changes
     android:layout_height="fill_parent"
     android:id="@+id/maingame_overview_view">
     <!-- Status Bar -->
@@ -99,6 +105,32 @@
             </HorizontalScrollView>
         </LinearLayout>
 
+<<<<<<< Updated upstream
+=======
+
+
+        </HorizontalScrollView>
+<<<<<<< Updated upstream
+=======
+
+        <TextView
+        android:id="@+id/txtPlayerCash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:text="@string/player_cash"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pop Up"
+            android:id="@+id/button"
+            android:layout_gravity="bottom" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </LinearLayout>
 
 

@@ -56,6 +56,7 @@ public class Painting {
         return value;
     }
 
+
     // Can be used to set the value of the painting in the initial setup
     public void setValue(int type) {
         this.value = type;

@@ -18,7 +18,8 @@ public class Player {
     Integer cash;
     private String playerpositionID;
     //TODO: Question: Should this be private?
-    //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set ?
+
+    //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set?
     List<Integer> ownedPaintingValues;
     List<Integer> ownedPaintingIDs;
     private boolean bidding;

@@ -28,5 +28,5 @@
         android:gravity="center"
         android:textSize="25sp"
         android:layout_marginTop="20dp"
-        android:text="Secret Value: $200000"/>
+        android:text="Secret Value: $200,000"/>
 </LinearLayout>
