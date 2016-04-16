@@ -38,6 +38,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Shake your phone to define game mode"
+        android:id="@+id/textView5"
+        android:layout_marginBottom="54dp"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 
 
