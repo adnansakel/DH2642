@@ -1,23 +1,13 @@
 package com.example.adnansakel.masterpiece;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -29,11 +19,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by Daniel on 02/04/2016.
@@ -58,7 +45,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_begin_bank_auction;
 
     View fullscreen_status_popup;
-    LinearLayout layoutStatusPopup;
+    //TODO: can eventually take the layouts below, since they're used by MainGameView instead
+    RelativeLayout layoutStatusPopup;
     RelativeLayout layoutPopupGameModelSelection;
     RelativeLayout layoutPopupPrivateAuctionInProgress;
     RelativeLayout layoutPopupBankAuctionInProgress;
@@ -86,14 +74,15 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         // Load images
 
 
-        //find the buttons
+        //find views of buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
-        button_start_turn = (Button)findViewById(R.id.btnRoll);
+        button_start_turn = (Button)findViewById(R.id.OLD_btnRoll);
         button_begin_bank_auction = (Button)findViewById(R.id.btn_begin_bank_auction);
 
         //find popup & popup contents
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
-        layoutStatusPopup = (LinearLayout)findViewById(R.id.fullscreenStatusPopup);
+        //TODO: can eventually take the findByIds below, since they're used by MainGameView instead
+        layoutStatusPopup = (RelativeLayout)findViewById(R.id.fullscreenStatusPopup);
         layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection_view);
         layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.privateauction_inprogress_view);
         layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bankauction_inprogress_view);
@@ -124,9 +113,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         //load pictures for myPlayer
         mainGameView.populatePaintingsMyPlayer(myPlayer);
 
-        //set listeners
+        //set click listeners
         button_status_bar.setOnClickListener(this);
-        //button_start_turn.setOnClickListener(this); //moved this into firebase listener
+        button_start_turn.setOnClickListener(this);
         button_secondPlayer.setOnClickListener(this);
         button_thirdPlayer.setOnClickListener(this);
         button_fourthPlayer.setOnClickListener(this);
@@ -138,35 +127,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         //start listening to changes in Firebase
         ListenForFirebaseGameEvents();
-
-        //check turnTaker. this listener is called once then immediately removed
-        Firebase turnTakerRef = new Firebase(AppConstants.GameRef+"/"+"TurnTaker");
-        turnTakerRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                System.out.println("first TurnTaker is: " + snapshot.getValue());
-
-                //if the TurnTaker is me
-                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
-
-                    //show popup
-                    fullscreen_status_popup.setVisibility(View.VISIBLE);
-                    statusPopupIsVisible = true;
-
-                    //show the start turn popup layout (game model selection)
-                    layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
-
-                    button_start_turn.setOnClickListener(MainGameActivity.this);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
 
     }
 
@@ -183,14 +143,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 //if the TurnTaker is me
                 if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
 
+                    /*
                     //show popup
                     fullscreen_status_popup.setVisibility(View.VISIBLE);
                     statusPopupIsVisible = true;
 
                     //show the start turn popup layout (game model selection)
                     layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
+                    */
 
-                    button_start_turn.setOnClickListener(MainGameActivity.this);
+                    //tell model that popupContent needs to change
+                    model.setPopupContent("startTurn");
+
+                    //button_start_turn.setOnClickListener(MainGameActivity.this);
                 }
             }
             @Override
@@ -383,14 +348,15 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         int roll = rn.nextInt(1); //there are only 2 types so far
 
         //hide the start turn layout
-        layoutStatusPopup.removeView(layoutPopupGameModelSelection);
+        //layoutStatusPopup.removeView(layoutPopupGameModelSelection);
 
         if(roll == 0){
 
             //PRIVATE AUCTION
 
             //show the private auction select painting layout
-            layoutStatusPopup.addView(layoutPopupPrivateAuctionSelectPainting);
+            //layoutStatusPopup.addView(layoutPopupPrivateAuctionSelectPainting);
+            model.setPopupContent("privateAuctionSelectPainting");
 
             //TODO: need to access my owned paintings
 
