@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="If You Have a Game Number"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/buttonJoinGame"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -29,9 +29,10 @@
         android:text="@string/join_game"
     android:textSize="25sp"
     android:textStyle="bold"
+        android:layout_above="@+id/buttonCreateGame"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="27dp" />
 
     <Button
         android:id="@+id/buttonCreateGame"
@@ -41,9 +42,9 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="69dp" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
