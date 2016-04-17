@@ -61,7 +61,7 @@ public class MasterpieceGameModel extends Observable{
         shuffledPaintingValues = new ArrayList<Integer>();
         shuffledPaintingIDs = new ArrayList<Integer>();
 
-        for(int i = 0; i < 20; i++){//assuming there are 20 paintings
+        for(int i = 0; i < AppConstants.TotalNumberofPainting; i++){//assuming there are 20 paintings
             shuffledPaintingIDs.add(i);
             shuffledPaintingValues.add((i + 1) * 100000);
         }

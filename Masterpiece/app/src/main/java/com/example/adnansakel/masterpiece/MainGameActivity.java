@@ -42,9 +42,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
     MasterpieceGameModel model;
     Player myPlayer;
-    Player secondPlayer = null;
-    Player thirdPlayer = null;
-    Player fourthPlayer = null;
+    Integer myPlayerID;
+    Integer secondPlayerID;
+    Integer thirdPlayerID;
+    Integer fourthPlayerID;
     Player selectedPlayer;
     MainGameView mainGameView;
 
@@ -98,27 +99,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_thirdPlayer = (Button)findViewById(R.id.btnThirdPlayer);
         button_fourthPlayer = (Button)findViewById(R.id.btnFourthPlayer);
 
-        //defining the order of the players
-        for (Player player : players) {
-            if (player.getPlayerpositionID() != myPlayer.getPlayerpositionID() ) {
-                if(secondPlayer == null){
-                    //setting them in the variables and updating the button text
-                    secondPlayer = player;
-                    button_secondPlayer.setText(secondPlayer.getName());
-                    //set to active
-                    button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                    //load pictures for the active player (2)
-                    mainGameView.populatePaintingsOtherPlayers(secondPlayer);
-                } else if (thirdPlayer == null) {
-                    thirdPlayer = player;
-                    button_thirdPlayer.setText(thirdPlayer.getName());
-                } else if (fourthPlayer == null){
-                    fourthPlayer = player;
-                    button_fourthPlayer.setText(fourthPlayer.getName());
-                }
-            }
-            System.out.println(player.getName());
-        }
+        myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
+        secondPlayerID = (myPlayerID + 1)%4;
+        thirdPlayerID = (myPlayerID + 2)%4;
+        fourthPlayerID = (myPlayerID + 3)%4;
+
+        button_secondPlayer.setText(model.getAllPlayers().get(secondPlayerID).getName());
+        button_thirdPlayer.setText(model.getAllPlayers().get(thirdPlayerID).getName());
+        button_fourthPlayer.setText(model.getAllPlayers().get(fourthPlayerID).getName());
+
+        button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+
+        //load pictures for the active player (2)
+        mainGameView.populatePaintingsOtherPlayers(model.getPlayer(secondPlayerID));
 
         //load pictures for myPlayer
         mainGameView.populatePaintingsMyPlayer(myPlayer);
@@ -246,30 +239,23 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             startTurn();
 
         } else if(v == button_secondPlayer) {
-            if (selectedPlayer != secondPlayer){
-                selectedPlayer = secondPlayer;
-                button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                button_thirdPlayer.setBackgroundColor(Color.WHITE);
-                button_fourthPlayer.setBackgroundColor(Color.WHITE);
-                mainGameView.populatePaintingsOtherPlayers(secondPlayer);
-            }
+            selectedPlayer = model.getAllPlayers().get(secondPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         } else if(v == button_thirdPlayer) {
-            if (selectedPlayer != thirdPlayer){
-                selectedPlayer = thirdPlayer;
-                button_secondPlayer.setBackgroundColor(Color.WHITE);
-                button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                button_fourthPlayer.setBackgroundColor(Color.WHITE);
-                mainGameView.populatePaintingsOtherPlayers(thirdPlayer);
-            }
-
+            selectedPlayer = model.getAllPlayers().get(thirdPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         } else if(v == button_fourthPlayer) {
-            if (selectedPlayer != fourthPlayer){
-                selectedPlayer = fourthPlayer;
-                button_secondPlayer.setBackgroundColor(Color.WHITE);
-                button_thirdPlayer.setBackgroundColor(Color.WHITE);
-                button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                mainGameView.populatePaintingsOtherPlayers(fourthPlayer);
-            }
+            selectedPlayer = model.getAllPlayers().get(fourthPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         }
     }
 
