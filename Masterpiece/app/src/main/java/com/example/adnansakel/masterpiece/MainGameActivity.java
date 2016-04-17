@@ -125,7 +125,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         //set listeners
         button_status_bar.setOnClickListener(this);
-        button_start_turn.setOnClickListener(this);
+        //button_start_turn.setOnClickListener(this); //moved this into firebase listener
         button_secondPlayer.setOnClickListener(this);
         button_thirdPlayer.setOnClickListener(this);
         button_fourthPlayer.setOnClickListener(this);
@@ -153,6 +153,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                     //show the start turn popup layout (game model selection)
                     layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
+
+                    button_start_turn.setOnClickListener(MainGameActivity.this);
                 }
             }
             @Override
