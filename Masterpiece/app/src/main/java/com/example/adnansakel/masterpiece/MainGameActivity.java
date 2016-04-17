@@ -97,7 +97,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection);
         layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.private_auction_in_progress);
         layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bank_auction_in_progress);
-        layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.private_auction_select_painting);
+        layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.privateauction_select_painting_view);
         layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bank_auction);
 
         //find buttons for top section of the overview
