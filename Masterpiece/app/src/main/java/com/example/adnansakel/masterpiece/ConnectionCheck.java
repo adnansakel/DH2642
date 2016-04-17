@@ -24,7 +24,7 @@ public class ConnectionCheck {
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if (isConnected == false) {
-            Toast.makeText(_context, "No Internet Connection. Please connect to the internet and try again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(_context, "No Internet Connection Found. Please connect to the internet and try again.", Toast.LENGTH_LONG).show();
             System.out.println("Toastcheck");
         }
 

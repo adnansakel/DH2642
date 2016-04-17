@@ -2,12 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    android:id="@+id/private_auction_select_painting">
-=======
-    android:id="@+id/privateauction_select_auctionpainting_view">
->>>>>>> origin/master
-
+    android:id="@+id/privateauction_select_painting_view">
 
     <TextView
         android:layout_width="wrap_content"
