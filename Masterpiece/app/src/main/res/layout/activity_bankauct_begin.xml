@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/start_bank_auction">
+    android:id="@+id/start_bankauction_view">
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="of the Bank&apos;s Paintings"
+        android:text="of the Bank&apos;s Paintings Being Auctioned"
         android:id="@+id/textView18"
         android:layout_below="@+id/textView17"
         android:layout_centerHorizontal="true" />
@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
+        android:textColor="#FF99CC00"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"

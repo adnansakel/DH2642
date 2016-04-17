@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="#FF0099CC"
         android:text="@string/game_number"
         android:gravity="center"/>
     <TextView
