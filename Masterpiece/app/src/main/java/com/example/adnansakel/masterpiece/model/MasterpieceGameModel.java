@@ -42,6 +42,7 @@ public class MasterpieceGameModel extends Observable{
 
     private String CountNonBidders;
     private String color;
+    private String popupContent;
 
 
     public MasterpieceGameModel(){
@@ -191,7 +192,7 @@ public class MasterpieceGameModel extends Observable{
         return allPlayers.get(position);
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         allPlayers.add(player);
         setChanged();
         notifyObservers();
@@ -312,11 +313,22 @@ public class MasterpieceGameModel extends Observable{
         this.allPaintingIDs = allPaintingIDs;
     }
 
-    public void addPaintingtoAllPaintings(Painting painting){
+    public void addPaintingtoAllPaintings(Painting painting) {
         allPaintings.add(painting);
     }
 
     public Painting getPainting(int position){
         return allPaintings.get(position);
+    }
+
+
+    public void setPopupContent(String popupContent) {
+        this.popupContent = popupContent;
+        setChanged();
+        notifyObservers("popupContentChanged");
+    }
+
+    public String getPopupContent(){
+        return popupContent;
     }
 }
