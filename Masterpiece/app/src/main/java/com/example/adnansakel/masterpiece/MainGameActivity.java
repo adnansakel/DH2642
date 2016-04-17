@@ -94,11 +94,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         //find popup & popup contents
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
         layoutStatusPopup = (LinearLayout)findViewById(R.id.fullscreenStatusPopup);
-        layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection);
-        layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.private_auction_in_progress);
-        layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bank_auction_in_progress);
+        layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection_view);
+        layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.privateauction_inprogress_view);
+        layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bankauction_inprogress_view);
         layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.privateauction_select_painting_view);
-        layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bank_auction);
+        layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bankauction_view);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
