@@ -1,6 +1,7 @@
 package com.example.adnansakel.masterpiece;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,9 +9,11 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
+import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.view.HomeView;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -64,6 +67,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         Firebase ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"0"+"Image");
         Map<String,Object> mp = new HashMap<String,Object>();
+
+
+        downloadImages();
 
         /*Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -164,6 +170,41 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
 
 
+    }
+
+    ProgressDialog progress;
+
+    private void downloadImages(){
+
+        Firebase.setAndroidContext(this);
+        progress = ProgressDialog.show(this, "", "Downloading masterpiece paintings ...", true);
+        new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            Painting painting = new Painting();
+                            System.out.println(ds.getValue().toString());
+                            System.out.println(ds.child("Artist").getValue().toString());
+                            painting.setArtist(ds.child(AppConstants.ARTIST).getValue().toString());
+                            painting.setImageURL(ds.child(AppConstants.IMAGE).getValue().toString());
+                            painting.setName(ds.child(AppConstants.NAME).getValue().toString());
+                            painting.setDescription(ds.child(AppConstants.DESCRIPTION).getValue().toString());
+                            masterpieceGameModel.addPaintingtoAllPaintings(painting);
+                            progress.dismiss();
+
+                        }
+
+                        ImageDownloader imageDownloader = new ImageDownloader(HomeActivity.this,masterpieceGameModel);
+                        imageDownloader.downloadImages(progress);
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                        progress.dismiss();
+                        Toast.makeText(HomeActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override

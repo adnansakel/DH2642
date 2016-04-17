@@ -84,10 +84,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
         // Load images
-        ProgressDialog progress;
-        progress = ProgressDialog.show(this, "", "Downloading paintings ...", true);
-        ImageDownloader imageDownloader = new ImageDownloader(MainGameActivity.this,model);
-        imageDownloader.downloadImages(progress);
+
 
         //find the buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
