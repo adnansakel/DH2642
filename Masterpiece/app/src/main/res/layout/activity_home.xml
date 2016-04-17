@@ -6,33 +6,33 @@
     android:gravity="center"
     android:id="@+id/home_view">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="If You Have a Game Number"
-        android:id="@+id/textView"
-        android:layout_above="@+id/buttonJoinGame"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/logo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="If you have a Game Number:"
+        android:id="@+id/textView"
+        android:layout_above="@+id/buttonJoinGame"
+        android:layout_centerHorizontal="true" />
 
     <Button
-    android:id="@+id/buttonJoinGame"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
+        android:id="@+id/buttonJoinGame"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:text="@string/join_game"
-    android:textSize="25sp"
-    android:textStyle="bold"
-        android:layout_above="@+id/buttonCreateGame"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="27dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/buttonCreateGame"
@@ -42,9 +42,8 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonJoinGame" />
 
 </RelativeLayout>
