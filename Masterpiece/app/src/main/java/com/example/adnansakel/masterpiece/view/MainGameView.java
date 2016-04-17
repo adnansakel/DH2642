@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.R;
@@ -35,6 +36,16 @@ public class MainGameView implements Observer{
     LinearLayout.LayoutParams layoutParams;
     LayoutInflater layoutInflater;
 
+    RelativeLayout layoutStatusPopup;
+    RelativeLayout layoutPopupGameModelSelection;
+    RelativeLayout layoutPopupPrivateAuctionInProgress;
+    RelativeLayout layoutPopupBankAuctionInProgress;
+    RelativeLayout layoutPopupPrivateAuctionSelectPainting;
+    RelativeLayout layoutPopupBankAuctionBegin;
+    RelativeLayout layoutPopupPrivateAuctionBid;
+    RelativeLayout layoutPopupBankAuctionBid;
+
+
     public MainGameView(View view, MasterpieceGameModel model) {
         model.addObserver(this);
         this.model = model;
@@ -43,13 +54,36 @@ public class MainGameView implements Observer{
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    private void initialize(){
+
+        //find the views that will be needed
+        layoutStatusPopup = (RelativeLayout)view.findViewById(R.id.fullscreenStatusPopup);
+        layoutPopupGameModelSelection = (RelativeLayout)view.findViewById(R.id.game_mode_selection_view);
+        layoutPopupPrivateAuctionInProgress = (RelativeLayout)view.findViewById(R.id.privateauction_inprogress_view);
+        layoutPopupBankAuctionInProgress = (RelativeLayout)view.findViewById(R.id.bankauction_inprogress_view);
+        layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)view.findViewById(R.id.privateauction_select_painting_view);
+        layoutPopupBankAuctionBegin = (RelativeLayout)view.findViewById(R.id.start_bankauction_view);
+        layoutPopupPrivateAuctionBid = (RelativeLayout)view.findViewById(R.id.privateauction_bid_view);
+        layoutPopupBankAuctionBid = (RelativeLayout)view.findViewById(R.id.bankauction_bid_view);
+
+        //set the popup content views to invisible
+        layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionSelectPainting.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
+        layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
+    }
+
     public void populatePaintingsOtherPlayers(Player selectedPlayer){
 
         LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer);
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(2,0,2,0);
+        layoutParams.setMargins(2, 0, 2, 0);
 
-        for(int paintingID: selectedPlayer.getOwnedPaintingIDs()) {
+        for (int paintingID : selectedPlayer.getOwnedPaintingIDs()) {
             View singlePainting = layoutInflater.inflate(R.layout.item_image, null);
             ImageView image = (ImageView) singlePainting.findViewById(R.id.imgPainting);
             image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
@@ -181,6 +215,35 @@ public class MainGameView implements Observer{
 
     @Override
     public void update(Observable observable, Object data) {
+        if(observable instanceof  MasterpieceGameModel){
 
+            //if model's popupContent changed
+            if(data.toString()=="popupContentChanged"){
+
+                //set layout as visible for each case (and probably need to set all others to invisible)
+                if(model.getPopupContent()== "startTurn") {
+                    //show the start turn popup layout (game model selection)
+                    layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "privateAuctionInProgress") {
+                    layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "bankAuctionInProgress") {
+                    layoutPopupBankAuctionInProgress.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "privateAuctionSelectPainting") {
+                    layoutPopupPrivateAuctionSelectPainting.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "bankAuctionBegin") {
+                    layoutPopupBankAuctionBegin.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "privateAuctionBid") {
+                    layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "bankAuctionBid") {
+                    layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 }
