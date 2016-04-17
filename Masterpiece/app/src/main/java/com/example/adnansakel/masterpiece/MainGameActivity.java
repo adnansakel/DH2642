@@ -55,14 +55,17 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_thirdPlayer;
     Button button_fourthPlayer;
     Button button_start_turn;
+    Button button_begin_bank_auction;
 
     View fullscreen_status_popup;
     LinearLayout layoutStatusPopup;
     RelativeLayout layoutPopupGameModelSelection;
     RelativeLayout layoutPopupPrivateAuctionInProgress;
     RelativeLayout layoutPopupBankAuctionInProgress;
+    RelativeLayout layoutPopupPrivateAuctionSelectPainting;
+    RelativeLayout layoutPopupBankAuctionBegin;
 
-    boolean turnIsHappening = false;
+    boolean myTurn = false;
     boolean statusPopupIsVisible = false;
 
     @Override
@@ -83,9 +86,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         ImageDownloader imageDownloader = new ImageDownloader(MainGameActivity.this,model);
         imageDownloader.downloadImages(progress);
 
-        //find the buttons and views that get hidden/shown
+        //find the buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
         button_start_turn = (Button)findViewById(R.id.btnRoll);
+        button_begin_bank_auction = (Button)findViewById(R.id.btn_begin_bank_auction);
 
         //find popup & popup contents
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
@@ -93,6 +97,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection);
         layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.private_auction_in_progress);
         layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bank_auction_in_progress);
+        layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.private_auction_select_painting);
+        layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bank_auction);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
@@ -219,10 +225,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                 System.out.println("TurnAction changed to: " + snapshot.getValue());
 
-                //if a new turn action just started
-                if (snapshot.getValue() != null && turnIsHappening == false) {
-
-                    turnIsHappening = true;
+                //if (snapshot.getValue() != null) { //probably don't need this
 
                     //if the turn is a private auction
                     if (snapshot.getValue() == "privateAuction") {
@@ -237,7 +240,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                         //my device will display the "bank auction in progress" screen
                         layoutStatusPopup.addView(layoutPopupBankAuctionInProgress);
                     }
-                }
+                //}
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -291,6 +294,22 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             button_thirdPlayer.setBackgroundColor(Color.WHITE);
             button_fourthPlayer.setBackgroundColor(Color.WHITE);
             mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
+        } else if(v == button_begin_bank_auction) {
+
+            //the below code could be moved to its own function
+
+            //set turn action
+            //model.setTurnAction("bankAuction");
+            new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("bankAuction");
+
+            //choose painting being auctioned (first painting in Paintings[])
+            Painting chosenPaintingToAuction = model.getAllPaintings1().get(0);
+
+            //set painting being auctioned
+            model.setPaintingBeingAuctioned(chosenPaintingToAuction);
+
+            //set current bidder as the next person in allPlayers[]
+            model.setCurrentBidder(model.getNextPlayer());
         }
     }
 
@@ -354,22 +373,20 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         int roll = rn.nextInt(1); //there are only 2 types so far
 
         //hide the start turn layout
+        layoutStatusPopup.removeView(layoutPopupGameModelSelection);
 
         if(roll == 0){
 
             //PRIVATE AUCTION
 
             //show the private auction select painting layout
+            layoutStatusPopup.addView(layoutPopupPrivateAuctionSelectPainting);
 
-            //set turn action
-            //model.setTurnAction("privateAuction");
-            new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("privateAuction");
-
-            //choose painting being auctioned (for now I'm just choosing my player's first painting)
-            //Painting chosenPaintingToAuction = model.getMyPlayer().getOwnedPaintings().get(0);
             //TODO: need to access my owned paintings
 
-            //TODO: allow my player to select a painting by swiping up
+            //TODO: display my paintings in the select painting layout
+
+            //TODO: allow my player to select a painting
 
             //set painting being auctioned
             //model.setPaintingBeingAuctioned(chosenPaintingToAuction);
@@ -377,6 +394,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //TODO: set the value of my painting in the above
 
             //TODO: set my player's bidding property to false in Firebase (eg. It's my auction so I'm done bidding)
+
+            //set turn action
+            //model.setTurnAction("privateAuction");
+            new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("privateAuction");
 
             //set current bidder as the next player
             //model.setCurrentBidder(model.getNextPlayer());
@@ -391,19 +412,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //BANK AUCTION
 
             //show the bank auction select painting layout
+            layoutStatusPopup.addView(layoutPopupBankAuctionBegin);
 
-            //set turn action
-            //model.setTurnAction("bankAuction");
-            new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("bankAuction");
+            //start listener on begin auction button
+            button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
 
-            //choose painting being auctioned (first painting in Paintings[])
-            Painting chosenPaintingToAuction = model.getAllPaintings1().get(0);
-
-            //set painting being auctioned
-            model.setPaintingBeingAuctioned(chosenPaintingToAuction);
-
-            //set current bidder as the next person in allPlayers[]
-            model.setCurrentBidder(model.getNextPlayer());
         }
 
     }
