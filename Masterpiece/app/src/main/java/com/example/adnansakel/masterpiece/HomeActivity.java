@@ -213,6 +213,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             // check if connected to the internet = true
             if (checkConnection.isConnected()) {
                 // if it is connected, then go to create game activity
+                masterpieceGameModel.removeAllPlayer();
+                masterpieceGameModel.getAllPaintings();
+                masterpieceGameModel.shufflePaintingIDsandValues();
                 startActivity(new Intent(HomeActivity.this, CreateGameActivity.class));
             }
         }

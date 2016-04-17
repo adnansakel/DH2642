@@ -203,6 +203,17 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }
 
+    public void removeAllPaintings(){
+        allPaintings.clear();
+        setChanged();
+        notifyObservers();
+    }
+
+    public void shufflePaintingIDsandValues(){
+        Collections.shuffle(shuffledPaintingIDs);
+        Collections.shuffle(shuffledPaintingValues);
+    }
+
     /*public String getTurnType(int position){
         return turnTypes.get(position);
     }*/

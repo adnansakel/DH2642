@@ -92,10 +92,12 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
                         shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
                         masterpiecegamemodel.setShuffledPaintingValues(shuffledpaintinvalueglist);
 
-                        for(int i = 0; i < 4; i++){//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
+                        for(int i = 0; i < AppConstants.TotalNumberofPlayers; i++){//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
                             masterpiecegamemodel.getAllPlayers().get(i).addOwnedPaintingID(shuffledpaintinglist.get(i));
                             masterpiecegamemodel.getAllPlayers().get(i).addOenedPaintingValue(shuffledpaintinvalueglist.get(i));
                         }
+                        shuffledpaintinglist.subList(0,AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
+                        shuffledpaintinvalueglist.subList(0,AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
                         progress.dismiss();
                         startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
                         LobbyActivity.this.finish();

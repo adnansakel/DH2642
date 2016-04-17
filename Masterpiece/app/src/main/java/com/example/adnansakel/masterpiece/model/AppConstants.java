@@ -15,6 +15,7 @@ public class AppConstants {
 
 
     public static int TotalNumberofPainting = 10;
+    public static int TotalNumberofPlayers = 4;
     // All values which just represent a string are in capital letters
     public static String GAMENUMBER = "GameNumber";
 

@@ -7,15 +7,18 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import android.os.Handler;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView txtHello;
+    Button btntestbutton;
     MasterpieceGameModel masterpieceGameModel;
     int paintingCounter = 0;
     Handler handler;
@@ -28,20 +31,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         masterpieceGameModel = ((MasterpieceApplication) this.getApplication()).getModel();
        // MainView mainView = new MainView(findViewById(R.id.relative_layout_Hello),masterpieceGameModel);
         txtHello = ((TextView)findViewById(R.id.textViewHello));
+        btntestbutton = (Button)findViewById(R.id.btntestButton);
         txtHello.setOnClickListener(this);
-        ProgressDialog progress;
+        btntestbutton.setOnClickListener(this);
+        /*ProgressDialog progress;
         progress = ProgressDialog.show(this, "", "Downloading paintings ...", true);
         ImageDownloader imageDownloader = new ImageDownloader(MainActivity.this,masterpieceGameModel);
         imageDownloader.downloadImages(progress);
-        handler = new Handler();
+        handler = new Handler();*/
     }
 
     @Override
     public void onClick(View v) {
         if(v  == txtHello){
-           // txtHello.setTextColor(Color.parseColor("#FF0000"));
+            txtHello.setTextColor(Color.parseColor("#FF0000"));
             //masterpieceGameModel.setColor("#ff0000");
-
+/*
                     ((ImageView) findViewById(R.id.imgTest1)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
                             masterpieceGameModel.getPaintingbyPosition(0).getImagebytearray(), 0,
                             masterpieceGameModel.getPaintingbyPosition(0).getImagebytearray().length),100,100,true));
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ((ImageView)findViewById(R.id.imgTest10)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
                     masterpieceGameModel.getPaintingbyPosition(9).getImagebytearray(), 0,
                     masterpieceGameModel.getPaintingbyPosition(9).getImagebytearray().length),100,100,true));
+                    */
             /*
             Runnable runnable = new Runnable() {
                 @Override
@@ -111,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 // start it with:
             handler.post(runnable);*/
+        }
+        else if(v == btntestbutton){
+            Toast.makeText(this,"Button clicked",Toast.LENGTH_LONG).show();
         }
 
     }
