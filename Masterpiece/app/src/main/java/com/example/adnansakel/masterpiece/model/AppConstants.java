@@ -1,5 +1,7 @@
 package com.example.adnansakel.masterpiece.model;
 
+import android.graphics.Color;
+
 /**
  * Created by Adnan Sakel on 3/28/2016.
  */
@@ -38,5 +40,8 @@ public class AppConstants {
 
     public static String SHUFFLEDPAINTINGVALUES = "ShuffledPaintingValues";
     public static String SHUFFLEDPAINTINGS = "ShuffledPaintings";
+
+    public static String MAINCOLOR = "#8B0000";
+    public static Integer MAINCOLORINT = Color.parseColor("#8B0000");
 
 }

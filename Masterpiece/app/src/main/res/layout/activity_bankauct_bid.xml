@@ -2,18 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/private_auction_bid">
-
+    android:id="@+id/bank_auction_bid">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Private Auction"
-        android:id="@+id/textView9"
+        android:text="Bank Auction"
+        android:id="@+id/textView19"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,17 +40,17 @@
         android:text="Bid + $50,000"
         android:id="@+id/btn_bid_increase"
         android:layout_alignTop="@+id/btn_not_bidding"
-        android:layout_toRightOf="@+id/txtPlayerCash"
-        android:layout_toEndOf="@+id/txtPlayerCash" />
+        android:layout_toLeftOf="@+id/textView19"
+        android:layout_toStartOf="@+id/textView19" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don&apos;t Bid"
         android:id="@+id/btn_not_bidding"
-        android:layout_above="@+id/txtPlayerCash"
-        android:layout_toRightOf="@+id/textView9"
-        android:layout_toEndOf="@+id/textView9"
-        android:layout_marginBottom="72dp" />
+        android:layout_alignTop="@+id/txtHighest_bid"
+        android:layout_toRightOf="@+id/textView19"
+        android:layout_toEndOf="@+id/textView19"
+        android:layout_marginTop="78dp" />
 
 </RelativeLayout>

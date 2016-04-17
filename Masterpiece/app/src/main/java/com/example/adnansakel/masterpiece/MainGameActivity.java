@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -26,6 +28,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -37,9 +40,20 @@ import java.util.Set;
 public class MainGameActivity extends Activity implements View.OnClickListener {
 
     MasterpieceGameModel model;
+    Player myPlayer;
+    Player secondPlayer = null;
+    Player thirdPlayer = null;
+    Player fourthPlayer = null;
+    Player selectedPlayer;
+    MainGameView mainGameView;
+
     //Firebase masterpieceRef;
     Button button_status_bar;
+    Button button_secondPlayer;
+    Button button_thirdPlayer;
+    Button button_fourthPlayer;
     Button button_start_turn;
+
     View fullscreen_status_popup;
     boolean turnIsHappening = false;
     boolean statusPopupIsVisible = false;
@@ -52,34 +66,53 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         // Adding the model
         model = ((MasterpieceApplication) this.getApplication()).getModel();
+        List<Player> players = model.getAllPlayers();
+        myPlayer = model.getMyPlayer();
         MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
         //find the buttons and views that get hidden/shown
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
         button_start_turn = (Button)findViewById(R.id.buttonStatusBar);
         //TODO: need to replace the above id with start turn button's id
+
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
+
+        //find buttons for top section of the overview
+        button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
+        button_thirdPlayer = (Button)findViewById(R.id.btnThirdPlayer);
+        button_fourthPlayer = (Button)findViewById(R.id.btnFourthPlayer);
+
+        //defining the order of the players
+        for (Player player : players) {
+            if (player.getPlayerpositionID() != myPlayer.getPlayerpositionID() ) {
+                if(secondPlayer == null){
+                    //setting them in the variables and updating the button text
+                    secondPlayer = player;
+                    button_secondPlayer.setText(secondPlayer.getName());
+                    //set to active
+                    button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+                    //load pictures for the active player (2)
+                    mainGameView.populatePaintingsOtherPlayers(secondPlayer);
+                } else if (thirdPlayer == null) {
+                    thirdPlayer = player;
+                    button_thirdPlayer.setText(thirdPlayer.getName());
+                } else if (fourthPlayer == null){
+                    fourthPlayer = player;
+                    button_fourthPlayer.setText(fourthPlayer.getName());
+                }
+            }
+            System.out.println(player.getName());
+        }
+
+        //load pictures for myPlayer
+        mainGameView.populatePaintingsMyPlayer(myPlayer);
 
         //set listeners
         button_status_bar.setOnClickListener(this);
         button_start_turn.setOnClickListener(this);
-
-        //DM TODO: OLD WAY OF CREATING IMAGES - Remove later
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.monalisa);
-        LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)findViewById(R.id.llPaintingsOfOtherPlayers);
-
-        for (int i = 0; i < 4; i++) {
-            layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(bm));
-            System.out.println("Test");
-        }
-
-        /*
-        for (int i = 0; i < 4; i++) { // TODO: DM - Replace 4 with "getActivePlayer()" and the data of the player (e.g. image, title,...)
-            LinearLayout tv = (LinearLayout)findViewById(R.id.llSinglePainting); // LinearLayout(getApplicationContext());
-            //tv.setText(yourData.get(i));
-            test.addView(tv);
-        }
-        */
+        button_secondPlayer.setOnClickListener(this);
+        button_thirdPlayer.setOnClickListener(this);
+        button_fourthPlayer.setOnClickListener(this);
 
         /*
         if(AppConstants.IamCreator){
@@ -170,6 +203,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         });
     }
 
+
     @Override
     public void onClick(View v) {
         if(v == button_status_bar) {
@@ -195,6 +229,32 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         else if(v == button_start_turn) {
 
             startTurn();
+
+        } else if(v == button_secondPlayer) {
+            if (selectedPlayer != secondPlayer){
+                selectedPlayer = secondPlayer;
+                button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+                button_thirdPlayer.setBackgroundColor(Color.WHITE);
+                button_fourthPlayer.setBackgroundColor(Color.WHITE);
+                mainGameView.populatePaintingsOtherPlayers(secondPlayer);
+            }
+        } else if(v == button_thirdPlayer) {
+            if (selectedPlayer != thirdPlayer){
+                selectedPlayer = thirdPlayer;
+                button_secondPlayer.setBackgroundColor(Color.WHITE);
+                button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+                button_fourthPlayer.setBackgroundColor(Color.WHITE);
+                mainGameView.populatePaintingsOtherPlayers(thirdPlayer);
+            }
+
+        } else if(v == button_fourthPlayer) {
+            if (selectedPlayer != fourthPlayer){
+                selectedPlayer = fourthPlayer;
+                button_secondPlayer.setBackgroundColor(Color.WHITE);
+                button_thirdPlayer.setBackgroundColor(Color.WHITE);
+                button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+                mainGameView.populatePaintingsOtherPlayers(fourthPlayer);
+            }
         }
     }
 
@@ -387,21 +447,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             }
         }*/
 
-    }
-
-    public LinearLayout createLayoutWithBitmap(Bitmap bm){
-        LinearLayout layout = new LinearLayout(getApplicationContext());
-        layout.setLayoutParams(new LinearLayout.LayoutParams(250, 250));
-        layout.setGravity(Gravity.CENTER);
-
-        ImageView imageView = new ImageView(getApplicationContext());
-        LinearLayout.LayoutParams ivLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        imageView.setLayoutParams(ivLayout);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageBitmap(bm);
-
-        layout.addView(imageView);
-        return layout;
     }
 
 }
