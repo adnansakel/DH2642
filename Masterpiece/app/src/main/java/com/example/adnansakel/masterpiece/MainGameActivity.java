@@ -2,6 +2,7 @@ package com.example.adnansakel.masterpiece;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -69,6 +70,12 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         List<Player> players = model.getAllPlayers();
         myPlayer = model.getMyPlayer();
         MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
+
+        // Load images
+        ProgressDialog progress;
+        progress = ProgressDialog.show(this, "", "Downloading paintings ...", true);
+        ImageDownloader imageDownloader = new ImageDownloader(MainGameActivity.this,model);
+        imageDownloader.downloadImages(progress);
 
         //find the buttons and views that get hidden/shown
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
