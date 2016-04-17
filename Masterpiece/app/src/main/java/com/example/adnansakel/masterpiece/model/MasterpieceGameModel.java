@@ -181,15 +181,6 @@ public class MasterpieceGameModel extends Observable{
         return nextPlayer;
     }
 
-    public Set<Painting> getPaintingsByPlayerID(){//should remove this method
-        //TODO: Define proper function with by ID or object
-        Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000,"artist");
-        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000,"artist");
-        Set<Painting> setofpaintings = new HashSet<Painting>(Arrays.asList(pa1,pa2));
-        return setofpaintings;
-    }
-
     public List<Painting> getAllPaintings(){
         //TODO: Define proper function with by ID or object
 
@@ -212,14 +203,9 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }
 
-
-
     /*public String getTurnType(int position){
         return turnTypes.get(position);
     }*/
-
-
-
 
     public String getColor() {
         return color;
@@ -247,14 +233,9 @@ public class MasterpieceGameModel extends Observable{
         CurrentBid = currentBid;
     }
 
-
-
-
-
     public void setShuffledPaintingValues(List<Integer> shuffledPaintingValues) {
         this.allPaintingValues = shuffledPaintingValues;
     }
-
 
     public void addPaintingIDAndValue( Integer paintingID, int value){
         myPlayer.addOwnedPaintingID(paintingID);
@@ -272,6 +253,10 @@ public class MasterpieceGameModel extends Observable{
 
     public Painting getPaintingbyPosition(int position){
         return allPaintings.get(position);
+    }
+
+    public Painting getPaintingbyPaintingID(int id){
+        return null; // TODO SAKEL
     }
 
     public List<Integer> getBankPaintingIDs() {

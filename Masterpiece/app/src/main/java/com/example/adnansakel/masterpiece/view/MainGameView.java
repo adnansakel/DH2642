@@ -48,10 +48,10 @@ public class MainGameView implements Observer{
         // Cleanup if paintings are already added to the layout
         if(layoutPaintingsOtherPlayers.getChildCount() > 0) layoutPaintingsOtherPlayers.removeAllViews();
 
-        List<Painting> selectedPlayerPaintings = model.getPaintingsByPlayerID(); // TODO replace with the right function
+        List<Integer> selectedPlayerPaintingIDs = selectedPlayer.getOwnedPaintingIDs(); // TODO replace with the right function
 
         // DM TODO: use actual information from local model
-        for (Painting painting : selectedPlayerPaintings) {
+        for (Integer paintingID : selectedPlayerPaintingIDs) {
             layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(bm)); // TODO replace BM with getPaintingByID when its created
             System.out.println("ADDING OTHER PLAYER PAINTINGS");
         }
@@ -66,10 +66,10 @@ public class MainGameView implements Observer{
         // Cleanup if paintings are already added to the layout
         if(layoutPaintingsMyPlayer.getChildCount() > 0) layoutPaintingsMyPlayer.removeAllViews();
 
-        List<Painting> myPlayerPaintings = model.getPaintingsByPlayerID(); // TODO add the right function (myPlayer - getID)
+        List<Integer> myPlayerPaintingIDs = myPlayer.getOwnedPaintingIDs(); // TODO add the right function (myPlayer - getID)
 
         // DM TODO: use actual information from local model
-        for (Painting painting : myPlayerPaintings) {
+        for (Integer paintingID : myPlayerPaintingIDs) {
             layoutPaintingsMyPlayer.addView(createLayoutWithBitmapAndValue(bm, "sv")); // TODO replace BM with getPaintingByID when its created, pass both the secret value and the bitmap
             System.out.println("ADDING MYPLAYER PAINTINGS");
         }
