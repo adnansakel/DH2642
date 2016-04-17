@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/private_auction_bid_lost">
+    android:id="@+id/privateauction_bidlost_view">
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
+        android:textColor="#FF99CC00"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -40,9 +41,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Bid:"
         android:id="@+id/txtPlayerAmountBid"
-        android:layout_below="@+id/textView12"
+        android:layout_below="@+id/txtHighestBid"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp" />
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Winning Bid: "
         android:id="@+id/txtHighestBid"
-        android:layout_below="@+id/textView20"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

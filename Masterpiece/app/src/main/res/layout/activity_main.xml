@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/textViewHello"
         android:text="Hello I'm Sakel!"
-        android:textColor="#009"
+        android:textColor="#FFFFBB33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <HorizontalScrollView

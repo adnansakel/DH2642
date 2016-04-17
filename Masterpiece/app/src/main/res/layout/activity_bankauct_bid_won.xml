@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bank_auction_bid_won">
+    android:id="@+id/bankauction_bidwon_view">
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
+        android:textColor="#FF99CC00"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -41,8 +42,7 @@
         android:text="Winning Bid Amount: "
         android:id="@+id/txtHighestBid"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/btnAddPaintingToCollection"
-        android:layout_alignEnd="@+id/btnAddPaintingToCollection" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"

@@ -12,6 +12,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:textSize="20sp"
+    android:gravity="center"
     android:hint="Game Number"/>
 
     <EditText
@@ -22,6 +23,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:gravity="center"
         android:hint="@string/hint_choose_user_name"/>
     <Button
         android:id="@+id/buttonJoinGame"
