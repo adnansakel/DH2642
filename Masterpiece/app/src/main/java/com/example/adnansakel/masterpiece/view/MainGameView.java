@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,33 +40,41 @@ public class MainGameView implements Observer{
         model.addObserver(this);
         this.model = model;
         this.view = view;
+
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(2,0,2,0);
+
+
+        Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                model.getPaintingbyPosition(0).getImagebytearray(), 0,
+                model.getPaintingbyPosition(0).getImagebytearray().length), 100, 100, true);
     }
 
     public void populatePaintingsOtherPlayers(Player selectedPlayer){
-        Bitmap bm = BitmapFactory.decodeResource(view.getResources(), R.drawable.monalisa);
         LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)view.findViewById(R.id.llPaintingsOfOtherPlayers);
 
         // Cleanup if paintings are already added to the layout
-        if(layoutPaintingsOtherPlayers.getChildCount() > 0) layoutPaintingsOtherPlayers.removeAllViews();
-        System.out.println("Removed all views from HSV");
+        //if(layoutPaintingsOtherPlayers.getChildCount() > 0) layoutPaintingsOtherPlayers.removeAllViews();
+        //System.out.println("Removed all views from HSV");
 
         // DM TODO: use actual information from local model
         for (Integer paintingID : selectedPlayer.getOwnedPaintingIDs()) {
             System.out.println("paintingID = " + paintingID);
-            createLayoutWithBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
-                    model.getPainting(0).getImagebytearray(), 0,
-                    model.getPainting(0).getImagebytearray().length), 100, 100, true));
-            layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
-                    model.getPainting(paintingID).getImagebytearray(), 0,
-                    model.getPainting(paintingID).getImagebytearray().length), 100, 100, true)));
+
+            if (model.getPaintingbyPosition(paintingID).getImagebytearray().length > 0) {
+                View singlePainting = layoutInflater.inflate(R.layout.item_image,null);
+                ImageView image = (ImageView)singlePainting.findViewById(R.id.imgPainting);
+                image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                        model.getPaintingbyPosition(paintingID).getImagebytearray(), 0,
+                        model.getPaintingbyPosition(paintingID).getImagebytearray().length), 100, 100, true));
+                layoutPaintingsOtherPlayers.addView(singlePainting, layoutParams);
+            }
+
             System.out.println("ADDING OTHER PLAYER PAINTINGS");
         }
-
-        // DM TODO: remove old paintings if player is switched
     }
 
     public void populatePaintingsMyPlayer(Player myPlayer){
-        Bitmap bm = BitmapFactory.decodeResource(view.getResources(), R.drawable.monalisa);
         LinearLayout layoutPaintingsMyPlayer = (LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer);
 
         // Cleanup if paintings are already added to the layout
@@ -73,16 +82,17 @@ public class MainGameView implements Observer{
 
         // DM TODO: use actual information from local model
         for (Integer paintingID : myPlayer.getOwnedPaintingIDs()) {
-
-            layoutPaintingsMyPlayer.addView(createLayoutWithBitmapAndValue(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+            System.out.println("paintingID = " + paintingID);
+            //model.getPainting(paintingID).getImagebytearray();
+            /*layoutPaintingsMyPlayer.addView(createLayoutWithBitmapAndValue(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
                     model.getPainting(paintingID).getImagebytearray(), 0,
                     model.getPainting(paintingID).getImagebytearray().length), 100, 100, true),
-                    model.getPainting(paintingID).getValue()));
+                    model.getPainting(paintingID).getValue()));*/
             System.out.println("ADDING MYPLAYER PAINTINGS");
         }
     }
 
-    public LinearLayout createLayoutWithBitmap(Bitmap bm){
+    public LinearLayout createLayoutWithBitmap(){
         LinearLayout layout = new LinearLayout(view.getContext());
         //layout.setLayoutParams(new LinearLayout.LayoutParams(250, 250));
         layout.setGravity(Gravity.CENTER);
@@ -91,7 +101,6 @@ public class MainGameView implements Observer{
         LinearLayout.LayoutParams ivLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         imageView.setLayoutParams(ivLayout);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageBitmap(bm);
 
         layout.addView(imageView);
         return layout;
