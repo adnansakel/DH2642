@@ -47,12 +47,17 @@ public class MainGameView implements Observer{
 
         // Cleanup if paintings are already added to the layout
         if(layoutPaintingsOtherPlayers.getChildCount() > 0) layoutPaintingsOtherPlayers.removeAllViews();
-
-        List<Integer> selectedPlayerPaintingIDs = selectedPlayer.getOwnedPaintingIDs(); // TODO replace with the right function
+        System.out.println("Removed all views from HSV");
 
         // DM TODO: use actual information from local model
-        for (Integer paintingID : selectedPlayerPaintingIDs) {
-            layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(bm)); // TODO replace BM with getPaintingByID when its created
+        for (Integer paintingID : selectedPlayer.getOwnedPaintingIDs()) {
+            System.out.println("paintingID = " + paintingID);
+            createLayoutWithBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    model.getPainting(0).getImagebytearray(), 0,
+                    model.getPainting(0).getImagebytearray().length), 100, 100, true));
+            layoutPaintingsOtherPlayers.addView(createLayoutWithBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    model.getPainting(paintingID).getImagebytearray(), 0,
+                    model.getPainting(paintingID).getImagebytearray().length), 100, 100, true)));
             System.out.println("ADDING OTHER PLAYER PAINTINGS");
         }
 
@@ -66,11 +71,13 @@ public class MainGameView implements Observer{
         // Cleanup if paintings are already added to the layout
         if(layoutPaintingsMyPlayer.getChildCount() > 0) layoutPaintingsMyPlayer.removeAllViews();
 
-        List<Integer> myPlayerPaintingIDs = myPlayer.getOwnedPaintingIDs(); // TODO add the right function (myPlayer - getID)
-
         // DM TODO: use actual information from local model
-        for (Integer paintingID : myPlayerPaintingIDs) {
-            layoutPaintingsMyPlayer.addView(createLayoutWithBitmapAndValue(bm, "sv")); // TODO replace BM with getPaintingByID when its created, pass both the secret value and the bitmap
+        for (Integer paintingID : myPlayer.getOwnedPaintingIDs()) {
+
+            layoutPaintingsMyPlayer.addView(createLayoutWithBitmapAndValue(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    model.getPainting(paintingID).getImagebytearray(), 0,
+                    model.getPainting(paintingID).getImagebytearray().length), 100, 100, true),
+                    model.getPainting(paintingID).getValue()));
             System.out.println("ADDING MYPLAYER PAINTINGS");
         }
     }
@@ -90,7 +97,7 @@ public class MainGameView implements Observer{
         return layout;
     }
 
-    public LinearLayout createLayoutWithBitmapAndValue(Bitmap bm, String sv){
+    public LinearLayout createLayoutWithBitmapAndValue(Bitmap bm, Integer sv){
         // Creating a layout which will include an imageView and a textView
         LinearLayout layout = new LinearLayout(view.getContext());
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

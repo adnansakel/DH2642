@@ -42,9 +42,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
     MasterpieceGameModel model;
     Player myPlayer;
-    Player secondPlayer = null;
-    Player thirdPlayer = null;
-    Player fourthPlayer = null;
+    Integer myPlayerID;
+    Integer secondPlayerID;
+    Integer thirdPlayerID;
+    Integer fourthPlayerID;
     Player selectedPlayer;
     MainGameView mainGameView;
 
@@ -56,6 +57,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_start_turn;
 
     View fullscreen_status_popup;
+    LinearLayout layoutStatusPopup;
+    RelativeLayout layoutPopupGameModelSelection;
+    RelativeLayout layoutPopupPrivateAuctionInProgress;
+    RelativeLayout layoutPopupBankAuctionInProgress;
+
     boolean turnIsHappening = false;
     boolean statusPopupIsVisible = false;
 
@@ -79,44 +85,40 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         //find the buttons and views that get hidden/shown
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
-        button_start_turn = (Button)findViewById(R.id.buttonStatusBar);
-        //TODO: need to replace the above id with start turn button's id
+        button_start_turn = (Button)findViewById(R.id.btnRoll);
 
+        //find popup & popup contents
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
+        layoutStatusPopup = (LinearLayout)findViewById(R.id.fullscreenStatusPopup);
+        layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection);
+        layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.private_auction_in_progress);
+        layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bank_auction_in_progress);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
         button_thirdPlayer = (Button)findViewById(R.id.btnThirdPlayer);
         button_fourthPlayer = (Button)findViewById(R.id.btnFourthPlayer);
 
-        //defining the order of the players
-        for (Player player : players) {
-            if (player.getPlayerpositionID() != myPlayer.getPlayerpositionID() ) {
-                if(secondPlayer == null){
-                    //setting them in the variables and updating the button text
-                    secondPlayer = player;
-                    button_secondPlayer.setText(secondPlayer.getName());
-                    //set to active
-                    button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                    //load pictures for the active player (2)
-                    mainGameView.populatePaintingsOtherPlayers(secondPlayer);
-                } else if (thirdPlayer == null) {
-                    thirdPlayer = player;
-                    button_thirdPlayer.setText(thirdPlayer.getName());
-                } else if (fourthPlayer == null){
-                    fourthPlayer = player;
-                    button_fourthPlayer.setText(fourthPlayer.getName());
-                }
-            }
-            System.out.println(player.getName());
-        }
+        myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
+        secondPlayerID = (myPlayerID + 1)%4;
+        thirdPlayerID = (myPlayerID + 2)%4;
+        fourthPlayerID = (myPlayerID + 3)%4;
+
+        button_secondPlayer.setText(model.getAllPlayers().get(secondPlayerID).getName());
+        button_thirdPlayer.setText(model.getAllPlayers().get(thirdPlayerID).getName());
+        button_fourthPlayer.setText(model.getAllPlayers().get(fourthPlayerID).getName());
+
+        button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+
+        //load pictures for the active player (2)
+        mainGameView.populatePaintingsOtherPlayers(model.getPlayer(secondPlayerID));
 
         //load pictures for myPlayer
         mainGameView.populatePaintingsMyPlayer(myPlayer);
 
         //set listeners
         button_status_bar.setOnClickListener(this);
-        button_start_turn.setOnClickListener(this);
+        //button_start_turn.setOnClickListener(this); //moved this into firebase listener
         button_secondPlayer.setOnClickListener(this);
         button_thirdPlayer.setOnClickListener(this);
         button_fourthPlayer.setOnClickListener(this);
@@ -142,11 +144,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                     fullscreen_status_popup.setVisibility(View.VISIBLE);
                     statusPopupIsVisible = true;
 
-                    //show the start turn popup layout
-                    //TODO: show the start turn layout
+                    //show the start turn popup layout (game model selection)
+                    layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
 
-                    //on the start turn layout there should be a button
-                    //button should call startTurn()
+                    button_start_turn.setOnClickListener(MainGameActivity.this);
                 }
             }
             @Override
@@ -192,14 +193,14 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                     if (snapshot.getValue() == "privateAuction") {
 
                         //my device will display the "private auction in progress" screen
-                        //TODO: display the above screen
+                        layoutStatusPopup.addView(layoutPopupPrivateAuctionInProgress);
                     }
 
                     //if the turn is a bank auction
                     if (snapshot.getValue() == "bankAuction") {
 
                         //my device will display the "bank auction in progress" screen
-                        //TODO: display the above screen
+                        layoutStatusPopup.addView(layoutPopupBankAuctionInProgress);
                     }
                 }
             }
@@ -238,30 +239,23 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             startTurn();
 
         } else if(v == button_secondPlayer) {
-            if (selectedPlayer != secondPlayer){
-                selectedPlayer = secondPlayer;
-                button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                button_thirdPlayer.setBackgroundColor(Color.WHITE);
-                button_fourthPlayer.setBackgroundColor(Color.WHITE);
-                mainGameView.populatePaintingsOtherPlayers(secondPlayer);
-            }
+            selectedPlayer = model.getAllPlayers().get(secondPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         } else if(v == button_thirdPlayer) {
-            if (selectedPlayer != thirdPlayer){
-                selectedPlayer = thirdPlayer;
-                button_secondPlayer.setBackgroundColor(Color.WHITE);
-                button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                button_fourthPlayer.setBackgroundColor(Color.WHITE);
-                mainGameView.populatePaintingsOtherPlayers(thirdPlayer);
-            }
-
+            selectedPlayer = model.getAllPlayers().get(thirdPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         } else if(v == button_fourthPlayer) {
-            if (selectedPlayer != fourthPlayer){
-                selectedPlayer = fourthPlayer;
-                button_secondPlayer.setBackgroundColor(Color.WHITE);
-                button_thirdPlayer.setBackgroundColor(Color.WHITE);
-                button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-                mainGameView.populatePaintingsOtherPlayers(fourthPlayer);
-            }
+            selectedPlayer = model.getAllPlayers().get(fourthPlayerID);
+            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_thirdPlayer.setBackgroundColor(Color.WHITE);
+            button_fourthPlayer.setBackgroundColor(Color.WHITE);
+            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         }
     }
 
