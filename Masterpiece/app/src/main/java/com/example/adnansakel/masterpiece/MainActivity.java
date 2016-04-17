@@ -42,6 +42,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            // txtHello.setTextColor(Color.parseColor("#FF0000"));
             //masterpieceGameModel.setColor("#ff0000");
 
+                    ((ImageView) findViewById(R.id.imgTest1)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                            masterpieceGameModel.getPaintingbyPosition(0).getImagebytearray(), 0,
+                            masterpieceGameModel.getPaintingbyPosition(0).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest2)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(1).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(1).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest3)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(2).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(2).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest4)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(3).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(3).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest5)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(4).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(4).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest6)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(5).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(5).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest7)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(6).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(6).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest8)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(7).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(7).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest9)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(8).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(8).getImagebytearray().length),100,100,true));
+
+            ((ImageView)findViewById(R.id.imgTest10)).setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    masterpieceGameModel.getPaintingbyPosition(9).getImagebytearray(), 0,
+                    masterpieceGameModel.getPaintingbyPosition(9).getImagebytearray().length),100,100,true));
+            /*
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -70,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             };
 
 // start it with:
-            handler.post(runnable);
+            handler.post(runnable);*/
         }
 
     }

@@ -97,7 +97,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
                             masterpiecegamemodel.getAllPlayers().get(i).addOenedPaintingValue(shuffledpaintinvalueglist.get(i));
                         }
                         progress.dismiss();
-                        startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
+                        startActivity(new Intent(LobbyActivity.this, MainActivity.class));
                         LobbyActivity.this.finish();
 
                     }
