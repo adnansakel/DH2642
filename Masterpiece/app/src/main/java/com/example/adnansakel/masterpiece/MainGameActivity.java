@@ -128,6 +128,42 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             gameSetUp();
         }*/
 
+        //start listening to changes in Firebase
+        ListenForFirebaseGameEvents();
+
+        //check turnTaker. this listener is called once then immediately removed
+        Firebase turnTakerRef = new Firebase(AppConstants.GameRef+"/"+"TurnTaker");
+        turnTakerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                System.out.println("first TurnTaker is: " + snapshot.getValue());
+
+                //if the TurnTaker is me
+                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
+
+                    //show popup
+                    fullscreen_status_popup.setVisibility(View.VISIBLE);
+                    statusPopupIsVisible = true;
+
+                    //show the start turn popup layout (game model selection)
+                    layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
+
+                    button_start_turn.setOnClickListener(MainGameActivity.this);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+    }
+
+    public void ListenForFirebaseGameEvents() {
+
         //listen for changes in TurnTaker in Firebase
         Firebase turnTakerRef = new Firebase(AppConstants.GameRef+"/"+"TurnTaker");
         turnTakerRef.addValueEventListener(new ValueEventListener() {
@@ -137,8 +173,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 System.out.println("TurnTaker changed to: " + snapshot.getValue());
 
                 //if the TurnTaker is me
-                if (snapshot.getValue() == "playerPositionID") {
-                    //TODO: use the right variable to compare to in the above (my id)
+                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
 
                     //show popup
                     fullscreen_status_popup.setVisibility(View.VISIBLE);
@@ -165,8 +200,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 System.out.println("CurrentBidder changed to: " + snapshot.getValue());
 
                 //if the CurrentBidder is me
-                if (snapshot.getValue() == "") {
-                    //TODO: use the right variable to compare to in the above
+                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
+
                     bidOnPainting();
                 }
             }
