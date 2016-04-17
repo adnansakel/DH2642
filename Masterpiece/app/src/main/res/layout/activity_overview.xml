@@ -120,15 +120,22 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
         android:id="@+id/fullscreenStatusPopup"
         android:layout_below="@+id/buttonStatusBar"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:orientation="vertical">
+        <include layout="@layout/activity_game_model_selection"/>
+        <include layout="@layout/activity_privatauct_ongoing"/>
+        <include layout="@layout/activity_bankauct_ongoing"/>
+        <include layout="@layout/activity_privatauct_selectpainting"/>
+        <include layout="@layout/activity_bankauct_begin"/>
+        <include layout="@layout/activity_privatauct_bid"/>
+        <include layout="@layout/activity_bankauct_bid"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
