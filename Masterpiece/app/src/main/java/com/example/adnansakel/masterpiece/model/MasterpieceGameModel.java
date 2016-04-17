@@ -255,10 +255,6 @@ public class MasterpieceGameModel extends Observable{
         return allPaintings.get(position);
     }
 
-    public Painting getPaintingbyPaintingID(int id){
-        return null; // TODO SAKEL
-    }
-
     public List<Integer> getBankPaintingIDs() {
         return bankPaintingIDs;
     }
