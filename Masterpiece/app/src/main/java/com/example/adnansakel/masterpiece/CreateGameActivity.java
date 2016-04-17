@@ -96,7 +96,9 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 //Map<String,Object>p1 = new HashMap<String, Object>();
 
                 game.put("Players", "");
-                game.put("TurnTaker", "");
+                Random randomplayer = new Random();
+                int turntaker = randomplayer.nextInt(4);
+                game.put("TurnTaker", String.valueOf(turntaker));
                 game.put("TurnAction", "");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
