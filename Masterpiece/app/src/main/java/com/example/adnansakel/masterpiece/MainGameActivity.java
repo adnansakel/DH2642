@@ -64,9 +64,12 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     RelativeLayout layoutPopupBankAuctionInProgress;
     RelativeLayout layoutPopupPrivateAuctionSelectPainting;
     RelativeLayout layoutPopupBankAuctionBegin;
+    RelativeLayout layoutPopupPrivateAuctionBid;
+    RelativeLayout layoutPopupBankAuctionBid;
 
     boolean myTurn = false;
     boolean statusPopupIsVisible = false;
+    String turnAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bankauction_inprogress_view);
         layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.privateauction_select_painting_view);
         layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bankauction_view);
+        layoutPopupPrivateAuctionBid = (RelativeLayout)findViewById(R.id.privateauction_bid_view);
+        layoutPopupBankAuctionBid = (RelativeLayout)findViewById(R.id.bankauction_bid_view);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
@@ -232,6 +237,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                         //my device will display the "private auction in progress" screen
                         layoutStatusPopup.addView(layoutPopupPrivateAuctionInProgress);
+
+                        //TODO: write this to game model instead of this script
+                        turnAction = "privateAuction";
                     }
 
                     //if the turn is a bank auction
@@ -239,6 +247,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                         //my device will display the "bank auction in progress" screen
                         layoutStatusPopup.addView(layoutPopupBankAuctionInProgress);
+
+                        //TODO: write this to game model instead of this script
+                        turnAction = "bankAuction";
                     }
                 //}
             }
@@ -296,7 +307,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
         } else if(v == button_begin_bank_auction) {
 
-            //the below code could be moved to its own function
+            //TODO: the below code could be moved to its own function
 
             //set turn action
             //model.setTurnAction("bankAuction");
@@ -311,6 +322,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //set current bidder as the next person in allPlayers[]
             model.setCurrentBidder(model.getNextPlayer());
         }
+
+        //TODO: if bid or don't bid buttons for private or public auction
     }
 
     /*public boolean onCreateOptionsMenu(Menu menu) {
@@ -424,11 +437,28 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     //executed when currentBidder = myPlayer
     public void bidOnPainting() {
 
-        //temporarily hide the "private auction in progress" screen or "bank auction in progress" screen
-        //TODO: hide the above screen
+        //if this is a private auction
+        if(turnAction == "privateAuction") {
 
-        //show the bidding screen
-        //TODO: hide the above screen
+            //temporarily hide the "private auction in progress" screen
+            layoutStatusPopup.removeView(layoutPopupPrivateAuctionInProgress);
+
+            //show the private auction bid screen
+            layoutStatusPopup.addView(layoutPopupPrivateAuctionBid);
+
+            //TODO: start listener for bid and don't bid buttons
+        }
+        //if this is a bank auction
+        else if (turnAction == "bankAuction") {
+
+            //temporarily hide the "bank auction in progress" screen
+            layoutStatusPopup.removeView(layoutPopupBankAuctionInProgress);
+
+            //show the bank auction bid screen
+            layoutStatusPopup.addView(layoutPopupBankAuctionBid);
+
+            //TODO: start listener for bid and don't bid buttons
+        }
     }
 
     public void Auction() {
