@@ -56,6 +56,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_start_turn;
 
     View fullscreen_status_popup;
+    LinearLayout layoutStatusPopup;
+    RelativeLayout layoutPopupGameModelSelection;
+    RelativeLayout layoutPopupPrivateAuctionInProgress;
+    RelativeLayout layoutPopupBankAuctionInProgress;
+
     boolean turnIsHappening = false;
     boolean statusPopupIsVisible = false;
 
@@ -79,10 +84,14 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         //find the buttons and views that get hidden/shown
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
-        button_start_turn = (Button)findViewById(R.id.buttonStatusBar);
-        //TODO: need to replace the above id with start turn button's id
+        button_start_turn = (Button)findViewById(R.id.btnRoll);
 
+        //find popup & popup contents
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
+        layoutStatusPopup = (LinearLayout)findViewById(R.id.fullscreenStatusPopup);
+        layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection);
+        layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.private_auction_in_progress);
+        layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bank_auction_in_progress);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
@@ -142,11 +151,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                     fullscreen_status_popup.setVisibility(View.VISIBLE);
                     statusPopupIsVisible = true;
 
-                    //show the start turn popup layout
-                    //TODO: show the start turn layout
-
-                    //on the start turn layout there should be a button
-                    //button should call startTurn()
+                    //show the start turn popup layout (game model selection)
+                    layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
                 }
             }
             @Override
@@ -192,14 +198,14 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                     if (snapshot.getValue() == "privateAuction") {
 
                         //my device will display the "private auction in progress" screen
-                        //TODO: display the above screen
+                        layoutStatusPopup.addView(layoutPopupPrivateAuctionInProgress);
                     }
 
                     //if the turn is a bank auction
                     if (snapshot.getValue() == "bankAuction") {
 
                         //my device will display the "bank auction in progress" screen
-                        //TODO: display the above screen
+                        layoutStatusPopup.addView(layoutPopupBankAuctionInProgress);
                     }
                 }
             }
