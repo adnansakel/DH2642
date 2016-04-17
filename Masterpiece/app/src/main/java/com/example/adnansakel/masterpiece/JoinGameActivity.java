@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +57,8 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
         // Creating the view class instance
         JoinGameView joinGameView = new JoinGameView(findViewById(R.id.joingame_view),masterpieceGameModel);
 
+        //mDateEntryField.addTextChangedListener(mDateEntryWatcher);
+
         Firebase.setAndroidContext(this);
 
         initializeComponent();
@@ -69,7 +72,35 @@ public class JoinGameActivity extends Activity implements View.OnClickListener {
         editTextUserName = (EditText)findViewById(R.id.edittext_userName);
         editTextGameNumber = (EditText)findViewById(R.id.edittext_GameNumber);
 
+        //editTextGameNumber.addTextChangedListener();
     }
+
+    /*private TextWatcher mDateEntryWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String working = s.toString();
+            boolean isValid = true;
+            if (working.length()==4) {
+                if (Integer.parseInt(working) < 1 || Integer.parseInt(working)>12) {
+                    isValid = false;
+                } else {
+                    working+="/";
+                    mDateEntryWatcher.setText(working);
+                    editTextGameNumber.setSelection(working.length());
+                }
+            }
+
+            if (!isValid) {
+                mDateEntryField.setError("Enter a valid date: MM/YYYY");
+            } else {
+                mDateEntryField.setError(null);
+            }
+
+        }
+        }
+
+    };*/
 
     @Override
     public void onClick(View v) {
