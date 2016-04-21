@@ -33,7 +33,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Integer secondPlayerID;
     Integer thirdPlayerID;
     Integer fourthPlayerID;
-    Player selectedPlayer;
+    Player selectedPlayer = new Player();
     MainGameView mainGameView;
 
     //Firebase masterpieceRef;
@@ -69,10 +69,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         model = ((MasterpieceApplication) this.getApplication()).getModel();
         List<Player> players = model.getAllPlayers();
         myPlayer = model.getMyPlayer();
-        MainGameView mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
-
-        // Load images
-
+        mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
         //find views of buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
@@ -108,10 +105,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
 
         //load pictures for the active player (2)
-        mainGameView.populatePaintingsOtherPlayers(model.getPlayer(secondPlayerID));
+        mainGameView.populatePaintingsOtherPlayers(secondPlayerID);
 
         //load pictures for myPlayer
-        mainGameView.populatePaintingsMyPlayer(myPlayer);
+        mainGameView.populatePaintingsMyPlayer(myPlayerID);
 
         //set click listeners
         button_status_bar.setOnClickListener(this);
@@ -250,23 +247,21 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             startTurn();
 
         } else if(v == button_secondPlayer) {
-            selectedPlayer = model.getAllPlayers().get(secondPlayerID);
+            model.setCurrentPlayerToDisplayID(secondPlayerID);
             button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-            button_thirdPlayer.setBackgroundColor(Color.WHITE);
-            button_fourthPlayer.setBackgroundColor(Color.WHITE);
-            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
+            button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
         } else if(v == button_thirdPlayer) {
-            selectedPlayer = model.getAllPlayers().get(thirdPlayerID);
-            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-            button_thirdPlayer.setBackgroundColor(Color.WHITE);
-            button_fourthPlayer.setBackgroundColor(Color.WHITE);
-            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
+            model.setCurrentPlayerToDisplayID(secondPlayerID);
+            //TODO Change setting color from view
+            button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
         } else if(v == button_fourthPlayer) {
-            selectedPlayer = model.getAllPlayers().get(fourthPlayerID);
-            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-            button_thirdPlayer.setBackgroundColor(Color.WHITE);
-            button_fourthPlayer.setBackgroundColor(Color.WHITE);
-            mainGameView.populatePaintingsOtherPlayers(selectedPlayer);
+            model.setCurrentPlayerToDisplayID(secondPlayerID);
+            button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
         } else if(v == button_begin_bank_auction) {
 
             //TODO: the below code could be moved to its own function

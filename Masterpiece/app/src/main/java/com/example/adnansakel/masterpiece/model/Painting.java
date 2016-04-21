@@ -12,7 +12,7 @@ public class Painting {
     private String imageURL;
     private Bitmap image;
     private String description;
-    private Integer value;
+    private int value;
     private String artist;
     private byte[] imagebytearray;
 
@@ -57,10 +57,9 @@ public class Painting {
         return value;
     }
 
-
     // Can be used to set the value of the painting in the initial setup
-    public void setValue(int type) {
-        this.value = type;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void setArtist(String artist){

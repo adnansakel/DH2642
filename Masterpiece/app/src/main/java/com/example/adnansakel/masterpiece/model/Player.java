@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class Player {
     //TODO: Please set up according to Firebase (e.g. Name + ID)
+    //TODO: Should this be an observable
 
     // Variable Definition
     String name;

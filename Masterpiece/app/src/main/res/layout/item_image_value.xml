@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/llSinglePainting_view">
+    android:id="@+id/llPaintingWithValue_view">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,14 +10,26 @@
         android:gravity="center">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@drawable/monalisa"
+                android:layout_weight="1"
                 android:id="@+id/imgPainting"/>
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Secret Value"
+                android:layout_weight="1"
+                android:id="@+id/txtSecretValue"
+                android:layout_gravity="center_horizontal" />
+            </LinearLayout>
 
     </LinearLayout>
+
+
 </LinearLayout>
