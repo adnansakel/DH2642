@@ -47,6 +47,10 @@ public class MainGameView implements Observer{
     RelativeLayout layoutPopupBankAuctionBegin;
     RelativeLayout layoutPopupPrivateAuctionBid;
     RelativeLayout layoutPopupBankAuctionBid;
+    RelativeLayout layoutPopupPrivateAuctionWon;
+    RelativeLayout layoutPopupBankAuctionWon;
+    RelativeLayout layoutPopupPrivateAuctionLost;
+    RelativeLayout layoutPopupBankAuctionLost;
 
 
     public MainGameView(View view, MasterpieceGameModel model) {
@@ -78,6 +82,10 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionBegin = (RelativeLayout)view.findViewById(R.id.start_bankauction_view);
         layoutPopupPrivateAuctionBid = (RelativeLayout)view.findViewById(R.id.privateauction_bid_view);
         layoutPopupBankAuctionBid = (RelativeLayout)view.findViewById(R.id.bankauction_bid_view);
+        layoutPopupPrivateAuctionWon = (RelativeLayout)view.findViewById(R.id.privateauction_bidwon_view);
+        layoutPopupBankAuctionWon = (RelativeLayout)view.findViewById(R.id.bankauction_bidwon_view);
+        layoutPopupPrivateAuctionLost = (RelativeLayout)view.findViewById(R.id.privateauction_bidlost_view);
+        layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
 
         //set the popup content views to invisible
         hideAllPopupContent();
@@ -134,6 +142,10 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
         layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
         layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionWon.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionWon.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionLost.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -167,6 +179,18 @@ public class MainGameView implements Observer{
                 }
                 else if(model.getPopupContent()== "bankAuctionBid") {
                     layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "privateAuctionWon") {
+                    layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "bankAuctionWon") {
+                    layoutPopupBankAuctionWon.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "privateAuctionLost") {
+                    layoutPopupPrivateAuctionLost.setVisibility(View.VISIBLE);
+                }
+                else if(model.getPopupContent()== "bankAuctionLost") {
+                    layoutPopupBankAuctionLost.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -202,13 +226,48 @@ public class MainGameView implements Observer{
                 if(model.getCurrentBidder() == model.getMyPlayer().getPlayerpositionID()) {
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
-                        hideAllPopupContent();
-                        layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                        //if there's only one bidder left(me), show private auction win screen
+                        if(model.getCountNonBidders() == 2) {
+                            hideAllPopupContent();
+                            layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);
+                        }
+                        //otherwise show bid screen
+                        else {
+                            hideAllPopupContent();
+                            layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                        }
                     }
                     //if it's a bank auction
                     else if (model.getTurnAction() == "bankAuction") {
-                        hideAllPopupContent();
-                        layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                        //if there's only one bidder left(me), show bank auction win screen
+                        if(model.getCountNonBidders() == 2) {
+                            hideAllPopupContent();
+                            layoutPopupBankAuctionWon.setVisibility(View.VISIBLE);
+                        }
+                        //otherwise show bid screen
+                        else {
+                            hideAllPopupContent();
+                            layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+                //if bidder isn't me
+                else {
+                    //if it's a private auction
+                    if(model.getTurnAction() == "privateAuction") {
+                        //if there's only one bidder left(and it's not me), show private auction lose screen
+                        if(model.getCountNonBidders() == 2) {
+                            hideAllPopupContent();
+                            layoutPopupPrivateAuctionLost.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    //if it's a bank auction
+                    else if (model.getTurnAction() == "bankAuction") {
+                        //if there's only one bidder left(and it's not me), show bank auction lose screen
+                        if(model.getCountNonBidders() == 2) {
+                            hideAllPopupContent();
+                            layoutPopupBankAuctionLost.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }

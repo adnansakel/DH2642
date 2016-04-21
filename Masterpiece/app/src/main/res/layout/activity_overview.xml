@@ -150,8 +150,10 @@
         <include layout="@layout/activity_bankauct_begin"/>
         <include layout="@layout/activity_privatauct_bid"/>
         <include layout="@layout/activity_bankauct_bid"/>
-
-
+        <include layout="@layout/activity_privatauct_bid_won"/>
+        <include layout="@layout/activity_bankauct_bid_won"/>
+        <include layout="@layout/activity_privatauct_bid_lost"/>
+        <include layout="@layout/activity_bankauct_bid_lost"/>
 
     </RelativeLayout>
 

@@ -190,9 +190,36 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
             //set current bidder as the next person in allPlayers[]
             model.setCurrentBidder(model.getCurrentBidder());
-        }
 
-        //TODO: if bid or don't bid buttons for private or public auction
+        } else if(v == button_privateauction_bid) {
+
+            //increase current bid in Firebase
+
+            //set current bidder as the next player whose Bidding boolean is true
+
+            //change to private auction in progress screen
+
+        } else if(v == button_privateauction_not_bidding) {
+
+            //set current bidder as the next player whose Bidding boolean is true
+
+            //change to private auction in progress screen
+
+        } else if(v == button_bankauction_bid) {
+
+            //increase current bid in Firebase
+
+            //set current bidder as the next player whose Bidding boolean is true
+
+            //change to bank auction in progress screen
+
+        } else if(v == button_bankauction_not_bidding) {
+
+            //set current bidder as the next player whose Bidding boolean is true
+
+            //change to bank auction in progress screen
+
+        }
     }
 
 
