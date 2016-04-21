@@ -64,6 +64,7 @@ public class MainGameView implements Observer{
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
         textPlayerTitle.setText(model.getPlayer(1).getName() + "'s paintings:");
 
+        initialize();
     }
 
     private void initialize(){
@@ -79,14 +80,7 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionBid = (RelativeLayout)view.findViewById(R.id.bankauction_bid_view);
 
         //set the popup content views to invisible
-        layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionInProgress.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionInProgress.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionSelectPainting.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
-        layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
+        hideAllPopupContent();
     }
 
     public void populatePaintingsOtherPlayers(Integer selectedPlayerID){
@@ -133,6 +127,16 @@ public class MainGameView implements Observer{
         }
     }
 
+    public void hideAllPopupContent() {
+        layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionSelectPainting.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public void update(Observable observable, Object data) {
         if(observable instanceof  MasterpieceGameModel){
@@ -140,7 +144,7 @@ public class MainGameView implements Observer{
             //if model's popupContent changed
             if(data.toString() =="popupContentChanged"){
 
-                //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                hideAllPopupContent();
 
                 //set layout as visible for each case
                 if(model.getPopupContent()== "startTurn") {
@@ -189,7 +193,7 @@ public class MainGameView implements Observer{
             if(data.toString()=="turnTakerChanged") {
                 //if I'm the turntaker
                 if(model.getTurnTaker() == model.getMyPlayer().getPlayerpositionID()) {
-                    //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                    hideAllPopupContent();
                     layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
                 }
             }
@@ -199,12 +203,12 @@ public class MainGameView implements Observer{
                 if(model.getCurrentBidder() == model.getMyPlayer().getPlayerpositionID()) {
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
-                        //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                        hideAllPopupContent();
                         layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
                     }
                     //if it's a bank auction
                     else if (model.getTurnAction() == "bankAuction") {
-                        //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                        hideAllPopupContent();
                         layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
                     }
                 }
@@ -213,12 +217,12 @@ public class MainGameView implements Observer{
             if(data.toString()=="turnActionChanged") {
                 //if the turn is a private auction
                 if (model.getTurnAction() == "privateAuction") {
-                    //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                    hideAllPopupContent();
                     layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);
                 }
                 //if the turn is a bank auction
                 else if (model.getTurnAction() == "bankAuction") {
-                    //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+                    hideAllPopupContent();
                     layoutPopupBankAuctionInProgress.setVisibility(View.VISIBLE);
                 }
             }
