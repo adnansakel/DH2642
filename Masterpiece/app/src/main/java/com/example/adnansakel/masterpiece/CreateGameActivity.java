@@ -29,8 +29,8 @@ import java.util.Random;
  */
 
 public class CreateGameActivity extends Activity implements View.OnClickListener{
-    // Variables for checking the internet connection status
 
+    // Variables for checking the internet connection status
     ConnectionCheck checkConnection;
 
     Firebase masterpieceRef;
@@ -55,6 +55,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         checkConnection = new ConnectionCheck(CreateGameActivity.this);
 
         masterpiecegamemodel = ((MasterpieceApplication)this.getApplication()).getModel();
+
         // Creating the view class instance
         CreateGameView createGameViewView = new CreateGameView(findViewById(R.id.creategame_view),masterpiecegamemodel);
         initializeComponent();
@@ -70,7 +71,6 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         textViewGameNumber = (TextView)findViewById(R.id.textviewGameNumber);
         editTextUserName = (EditText)findViewById(R.id.edittext_userName);
         buttonJoinGame.setOnClickListener(this);
-
     }
 
     private void createGame(){
@@ -82,7 +82,6 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final String game_number = dataSnapshot.getValue().toString();
-
 
                 AppConstants.GameID = game_number;
                 masterpiecegamemodel.setGameNumber(game_number);
@@ -108,7 +107,6 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 game.put(AppConstants.CURRENTBID,"0");
                 game.put(AppConstants.COUNTNONBIDDERS,"0");
                 game.put("BankPaintings", "");
-
 
                 Firebase gamesRef = masterpieceRef.child("Games");
                 final Firebase newGameRef = gamesRef.push();
@@ -139,7 +137,6 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
             }
         });
-
     }
 
     @Override
@@ -152,7 +149,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
                 player.put("Name", editTextUserName.getText().toString());
                 player.put("Paintings", "");
-                player.put("Cash", "1500000");//Initial cash
+                player.put("Cash", "1500000"); //Initial cash
                 player.put("BidAmount", "");
                 player.put("Bidding", "");
                 progress = ProgressDialog.show(this, "", "joining game ...", true);

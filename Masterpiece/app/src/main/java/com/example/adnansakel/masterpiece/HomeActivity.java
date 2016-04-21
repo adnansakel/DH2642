@@ -54,6 +54,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         checkConnection = new ConnectionCheck(HomeActivity.this);
 
         masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
+
         // Creating the view class instance
         HomeView homeView = new HomeView(findViewById(R.id.home_view),masterpieceGameModel);
 
