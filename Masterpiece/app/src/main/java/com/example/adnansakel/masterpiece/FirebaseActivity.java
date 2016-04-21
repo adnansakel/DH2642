@@ -21,7 +21,6 @@ import java.util.Map;
 public class FirebaseActivity extends Activity {
 
     MasterpieceGameModel model;
-    Player playermodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +48,7 @@ public class FirebaseActivity extends Activity {
                 //I skipped GameState, maybe we won't need it?
                 model.setTurnAction((String) snapshot.child("TurnAction").getValue());
 
-                //Map<String, Object> players = (HashMap<String,Object>)snapshot.child("Players").getValue();
-
+                //reset playerNumber after each onDataChange
                 Integer playerNumber = 0;
 
                 //loop through each player
