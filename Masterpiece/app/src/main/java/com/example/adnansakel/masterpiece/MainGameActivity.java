@@ -42,6 +42,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_fourthPlayer;
     Button button_start_turn;
     Button button_begin_bank_auction;
+    Button button_privateauction_bid;
+    Button button_bankauction_bid;
+    Button button_privateauction_not_bidding;
+    Button button_bankauction_not_bidding;
 
     View fullscreen_status_popup;
 
@@ -54,9 +58,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        // Adding the model
+        //adding the model
         model = ((MasterpieceApplication) this.getApplication()).getModel();
-        List<Player> players = model.getAllPlayers();
+
         myPlayer = model.getMyPlayer();
         mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
 
@@ -64,6 +68,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
         button_start_turn = (Button)findViewById(R.id.btnRoll); // Changed from OLDBUTTONROLL
         button_begin_bank_auction = (Button)findViewById(R.id.btn_begin_bank_auction);
+        button_privateauction_bid = (Button)findViewById(R.id.btn_privateauction_bid);
+        button_bankauction_bid = (Button)findViewById(R.id.btn_bankauction_bid);
+        button_privateauction_not_bidding = (Button)findViewById(R.id.btn_privateauction_not_bidding);
+        button_bankauction_not_bidding = (Button)findViewById(R.id.btn_bankauction_not_bidding);
+
 
         //find popup
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
@@ -96,86 +105,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_secondPlayer.setOnClickListener(this);
         button_thirdPlayer.setOnClickListener(this);
         button_fourthPlayer.setOnClickListener(this);
+        button_privateauction_bid.setOnClickListener(this);
+        button_bankauction_bid.setOnClickListener(this);
+        button_privateauction_not_bidding.setOnClickListener(this);
+        button_bankauction_not_bidding.setOnClickListener(this);
 
-        //start listening to changes in Firebase
-        ListenForFirebaseGameEvents();
-
-    }
-
-    public void ListenForFirebaseGameEvents() {
-
-        //listen for changes in TurnTaker in Firebase
-        Firebase turnTakerRef = new Firebase(AppConstants.GameRef+"/"+"TurnTaker");
-        turnTakerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                System.out.println("TurnTaker changed to: " + snapshot.getValue());
-
-                //if the TurnTaker is me
-                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
-
-                    //tell model that popupContent needs to change
-                    model.setPopupContent("startTurn");
-
-                    //button_start_turn.setOnClickListener(MainGameActivity.this);
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-        //listen for changes in CurrentBidder in Firebase
-        Firebase currentBidderRef = new Firebase(AppConstants.GameRef+"/"+"CurrentBidder");
-        turnTakerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                System.out.println("CurrentBidder changed to: " + snapshot.getValue());
-
-                //if the CurrentBidder is me
-                if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
-
-                    bidOnPainting();
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-        //listen for changes in TurnAction in Firebase
-        Firebase turnActionRef = new Firebase(AppConstants.GameRef+"/"+"TurnAction");
-        turnTakerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                System.out.println("TurnAction changed to: " + snapshot.getValue());
-
-                //if the turn is a private auction
-                if (snapshot.getValue() == "privateAuction") {
-
-                    model.setPopupContent("privateAuctionInProgress");
-
-                    model.setTurnAction("privateAuction");
-                }
-
-                //if the turn is a bank auction
-                if (snapshot.getValue() == "bankAuction") {
-
-                    model.setPopupContent("bankAuctionInProgress");
-
-                    model.setTurnAction("bankAuction");
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
     }
 
 
@@ -293,26 +227,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //start listener on begin auction button
             button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
 
-        }
-
-    }
-
-    //executed when currentBidder = myPlayer
-    public void bidOnPainting() {
-
-        //if this is a private auction
-        if(model.getTurnAction() == "privateAuction") {
-
-            model.setPopupContent("privateAuctionBid");
-
-            //TODO: start listener for bid and don't bid buttons
-        }
-        //if this is a bank auction
-        else if (model.getTurnAction() == "bankAuction") {
-
-            model.setPopupContent("bankAuctionBid");
-
-            //TODO: start listener for bid and don't bid buttons
         }
     }
 

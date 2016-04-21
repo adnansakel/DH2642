@@ -17,7 +17,7 @@ public class Player {
     String name;
     String firebaseid;
     Integer cash;
-    private String playerpositionID;
+    private int playerpositionID;
     //TODO: Question: Should this be private?
 
     //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set?
@@ -83,11 +83,11 @@ public class Player {
         ownedPaintingIDs.remove(paintingValue); //TODO: Does this work?
     }
 
-    public String getPlayerpositionID() {
+    public int getPlayerpositionID() {
         return playerpositionID;
     }
 
-    public void setPlayerpositionID(String playerpositionID) {
+    public void setPlayerpositionID(int playerpositionID) {
         this.playerpositionID = playerpositionID;
     }
 
