@@ -24,24 +24,24 @@ public class MasterpieceGameModel extends Observable{
     private List<Integer> allPaintingValues;
     private List<Integer> allPaintingIDs;
     private Player myPlayer;
-    private Player nextPlayer;
+    //private Player nextPlayer;
     //private List<String>turnTypes;
     private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
     private List<Integer>shuffledPaintingIDs;
 
-    private List<Integer>bankPaintingIDs;
-    private List<Integer>bankPaintingValues;
+   // private List<Integer>bankPaintingIDs;
+    //private List<Integer>bankPaintingValues;
 
    // private List<Integer>paintingShuffler;//A list to shuffle the paintings
    // private List<Integer>shuffledPaintingID;
-    private Painting paintingBeingAuctioned;
-    private Player turnTaker;
+    private int paintingBeingAuctioned;
+    private int turnTaker;
     private String turnAction;
 
-    private Player currentBidder;
+    private int currentBidder;
 
     private String CountNonBidders;
-    private String color;
+    //private String color;
     private String popupContent;
 
 
@@ -85,27 +85,27 @@ public class MasterpieceGameModel extends Observable{
     }
 
     //the paintings and values are in a list in order to easily randomize them
-    public void setAllPaintings(List<Painting> allPaintings){
+    /*public void setAllPaintings(List<Painting> allPaintings){
         this.allPaintings = allPaintings;
-    }
+    }*/
 
-    public List<Painting> getAllPaintings1(){ //name has 1 because of duplicate getAllPaintings below
+    /*public List<Painting> getAllPaintings1(){ //name has 1 because of duplicate getAllPaintings below
         return allPaintings;
-    }
+    }*/
 
-    public void setAllPaintingValues(List<Integer> allPaintingValues){
+    /*public void setAllPaintingValues(List<Integer> allPaintingValues){
         this.allPaintingValues = allPaintingValues;
-    }
+    }*/
 
     public List<Integer> getAllPaintingValues(){
         return allPaintingValues;
     }
 
-    public void setTurnTaker(Player turnTaker){
+    public void setTurnTaker(int turnTaker){
         this.turnTaker = turnTaker;
     }
 
-    public Player getTurnTaker(){
+    public int getTurnTaker(){
         return turnTaker;
     }
 
@@ -117,19 +117,19 @@ public class MasterpieceGameModel extends Observable{
         return turnAction;
     }
 
-    public void setPaintingBeingAuctioned(Painting paintingBeingAuctioned){
+    public void setPaintingBeingAuctioned(int paintingBeingAuctioned){
         this.paintingBeingAuctioned = paintingBeingAuctioned;
     }
 
-    public Painting getPaintingBeingAuctioned(){
+    public int getPaintingBeingAuctioned(){
         return paintingBeingAuctioned;
     }
 
-    public void setCurrentBidder(Player currentBidder){
+    public void setCurrentBidder(int currentBidder){
         this.currentBidder = currentBidder;
     }
 
-    public Player getCurrentBidder(){
+    public int getCurrentBidder(){
         return currentBidder;
     }
 
@@ -142,7 +142,7 @@ public class MasterpieceGameModel extends Observable{
         return myPlayer;
     }
 
-    public void setNextPlayer(){
+    /*public void setNextPlayer(){
         Integer myPlayerIndex = allPlayers.indexOf(myPlayer);
         //if I'm player 4, next player will be player 1
         if (myPlayerIndex <= 2) {
@@ -150,12 +150,12 @@ public class MasterpieceGameModel extends Observable{
         } else {
             this.nextPlayer = allPlayers.get(0);
         }
-    }
+    }*/
     //TODO: need to call this when joining the game
 
-    public Player getNextPlayer(){
+   /* public Player getNextPlayer(){
         return nextPlayer;
-    }
+    }*/
 
     public List<Painting> getAllPaintings(){
         //TODO: Define proper function with by ID or object
@@ -179,11 +179,11 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }
 
-    public void removeAllPaintings(){
+    /*public void removeAllPaintings(){
         allPaintings.clear();
         setChanged();
         notifyObservers();
-    }
+    }*/
 
     public void shufflePaintingIDsandValues(){
         Collections.shuffle(shuffledPaintingIDs);
@@ -194,15 +194,15 @@ public class MasterpieceGameModel extends Observable{
         return turnTypes.get(position);
     }*/
 
-    public String getColor() {
+    /*public String getColor() {
         return color;
-    }
+    }*/
 
-    public void setColor(String color) {
+    /*public void setColor(String color) {
         this.color = color;
         setChanged();
         notifyObservers();
-    }
+    }*/
 
     public String getCountNonBidders() {
         return CountNonBidders;
@@ -224,10 +224,10 @@ public class MasterpieceGameModel extends Observable{
         this.allPaintingValues = shuffledPaintingValues;
     }
 
-    public void addPaintingIDAndValue( Integer paintingID, int value){
+    /*public void addPaintingIDAndValue( Integer paintingID, int value){
         myPlayer.addOwnedPaintingID(paintingID);
         myPlayer.addOenedPaintingValue(value);
-    }
+    }*/
 
 
     public String getUserName() {
@@ -242,6 +242,7 @@ public class MasterpieceGameModel extends Observable{
         return allPaintings.get(position);
     }
 
+    /*
     public List<Integer> getBankPaintingIDs() {
         return bankPaintingIDs;
     }
@@ -265,7 +266,7 @@ public class MasterpieceGameModel extends Observable{
     public void addBankPaintingValue(int paintingValue){
         bankPaintingIDs.add(paintingValue);
     }
-
+    */
     public List<Integer> getShuffledPaintingIDs() {
         return shuffledPaintingIDs;
     }
