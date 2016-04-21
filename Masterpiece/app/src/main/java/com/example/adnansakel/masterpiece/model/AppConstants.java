@@ -44,5 +44,6 @@ public class AppConstants {
 
     public static String MAINCOLOR = "#ffdab9";
     public static Integer MAINCOLORINT = Color.parseColor("#8B0000");
+    public static String CURRENTBIDDER = "CurrentBidder";
 
 }
