@@ -109,6 +109,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_bankauction_bid.setOnClickListener(this);
         button_privateauction_not_bidding.setOnClickListener(this);
         button_bankauction_not_bidding.setOnClickListener(this);
+        button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
 
     }
 
@@ -136,7 +137,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         }
         else if(v == button_start_turn) {
 
-            startTurn();
+            //randomly select a turn type (roll the dice)
+            Random rn = new Random();
+            int roll = rn.nextInt(1); //there are only 2 types so far
+            if(roll == 0) {
+
+                //PRIVATE AUCTION
+                model.setPopupContent("privateAuctionSelectPainting");
+            }
+            else if(roll == 1) {
+
+                //BANK AUCTION
+                model.setPopupContent("bankAuctionBegin");
+            }
 
         } else if(v == button_secondPlayer) {
             model.setCurrentPlayerToDisplay(secondPlayerID);
