@@ -205,18 +205,18 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             startTurn();
 
         } else if(v == button_secondPlayer) {
-            model.setCurrentPlayerToDisplayID(secondPlayerID);
+            model.setCurrentPlayerToDisplay(secondPlayerID);
             button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
             button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
             button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
         } else if(v == button_thirdPlayer) {
-            model.setCurrentPlayerToDisplayID(secondPlayerID);
+            model.setCurrentPlayerToDisplay(thirdPlayerID);
             //TODO Change setting color from view
             button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
             button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
             button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
         } else if(v == button_fourthPlayer) {
-            model.setCurrentPlayerToDisplayID(secondPlayerID);
+            model.setCurrentPlayerToDisplay(fourthPlayerID);
             button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
             button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
             button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));

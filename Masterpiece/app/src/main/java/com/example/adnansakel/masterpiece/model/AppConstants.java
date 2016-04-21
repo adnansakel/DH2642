@@ -42,7 +42,7 @@ public class AppConstants {
     public static String SHUFFLEDPAINTINGVALUES = "ShuffledPaintingValues";
     public static String SHUFFLEDPAINTINGS = "ShuffledPaintings";
 
-    public static String MAINCOLOR = "#8B0000";
+    public static String MAINCOLOR = "#ffdab9";
     public static Integer MAINCOLORINT = Color.parseColor("#8B0000");
 
 }

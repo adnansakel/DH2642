@@ -16,7 +16,7 @@ public class Player {
     // Variable Definition
     String name;
     String firebaseid;
-    Integer cash;
+    int cash;
     private String playerpositionID;
     //TODO: Question: Should this be private?
 
@@ -51,10 +51,10 @@ public class Player {
     public void setFirebaseid(String firebaseid) {
         this.firebaseid = firebaseid;
     }
-    public Integer getCash() {
+    public int getCash() {
         return cash;
     }
-    public void setCash(Integer cash) {
+    public void setCash(int cash) {
         this.cash = cash;
     }
 
