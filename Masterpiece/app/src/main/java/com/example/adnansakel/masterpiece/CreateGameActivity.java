@@ -125,7 +125,6 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                             masterpiecegamemodel.setGameNumber(game_number);
                             AppConstants.GameRef = newGameRef.toString();
                             AppConstants.IamCreator = true;
-
                         }
                     }
 

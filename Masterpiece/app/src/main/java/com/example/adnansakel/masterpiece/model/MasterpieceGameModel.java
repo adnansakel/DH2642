@@ -68,31 +68,6 @@ public class MasterpieceGameModel extends Observable{
         }
         Collections.shuffle(shuffledPaintingIDs);
         Collections.shuffle(shuffledPaintingValues);
-
-        /*
-        // TEMPORARY: This is just for testing, will be replaced by firebase data model
-        Bitmap test = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        Painting pa1 = new Painting("Painting 1","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test, "A description",100000);
-        Painting pa2 = new Painting("Painting 2","http://res.cloudinary.com/masterpiece/image/upload/v1459241655/1.jpg", test,"A description",300000);
-        List<Painting> listOfPaintings = new ArrayList<Painting>();
-        listOfPaintings.add(pa1);
-        listOfPaintings.add(pa2);
-
-        Player p1 = new Player("P1","1",200000,listOfPaintings);
-        Player p2 = new Player("P2","2",200000,listOfPaintings);
-        Player p3 = new Player("P3","3",200000,listOfPaintings);
-        Player p4 = new Player("P4","4",200000,listOfPaintings);
-        allPlayers.add(p1);
-        allPlayers.add(p2);
-        allPlayers.add(p3);
-        allPlayers.add(p4);
-
-        System.out.println("Player 1: " + p1);
-        System.out.println("Player 1 Paintings: " + p1.ownedPaintings);
-        System.out.println("Player 2: " + p2);
-        System.out.println("Player 3: " + p3);
-        System.out.println("Player 4: " + p4);
-        */
     }
 
     public void setGameNumber(String gameNumber){

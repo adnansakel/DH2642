@@ -76,7 +76,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         //find views of buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);
-        button_start_turn = (Button)findViewById(R.id.OLD_btnRoll);
+        button_start_turn = (Button)findViewById(R.id.btnRoll); // Changed from OLDBUTTONROLL
         button_begin_bank_auction = (Button)findViewById(R.id.btn_begin_bank_auction);
 
         //find popup & popup contents
