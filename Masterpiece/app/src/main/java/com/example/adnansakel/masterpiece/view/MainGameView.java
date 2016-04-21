@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,10 +34,8 @@ import java.util.Observer;
  */
 public class MainGameView implements Observer{
     View view;
-    TextView textSecretValue;
     MasterpieceGameModel model;
     //Map<String, View> PaintingNameToViewMap = new HashMap<>();
-    LinearLayout personalImageLayout;
     LinearLayout.LayoutParams layoutParams;
     LayoutInflater layoutInflater;
 
@@ -56,6 +55,15 @@ public class MainGameView implements Observer{
         this.view = view;
 
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //set cash
+        TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
+        textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
+
+        //set currently selected player text
+        TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
+        textPlayerTitle.setText(model.getPlayer(1).getName() + "'s paintings:");
+
     }
 
     private void initialize(){
@@ -82,10 +90,12 @@ public class MainGameView implements Observer{
     }
 
     public void populatePaintingsOtherPlayers(Integer selectedPlayerID){
-        System.out.println("TEST");
         LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)view.findViewById(R.id.llPaintingsOfOtherPlayers);
+        HorizontalScrollView hsvTopPanel = (HorizontalScrollView)view.findViewById(R.id.hsvTopPanel);
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(2, 0, 2, 0);
+
+        layoutPaintingsOtherPlayers.removeAllViews();
 
         for (int paintingID : model.getPlayer(selectedPlayerID).getOwnedPaintingIDs()) {
             View singlePainting = layoutInflater.inflate(R.layout.item_image, null);
@@ -99,10 +109,14 @@ public class MainGameView implements Observer{
     }
 
     public void populatePaintingsMyPlayer(Integer myPlayerID){
-        LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer);
+        LinearLayout layoutPaintingsMyPlayer = (LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer);
+        HorizontalScrollView hsvBottomPanel = (HorizontalScrollView)view.findViewById(R.id.hsvBottomPanel);
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
+        layoutPaintingsMyPlayer.removeAllViews();
+
+        int counter = 0;
         for(int paintingID: model.getPlayer(myPlayerID).getOwnedPaintingIDs()) {
             View singlePainting = layoutInflater.inflate(R.layout.item_image_value, null);
             ImageView image = (ImageView) singlePainting.findViewById(R.id.imgPainting);
@@ -111,13 +125,11 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            System.out.println("TextView text: " + textSecretValue.getText());
-            System.out.println(model.getPainting(paintingID).getValue());
-            String test = String.valueOf(model.getPainting(paintingID).getValue());
-            textSecretValue.setText(test);
+            textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
             textSecretValue.setWidth(200);
 
-            layoutPaintingsOtherPlayers.addView(singlePainting, layoutParams);
+            layoutPaintingsMyPlayer.addView(singlePainting, layoutParams);
+            counter++;
         }
     }
 
@@ -126,7 +138,7 @@ public class MainGameView implements Observer{
         if(observable instanceof  MasterpieceGameModel){
 
             //if model's popupContent changed
-            if(data.toString()=="popupContentChanged"){
+            if(data.toString() =="popupContentChanged"){
 
                 //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
 
@@ -155,18 +167,22 @@ public class MainGameView implements Observer{
                 }
             }
 
-            if(data.toString()=="currentPlayerToDisplayChangedID") {
+            if(data.toString()=="currentPlayerToDisplayChanged") {
 
                 //populate images
-                populatePaintingsOtherPlayers(model.getCurrentPlayerToDisplayID());
+                populatePaintingsOtherPlayers(model.getCurrentPlayerToDisplay());
+
+                //update player title
+                TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
+                textPlayerTitle.setText(model.getPlayer(model.getCurrentPlayerToDisplay()).getName() + "'s paintings:");
 
                 //TODO maybe add the highlighting of the buttons
             }
 
-            //TODO cashChanged - observable in Player
+            //TODO cashChanged
             if(data.toString()=="cashChanged") {
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
-                textCash.setText(model.getMyPlayer().getCash());
+                textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
             }
 
 

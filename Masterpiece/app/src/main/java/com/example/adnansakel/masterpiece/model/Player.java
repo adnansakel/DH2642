@@ -16,8 +16,10 @@ public class Player {
     // Variable Definition
     String name;
     String firebaseid;
-    Integer cash;
+
+    int cash;
     private int playerpositionID;
+
     //TODO: Question: Should this be private?
 
     //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set?
@@ -51,10 +53,10 @@ public class Player {
     public void setFirebaseid(String firebaseid) {
         this.firebaseid = firebaseid;
     }
-    public Integer getCash() {
+    public int getCash() {
         return cash;
     }
-    public void setCash(Integer cash) {
+    public void setCash(int cash) {
         this.cash = cash;
     }
 

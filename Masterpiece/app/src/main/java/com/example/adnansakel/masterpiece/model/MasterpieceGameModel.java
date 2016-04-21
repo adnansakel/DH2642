@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class MasterpieceGameModel extends Observable{
 
-    private Integer currentPlayerToDisplayID;
+    private Integer currentPlayerToDisplay;
 
     private String gameNumber;
 
@@ -316,13 +316,19 @@ public class MasterpieceGameModel extends Observable{
         return popupContent;
     }
 
-    public Integer getCurrentPlayerToDisplayID() {
-        return currentPlayerToDisplayID;
+    public Integer getCurrentPlayerToDisplay() {
+        return currentPlayerToDisplay;
     }
 
-    public void setCurrentPlayerToDisplayID(Integer currentPlayerToDisplay) {
-        this.currentPlayerToDisplayID = currentPlayerToDisplayID;
+    public void setCurrentPlayerToDisplay(Integer currentPlayerPositionID) {
+        this.currentPlayerToDisplay = currentPlayerPositionID;
         setChanged();
-        notifyObservers("currentPlayerToDisplayIDChanged");
+        notifyObservers("currentPlayerToDisplayChanged");
+    }
+
+    public void setCash(int cash, int playerPositionID) {
+        getPlayer(playerPositionID).setCash(cash);
+        setChanged();
+        notifyObservers("cashChanged");
     }
 }

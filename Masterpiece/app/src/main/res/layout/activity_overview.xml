@@ -14,12 +14,13 @@
         android:orientation="horizontal"
         android:focusable="true">
     </Button>
-    <LinearLayout
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/buttonStatusBar">
+        android:layout_below="@+id/buttonStatusBar"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,6 +60,17 @@
                     android:layout_marginLeft="5dp"
                     android:text="Player 4" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player X's paintings"
+                android:id="@+id/txtPlayerTitle"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -138,6 +150,8 @@
         <include layout="@layout/activity_bankauct_begin"/>
         <include layout="@layout/activity_privatauct_bid"/>
         <include layout="@layout/activity_bankauct_bid"/>
+
+
 
     </RelativeLayout>
 

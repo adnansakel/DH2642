@@ -24,9 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Secret Value"
-                android:layout_weight="1"
+                android:background="@color/colorSecretValue"
+                android:layout_weight="0"
                 android:id="@+id/txtSecretValue"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"/>
             </LinearLayout>
 
     </LinearLayout>
