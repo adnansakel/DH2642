@@ -37,15 +37,15 @@ public class MasterpieceGameModel extends Observable{
     // private List<Integer>paintingShuffler;//A list to shuffle the paintings
     // private List<Integer>shuffledPaintingID;
 
-    private int paintingBeingAuctioned;
-    private int turnTaker;
+    private String paintingBeingAuctioned;
+    private String turnTaker;
     private String turnAction;
 
-    private int currentBidder;
+    private String currentBidder;
 
-    private int currentBid;
+    private String currentBid;
 
-    private int CountNonBidders;
+    private String CountNonBidders;
     //private String color;
 
 
@@ -108,13 +108,13 @@ public class MasterpieceGameModel extends Observable{
         return allPaintingValues;
     }
 
-    public void setTurnTaker(int turnTaker){
+    public void setTurnTaker(String turnTaker){
         this.turnTaker = turnTaker;
         setChanged();
         notifyObservers("turnTakerChanged");
     }
 
-    public int getTurnTaker(){
+    public String getTurnTaker(){
 
         return turnTaker;
     }
@@ -128,22 +128,22 @@ public class MasterpieceGameModel extends Observable{
         return turnAction;
     }
 
-    public void setPaintingBeingAuctioned(int paintingBeingAuctioned){
+    public void setPaintingBeingAuctioned(String paintingBeingAuctioned){
         this.paintingBeingAuctioned = paintingBeingAuctioned;
     }
 
 
-    public int getPaintingBeingAuctioned(){
+    public String getPaintingBeingAuctioned(){
         return paintingBeingAuctioned;
     }
 
-    public void setCurrentBidder(int currentBidder){
+    public void setCurrentBidder(String currentBidder){
         this.currentBidder = currentBidder;
         setChanged();
         notifyObservers("currentBidderChanged");
     }
 
-    public int getCurrentBidder(){
+    public String getCurrentBidder(){
         return currentBidder;
     }
 
@@ -219,17 +219,17 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }*/
 
-    public int getCountNonBidders() {
+    public String getCountNonBidders() {
         return CountNonBidders;
     }
-    public void setCountNonBidders(int countNonBidders) {
+    public void setCountNonBidders(String countNonBidders) {
         CountNonBidders = countNonBidders;
     }
 
-    public int getCurrentBid() {
+    public String getCurrentBid() {
         return currentBid;
     }
-    public void setCurrentBid(int currentBid) {
+    public void setCurrentBid(String currentBid) {
         this.currentBid = currentBid;
     }
 

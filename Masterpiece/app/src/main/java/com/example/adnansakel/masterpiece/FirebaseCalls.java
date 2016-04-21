@@ -61,15 +61,15 @@ public class FirebaseCalls {
                 game.put("Players", "");
                 Random randomplayer = new Random();
                 int turntaker = randomplayer.nextInt(4);
-                game.put("TurnTaker", turntaker);
+                game.put("TurnTaker", String.valueOf(turntaker));
                 game.put("TurnAction", "");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpieceGameModel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpieceGameModel.getShuffledPaintingIDs());
                 game.put("PaintingBeingAuctioned", "");
-                game.put("CurrentBidder", 100);
-                game.put(AppConstants.CURRENTBID, 0);
-                game.put(AppConstants.COUNTNONBIDDERS, 0);
+                game.put("CurrentBidder", "100");
+                game.put(AppConstants.CURRENTBID, "0");
+                game.put(AppConstants.COUNTNONBIDDERS, "0");
                 game.put("BankPaintings", "");
 
                 Firebase gamesRef = masterpieceRef.child("Games");
@@ -314,30 +314,36 @@ public class FirebaseCalls {
                 System.out.println("Some data changed in Firebase: " + snapshot.getValue());
 
                 //integers
-                masterpieceGameModel.setCountNonBidders((Integer) snapshot.child("CountNonBidders").getValue());
+                masterpieceGameModel.setCountNonBidders(snapshot.child(AppConstants.COUNTNONBIDDERS).getValue().toString());
                 //masterpieceGameModel.setCountPlayers((Integer) snapshot.child("CountPlayers").getValue()); //maybe we don't need this
-                masterpieceGameModel.setCurrentBid((Integer) snapshot.child("CurrentBid").getValue());
-                masterpieceGameModel.setCurrentBidder((Integer) snapshot.child("CurrentBidder").getValue());
+                //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
+                masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                 //I skipped GameNumber, I don't think we need to set that from here
-                masterpieceGameModel.setPaintingBeingAuctioned((Integer) snapshot.child("PaintingBeingAuctioned").getValue());
-                masterpieceGameModel.setTurnTaker((Integer) snapshot.child("TurnTaker").getValue());
+                masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
+                masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
 
                 //strings
                 //I skipped GameState, maybe we won't need it?
-                masterpieceGameModel.setTurnAction((String) snapshot.child("TurnAction").getValue());
+                masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
 
                 //reset playerNumber after each onDataChange
-                Integer playerNumber = 0;
-
+                int playerNumber = 0;
+                masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
+                //masterpieceGameModel.set
                 //loop through each player
-                for (DataSnapshot playersSnapshot: snapshot.child("Players").getChildren()) {
+                /*for (DataSnapshot playersSnapshot: snapshot.child("Players").getChildren()) {
                    // masterpieceGameModel.getPlayer(playerNumber).setBidAmount((Integer) snapshot.child("BidAmount").getValue());
-                    masterpieceGameModel.getPlayer(playerNumber).setBidding((Boolean) snapshot.child("Bidding").getValue());
-                    masterpieceGameModel.getPlayer(playerNumber).setCash((Integer) snapshot.child("Cash").getValue());
-                    masterpieceGameModel.getPlayer(playerNumber).setName((String) snapshot.child("Name").getValue());
+                    if(snapshot.child("Bidding").getValue().toString().equals("true")){
+                        masterpieceGameModel.getPlayer(playerNumber).setBidding(true);
+                    }
+                    else if(snapshot.child("Bidding").getValue().toString().equals("false")){
+                        masterpieceGameModel.getPlayer(playerNumber).setBidding(false);
+                    }
+                    masterpieceGameModel.getPlayer(playerNumber).setCash((int) snapshot.child("Cash").getValue());
+                    masterpieceGameModel.getPlayer(playerNumber).setName(snapshot.child("Name").getValue().toString());
                    // masterpieceGameModel.getPlayer(playerNumber).setOwnedPaintings((List<Integer>) snapshot.child("Paintings").getValue());
                     playerNumber++;
-                }
+                }*/
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
