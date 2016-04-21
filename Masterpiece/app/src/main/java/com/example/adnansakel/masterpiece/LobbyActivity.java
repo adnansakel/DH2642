@@ -45,6 +45,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
     // Variable definition
     Button button_create_game;
     MasterpieceGameModel masterpiecegamemodel;
+    FirebaseCalls firebaseCalls;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Default call to load previous state
@@ -65,83 +66,15 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         button_create_game = (Button)findViewById(R.id.buttonStartGame);
         button_create_game.setOnClickListener(this);
 
-        Firebase.setAndroidContext(this);
+        firebaseCalls = new FirebaseCalls(this, masterpiecegamemodel);
+        //Firebase.setAndroidContext(this);
 
         if (checkConnection.isConnected()) {
-            listentoFirebaseforPlayers();
+            firebaseCalls.listentoFirebaseforPlayers();
 
         }
     }
 
-
-
-
-    private void distributeShuffledPaintingandValues(){
-        progress = ProgressDialog.show(this, "", "distributing paintings ...", true);
-        //downloading the shuffled painting ids and values then assign a painting and value to my player and rest to bamk
-        new Firebase(AppConstants.GameRef).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {};
-                        List<Integer> shuffledpaintinglist = new ArrayList<Integer>();
-                        List<Integer> shuffledpaintinvalueglist = new ArrayList<Integer>();
-                        shuffledpaintinglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGS).getValue(t);
-                        masterpiecegamemodel.setShuffledPaintingIDs(shuffledpaintinglist);
-                        shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
-                        masterpiecegamemodel.setShuffledPaintingValues(shuffledpaintinvalueglist);
-
-                        for(int i = 0; i < AppConstants.TotalNumberofPlayers; i++){//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
-                            masterpiecegamemodel.getAllPlayers().get(i).addOwnedPaintingID(shuffledpaintinglist.get(i));
-                            masterpiecegamemodel.getAllPlayers().get(i).addOenedPaintingValue(shuffledpaintinvalueglist.get(i));
-                        }
-                        shuffledpaintinglist.subList(0,AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
-                        shuffledpaintinvalueglist.subList(0,AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
-                        progress.dismiss();
-                        startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
-                        LobbyActivity.this.finish();
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                        progress.dismiss();
-                        Toast.makeText(LobbyActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-    }
-
-    private void listentoFirebaseforPlayers(){
-
-        new Firebase(AppConstants.GameRef+"/"+"Players").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                masterpiecegamemodel.removeAllPlayer();
-                int i = 0;
-                for(DataSnapshot dsplayer : dataSnapshot.getChildren()){
-                    //DataSnapshot dpl = (DataSnapshot)dsplayer.getValue();
-                    //System.out.println(dsplayer.child("Name"));
-                    Player player = new Player();
-                    player.setName(dsplayer.child("Name").getValue().toString());
-                    player.setPlayerpositionID(String.valueOf(i));
-                    player.setFirebaseid(dsplayer.getKey().toString());
-                    masterpiecegamemodel.addPlayer(player);
-                    if(player.getName().equals(masterpiecegamemodel.getUserName())){
-                        masterpiecegamemodel.setMyPlayer(player);
-                    }
-                   // masterpiecegamemodel.notifyObservers();
-                    i++;
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                Toast.makeText(LobbyActivity.this,firebaseError.getMessage().toString(),Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     @Override
     public void onClick(View v) {
@@ -149,8 +82,10 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             //go to lobby activity
             // TODO: add the conditions that it only moves to MainGameActivity if the Game is successfully setup in Firebase
             if (checkConnection.isConnected()) {
-                distributeShuffledPaintingandValues();
+                //distributeShuffledPaintingandValues();
                 //downloadImage();
+                startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
+                LobbyActivity.this.finish();
             }
 
         }

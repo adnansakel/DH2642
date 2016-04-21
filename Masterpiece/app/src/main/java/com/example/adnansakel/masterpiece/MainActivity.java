@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageDownloader imageDownloader = new ImageDownloader(MainActivity.this,masterpieceGameModel);
         imageDownloader.downloadImages(progress);
         handler = new Handler();*/
+        FirebaseCalls firebaseCalls = new FirebaseCalls(this,masterpieceGameModel);
+        firebaseCalls.distributeShuffledPaintingandValues();
     }
 
     @Override

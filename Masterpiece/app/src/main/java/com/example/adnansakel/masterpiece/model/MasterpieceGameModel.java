@@ -43,9 +43,9 @@ public class MasterpieceGameModel extends Observable{
 
     private int currentBidder;
 
-    private String currentBid;
+    private int currentBid;
 
-    private String CountNonBidders;
+    private int CountNonBidders;
     //private String color;
 
 
@@ -219,17 +219,17 @@ public class MasterpieceGameModel extends Observable{
         notifyObservers();
     }*/
 
-    public String getCountNonBidders() {
+    public int getCountNonBidders() {
         return CountNonBidders;
     }
-    public void setCountNonBidders(String countNonBidders) {
+    public void setCountNonBidders(int countNonBidders) {
         CountNonBidders = countNonBidders;
     }
 
-    public String getCurrentBid() {
+    public int getCurrentBid() {
         return currentBid;
     }
-    public void setCurrentBid(String currentBid) {
+    public void setCurrentBid(int currentBid) {
         this.currentBid = currentBid;
     }
 

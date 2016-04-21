@@ -39,6 +39,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Button button_join_game;
     Firebase masterpieceGameNumberRef;
     MasterpieceGameModel masterpieceGameModel;
+    FirebaseCalls firebaseCalls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,142 +71,22 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         Map<String,Object> mp = new HashMap<String,Object>();
 
 
+        firebaseCalls = new FirebaseCalls(this, masterpieceGameModel);
         downloadImages();
 
-        /*Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 10, bytes);
-        String encodeImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);*/
-        /*
-        Bitmap bmp =  BitmapFactory. decodeResource(this.getApplication().getResources(), R.drawable.a);//your image
-        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byte[] byteArray = bYtE.toByteArray();
-        String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"1"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.b);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"2"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.c);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"3"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.d);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"4"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.e);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"5"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.f);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"6"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.g);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"7"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.h);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"8"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.i);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-
-        ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"9"+"Image");
-        bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.j);//your image
-        bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byteArray = bYtE.toByteArray();
-        imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        ref.setValue(imageFile);
-*/
-
-       // ref.updateChildren(mp);
 
 
 
     }
 
-    ProgressDialog progress;
+   // ProgressDialog progress;
 
     private void downloadImages(){
 
-        Firebase.setAndroidContext(this);
-        progress = ProgressDialog.show(this, "", "Downloading masterpiece paintings ...", true);
-        new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            Painting painting = new Painting();
-                            System.out.println(ds.getValue().toString());
-                            System.out.println(ds.child("Artist").getValue().toString());
-                            painting.setArtist(ds.child(AppConstants.ARTIST).getValue().toString());
-                            painting.setImageURL(ds.child(AppConstants.IMAGE).getValue().toString());
-                            painting.setName(ds.child(AppConstants.NAME).getValue().toString());
-                            painting.setDescription(ds.child(AppConstants.DESCRIPTION).getValue().toString());
-                            masterpieceGameModel.addPaintingtoAllPaintings(painting);
-                            progress.dismiss();
+        if(checkConnection.isConnected()){
+            firebaseCalls.downloadMasterpiecePaintings();
+        }
 
-                        }
-
-                        ImageDownloader imageDownloader = new ImageDownloader(HomeActivity.this,masterpieceGameModel);
-                        imageDownloader.downloadImages(progress);
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                        progress.dismiss();
-                        Toast.makeText(HomeActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
     }
 
     @Override
