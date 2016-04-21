@@ -40,6 +40,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
     EditText editTextUserName;
 
     MasterpieceGameModel masterpiecegamemodel;
+    FirebaseCalls firebaseCalls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +62,9 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         initializeComponent();
 
         // retrieve Internet status
-        if (checkConnection.isConnected()) {
-            createGame();
-        }
+
+        createGame();
+
     }
 
     private void initializeComponent(){
@@ -71,72 +72,14 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         textViewGameNumber = (TextView)findViewById(R.id.textviewGameNumber);
         editTextUserName = (EditText)findViewById(R.id.edittext_userName);
         buttonJoinGame.setOnClickListener(this);
+        firebaseCalls = new FirebaseCalls(CreateGameActivity.this, masterpiecegamemodel);
     }
 
     private void createGame(){
-        Firebase.setAndroidContext(this);
-        masterpieceRef = new Firebase(AppConstants.FireBaseUri);
-        progress = ProgressDialog.show(this,"","creating game ...", true);
+        if(checkConnection.isConnected()){
+            firebaseCalls.createGame();
+        }
 
-        masterpieceRef.child("GameNumber").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final String game_number = dataSnapshot.getValue().toString();
-
-                AppConstants.GameID = game_number;
-                masterpiecegamemodel.setGameNumber(game_number);
-                Map<String, Object> newGameNumber = new HashMap<String, Object>();
-                newGameNumber.put(AppConstants.GAMENUMBER, String.valueOf(Integer.valueOf(game_number) + 1));
-                masterpieceRef.updateChildren(newGameNumber);
-                Map<String, Object> game = new HashMap<String, Object>();
-                game.put("GameNr", masterpiecegamemodel.getGameNumber());
-                game.put("CountPlayers", "");
-
-                //Map<String,Object>p1 = new HashMap<String, Object>();
-
-                game.put("Players", "");
-                Random randomplayer = new Random();
-                int turntaker = randomplayer.nextInt(4);
-                game.put("TurnTaker", String.valueOf(turntaker));
-                game.put("TurnAction", "");
-                game.put(AppConstants.GAMESTATE, "SetUp");
-                game.put("ShuffledPaintingValues", masterpiecegamemodel.getShuffledPaintingValues());
-                game.put("ShuffledPaintings", masterpiecegamemodel.getShuffledPaintingIDs());
-                game.put("PaintingBeingAuctioned","");
-                game.put("CurrentBidder","");
-                game.put(AppConstants.CURRENTBID,"0");
-                game.put(AppConstants.COUNTNONBIDDERS,"0");
-                game.put("BankPaintings", "");
-
-                Firebase gamesRef = masterpieceRef.child("Games");
-                final Firebase newGameRef = gamesRef.push();
-                newGameRef.setValue((game), new Firebase.CompletionListener() {
-                    @Override
-                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                        //progress.dismiss();
-                        if (firebaseError != null) {
-                            progress.dismiss();
-                            Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-                            //textViewGameNumber.setText(firebaseError.getMessage().toString());
-                        } else {
-                            progress.dismiss();
-                            masterpiecegamemodel.setGameNumber(game_number);
-                            AppConstants.GameRef = newGameRef.toString();
-                            AppConstants.IamCreator = true;
-                        }
-                    }
-
-
-                });
-                //System.out.println("New game ref: " + newGameRef.toString());
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                progress.dismiss();
-                Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-            }
-        });
     }
 
     @Override
@@ -144,32 +87,15 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
             if (view == buttonJoinGame) {
                 if (checkConnection.isConnected()) {
-                Map<String, Object> player = new HashMap<String, Object>();
-                //String[]paintings = {"1","2","3","4"};
-                masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
-                player.put("Name", editTextUserName.getText().toString());
-                player.put("Paintings", "");
-                player.put("Cash", "1500000"); //Initial cash
-                player.put("BidAmount", "");
-                player.put("Bidding", "");
-                progress = ProgressDialog.show(this, "", "joining game ...", true);
-                new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
-                    @Override
-                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                        //progress.dismiss();
-                        if (firebaseError != null) {
-                            //textViewGameNumber.setText(firebaseError.getMessage().toString());
-                            progress.dismiss();
-                            Toast.makeText(CreateGameActivity.this, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-                        } else {
-                            progress.dismiss();
-                            //textViewGameNumber.setText(game_number);
-                            //lobby activity should come here
-                            startActivity(new Intent(CreateGameActivity.this, LobbyActivity.class));
-                        }
+                    masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
+                    if(masterpiecegamemodel.getUserName().length()>0){
+                        firebaseCalls.joinGamebyCreator();
                     }
-                });
+                    else{
+                        Toast.makeText(this,"Please insert an username to join the game.",Toast.LENGTH_LONG);
+                    }
+
+                }
             }
-        }
     }
 }
