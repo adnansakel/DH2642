@@ -276,13 +276,13 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("bankAuction");
 
             //choose painting being auctioned (first painting in Paintings[])
-            Painting chosenPaintingToAuction = model.getAllPaintings1().get(0);
+            int chosenPaintingToAuction = model.getMyPlayer().getOwnedPaintingIDs().get(0);
 
             //set painting being auctioned
             model.setPaintingBeingAuctioned(chosenPaintingToAuction);
 
             //set current bidder as the next person in allPlayers[]
-            model.setCurrentBidder(model.getNextPlayer());
+            model.setCurrentBidder(model.getCurrentBidder());
         }
 
         //TODO: if bid or don't bid buttons for private or public auction
