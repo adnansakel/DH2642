@@ -104,7 +104,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
 
         //load pictures for the active player (2)
-        mainGameView.populatePaintingsOtherPlayers(secondPlayerID);
+        mainGameView.populatePaintingsOtherPlayers(secondPlayerID);//should not call like this
 
         //load pictures for myPlayer
         mainGameView.populatePaintingsMyPlayer(myPlayerID,(LinearLayout)findViewById(R.id.llPaintingsOfMyPlayer));
@@ -140,7 +140,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             else {
 
                 //hide the fullscreen popup
-                fullscreen_status_popup.setVisibility(View.GONE);
+                fullscreen_status_popup.setVisibility(View.INVISIBLE);
 
                 //toggle the button to show popup next time it's pressed
                 statusPopupIsVisible = false;
@@ -163,6 +163,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
         } else if(v == button_secondPlayer) {
             model.setCurrentPlayerToDisplay(secondPlayerID);
+            //TODO move code to change view to GameView and do not use deprecated method like getColor
             button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
             button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
             button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));

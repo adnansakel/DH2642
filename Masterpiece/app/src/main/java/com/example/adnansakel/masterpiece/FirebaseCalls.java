@@ -288,7 +288,7 @@ public class FirebaseCalls {
                         masterpieceGameModel.setShuffledPaintingValues(shuffledpaintinvalueglist);
 
                         for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
-                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i),shuffledpaintinvalueglist.get(i));
+                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i), shuffledpaintinvalueglist.get(i));
                         }
                         masterpieceGameModel.notifyAllPaintingsAdded();
                         //masterpieceGameModel.setCurrentPlayerToDisplay(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
@@ -324,7 +324,7 @@ public class FirebaseCalls {
                 //I skipped GameNumber, I don't think we need to set that from here
                 masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
                 masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
-
+                System.out.println("From firebasecalls: Turn taker set : "+snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                 //strings
                 //I skipped GameState, maybe we won't need it?
                 masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());

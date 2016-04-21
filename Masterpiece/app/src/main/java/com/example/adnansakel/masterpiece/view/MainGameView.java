@@ -52,12 +52,15 @@ public class MainGameView implements Observer{
     RelativeLayout layoutPopupBankAuctionWon;
     RelativeLayout layoutPopupPrivateAuctionLost;
     RelativeLayout layoutPopupBankAuctionLost;
+    LinearLayout layoutHomeViewInMainGameView;
 
 
     public MainGameView(View view, MasterpieceGameModel model) {
+        this.view = view;
+        initialize();
         model.addObserver(this);
         this.model = model;
-        this.view = view;
+
 
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -69,7 +72,7 @@ public class MainGameView implements Observer{
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
         textPlayerTitle.setText(model.getPlayer(1).getName() + "'s paintings:");
 
-        initialize();
+
     }
 
     private void initialize(){
@@ -87,9 +90,13 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionWon = (RelativeLayout)view.findViewById(R.id.bankauction_bidwon_view);
         layoutPopupPrivateAuctionLost = (RelativeLayout)view.findViewById(R.id.privateauction_bidlost_view);
         layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
+        layoutHomeViewInMainGameView = (LinearLayout)view.findViewById(R.id.linear_layout_homeview_in_MainGameView);
 
         //set the popup content views to invisible
         hideAllPopupContent();
+        //layoutHomeViewInMainGameView.setVisibility(View.VISIBLE);
+        //layoutStatusPopup.setVisibility(View.VISIBLE);
+        //layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
     }
 
     public void populatePaintingsOtherPlayers(Integer selectedPlayerID){
@@ -174,6 +181,8 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionWon.setVisibility(View.INVISIBLE);
         layoutPopupPrivateAuctionLost.setVisibility(View.INVISIBLE);
         layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
+        //layoutHomeViewInMainGameView.setVisibility(View.INVISIBLE);
+        layoutStatusPopup.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -237,7 +246,7 @@ public class MainGameView implements Observer{
             if(data.toString()=="PaintingAdded") {
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer));
-            };
+            }
 
             //TODO cashChanged
             if(data.toString()=="cashChanged") {
@@ -247,20 +256,29 @@ public class MainGameView implements Observer{
 
 
             if(data.toString()=="turnTakerChanged") {
+
                 //if I'm the turntaker
-                if (model.getTurnTaker() == String.valueOf(model.getMyPlayer().getPlayerpositionID())) {
+                System.out.println("From MainGameView: Turn taker set " + model.getTurnTaker()+", PlayerID: "+
+                        model.getMyPlayer().getPlayerpositionID());
+
+                if (model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))) {
+                    System.out.println("Came here");
                     hideAllPopupContent();
+                    layoutStatusPopup.setVisibility(View.VISIBLE);
                     layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
                 }
+
+
             }
 
             if(data.toString()=="currentBidderChanged") {
+
                 //if I'm the current bidder
                 if (model.getCurrentBidder() == String.valueOf(model.getMyPlayer().getPlayerpositionID())) {
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
                         //if there's only one bidder left(me), show private auction win screen
-                        if(model.getCountNonBidders() == 2) {
+                        if(model.getCountNonBidders() == "2") {
                             hideAllPopupContent();
                             layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);
                         }
@@ -273,7 +291,7 @@ public class MainGameView implements Observer{
                     //if it's a bank auction
                     else if (model.getTurnAction() == "bankAuction") {
                         //if there's only one bidder left(me), show bank auction win screen
-                        if(model.getCountNonBidders() == 2) {
+                        if(model.getCountNonBidders() == "2") {
                             hideAllPopupContent();
                             layoutPopupBankAuctionWon.setVisibility(View.VISIBLE);
                         }
@@ -289,7 +307,7 @@ public class MainGameView implements Observer{
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
                         //if there's only one bidder left(and it's not me), show private auction lose screen
-                        if(model.getCountNonBidders() == 2) {
+                        if(model.getCountNonBidders() == "2") {
                             hideAllPopupContent();
                             layoutPopupPrivateAuctionLost.setVisibility(View.VISIBLE);
                         }
@@ -297,7 +315,7 @@ public class MainGameView implements Observer{
                     //if it's a bank auction
                     else if (model.getTurnAction() == "bankAuction") {
                         //if there's only one bidder left(and it's not me), show bank auction lose screen
-                        if(model.getCountNonBidders() == 2) {
+                        if(model.getCountNonBidders() == "2") {
                             hideAllPopupContent();
                             layoutPopupBankAuctionLost.setVisibility(View.VISIBLE);
                         }
@@ -306,6 +324,7 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString()=="turnActionChanged") {
+
                 //if the turn is a private auction
                 if (model.getTurnAction() == "privateAuction") {
                     hideAllPopupContent();
@@ -318,5 +337,6 @@ public class MainGameView implements Observer{
                 }
             }
         }
+
     }
 }
