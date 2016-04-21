@@ -78,6 +78,10 @@ public class Player {
         ownedPaintingIDs.remove(paintingID); //TODO: Does this work?
     }
 
+    public void removePaintingValues(int paintingValue) {
+        ownedPaintingIDs.remove(paintingValue); //TODO: Does this work?
+    }
+
     public String getPlayerpositionID() {
         return playerpositionID;
     }
