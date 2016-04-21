@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -58,6 +59,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
+        // launch firebase calls
+        FirebaseCalls firebaseCalls = new FirebaseCalls(this,model);
+        firebaseCalls.distributeShuffledPaintingandValues();
+        firebaseCalls.listentoFireBaseForGameLogic();
+
         //adding the model
         model = ((MasterpieceApplication) this.getApplication()).getModel();
 
@@ -97,7 +103,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         mainGameView.populatePaintingsOtherPlayers(secondPlayerID);
 
         //load pictures for myPlayer
-        mainGameView.populatePaintingsMyPlayer(myPlayerID);
+        mainGameView.populatePaintingsMyPlayer(myPlayerID,(LinearLayout)findViewById(R.id.llPaintingsOfMyPlayer),(HorizontalScrollView)findViewById(R.id.hsvBottomPanel));
 
         //set click listeners
         button_status_bar.setOnClickListener(this);
@@ -110,6 +116,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_privateauction_not_bidding.setOnClickListener(this);
         button_bankauction_not_bidding.setOnClickListener(this);
         button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
+
 
     }
 
@@ -190,16 +197,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
 
     //executed whenever the turnTaker changes and is equal to my player
-    public void startTurn() {
-
-        //randomly select a turn type (roll the dice)
-        Random rn = new Random();
-        int roll = rn.nextInt(1); //there are only 2 types so far
-
-        //hide the start turn layout
-        //layoutStatusPopup.removeView(layoutPopupGameModelSelection);
-
-        if(roll == 0){
+    public void startPrivateAuction () {
 
             //PRIVATE AUCTION
 
@@ -207,6 +205,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             model.setPopupContent("privateAuctionSelectPainting");
 
             //TODO: need to access my owned paintings
+
 
             //TODO: display my paintings in the select painting layout
 
@@ -231,7 +230,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //bidding on private auction
 
 
-        } else if(roll == 1){
+       // } else if(roll == 1){
 
             //BANK AUCTION
 
@@ -240,7 +239,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //start listener on begin auction button
             button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
 
-        }
+        //}
     }
 
 }

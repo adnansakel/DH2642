@@ -102,9 +102,8 @@ public class MainGameView implements Observer{
         }
     }
 
-    public void populatePaintingsMyPlayer(Integer myPlayerID){
-        LinearLayout layoutPaintingsMyPlayer = (LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer);
-        HorizontalScrollView hsvBottomPanel = (HorizontalScrollView)view.findViewById(R.id.hsvBottomPanel);
+    public void populatePaintingsMyPlayer(Integer myPlayerID, LinearLayout ll, HorizontalScrollView hsv){
+
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
