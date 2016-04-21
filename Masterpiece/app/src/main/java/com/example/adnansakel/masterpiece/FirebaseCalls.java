@@ -61,15 +61,15 @@ public class FirebaseCalls {
                 game.put("Players", "");
                 Random randomplayer = new Random();
                 int turntaker = randomplayer.nextInt(4);
-                game.put("TurnTaker", String.valueOf(turntaker));
+                game.put("TurnTaker", turntaker);
                 game.put("TurnAction", "");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpieceGameModel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpieceGameModel.getShuffledPaintingIDs());
                 game.put("PaintingBeingAuctioned", "");
-                game.put("CurrentBidder", "");
-                game.put(AppConstants.CURRENTBID, "0");
-                game.put(AppConstants.COUNTNONBIDDERS, "0");
+                game.put("CurrentBidder", 100);
+                game.put(AppConstants.CURRENTBID, 0);
+                game.put(AppConstants.COUNTNONBIDDERS, 0);
                 game.put("BankPaintings", "");
 
                 Firebase gamesRef = masterpieceRef.child("Games");
