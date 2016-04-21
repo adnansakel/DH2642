@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bid + $50,000"
-        android:id="@+id/btn_bid_increase"
+        android:id="@+id/btn_bankauction_bid"
         android:layout_above="@+id/txtPlayerCash"
         android:layout_toLeftOf="@+id/textView19"
         android:layout_toStartOf="@+id/textView19"
@@ -49,8 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don&apos;t Bid"
-        android:id="@+id/btn_not_bidding"
-        android:layout_alignTop="@+id/btn_bid_increase"
+        android:id="@+id/btn_bankauction_not_bidding"
+        android:layout_alignTop="@+id/btn_bankauction_bid"
         android:layout_toRightOf="@+id/textView19"
         android:layout_toEndOf="@+id/textView19" />
 
