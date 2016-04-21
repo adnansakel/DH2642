@@ -16,15 +16,17 @@ import java.util.Set;
 public class MasterpieceGameModel extends Observable{
 
     private String gameNumber;
-    private List<Player> allPlayers;
-    private String CurrentBid;
 
     private String userName;
+
     private List<Painting> allPaintings;
     private List<Integer> allPaintingValues;
     private List<Integer> allPaintingIDs;
+
+    private List<Player> allPlayers;
     private Player myPlayer;
     private Player nextPlayer;
+
     //private List<String>turnTypes;
     private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
     private List<Integer>shuffledPaintingIDs;
@@ -35,13 +37,16 @@ public class MasterpieceGameModel extends Observable{
    // private List<Integer>paintingShuffler;//A list to shuffle the paintings
    // private List<Integer>shuffledPaintingID;
     private Painting paintingBeingAuctioned;
+
     private Player turnTaker;
     private String turnAction;
 
+    private String CurrentBid;
     private Player currentBidder;
-
     private String CountNonBidders;
+
     private String color;
+
     private String popupContent;
 
 
@@ -53,7 +58,7 @@ public class MasterpieceGameModel extends Observable{
         allPaintingValues = new ArrayList<Integer>();
         allPaintingIDs = new ArrayList<Integer>();
 
-         //prepopulated with fixed values
+         //pre populated with fixed values
 
         /*turnTypes = new ArrayList<>();
         turnTypes.add("PrivateAuction");
@@ -104,7 +109,6 @@ public class MasterpieceGameModel extends Observable{
     public void setTurnTaker(Player turnTaker){
         this.turnTaker = turnTaker;
     }
-
     public Player getTurnTaker(){
         return turnTaker;
     }
@@ -112,7 +116,6 @@ public class MasterpieceGameModel extends Observable{
     public void setTurnAction(String turnAction){
         this.turnAction = turnAction;
     }
-
     public String getTurnAction() {
         return turnAction;
     }
@@ -120,7 +123,6 @@ public class MasterpieceGameModel extends Observable{
     public void setPaintingBeingAuctioned(Painting paintingBeingAuctioned){
         this.paintingBeingAuctioned = paintingBeingAuctioned;
     }
-
     public Painting getPaintingBeingAuctioned(){
         return paintingBeingAuctioned;
     }
@@ -128,7 +130,6 @@ public class MasterpieceGameModel extends Observable{
     public void setCurrentBidder(Player currentBidder){
         this.currentBidder = currentBidder;
     }
-
     public Player getCurrentBidder(){
         return currentBidder;
     }
@@ -137,7 +138,6 @@ public class MasterpieceGameModel extends Observable{
         this.myPlayer = myPlayer;
     }
     //TODO: myPlayer is empty. need to set it when joining the game
-
     public Player getMyPlayer(){
         return myPlayer;
     }
@@ -152,7 +152,6 @@ public class MasterpieceGameModel extends Observable{
         }
     }
     //TODO: need to call this when joining the game
-
     public Player getNextPlayer(){
         return nextPlayer;
     }
@@ -197,7 +196,6 @@ public class MasterpieceGameModel extends Observable{
     public String getColor() {
         return color;
     }
-
     public void setColor(String color) {
         this.color = color;
         setChanged();
@@ -207,7 +205,6 @@ public class MasterpieceGameModel extends Observable{
     public String getCountNonBidders() {
         return CountNonBidders;
     }
-
     public void setCountNonBidders(String countNonBidders) {
         CountNonBidders = countNonBidders;
     }
@@ -215,7 +212,6 @@ public class MasterpieceGameModel extends Observable{
     public String getCurrentBid() {
         return CurrentBid;
     }
-
     public void setCurrentBid(String currentBid) {
         CurrentBid = currentBid;
     }
@@ -233,7 +229,6 @@ public class MasterpieceGameModel extends Observable{
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -245,7 +240,6 @@ public class MasterpieceGameModel extends Observable{
     public List<Integer> getBankPaintingIDs() {
         return bankPaintingIDs;
     }
-
     public void setBankPaintingIDs(List<Integer> bankPaintingIDs) {
         this.bankPaintingIDs = bankPaintingIDs;
     }
@@ -253,7 +247,6 @@ public class MasterpieceGameModel extends Observable{
     public List<Integer> getBankPaintingValues() {
         return bankPaintingValues;
     }
-
     public void setBankPaintingValues(List<Integer> bankPaintingValues) {
         this.bankPaintingValues = bankPaintingValues;
     }
@@ -283,7 +276,6 @@ public class MasterpieceGameModel extends Observable{
     public List<Integer> getAllPaintingIDs() {
         return allPaintingIDs;
     }
-
     public void setAllPaintingIDs(List<Integer> allPaintingIDs) {
         this.allPaintingIDs = allPaintingIDs;
     }
@@ -302,7 +294,6 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers("popupContentChanged");
     }
-
     public String getPopupContent(){
         return popupContent;
     }

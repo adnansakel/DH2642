@@ -26,7 +26,6 @@ public class Painting {
     }
 
     public Painting(){
-
     }
 
     public String getName() {
@@ -56,8 +55,6 @@ public class Painting {
     public int getValue() {
         return value;
     }
-
-
     // Can be used to set the value of the painting in the initial setup
     public void setValue(int type) {
         this.value = type;
@@ -66,7 +63,6 @@ public class Painting {
     public void setArtist(String artist){
         this.artist = artist;
     }
-
     public String getArtist(){
         return artist;
     }
@@ -74,7 +70,6 @@ public class Painting {
     public byte[] getImagebytearray() {
         return imagebytearray;
     }
-
     public void setImagebytearray(byte[] imagebytearray) {
         this.imagebytearray = imagebytearray;
     }

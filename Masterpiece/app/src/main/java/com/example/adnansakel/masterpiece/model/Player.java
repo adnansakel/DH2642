@@ -19,7 +19,7 @@ public class Player {
     private String playerpositionID;
     //TODO: Question: Should this be private?
 
-    //Set<Painting> ownedPaintings = new HashSet<Painting>();//why using hash set?
+    //Set<Painting> ownedPaintings = new HashSet<Painting>(); //why using hash set?
     List<Integer> ownedPaintingValues;
     List<Integer> ownedPaintingIDs;
     private boolean bidding;
@@ -30,7 +30,6 @@ public class Player {
         this.cash = cash;
         ownedPaintingIDs = new ArrayList<Integer>();
         ownedPaintingValues = new ArrayList<Integer>();
-
     }
 
     public Player(){
@@ -44,12 +43,14 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getFirebaseid() {
         return firebaseid;
     }
     public void setFirebaseid(String firebaseid) {
         this.firebaseid = firebaseid;
     }
+
     public Integer getCash() {
         return cash;
     }
@@ -61,13 +62,13 @@ public class Player {
         return ownedPaintingValues;
     }
 
-    public List<Integer> getOwnedPaintingIDs(){ return ownedPaintingIDs; }
+    public List<Integer> getOwnedPaintingIDs(){
+        return ownedPaintingIDs;
+    }
 
     public void addOwnedPaintingID(int paintigID){
         ownedPaintingIDs.add(paintigID);
     }
-
-
 
     public void addOenedPaintingValue(int paintingValue){
         ownedPaintingValues.add(paintingValue);
@@ -81,7 +82,6 @@ public class Player {
     public String getPlayerpositionID() {
         return playerpositionID;
     }
-
     public void setPlayerpositionID(String playerpositionID) {
         this.playerpositionID = playerpositionID;
     }
