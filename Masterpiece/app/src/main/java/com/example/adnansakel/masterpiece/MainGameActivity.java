@@ -36,7 +36,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Player selectedPlayer = new Player();
     MainGameView mainGameView;
 
-    //Firebase masterpieceRef;
     Button button_status_bar;
     Button button_secondPlayer;
     Button button_thirdPlayer;
@@ -45,19 +44,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     Button button_begin_bank_auction;
 
     View fullscreen_status_popup;
-    //TODO: can eventually take the layouts below, since they're used by MainGameView instead
-    RelativeLayout layoutStatusPopup;
-    RelativeLayout layoutPopupGameModelSelection;
-    RelativeLayout layoutPopupPrivateAuctionInProgress;
-    RelativeLayout layoutPopupBankAuctionInProgress;
-    RelativeLayout layoutPopupPrivateAuctionSelectPainting;
-    RelativeLayout layoutPopupBankAuctionBegin;
-    RelativeLayout layoutPopupPrivateAuctionBid;
-    RelativeLayout layoutPopupBankAuctionBid;
 
     boolean myTurn = false;
     boolean statusPopupIsVisible = false;
-    String turnAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +65,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_start_turn = (Button)findViewById(R.id.btnRoll); // Changed from OLDBUTTONROLL
         button_begin_bank_auction = (Button)findViewById(R.id.btn_begin_bank_auction);
 
-        //find popup & popup contents
+        //find popup
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
-        //TODO: can eventually take the findByIds below, since they're used by MainGameView instead
-        layoutStatusPopup = (RelativeLayout)findViewById(R.id.fullscreenStatusPopup);
-        layoutPopupGameModelSelection = (RelativeLayout)findViewById(R.id.game_mode_selection_view);
-        layoutPopupPrivateAuctionInProgress = (RelativeLayout)findViewById(R.id.privateauction_inprogress_view);
-        layoutPopupBankAuctionInProgress = (RelativeLayout)findViewById(R.id.bankauction_inprogress_view);
-        layoutPopupPrivateAuctionSelectPainting = (RelativeLayout)findViewById(R.id.privateauction_select_painting_view);
-        layoutPopupBankAuctionBegin = (RelativeLayout)findViewById(R.id.start_bankauction_view);
-        layoutPopupPrivateAuctionBid = (RelativeLayout)findViewById(R.id.privateauction_bid_view);
-        layoutPopupBankAuctionBid = (RelativeLayout)findViewById(R.id.bankauction_bid_view);
 
         //find buttons for top section of the overview
         button_secondPlayer = (Button)findViewById(R.id.btnSecondPlayer);
@@ -117,11 +97,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_thirdPlayer.setOnClickListener(this);
         button_fourthPlayer.setOnClickListener(this);
 
-        /*
-        if(AppConstants.IamCreator){
-            gameSetUp();
-        }*/
-
         //start listening to changes in Firebase
         ListenForFirebaseGameEvents();
 
@@ -139,15 +114,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                 //if the TurnTaker is me
                 if (snapshot.getValue() == model.getMyPlayer().getPlayerpositionID()) {
-
-                    /*
-                    //show popup
-                    fullscreen_status_popup.setVisibility(View.VISIBLE);
-                    statusPopupIsVisible = true;
-
-                    //show the start turn popup layout (game model selection)
-                    layoutStatusPopup.addView(layoutPopupGameModelSelection); //might have to use index of -1?
-                    */
 
                     //tell model that popupContent needs to change
                     model.setPopupContent("startTurn");
@@ -189,28 +155,21 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
                 System.out.println("TurnAction changed to: " + snapshot.getValue());
 
-                //if (snapshot.getValue() != null) { //probably don't need this
+                //if the turn is a private auction
+                if (snapshot.getValue() == "privateAuction") {
 
-                    //if the turn is a private auction
-                    if (snapshot.getValue() == "privateAuction") {
+                    model.setPopupContent("privateAuctionInProgress");
 
-                        //my device will display the "private auction in progress" screen
-                        layoutStatusPopup.addView(layoutPopupPrivateAuctionInProgress);
+                    model.setTurnAction("privateAuction");
+                }
 
-                        //TODO: write this to game model instead of this script
-                        turnAction = "privateAuction";
-                    }
+                //if the turn is a bank auction
+                if (snapshot.getValue() == "bankAuction") {
 
-                    //if the turn is a bank auction
-                    if (snapshot.getValue() == "bankAuction") {
+                    model.setPopupContent("bankAuctionInProgress");
 
-                        //my device will display the "bank auction in progress" screen
-                        layoutStatusPopup.addView(layoutPopupBankAuctionInProgress);
-
-                        //TODO: write this to game model instead of this script
-                        turnAction = "bankAuction";
-                    }
-                //}
+                    model.setTurnAction("bankAuction");
+                }
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -240,7 +199,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
                 //toggle the button to show popup next time it's pressed
                 statusPopupIsVisible = false;
             }
-
         }
         else if(v == button_start_turn) {
 
@@ -283,57 +241,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         //TODO: if bid or don't bid buttons for private or public auction
     }
 
-    /*public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_paintings_mainplayer, menu);
-        return true;
-    }*/
-
-    /*
-    //sets up the game, and is executed only by the game creator
-    private void gameSetUp() {
-
-        //access list of paintings and players
-        List<Painting> thePaintings = model.getAllPaintings1();
-        List<Player> thePlayers =  model.getAllPlayers();
-
-        //randomize order of paintings
-        Collections.shuffle(thePaintings);
-        model.setAllPaintings(thePaintings);
-
-        //randomize order of painting values
-        List<Integer> thePaintingValues = model.getAllPaintingValues();
-        Collections.shuffle(thePaintingValues);
-        model.setAllPaintingValues(thePaintingValues);
-
-        //for each player in the game
-        for(int i=0; i<4; i++){
-
-            //assign the first value in PaintingValues[] to the first painting in Paintings[]
-            thePaintings.get(0).setValue(thePaintingValues.get(0));
-
-            //add the first painting in Paintings[] to player’s painting list
-            Player thisPlayer = thePlayers.get(i);
-            thisPlayer.addPainting(thePaintings.get(0));
-
-            //remove the first painting and value from their lists
-            thePaintings.remove(0);
-            thePaintingValues.remove(0);
-
-        }
-
-        //since 4 paintings and 4 values have been removed, we need to update the model
-        model.setAllPaintings(thePaintings);
-        model.setAllPaintingValues(thePaintingValues);
-        //*** maybe we'll need a separate list for available paintings? (which would be different than all paintings)
-
-        //randomly select a player and set them as TurnTaker
-        Random rn = new Random();
-        int index = rn.nextInt(3);
-        Player selectedPlayer = thePlayers.get(index);
-        model.setTurnTaker(selectedPlayer);
-
-    }*/
 
     //executed whenever the turnTaker changes and is equal to my player
     public void startTurn() {
@@ -350,7 +257,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
             //PRIVATE AUCTION
 
             //show the private auction select painting layout
-            //layoutStatusPopup.addView(layoutPopupPrivateAuctionSelectPainting);
             model.setPopupContent("privateAuctionSelectPainting");
 
             //TODO: need to access my owned paintings
@@ -382,8 +288,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
             //BANK AUCTION
 
-            //show the bank auction select painting layout
-            layoutStatusPopup.addView(layoutPopupBankAuctionBegin);
+            model.setPopupContent("bankAuctionBegin");
 
             //start listener on begin auction button
             button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
@@ -396,94 +301,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
     public void bidOnPainting() {
 
         //if this is a private auction
-        if(turnAction == "privateAuction") {
+        if(model.getTurnAction() == "privateAuction") {
 
-            //temporarily hide the "private auction in progress" screen
-            layoutStatusPopup.removeView(layoutPopupPrivateAuctionInProgress);
-
-            //show the private auction bid screen
-            layoutStatusPopup.addView(layoutPopupPrivateAuctionBid);
+            model.setPopupContent("privateAuctionBid");
 
             //TODO: start listener for bid and don't bid buttons
         }
         //if this is a bank auction
-        else if (turnAction == "bankAuction") {
+        else if (model.getTurnAction() == "bankAuction") {
 
-            //temporarily hide the "bank auction in progress" screen
-            layoutStatusPopup.removeView(layoutPopupBankAuctionInProgress);
-
-            //show the bank auction bid screen
-            layoutStatusPopup.addView(layoutPopupBankAuctionBid);
+            model.setPopupContent("bankAuctionBid");
 
             //TODO: start listener for bid and don't bid buttons
         }
-    }
-
-    public void Auction() {
-        /*
-        //full screen popup during auction
-<<<<<<< Updated upstream
-        private Button popup;
-        private final PopupWindow popupWindow;
-        private final LayoutInflater layoutInflater;
-        private final RelativeLayout relativeLayout;
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_auction);
-            popup = (Button) findViewById(R.id.Button);
-            relativeLayout = (relativeLayout) findViewById(R.id.relative);
-
-            popup.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick (View view) {
-
-                    layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container  = (ViewGroup) layoutInflater.inflate(R.layout.activity_bid,null);
-
-                    popupWindow = new PopupWindow(container,400,400,true);
-                    popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY,500,500);
-
-                    container.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent)
-                        popupWindow.dismiss();
-                        return true;
-=======
-       //private Button popup;
-        //private final PopupWindow popupWindow;
-        //private final LayoutInflater layoutInflater;
-        //private final RelativeLayout relativeLayout;
-
-        //@Override
-        //protected void onCreate(Bundle savedInstanceState) {
-            //super.onCreate(savedInstanceState);
-            //setContentView(R.layout.activity_auction);
-            //popup = (Button) findViewById(R.id.Button);
-            //relativeLayout = (relativeLayout) findViewById(R.id.relative);
-
-            //popup.setOnClickListener(new View.OnClickListener(){
-                //@Override
-                //public void onClick (View view) {
-
-                    //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    //ViewGroup container  = (ViewGroup) layoutInflater.inflate(R.layout.activity_bid,null);
-
-                    //popupWindow = new PopupWindow(container,400,400,true);
-                    //popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY,500,500);
-
-                    //container.setOnTouchListener(new View.OnTouchListener() {
-                    //@Override
-                    //public boolean onTouch(View view, MotionEvent motionEvent)
-                        //popupWindow.dismiss();
-                        //return true;
->>>>>>> Stashed changes
-
-                    });
-            }
-        }*/
-
     }
 
 }

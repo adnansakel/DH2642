@@ -128,7 +128,9 @@ public class MainGameView implements Observer{
             //if model's popupContent changed
             if(data.toString()=="popupContentChanged"){
 
-                //set layout as visible for each case (and probably need to set all others to invisible)
+                //TODO: set all popup layouts to invisible before setting one to visible (otherwise multiple layouts will be visible)
+
+                //set layout as visible for each case
                 if(model.getPopupContent()== "startTurn") {
                     //show the start turn popup layout (game model selection)
                     layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
