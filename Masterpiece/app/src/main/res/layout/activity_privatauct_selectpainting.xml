@@ -43,7 +43,7 @@
         android:layout_marginLeft="5dp">
 
         <LinearLayout
-            android:id="@+id/llPaintingsToSelect"
+            android:id="@+id/ll_PrivateAuction_PaintingsToSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

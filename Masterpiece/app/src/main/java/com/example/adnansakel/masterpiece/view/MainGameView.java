@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,12 +111,11 @@ public class MainGameView implements Observer{
         }
     }
 
-    public void populatePaintingsMyPlayer(Integer myPlayerID, LinearLayout ll, HorizontalScrollView hsv){
-
+    public void populatePaintingsMyPlayer(Integer myPlayerID, LinearLayout ll){
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
-        layoutPaintingsMyPlayer.removeAllViews();
+        ll.removeAllViews();
 
         int counter = 0;
         for(int paintingID: model.getPlayer(myPlayerID).getOwnedPaintingIDs()) {
@@ -129,10 +129,38 @@ public class MainGameView implements Observer{
             textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
             textSecretValue.setWidth(200);
 
-            layoutPaintingsMyPlayer.addView(singlePainting, layoutParams);
+            ll.addView(singlePainting, layoutParams);
             counter++;
         }
     }
+
+    public void populatePaintingsMyPlayerPrivateAuction(Integer myPlayerID, LinearLayout ll){
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(2, 0, 2, 0);
+
+        ll.removeAllViews();
+
+        int counter = 0;
+        for(int paintingID: model.getPlayer(myPlayerID).getOwnedPaintingIDs()) {
+            View singlePainting = layoutInflater.inflate(R.layout.item_image_value_clickable, null);
+            ImageView image = (ImageView) singlePainting.findViewById(R.id.imgPainting);
+            image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                    model.getPaintingbyPosition(paintingID).getImagebytearray(), 0,
+                    model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
+
+            //Setting the paintingID as the id of the image to be able to distinguish when it is clicked upon on Private Auction
+            image.setId(paintingID);
+
+            TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
+            textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
+            textSecretValue.setWidth(200);
+
+            ll.addView(singlePainting, layoutParams);
+            counter++;
+        }
+    }
+
+
 
     public void hideAllPopupContent() {
         layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
@@ -206,6 +234,11 @@ public class MainGameView implements Observer{
                 //TODO maybe add the highlighting of the buttons
             }
 
+            if(data.toString()=="PaintingAdded") {
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
+                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer));
+            };
+
             //TODO cashChanged
             if(data.toString()=="cashChanged") {
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
@@ -215,7 +248,7 @@ public class MainGameView implements Observer{
 
             if(data.toString()=="turnTakerChanged") {
                 //if I'm the turntaker
-                if(model.getTurnTaker() == model.getMyPlayer().getPlayerpositionID()) {
+                if (model.getTurnTaker() == String.valueOf(model.getMyPlayer().getPlayerpositionID())) {
                     hideAllPopupContent();
                     layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
                 }
@@ -223,7 +256,7 @@ public class MainGameView implements Observer{
 
             if(data.toString()=="currentBidderChanged") {
                 //if I'm the current bidder
-                if(model.getCurrentBidder() == model.getMyPlayer().getPlayerpositionID()) {
+                if (model.getCurrentBidder() == String.valueOf(model.getMyPlayer().getPlayerpositionID())) {
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
                         //if there's only one bidder left(me), show private auction win screen

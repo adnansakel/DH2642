@@ -60,8 +60,9 @@ public class FirebaseCalls {
 
                 game.put("Players", "");
                 Random randomplayer = new Random();
-                int turntaker = randomplayer.nextInt(4);
-                game.put("TurnTaker", String.valueOf(turntaker));
+                //int turntaker = randomplayer.nextInt(4);
+                //game.put("TurnTaker", String.valueOf(turntaker));
+                game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
                 game.put("TurnAction", "");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpieceGameModel.getShuffledPaintingValues());
@@ -253,6 +254,7 @@ public class FirebaseCalls {
                     player.setPlayerpositionID(i);
                     player.setFirebaseid(dsplayer.getKey().toString());
                     masterpieceGameModel.addPlayer(player);
+                    System.out.println(player.getName() + "/" + player.getPlayerpositionID());
                     if (player.getName().equals(masterpieceGameModel.getUserName())) {
                         masterpieceGameModel.setMyPlayer(player);
                     }
@@ -286,9 +288,10 @@ public class FirebaseCalls {
                         masterpieceGameModel.setShuffledPaintingValues(shuffledpaintinvalueglist);
 
                         for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
-                            masterpieceGameModel.getAllPlayers().get(i).addOwnedPaintingID(shuffledpaintinglist.get(i));
-                            masterpieceGameModel.getAllPlayers().get(i).addOenedPaintingValue(shuffledpaintinvalueglist.get(i));
+                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i),shuffledpaintinvalueglist.get(i));
                         }
+                        masterpieceGameModel.notifyAllPaintingsAdded();
+                        //masterpieceGameModel.setCurrentPlayerToDisplay(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                         shuffledpaintinglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
                         shuffledpaintinvalueglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
                         progress.dismiss();
