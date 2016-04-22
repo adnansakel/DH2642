@@ -175,19 +175,12 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
         } else if(v == button_secondPlayer) {
             model.setCurrentPlayerToDisplay(secondPlayerID);
-            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
-            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
-            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
         } else if(v == button_thirdPlayer) {
             model.setCurrentPlayerToDisplay(thirdPlayerID);
-            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
-            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
-            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+
         } else if(v == button_fourthPlayer) {
             model.setCurrentPlayerToDisplay(fourthPlayerID);
-            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
-            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
-            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+
         } else if(v == button_begin_bank_auction) {
 
             //TODO: the below code could be moved to its own function

@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,6 +55,10 @@ public class MainGameView implements Observer{
     RelativeLayout layoutPopupBankAuctionLost;
     LinearLayout layoutHomeViewInMainGameView;
 
+    Button button_secondPlayer;
+    Button button_thirdPlayer;
+    Button button_fourthPlayer;
+
 
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
@@ -71,6 +76,10 @@ public class MainGameView implements Observer{
         //set currently selected player text
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
         textPlayerTitle.setText(model.getPlayer(1).getName() + "'s paintings:");
+
+        button_secondPlayer = (Button)view.findViewById(R.id.btnSecondPlayer);
+        button_thirdPlayer = (Button)view.findViewById(R.id.btnThirdPlayer);
+        button_fourthPlayer = (Button)view.findViewById(R.id.btnFourthPlayer);
 
 
     }
@@ -189,6 +198,32 @@ public class MainGameView implements Observer{
     public void update(Observable observable, Object data) {
         if(observable instanceof  MasterpieceGameModel){
 
+            if(data.toString().equals("currentPlayerToDisplayChanged")){
+                int myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
+                int secondPlayerID = (myPlayerID + 1)%4;
+                int thirdPlayerID = (myPlayerID + 2)%4;
+                int fourthPlayerID = (myPlayerID + 3)%4;
+
+                if(model.getCurrentPlayerToDisplay()==secondPlayerID){
+
+                    button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+                    button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                    button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                }
+                else if(model.getCurrentPlayerToDisplay()==thirdPlayerID){
+
+                    button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                    button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+                    button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                }
+                else if(model.getCurrentPlayerToDisplay()==fourthPlayerID){
+
+                    button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                    button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+                    button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+
+                }
+            }
             //if model's popupContent changed
             if(data.toString().equals("popupContentChanged")){
 
