@@ -3,12 +3,15 @@ package com.example.adnansakel.masterpiece;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -26,7 +29,7 @@ import java.util.Random;
 /**
  * Created by Daniel on 02/04/2016.
  */
-public class MainGameActivity extends Activity implements View.OnClickListener {
+public class MainGameActivity extends Activity implements View.OnClickListener, ShakeDetector.OnShakeListener {
 
     MasterpieceGameModel model;
     Player myPlayer;
@@ -50,11 +53,13 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
     FirebaseCalls firebaseCalls;
 
+    SensorManager mSensorManager;
+    ShakeDetector mShakeDetector;
     View fullscreen_status_popup;
 
     boolean myTurn = false;
     boolean statusPopupIsVisible = false;
-
+    Sensor mAccelerometer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -107,7 +112,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         mainGameView.populatePaintingsOtherPlayers(secondPlayerID);//should not call like this
 
         //load pictures for myPlayer
-        mainGameView.populatePaintingsMyPlayer(myPlayerID,(LinearLayout)findViewById(R.id.llPaintingsOfMyPlayer));
+        mainGameView.populatePaintingsMyPlayer(myPlayerID, (LinearLayout) findViewById(R.id.llPaintingsOfMyPlayer));
 
         //set click listeners
         button_status_bar.setOnClickListener(this);
@@ -120,6 +125,13 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
         button_privateauction_not_bidding.setOnClickListener(this);
         button_bankauction_not_bidding.setOnClickListener(this);
         button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
+
+
+        mSensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(this);
 
 
     }
@@ -296,4 +308,22 @@ public class MainGameActivity extends Activity implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onShake(int count) {
+        Toast.makeText(this,"Shake detected"+count,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
 }
