@@ -31,4 +31,14 @@ public class ConnectionCheck {
         System.out.println("isConnected: " + isConnected);
         return isConnected;
     }
+
+    public boolean isConnectedWithoutToastMessage(){
+        ConnectivityManager cm = (ConnectivityManager)_context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+
+        return isConnected;
+
+    }
 }

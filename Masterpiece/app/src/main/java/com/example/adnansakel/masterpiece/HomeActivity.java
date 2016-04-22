@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import android.os.Handler;
 
 /**
  * Created by Adnan Sakel on 3/28/2016.
@@ -40,6 +41,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Firebase masterpieceGameNumberRef;
     MasterpieceGameModel masterpieceGameModel;
     FirebaseCalls firebaseCalls;
+    Handler handler;
+    boolean mStopHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,12 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         Firebase ref = new Firebase(AppConstants.FireBaseUri+"/"+AppConstants.PAINTINGS+"/"+"0"+"Image");
         Map<String,Object> mp = new HashMap<String,Object>();
 
-
+        handler = new Handler();
+        mStopHandler = false;
         firebaseCalls = new FirebaseCalls(this, masterpieceGameModel);
+        checkConnection.isConnected();
+        masterpieceGameModel.removeAllPlayer();
+        masterpieceGameModel.getAllPaintings().clear();
         downloadImages();
 
 
@@ -83,9 +90,27 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     private void downloadImages(){
 
-        if(checkConnection.isConnected()){
-            firebaseCalls.downloadMasterpiecePaintings();
-        }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                // do your stuff - don't create a new runnable here!
+                if(checkConnection.isConnectedWithoutToastMessage()){
+                    firebaseCalls.downloadMasterpiecePaintings();
+                    handler.removeCallbacks(this);
+                    mStopHandler = true;
+
+                }
+                if (!mStopHandler) {
+                    //System.out.println("Hi...");
+                    handler.postDelayed(this, 500);
+                }
+            }
+        };
+
+// start it with:
+        handler.post(runnable);
+
+
 
     }
 
