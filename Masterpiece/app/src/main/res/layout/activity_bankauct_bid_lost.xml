@@ -57,6 +57,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Winning Bid: "
         android:textColor="@color/colorMainText"
+        android:textStyle="bold"
         android:id="@+id/txtHighestBid"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/txtPlayerAmountBid"
