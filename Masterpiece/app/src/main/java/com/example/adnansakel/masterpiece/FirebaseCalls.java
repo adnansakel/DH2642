@@ -332,7 +332,7 @@ public class FirebaseCalls {
                 //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
 
                 //if I'm the current bidder and Bidding is set to false on my player
-                /*if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
+                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
                     //don't set current bidder. instead set next player as current bidder
                     setNextPlayerAsBidder();
                 }
@@ -340,14 +340,15 @@ public class FirebaseCalls {
                 //otherwise set the current bidder in the model
                 else {
                     masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
-                }*/
+                    masterpieceGameModel.setPopupContent("privateAuctionBid");
+                }
 
-                masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
+                /*masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
 
                 if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == true) {
                     //don't set current bidder. instead set next player as current bidder
                     masterpieceGameModel.notifyViewToShowPopupBid();
-                }
+                }*/
 
                 //I skipped GameNumber, I don't think we need to set that from here
                 masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());

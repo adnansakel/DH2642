@@ -162,7 +162,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
             //randomly select a turn type (roll the dice)
             Random rn = new Random();
-            int roll = rn.nextInt(1); //there are only 2 types so far
+            //int roll = rn.nextInt(1); //there are only 2 types so far
+            int roll = 0; // for testing only
 
             if(roll == 0) {
                 //PRIVATE AUCTION

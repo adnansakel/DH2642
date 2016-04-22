@@ -101,8 +101,10 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
         layoutHomeViewInMainGameView = (LinearLayout)view.findViewById(R.id.linear_layout_homeview_in_MainGameView);
 
-        //set the popup content views to invisible
+        //set the popup and content views to invisible
+        layoutStatusPopup.setVisibility(View.INVISIBLE);
         hideAllPopupContent();
+
         //layoutHomeViewInMainGameView.setVisibility(View.VISIBLE);
         //layoutStatusPopup.setVisibility(View.VISIBLE);
         //layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
@@ -191,7 +193,7 @@ public class MainGameView implements Observer{
         layoutPopupPrivateAuctionLost.setVisibility(View.INVISIBLE);
         layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
         //layoutHomeViewInMainGameView.setVisibility(View.INVISIBLE);
-        layoutStatusPopup.setVisibility(View.INVISIBLE);
+        //layoutStatusPopup.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -242,6 +244,8 @@ public class MainGameView implements Observer{
                 }
                 else if(model.getPopupContent().equals("privateAuctionSelectPainting")) {
                     layoutPopupPrivateAuctionSelectPainting.setVisibility(View.VISIBLE);
+                    //show cash
+
                 }
                 else if(model.getPopupContent().equals("bankAuctionBegin")) {
                     layoutPopupBankAuctionBegin.setVisibility(View.VISIBLE);
@@ -279,7 +283,7 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals("PaintingAdded")) {
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+ 1) % 4);
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
