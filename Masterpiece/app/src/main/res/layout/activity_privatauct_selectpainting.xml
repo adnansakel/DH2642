@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Select the painting you want to offer:"
-        android:id="@+id/textView7"
+        android:id="@+id/txtSelect"
         android:layout_marginTop="85dp"
         android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true" />
@@ -29,18 +29,23 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="#000"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/hsvSelectPainting"
         android:fillViewport="false"
-        android:layout_marginLeft="5dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtSelect">
 
         <LinearLayout
             android:id="@+id/ll_PrivateAuction_PaintingsToSelect"

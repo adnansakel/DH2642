@@ -261,7 +261,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             model.setPopupContent("privateAuctionSelectPainting");
 
             // load clickable pictures for myPlayer
-            mainGameView.populatePaintingsMyPlayer(myPlayerID,(LinearLayout)findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
+            mainGameView.populatePaintingsMyPlayerPrivateAuction(myPlayerID,(LinearLayout)findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
 
             // player can
             //TODO: allow my player to select a painting
