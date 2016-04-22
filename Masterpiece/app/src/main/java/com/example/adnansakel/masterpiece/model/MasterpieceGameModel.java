@@ -42,7 +42,7 @@ public class MasterpieceGameModel extends Observable{
     private String turnTaker;
     private String turnAction = "setup";
 
-    private String currentBidder;
+    private String currentBidder = "";
 
     private String currentBid;
 
