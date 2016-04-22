@@ -38,15 +38,15 @@ public class MasterpieceGameModel extends Observable{
     // private List<Integer>paintingShuffler;//A list to shuffle the paintings
     // private List<Integer>shuffledPaintingID;
 
-    private String paintingBeingAuctioned;
-    private String turnTaker;
+    private String paintingBeingAuctioned = "";
+    private String turnTaker = "";
     private String turnAction = "setup";
 
     private String currentBidder = "";
 
-    private String currentBid;
+    private String currentBid = "";
 
-    private String CountNonBidders;
+    private String CountNonBidders = "";
     //private String color;
 
 

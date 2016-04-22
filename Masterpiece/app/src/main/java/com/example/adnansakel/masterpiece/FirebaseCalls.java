@@ -348,18 +348,16 @@ public class FirebaseCalls {
                     }
 
                 }
-
-                /*masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
-
-                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == true) {
-                    //don't set current bidder. instead set next player as current bidder
-                    masterpieceGameModel.notifyViewToShowPopupBid();
-                }*/
-
                 //I skipped GameNumber, I don't think we need to set that from here
-                masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
-                masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
-                System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
+                if(!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())){
+                    masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
+                }
+
+                if(!masterpieceGameModel.getTurnTaker().equals(snapshot.child(AppConstants.TURNTAKER).getValue().toString())){
+                    masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
+                    //System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
+                }
+
                 //strings
                 //I skipped GameState, maybe we won't need it?
 
@@ -371,22 +369,11 @@ public class FirebaseCalls {
 
                 //reset playerNumber after each onDataChange
                 int playerNumber = 0;
-                masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
-                //masterpieceGameModel.set
-                //loop through each player
-                /*for (DataSnapshot playersSnapshot: snapshot.child("Players").getChildren()) {
-                   // masterpieceGameModel.getPlayer(playerNumber).setBidAmount((Integer) snapshot.child("BidAmount").getValue());
-                    if(snapshot.child("Bidding").getValue().toString().equals("true")){
-                        masterpieceGameModel.getPlayer(playerNumber).setBidding(true);
-                    }
-                    else if(snapshot.child("Bidding").getValue().toString().equals("false")){
-                        masterpieceGameModel.getPlayer(playerNumber).setBidding(false);
-                    }
-                    masterpieceGameModel.getPlayer(playerNumber).setCash((int) snapshot.child("Cash").getValue());
-                    masterpieceGameModel.getPlayer(playerNumber).setName(snapshot.child("Name").getValue().toString());
-                   // masterpieceGameModel.getPlayer(playerNumber).setOwnedPaintings((List<Integer>) snapshot.child("Paintings").getValue());
-                    playerNumber++;
-                }*/
+                if(!masterpieceGameModel.getCurrentBid().equals(snapshot.child(AppConstants.CURRENTBID).getValue().toString())){
+                    masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
+                }
+
+
             }
 
             @Override
