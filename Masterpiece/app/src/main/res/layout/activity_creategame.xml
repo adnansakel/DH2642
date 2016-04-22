@@ -3,21 +3,23 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:id="@+id/creategame_view">
+    android:id="@+id/creategame_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:text="@string/game_number"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:gravity="center"/>
     <TextView
         android:id="@+id/textviewGameNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="#00aa00"
+        android:textColor="@color/colorMainText"
         android:text="1234"
         android:gravity="center"/>
     <EditText
@@ -30,6 +32,7 @@
         android:textSize="25sp"
         android:gravity="center"
         android:maxLength="3"
+        android:textColor="@color/colorMainText"
         android:hint="@string/hint_choose_user_name"/>
 
     <Button
@@ -40,7 +43,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/join_game"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:textSize="25sp"
-        android:textStyle="bold"
         android:layout_gravity="center_vertical"/>
 </LinearLayout>

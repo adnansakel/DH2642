@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/privateauction_bidlost_view">
+    android:id="@+id/privateauction_bidlost_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,6 +11,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Private Auction"
         android:id="@+id/textView11"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp" />
@@ -20,6 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="You Have Lost the Auction!"
         android:id="@+id/textView12"
+        android:textColor="@color/colorMainText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:layout_below="@+id/textView11" />
@@ -29,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -41,6 +45,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Bid:"
         android:id="@+id/txtPlayerAmountBid"
+        android:textColor="@color/colorMainText"
         android:layout_below="@+id/txtHighestBid"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
@@ -51,6 +56,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Winning Bid: "
         android:id="@+id/txtHighestBid"
+        android:textStyle="bold"
+        android:textColor="@color/colorMainText"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

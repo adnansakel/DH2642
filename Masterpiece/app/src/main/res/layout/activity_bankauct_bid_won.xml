@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bankauction_bidwon_view">
+    android:id="@+id/bankauction_bidwon_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bank Auction"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:id="@+id/textView11"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -19,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="You Have Won the Auction!"
+        android:textColor="@color/colorMainText"
         android:id="@+id/textView12"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
@@ -29,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -40,6 +44,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Winning Bid Amount: "
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtHighestBid"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -48,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Painting to my Collection"
+        android:textColor="@color/colorButtonText"
+        android:background="@color/colorButton"
         android:id="@+id/btnAddPaintingToCollection"
         android:layout_marginBottom="88dp"
         android:layout_above="@+id/txtPlayerCash"

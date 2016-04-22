@@ -3,15 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:id="@+id/lobby_view">
+    android:id="@+id/lobby_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="#FF0099CC"
         android:text="@string/game_number"
+        android:textColor="@color/colorHeading"
         android:gravity="center"/>
     <TextView
         android:id="@+id/textviewGameNumber"
@@ -39,6 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/colorMainText"
         android:text="@string/waiting_for_player"/>
 
     <View
@@ -57,6 +59,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/colorMainText"
         android:text="@string/waiting_for_player"/>
 
     <View
@@ -75,6 +78,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/colorMainText"
         android:text="@string/waiting_for_player"/>
 
     <View
@@ -93,6 +97,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/colorMainText"
         android:text="@string/waiting_for_player"/>
 
 
@@ -113,8 +118,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:text="@string/start_game"
+        android:background="@drawable/rounded_rect_blue"
+        android:textColor="@color/colorButtonText"
         android:textSize="25sp"
-        android:textStyle="bold"
         android:layout_gravity="center_vertical"/>
 
 </LinearLayout>

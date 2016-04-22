@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bankauction_inprogress_view">
+    android:id="@+id/bankauction_inprogress_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bank Auction - Ongoing"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -18,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Players are Currently Bidding"
+        android:text="Players are currently bidding"
+        android:textColor="@color/colorMainText"
         android:id="@+id/textView8"
         android:layout_marginTop="80dp"
         android:layout_below="@+id/textView2"
@@ -30,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"

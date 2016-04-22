@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:id="@+id/home_view">
+    android:id="@+id/home_view"
+    android:background="@color/colorBackground">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="If you have a Game Number:"
+        android:textColor="#000000"
         android:id="@+id/textView"
         android:layout_above="@+id/buttonJoinGame"
         android:layout_centerHorizontal="true" />
@@ -29,7 +31,8 @@
         android:layout_height="50dp"
         android:text="@string/join_game"
         android:textSize="25sp"
-        android:textStyle="bold"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -40,10 +43,12 @@
         android:layout_height="50dp"
         android:text="@string/create_game"
         android:textSize="25sp"
-        android:textStyle="bold"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:layout_gravity="center_vertical"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/buttonJoinGame"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonJoinGame" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

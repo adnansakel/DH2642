@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:id="@+id/joingame_view">
+    android:id="@+id/joingame_view"
+    android:background="@color/colorBackground">
 
 <EditText
     android:id="@+id/edittext_GameNumber"
@@ -14,6 +15,8 @@
     android:textSize="20sp"
     android:gravity="center"
     android:hint="Game Number"
+    android:textColor="@color/colorHeading"
+    android:textStyle="bold"
     android:maxLength="4"
     android:inputType="number" />
 
@@ -27,7 +30,10 @@
         android:textSize="20sp"
         android:maxLength="4"
         android:gravity="center"
-        android:hint="@string/hint_choose_user_name"/>
+        android:hint="@string/hint_choose_user_name"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
+        />
     <Button
         android:id="@+id/buttonJoinGame"
         android:layout_width="match_parent"
@@ -36,6 +42,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/join_game"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"/>

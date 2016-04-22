@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/maingame_overview_view">
+    android:id="@+id/maingame_overview_view"
+    android:background="@color/colorBackground">
 
     <!-- Status Bar -->
 
@@ -41,7 +42,8 @@
                     android:layout_weight="1"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@color/colorButtonInactive"
+                    android:background="@drawable/rounded_rect_blue"
+                    android:textColor="@color/colorButtonText"
                     android:text="Player 2" />
 
                 <Button
@@ -49,7 +51,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="30dp"
-                    android:background="@color/colorButtonInactive"
+                    android:background="@drawable/rounded_rect_blue"
+                    android:textColor="@color/colorButtonText"
                     android:layout_marginLeft="5dp"
                     android:text="Player 3" />
 
@@ -58,7 +61,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="30dp"
-                    android:background="@color/colorButtonInactive"
+                    android:background="@drawable/rounded_rect_blue"
+                    android:textColor="@color/colorButtonText"
                     android:layout_marginLeft="5dp"
                     android:text="Player 4" />
             </LinearLayout>
@@ -67,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Player X's paintings"
+                android:textColor="@color/colorMainText"
                 android:id="@+id/txtPlayerTitle"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -131,8 +136,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:textSize="20sp"
-        android:textColor="#000000"
-        android:text="@string/player_cash"/>
+        android:textColor="@color/colorMainText"
+        android:text="@string/player_cash" />
 
     </LinearLayout>
 

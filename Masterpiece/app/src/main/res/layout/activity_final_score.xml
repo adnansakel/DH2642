@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/game_final_score_view">
+    android:id="@+id/game_final_score_view"
+    android:background="@color/colorBackground">
 
 
     <TextView
@@ -10,6 +11,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Final Score"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:id="@+id/textView22"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,6 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1."
         android:id="@+id/txtWinningPlayer"
+        android:textColor="@color/colorMainText"
         android:layout_below="@+id/textView22"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -34,6 +38,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="2."
         android:id="@+id/txtRunnerUpPlayer"
+        android:textColor="@color/colorMainText"
         android:layout_marginTop="38dp"
         android:layout_below="@+id/txtWinningPlayer"
         android:layout_alignLeft="@+id/txtWinningPlayer"
@@ -45,6 +50,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="3."
         android:id="@+id/txtThirdPlayer"
+        android:textColor="@color/colorMainText"
         android:layout_below="@+id/txtRunnerUpPlayer"
         android:layout_alignLeft="@+id/txtRunnerUpPlayer"
         android:layout_alignStart="@+id/txtRunnerUpPlayer"
@@ -56,6 +62,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="4."
         android:id="@+id/txtLastPlayer"
+        android:textColor="@color/colorMainText"
         android:layout_below="@+id/txtThirdPlayer"
         android:layout_alignLeft="@+id/txtThirdPlayer"
         android:layout_alignStart="@+id/txtThirdPlayer"
@@ -66,6 +73,8 @@
         android:layout_height="wrap_content"
         android:text="Main Menu"
         android:id="@+id/btnBackToMainMenu"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView22"

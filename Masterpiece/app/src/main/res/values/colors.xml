@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorButtonInactive">#c4c4c4</color>
     <color name="colorSecretValue">#eaeaea</color>
+    <color name="colorBackground">#ffdab9</color>
+    <color name="colorHeading">#003399</color>
+    <color name="colorMainText">#FF8C00</color>
+    <color name="colorButton">#003399</color>
+    <color name="colorButtonText">#FFFFFF</color>
+
 </resources>

@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/start_bankauction_view">
+    android:id="@+id/start_bankauction_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bank Auction"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:id="@+id/textView16"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -20,6 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Bid Against Other Players for One"
         android:id="@+id/textView17"
+        android:textColor="@color/colorMainText"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/textView16"
         android:layout_centerHorizontal="true" />
@@ -30,6 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="of the Bank&apos;s Paintings Being Auctioned"
         android:id="@+id/textView18"
+        android:textColor="@color/colorMainText"
         android:layout_below="@+id/textView17"
         android:layout_centerHorizontal="true" />
 
@@ -38,7 +43,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -48,8 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Begin"
+        android:textColor="#FFFFFF"
         android:id="@+id/btn_begin_bank_auction"
         android:layout_marginTop="69dp"
         android:layout_below="@+id/textView18"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorButton" />
 </RelativeLayout>

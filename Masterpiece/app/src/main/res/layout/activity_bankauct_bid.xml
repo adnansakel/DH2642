@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bankauction_bid_view">
+    android:id="@+id/bankauction_bid_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bank Auction"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:id="@+id/textView19"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -20,6 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Current Highest Bid: "
         android:id="@+id/txtHighestBid"
+        android:textColor="@color/colorMainText"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="206dp" />
@@ -29,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -40,18 +44,22 @@
         android:layout_height="wrap_content"
         android:text="Bid + $50,000"
         android:id="@+id/btn_bankauction_bid"
+        android:textColor="@color/colorButtonText"
         android:layout_above="@+id/txtPlayerCash"
         android:layout_toLeftOf="@+id/textView19"
         android:layout_toStartOf="@+id/textView19"
-        android:layout_marginBottom="71dp" />
+        android:layout_marginBottom="71dp"
+        android:background="@color/colorButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don&apos;t Bid"
         android:id="@+id/btn_bankauction_not_bidding"
+        android:textColor="@color/colorButtonText"
         android:layout_alignTop="@+id/btn_bankauction_bid"
         android:layout_toRightOf="@+id/textView19"
-        android:layout_toEndOf="@+id/textView19" />
+        android:layout_toEndOf="@+id/textView19"
+        android:background="@color/colorButton" />
 
 </RelativeLayout>

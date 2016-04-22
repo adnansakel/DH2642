@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/privateauction_bid_view">
+    android:id="@+id/privateauction_bid_view"
+    android:background="@color/colorBackground"
+    >
 
 
     <TextView
@@ -11,6 +13,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Private Auction"
         android:id="@+id/textView9"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp" />
@@ -31,6 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Current Highest Bid: "
         android:id="@+id/txtHighestBid"
+        android:textColor="@color/colorMainText"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="206dp" />
@@ -40,7 +45,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Cash:"
-        android:textColor="#FF99CC00"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textView7"
@@ -51,6 +56,8 @@
         android:layout_height="wrap_content"
         android:text="Bid + $50,000"
         android:id="@+id/btn_privateauction_bid"
+        android:background="@drawable/rounded_rect_blue"
+        android:textColor="@color/colorButtonText"
         android:layout_alignTop="@+id/btn_privateauction_not_bidding"
         android:layout_toRightOf="@+id/txtPlayerCash"
         android:layout_toEndOf="@+id/txtPlayerCash" />
@@ -60,6 +67,8 @@
         android:layout_height="wrap_content"
         android:text="Don&apos;t Bid"
         android:id="@+id/btn_privateauction_not_bidding"
+        android:background="@drawable/rounded_rect_blue"
+        android:textColor="@color/colorButtonText"
         android:layout_above="@+id/txtPlayerCash"
         android:layout_toRightOf="@+id/textView9"
         android:layout_toEndOf="@+id/textView9"

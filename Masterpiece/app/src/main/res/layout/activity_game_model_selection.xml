@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/game_mode_selection_view">
+    android:id="@+id/game_mode_selection_view"
+    android:background="@color/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Player X"
+        android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -20,6 +22,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="It&apos;s Your Turn"
         android:id="@+id/textView4"
+        android:textColor="@color/colorHeading"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/txtPlayerTitle"
@@ -31,6 +35,8 @@
         android:layout_height="wrap_content"
         android:text="Roll"
         android:id="@+id/btnRoll"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/rounded_rect_blue"
         android:layout_gravity="right|bottom"
         android:layout_marginRight="27dp"
         android:layout_marginEnd="27dp"
@@ -44,6 +50,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Shake Your Phone to Define Game Mode"
+        android:textColor="@color/colorMainText"
         android:id="@+id/textView5"
         android:layout_marginBottom="121dp"
         android:layout_above="@+id/btnRoll"

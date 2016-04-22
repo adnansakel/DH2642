@@ -6,7 +6,7 @@
             <padding android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp" />
 
             
-            <stroke android:width="0.5dp" android:color="#03bec0" />
+            <stroke android:width="0.5dp" android:color="#003399" />
 
-            <gradient android:angle="270"  android:centerColor="#03bec0" android:endColor="#03bec0" android:startColor="#03bec0" />
+            <gradient android:angle="270"  android:centerColor="#003399" android:endColor="#003399" android:startColor="#003399" />
         </shape>
