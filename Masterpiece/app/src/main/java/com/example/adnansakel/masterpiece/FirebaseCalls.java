@@ -330,9 +330,10 @@ public class FirebaseCalls {
                 masterpieceGameModel.setCountNonBidders(snapshot.child(AppConstants.COUNTNONBIDDERS).getValue().toString());
                 //masterpieceGameModel.setCountPlayers((Integer) snapshot.child("CountPlayers").getValue()); //maybe we don't need this
                 //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
-
+                System.out.println("here?");
                 //if I'm the current bidder and Bidding is set to false on my player
                 if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
+                    System.out.println("Set next player as current bidder");
                     //don't set current bidder. instead set next player as current bidder
                     setNextPlayerAsBidder();
                 }
@@ -340,7 +341,8 @@ public class FirebaseCalls {
                 //otherwise set the current bidder in the model
                 else {
                     //if current bidder value has changed
-                    if( masterpieceGameModel.getCurrentBidder().length() > 0 && !masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                    if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                        System.out.println("Current bidder has changed and is greater than 0");
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");
                     }
@@ -360,7 +362,12 @@ public class FirebaseCalls {
                 System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                 //strings
                 //I skipped GameState, maybe we won't need it?
-                masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
+
+                //if turn action has changed
+                if(!masterpieceGameModel.getTurnAction().equals(snapshot.child(AppConstants.TURNACTION).getValue())) {
+                    masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
+                }
+
 
                 //reset playerNumber after each onDataChange
                 int playerNumber = 0;

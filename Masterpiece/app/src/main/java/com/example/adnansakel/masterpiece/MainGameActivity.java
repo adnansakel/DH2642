@@ -244,10 +244,12 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         }
     }
 
-    //executed whenever the turnTaker changes and is equal to my player
+
     public void startPrivateAuction () {
 
             //PRIVATE AUCTION
+
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
 
             //show the private auction select painting layout
             model.setPopupContent("privateAuctionSelectPainting");
@@ -305,7 +307,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("false");
 
         //set TurnAction to privateAuction so that everybody receives the update of screens
-        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
+        //new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
 
         //set the current bidder to the playerID of the next player
         new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((myPlayerID + 1)%4+"");

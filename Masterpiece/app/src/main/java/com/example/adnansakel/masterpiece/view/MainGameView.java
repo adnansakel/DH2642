@@ -311,12 +311,17 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals("ViewToShowPopupBid")) {
-                hideAllPopupContent();
-                layoutStatusPopup.setVisibility(View.VISIBLE);
-                layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
-                //show highest bid
-                TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
-                bidText.setText("Current Highest Bid: " + model.getCurrentBid());
+                System.out.println("ViewToShowPopupBid in view");
+                if (model.getCurrentBidder().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))) {
+                    System.out.println("Current bidder matches my player");
+                    hideAllPopupContent();
+                    layoutStatusPopup.setVisibility(View.VISIBLE);
+                    layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                    //show highest bid
+                    TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                    bidText.setText("Current Highest Bid: " + model.getCurrentBid());
+                }
+
 
                 /*
                 //if I'm the current bidder
