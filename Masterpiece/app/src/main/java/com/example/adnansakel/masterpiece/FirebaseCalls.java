@@ -340,7 +340,7 @@ public class FirebaseCalls {
                 //otherwise set the current bidder in the model
                 else {
                     //if current bidder value has changed
-                    if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                    if( masterpieceGameModel.getCurrentBidder().length() > 0 && !masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");
                     }
