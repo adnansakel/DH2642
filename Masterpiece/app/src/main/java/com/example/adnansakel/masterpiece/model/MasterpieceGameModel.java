@@ -140,8 +140,8 @@ public class MasterpieceGameModel extends Observable{
 
     public void setCurrentBidder(String currentBidder){
         this.currentBidder = currentBidder;
-        setChanged();
-        notifyObservers("currentBidderChanged");
+        //setChanged();
+        //notifyObservers("currentBidderChanged");
     }
 
     public String getCurrentBidder(){
@@ -349,5 +349,10 @@ public class MasterpieceGameModel extends Observable{
 
     public void setNextBankPainting(Integer nextBankPainting) {
         this.nextBankPainting = nextBankPainting;
+    }
+
+    public void notifyViewToShowPopupBid(){
+        setChanged();
+        notifyObservers("ViewToShowPopupBid");
     }
 }

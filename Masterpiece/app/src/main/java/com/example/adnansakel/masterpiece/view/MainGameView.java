@@ -271,8 +271,14 @@ public class MainGameView implements Observer{
 
             }
 
-            if(data.toString().equals("currentBidderChanged")) {
+            if(data.toString().equals("ViewToShowPopupBid")) {
+                hideAllPopupContent();
+                layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                //show highest bid
+                TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                bidText.setText("Current Highest Bid: " + model.getCurrentBid());
 
+                /*
                 //if I'm the current bidder
                 if (model.getCurrentBidder().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))) {
                     //if it's a private auction
@@ -337,7 +343,7 @@ public class MainGameView implements Observer{
                             layoutPopupBankAuctionLost.setVisibility(View.VISIBLE);
                         }
                     }
-                }
+                }*/
             }
 
             if(data.toString().equals("turnActionChanged")) {

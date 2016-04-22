@@ -307,16 +307,17 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         //TODO: move to firebase class
 
         //TODO: set the value of my painting in PaintingBeingAuctioned
-        new Firebase(AppConstants.GameRef+"/"+"PaintingBeingAuctioned").setValue(v.getId());
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.PAINTINGBEINGAUCTIONED).setValue(v.getId());
 
         //set my player's bidding property to false in Firebase (eg. It's my auction so I'm done bidding)
         new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("false");
 
         //set TurnAction to privateAuction so that everybody receives the update of screens
-        new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("privateAuction");
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
 
         //set the current bidder to the playerID of the next player
-        new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((myPlayerID + 1)%4+"");
+        System.out.println();
 
         //bidding on private auction
 

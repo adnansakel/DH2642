@@ -112,7 +112,7 @@ public class FirebaseCalls {
         player.put("Paintings", "");
         player.put("Cash", "1500000"); //Initial cash
         player.put("BidAmount", "");
-        player.put("Bidding", "");
+        player.put("Bidding", "true");
         progress = ProgressDialog.show(context, "", "joining game ...", true);
         new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
             @Override
@@ -158,6 +158,7 @@ public class FirebaseCalls {
                 player.put("Paintings", "");
                 player.put("Cash", "");
                 player.put("BidAmount", "");
+                player.put("Bidding", "true");
 
                         /*
                         * Step 2 as follows
@@ -245,8 +246,7 @@ public class FirebaseCalls {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // only execute if turnAction is different from "setup", which is set in the beginning in the gameModel
-                if (masterpieceGameModel.getTurnAction() != "setup" )
-                {
+                if (masterpieceGameModel.getTurnAction() != "setup") {
                     return;
                 }
                 masterpieceGameModel.removeAllPlayer();
@@ -302,7 +302,7 @@ public class FirebaseCalls {
                         shuffledpaintinvalueglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
 
                         //set next bank painting to TotalNumberofPlayers + 1
-                        masterpieceGameModel.setNextBankPainting(AppConstants.TotalNumberofPlayers+1);
+                        masterpieceGameModel.setNextBankPainting(AppConstants.TotalNumberofPlayers + 1);
 
                         progress.dismiss();
 
@@ -332,13 +332,21 @@ public class FirebaseCalls {
                 //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
 
                 //if I'm the current bidder and Bidding is set to false on my player
-                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
+                /*if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
                     //don't set current bidder. instead set next player as current bidder
                     setNextPlayerAsBidder();
                 }
+
                 //otherwise set the current bidder in the model
                 else {
                     masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
+                }*/
+
+                masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
+
+                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == true) {
+                    //don't set current bidder. instead set next player as current bidder
+                    masterpieceGameModel.notifyViewToShowPopupBid();
                 }
 
                 //I skipped GameNumber, I don't think we need to set that from here
@@ -377,6 +385,7 @@ public class FirebaseCalls {
     }
 
     public void setNextPlayerAsBidder() {
-        new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1)%4));
+        new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1) % 4));
     }
+
 }
