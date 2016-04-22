@@ -35,14 +35,14 @@
         />
     <Button
         android:id="@+id/buttonJoinGame"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/join_game"
         android:textColor="@color/colorButtonText"
-        android:background="@drawable/rounded_rect_blue"
+        android:background="@drawable/custom_button"
         android:textSize="23sp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center"/>
 </LinearLayout>

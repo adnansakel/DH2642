@@ -48,7 +48,7 @@
         android:layout_toLeftOf="@+id/textView19"
         android:layout_toStartOf="@+id/textView19"
         android:layout_marginBottom="71dp"
-        android:background="@drawable/rounded_rect_blue"
+        android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText" />
 
     <Button
@@ -59,7 +59,7 @@
         android:layout_alignTop="@+id/btn_bankauction_bid"
         android:layout_toRightOf="@+id/textView19"
         android:layout_toEndOf="@+id/textView19"
-        android:background="@drawable/rounded_rect_blue"
+        android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText" />
 
 </RelativeLayout>

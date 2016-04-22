@@ -18,9 +18,9 @@
         android:id="@+id/textviewGameNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:textColor="#00aa00"
+        android:textColor="@color/colorMainText"
         android:text=""
         android:gravity="center"/>
 
@@ -35,7 +35,7 @@
         android:id="@+id/textviewPlayerOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -54,7 +54,7 @@
         android:id="@+id/textviewPlayerTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -73,7 +73,7 @@
         android:id="@+id/textviewPlayerThree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -92,7 +92,7 @@
         android:id="@+id/textviewPlayerFour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -112,15 +112,15 @@
 
     <Button
         android:id="@+id/buttonStartGame"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:text="@string/start_game"
-        android:background="@drawable/rounded_rect_blue"
+        android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText"
         android:textSize="23sp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center"/>
 
 </LinearLayout>
