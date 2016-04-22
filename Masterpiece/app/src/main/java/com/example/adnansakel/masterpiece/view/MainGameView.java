@@ -245,7 +245,7 @@ public class MainGameView implements Observer{
 
             if(data.toString().equals("PaintingAdded")) {
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
-                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer));
+                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
             //TODO cashChanged
@@ -258,7 +258,7 @@ public class MainGameView implements Observer{
             if(data.toString().equals("turnTakerChanged")) {
 
                 //if I'm the turntaker
-                System.out.println("From MainGameView: Turn taker set " + model.getTurnTaker()+", PlayerID: "+
+                System.out.println("From MainGameView: Turn taker set " + model.getTurnTaker() + ", PlayerID: " +
                         model.getMyPlayer().getPlayerpositionID());
 
                 if (model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))) {
@@ -295,6 +295,10 @@ public class MainGameView implements Observer{
 
                             //Setting the paintingID as the id of the image to be able to distinguish when it is clicked upon on Private Auction
                             image.setId(Integer.valueOf(model.getPaintingBeingAuctioned()));
+
+                            //show highest bid
+                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
                     }
                     //if it's a bank auction
@@ -308,6 +312,9 @@ public class MainGameView implements Observer{
                         else {
                             hideAllPopupContent();
                             layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                            //show highest bid
+                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
                     }
                 }

@@ -330,11 +330,21 @@ public class FirebaseCalls {
                 masterpieceGameModel.setCountNonBidders(snapshot.child(AppConstants.COUNTNONBIDDERS).getValue().toString());
                 //masterpieceGameModel.setCountPlayers((Integer) snapshot.child("CountPlayers").getValue()); //maybe we don't need this
                 //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
-                masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
+
+                //if I'm the current bidder and Bidding is set to false on my player
+                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
+                    //don't set current bidder. instead set next player as current bidder
+                    setNextPlayerAsBidder();
+                }
+                //otherwise set the current bidder in the model
+                else {
+                    masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
+                }
+
                 //I skipped GameNumber, I don't think we need to set that from here
                 masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
                 masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
-                System.out.println("From firebasecalls: Turn taker set : "+snapshot.child(AppConstants.TURNTAKER).getValue().toString());
+                System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                 //strings
                 //I skipped GameState, maybe we won't need it?
                 masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
@@ -358,10 +368,15 @@ public class FirebaseCalls {
                     playerNumber++;
                 }*/
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("Firebase read failed: " + firebaseError.getMessage());
             }
         });
+    }
+
+    public void setNextPlayerAsBidder() {
+        new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1)%4));
     }
 }
