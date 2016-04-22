@@ -210,30 +210,44 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         } else if(v == button_privateauction_bid) {
 
             //increase current bid in Firebase
+            int currentBid = Integer.parseInt(model.getCurrentBid());
+            currentBid += 50000;
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBid").setValue(Integer.toString(currentBid));
 
-            //set current bidder as the next player whose Bidding boolean is true
+            //set current bidder as the next player
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
 
             //change to private auction in progress screen
+            model.setPopupContent("privateAuctionInProgress");
 
         } else if(v == button_privateauction_not_bidding) {
 
-            //set current bidder as the next player whose Bidding boolean is true
+            //set current bidder as the next player
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1) % 4);
 
             //change to private auction in progress screen
+            model.setPopupContent("privateAuctionInProgress");
 
         } else if(v == button_bankauction_bid) {
 
             //increase current bid in Firebase
+            int currentBid = Integer.parseInt(model.getCurrentBid());
+            currentBid += 50000;
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBid").setValue(Integer.toString(currentBid));
 
-            //set current bidder as the next player whose Bidding boolean is true
+            //set current bidder as the next player
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
 
             //change to bank auction in progress screen
+            model.setPopupContent("bankAuctionInProgress");
 
         } else if(v == button_bankauction_not_bidding) {
 
-            //set current bidder as the next player whose Bidding boolean is true
+            //set current bidder as the next player
+            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
 
             //change to bank auction in progress screen
+            model.setPopupContent("bankAuctionInProgress");
 
         }
     }

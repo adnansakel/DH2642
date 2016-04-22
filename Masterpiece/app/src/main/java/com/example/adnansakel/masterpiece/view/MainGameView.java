@@ -245,7 +245,7 @@ public class MainGameView implements Observer{
 
             if(data.toString()=="PaintingAdded") {
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
-                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.llPaintingsOfMyPlayer));
+                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
             //TODO cashChanged
@@ -258,7 +258,7 @@ public class MainGameView implements Observer{
             if(data.toString()=="turnTakerChanged") {
 
                 //if I'm the turntaker
-                System.out.println("From MainGameView: Turn taker set " + model.getTurnTaker()+", PlayerID: "+
+                System.out.println("From MainGameView: Turn taker set " + model.getTurnTaker() + ", PlayerID: " +
                         model.getMyPlayer().getPlayerpositionID());
 
                 if (model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))) {
@@ -275,6 +275,7 @@ public class MainGameView implements Observer{
 
                 //if I'm the current bidder
                 if (model.getCurrentBidder() == String.valueOf(model.getMyPlayer().getPlayerpositionID())) {
+
                     //if it's a private auction
                     if(model.getTurnAction() == "privateAuction") {
                         //if there's only one bidder left(me), show private auction win screen
@@ -286,6 +287,9 @@ public class MainGameView implements Observer{
                         else {
                             hideAllPopupContent();
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                            //show highest bid
+                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
                     }
                     //if it's a bank auction
@@ -299,6 +303,9 @@ public class MainGameView implements Observer{
                         else {
                             hideAllPopupContent();
                             layoutPopupBankAuctionBid.setVisibility(View.VISIBLE);
+                            //show highest bid
+                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
                     }
                 }
