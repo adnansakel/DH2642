@@ -27,28 +27,26 @@
 
     <Button
         android:id="@+id/buttonJoinGame"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
         android:text="@string/join_game"
         android:textSize="23sp"
         android:textColor="@color/colorButtonText"
         android:background="@drawable/rounded_rect_blue"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/buttonCreateGame"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
         android:text="@string/create_game"
         android:textSize="23sp"
         android:textColor="@color/colorButtonText"
         android:background="@drawable/custom_button"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="25dp"
         android:layout_below="@+id/buttonJoinGame"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>
