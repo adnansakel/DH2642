@@ -175,21 +175,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
         } else if(v == button_secondPlayer) {
             model.setCurrentPlayerToDisplay(secondPlayerID);
-            //TODO move code to change view to GameView and do not use deprecated method like getColor
-            button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-            button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
-            button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
         } else if(v == button_thirdPlayer) {
             model.setCurrentPlayerToDisplay(thirdPlayerID);
-            //TODO Change setting color from view
-            button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
-            button_thirdPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-            button_fourthPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
+            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
+            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
         } else if(v == button_fourthPlayer) {
             model.setCurrentPlayerToDisplay(fourthPlayerID);
-            button_secondPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
-            button_thirdPlayer.setBackgroundColor(getResources().getColor(R.color.colorButtonInactive));
-            button_fourthPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
+            button_secondPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+            button_thirdPlayer.setBackgroundResource(R.drawable.rounded_rect_blue);
+            button_fourthPlayer.setBackgroundResource(R.drawable.rounded_rect_blue_pressed);
         } else if(v == button_begin_bank_auction) {
 
             //TODO: the below code could be moved to its own function
