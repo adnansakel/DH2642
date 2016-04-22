@@ -199,13 +199,13 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("bankAuction");
 
             //choose painting being auctioned (first painting in Paintings[])
-            int chosenPaintingToAuction = model.getMyPlayer().getOwnedPaintingIDs().get(0);
+            int chosenPaintingToAuction = model.getNextBankPainting();
 
             //set painting being auctioned
-            model.setPaintingBeingAuctioned(String.valueOf(chosenPaintingToAuction));
+            model.setPaintingBeingAuctioned(String.valueOf(model.getNextBankPainting()));
 
             //set current bidder as the next person in allPlayers[]
-            model.setCurrentBidder(model.getCurrentBidder());
+            //model.setCurrentBidder(model.getCurrentBidder());
 
         } else if(v == button_privateauction_bid) {
 
@@ -247,9 +247,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             model.setPopupContent("privateAuctionSelectPainting");
 
             // load clickable pictures for myPlayer
-            mainGameView.populatePaintingsMyPlayerPrivateAuction(myPlayerID,(LinearLayout)findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
+            mainGameView.populatePaintingsMyPlayerPrivateAuction(myPlayerID, (LinearLayout) findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
 
-            // player can
+        // player can
             //TODO: allow my player to select a painting
 
             //set painting being auctioned

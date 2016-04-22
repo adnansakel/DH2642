@@ -30,6 +30,7 @@ public class MasterpieceGameModel extends Observable{
     //private List<String>turnTypes;
     private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
     private List<Integer>shuffledPaintingIDs;
+    private Integer nextBankPainting;
 
     // private List<Integer>bankPaintingIDs;
     //private List<Integer>bankPaintingValues;
@@ -340,5 +341,13 @@ public class MasterpieceGameModel extends Observable{
     public void notifyAllPaintingsAdded(){
         setChanged();
         notifyObservers("PaintingAdded");
+    }
+
+    public Integer getNextBankPainting() {
+        return nextBankPainting;
+    }
+
+    public void setNextBankPainting(Integer nextBankPainting) {
+        this.nextBankPainting = nextBankPainting;
     }
 }

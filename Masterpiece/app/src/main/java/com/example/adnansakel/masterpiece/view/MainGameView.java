@@ -286,6 +286,15 @@ public class MainGameView implements Observer{
                         else {
                             hideAllPopupContent();
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+
+                            // Update the painting to be selected
+                            ImageView image = (ImageView) view.findViewById(R.id.img_PrivateAuction_PaintingBeingAuctioned);
+                            image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
+                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
+
+                            //Setting the paintingID as the id of the image to be able to distinguish when it is clicked upon on Private Auction
+                            image.setId(Integer.valueOf(model.getPaintingBeingAuctioned()));
                         }
                     }
                     //if it's a bank auction

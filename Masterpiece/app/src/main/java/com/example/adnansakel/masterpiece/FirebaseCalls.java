@@ -300,6 +300,10 @@ public class FirebaseCalls {
                         //masterpieceGameModel.setCurrentPlayerToDisplay(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                         shuffledpaintinglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
                         shuffledpaintinvalueglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
+
+                        //set next bank painting to TotalNumberofPlayers + 1
+                        masterpieceGameModel.setNextBankPainting(AppConstants.TotalNumberofPlayers+1);
+
                         progress.dismiss();
 
 
