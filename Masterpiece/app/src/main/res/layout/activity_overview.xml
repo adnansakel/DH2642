@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dip"
         android:id="@+id/buttonStatusBar"
-        android:background="#ff0000"
+        android:background="#f88d53"
         android:orientation="horizontal"
         android:focusable="true">
     </Button>
@@ -140,7 +140,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00bb00"
+        android:background="#ffdab9"
         android:id="@+id/fullscreenStatusPopup"
         android:layout_below="@+id/buttonStatusBar"
         android:visibility="visible"

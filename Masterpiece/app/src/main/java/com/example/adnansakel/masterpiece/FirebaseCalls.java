@@ -63,7 +63,7 @@ public class FirebaseCalls {
                 //int turntaker = randomplayer.nextInt(4);
                 //game.put("TurnTaker", String.valueOf(turntaker));
                 game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
-                game.put("TurnAction", "");
+                game.put("TurnAction", "pending");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpieceGameModel.getShuffledPaintingValues());
                 game.put("ShuffledPaintings", masterpieceGameModel.getShuffledPaintingIDs());
@@ -244,7 +244,13 @@ public class FirebaseCalls {
         new Firebase(AppConstants.GameRef+"/"+"Players").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // only execute if turnAction is different from "setup", which is set in the beginning in the gameModel
+                if (masterpieceGameModel.getTurnAction() != "setup" )
+                {
+                    return;
+                }
                 masterpieceGameModel.removeAllPlayer();
+
                 int i = 0;
                 for (DataSnapshot dsplayer : dataSnapshot.getChildren()) {
                     //DataSnapshot dpl = (DataSnapshot)dsplayer.getValue();

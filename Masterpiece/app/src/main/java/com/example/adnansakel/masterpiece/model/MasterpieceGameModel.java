@@ -39,7 +39,7 @@ public class MasterpieceGameModel extends Observable{
 
     private String paintingBeingAuctioned;
     private String turnTaker;
-    private String turnAction;
+    private String turnAction = "setup";
 
     private String currentBidder;
 
