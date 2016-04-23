@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player X's paintings"
+                android:text="PlayerID's paintings"
                 android:textColor="@color/colorMainText"
                 android:id="@+id/txtPlayerTitle"
                 android:layout_alignParentTop="true"
@@ -108,8 +108,6 @@
             android:layout_weight="1"
             android:id="@+id/bottomPanel"
             android:layout_marginTop="5dp">
-
-
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -157,7 +155,7 @@
         <include layout="@layout/activity_bankauct_begin"/>
         <include layout="@layout/activity_privatauct_bid"/>
         <include layout="@layout/activity_bankauct_bid"/>
-        <include layout="@layout/activity_privatauct_bid_won"/>
+        <include layout="@layout/activity_privatauct_bid_results"/>
         <include layout="@layout/activity_bankauct_bid_won"/>
         <include layout="@layout/activity_privatauct_bid_lost"/>
         <include layout="@layout/activity_bankauct_bid_lost"/>
