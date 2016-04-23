@@ -60,6 +60,7 @@ public class MainGameView implements Observer{
     Button button_fourthPlayer;
     Button button_end_round;
     Button button_status_bar;
+    TextView textWinnerName;
 
 
     public MainGameView(View view, MasterpieceGameModel model) {
@@ -84,7 +85,9 @@ public class MainGameView implements Observer{
         button_thirdPlayer = (Button)view.findViewById(R.id.btnThirdPlayer);
         button_fourthPlayer = (Button)view.findViewById(R.id.btnFourthPlayer);
         button_end_round = (Button)view.findViewById(R.id.btn_end_round);
+        textWinnerName = (TextView)view.findViewById(R.id.textViewWinnerName);
         button_end_round.setVisibility(View.INVISIBLE);
+
 
     }
 
@@ -303,6 +306,8 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND)){
+                System.out.println("Winner is player "+ model.getWinner());
+                textWinnerName.setText(model.getAllPaintings().get(Integer.valueOf(model.getWinner())).getName());
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID())){
                     //Make the btn_end_round visible
                     button_end_round.setVisibility(View.VISIBLE);

@@ -360,10 +360,11 @@ public class FirebaseCalls {
                                     System.out.println(snapshot.getValue());
                                     int i = 0;
                                     for(DataSnapshot dplayer: snapshot.getChildren()){
-                                        //System.out.println("Player name: " + dplayer.child("Name").getValue().toString());
-                                        //System.out.println("Is bidding:" + dplayer.child("Bidding").getValue().toString());
+                                        System.out.println("Player name: " + dplayer.child("Name").getValue().toString());
+                                        System.out.println("Is bidding:" + dplayer.child("Bidding").getValue().toString());
                                         if(dplayer.child(AppConstants.BIDDING).getValue().toString().equals("true")){
                                             masterpieceGameModel.setWinner(i+"");
+                                            System.out.println("Winner:"+i);
                                         }
 
                                         i++;

@@ -365,6 +365,8 @@ public class MasterpieceGameModel extends Observable{
 
     public void setWinner(String winner) {
         this.winner = winner;
+        setChanged();
+        notifyObservers(AppConstants.WINNERFOUND);
     }
 
     public String getWinningbidamount() {
@@ -373,7 +375,5 @@ public class MasterpieceGameModel extends Observable{
 
     public void setWinningbidamount(String winningbidamount) {
         this.winningbidamount = winningbidamount;
-        setChanged();
-        notifyObservers(AppConstants.WINNERFOUND);
     }
 }
