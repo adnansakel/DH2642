@@ -347,7 +347,7 @@ public class FirebaseCalls {
                                 .valueOf(masterpieceGameModel.getTurnTaker())+1)+"");
                     }
                 }
-                    if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
                         //System.out.println("Current bidder has changed and is greater than 0");
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");

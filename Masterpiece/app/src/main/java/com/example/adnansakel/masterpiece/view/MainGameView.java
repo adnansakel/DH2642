@@ -327,20 +327,23 @@ public class MainGameView implements Observer{
                         if(model.getMyPlayer().isBidding()){
                             //Display bidding screen. Let's use same bidding screen for both type of auction
                             hideAllPopupContent();
+                            layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
                         }
 
                     }
                     else if(!model.getCurrentBidder().equals("100")){
                         hideAllPopupContent();
+                        layoutStatusPopup.setVisibility(View.VISIBLE);
                         layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);
                     }
                 }
                 if(data.toString().equals(AppConstants.TURN_ACTION_CHANGED)){
                     if(model.getTurnAction().equals(AppConstants.PRIVATE)){
-                        if(model.getCurrentBidder().equals(model.getMyPlayer().getPlayerpositionID()+"")){
+                        if(model.getTurnTaker().equals(model.getMyPlayer().getPlayerpositionID() + "")){
                             //Display screen for private auction
                             hideAllPopupContent();
+                            layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionSelectPainting.setVisibility(View.VISIBLE);
                             populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
                         }
