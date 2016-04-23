@@ -75,12 +75,11 @@ public class MainGameView implements Observer{
 
         //set currently selected player text
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
-        textPlayerTitle.setText(model.getPlayer(1).getName() + "'s paintings:");
+        textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%4).getName() + "'s paintings:");
 
         button_secondPlayer = (Button)view.findViewById(R.id.btnSecondPlayer);
         button_thirdPlayer = (Button)view.findViewById(R.id.btnThirdPlayer);
         button_fourthPlayer = (Button)view.findViewById(R.id.btnFourthPlayer);
-
 
     }
 
@@ -166,7 +165,7 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray(), 0,
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
-            //Setting the paintingID as the id of the image to be able to distinguish when it is clicked upon on Private Auction
+            //Setting the paintingID as the id of the image to be able to distinguish when it is clicked upon on ate Auction
             image.setId(paintingID);
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
@@ -329,6 +328,10 @@ public class MainGameView implements Observer{
                             hideAllPopupContent();
                             layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                            ImageView image = (ImageView) view.findViewById(R.id.img_PrivateAuction_PaintingBeingAuctioned);
+                            image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
+                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
                             TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
                             bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }

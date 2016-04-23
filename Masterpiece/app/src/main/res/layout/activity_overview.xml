@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/custom_button"
+                    android:background="@drawable/rounded_rect_blue_pressed"
                     android:textColor="@color/colorButtonText"
                     android:text="Player 2" />
 

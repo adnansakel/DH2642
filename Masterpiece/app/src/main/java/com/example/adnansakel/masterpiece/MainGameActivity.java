@@ -106,8 +106,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_thirdPlayer.setText(model.getAllPlayers().get(thirdPlayerID).getName());
         button_fourthPlayer.setText(model.getAllPlayers().get(fourthPlayerID).getName());
 
-        button_secondPlayer.setBackgroundColor(Color.parseColor(AppConstants.MAINCOLOR));
-
         //load pictures for the active player (2)
         mainGameView.populatePaintingsOtherPlayers(secondPlayerID);//should not call like this
 
