@@ -3,24 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/maingame_overview_view"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:transitionGroup="false"
+    android:visibility="visible">
 
     <!-- Status Bar -->
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:id="@+id/buttonStatusBar"
+        android:layout_height="wrap_content"
+        android:id="@+id/llStatusBar"
         android:background="#f88d53"
-        android:orientation="horizontal"
-        android:focusable="true">
-    </Button>
+        android:gravity="center">
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:id="@+id/buttonStatusBar"
+            android:background="@drawable/downarrow"
+            android:focusable="true"
+            android:rotation="180"
+            android:layout_marginTop="3dp"
+            android:visibility="visible">
+        </Button>
+    </LinearLayout>
+
+
+    <!-- Other Styling -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/buttonStatusBar"
+        android:layout_below="@+id/llStatusBar"
         android:layout_marginTop="5dp"
         android:id="@+id/linear_layout_homeview_in_MainGameView"
         >
@@ -84,7 +98,8 @@
                 android:layout_height="200dp"
                 android:id="@+id/hsvTopPanel"
                 android:fillViewport="false"
-                android:layout_marginLeft="5dp">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfOtherPlayers"
@@ -99,8 +114,21 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="2dp"
+            android:background="@android:color/holo_orange_dark"
+            android:id="@+id/seperatorline"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your paintings:"
+            android:textColor="@color/colorMainText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/seperatorline"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,7 +173,7 @@
         android:layout_height="match_parent"
         android:background="#ffdab9"
         android:id="@+id/fullscreenStatusPopup"
-        android:layout_below="@+id/buttonStatusBar"
+        android:layout_below="@+id/llStatusBar"
         android:visibility="visible"
         android:orientation="vertical">
         <include layout="@layout/activity_game_model_selection"/>

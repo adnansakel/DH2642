@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Private Auction"
-        android:id="@+id/textView9"
+        android:id="@+id/txtPrivateAuctionTitle"
         android:textColor="@color/colorHeading"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
@@ -25,6 +25,7 @@
         android:maxHeight="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_below="@id/txtPrivateAuctionTitle"
         android:id="@+id/img_PrivateAuction_PaintingBeingAuctioned"/>
 
     <TextView
