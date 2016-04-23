@@ -60,9 +60,9 @@ public class FirebaseCalls {
 
                 game.put("Players", "");
                 Random randomplayer = new Random();
-                //int turntaker = randomplayer.nextInt(4);
-                //game.put("TurnTaker", String.valueOf(turntaker));
-                game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
+                int turntaker = randomplayer.nextInt(4);
+                game.put("TurnTaker", String.valueOf(turntaker));
+                //game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
                 game.put("TurnAction", "pending");
                 game.put(AppConstants.GAMESTATE, "SetUp");
                 game.put("ShuffledPaintingValues", masterpieceGameModel.getShuffledPaintingValues());

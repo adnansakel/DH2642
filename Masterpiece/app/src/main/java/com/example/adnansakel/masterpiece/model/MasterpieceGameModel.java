@@ -81,7 +81,7 @@ public class MasterpieceGameModel extends Observable{
     public void setGameNumber(String gameNumber){
         this.gameNumber = gameNumber;
         setChanged();
-        notifyObservers();
+        notifyObservers("");
     }
 
     public String getGameNumber(){
@@ -183,13 +183,13 @@ public class MasterpieceGameModel extends Observable{
     public void addPlayer(Player player) {
         allPlayers.add(player);
         setChanged();
-        notifyObservers();
+        notifyObservers("");
     }
 
     public void removeAllPlayer(){
         allPlayers.clear();
         setChanged();
-        notifyObservers();
+        notifyObservers("");
     }
 
     /*public void removeAllPaintings(){
@@ -226,7 +226,7 @@ public class MasterpieceGameModel extends Observable{
     public void setCountNonBidders(String countNonBidders) {
         CountNonBidders = countNonBidders;
         setChanged();
-        notifyObservers();
+        notifyObservers("");
     }
 
     public String getCurrentBid() {
