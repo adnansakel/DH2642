@@ -22,7 +22,7 @@
         android:gravity="center"
         android:textSize="25sp"
         android:layout_marginTop="5dp"
-        android:text="Monalisa"
+        android:text="@string/painting_name"
         android:textColor="@color/colorHeading"
         />
     <TextView
@@ -32,7 +32,7 @@
         android:gravity="center"
         android:textSize="25sp"
         android:layout_marginTop="20dp"
-        android:text="Secret Value: $200,000"
+        android:text="@string/secret_value"
         android:textColor="@color/colorMainText"
         />
 </LinearLayout>

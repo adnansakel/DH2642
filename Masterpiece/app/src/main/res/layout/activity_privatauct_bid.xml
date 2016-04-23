@@ -6,7 +6,6 @@
     android:background="@color/colorBackground"
     >
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,18 +31,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Current Highest Bid: "
+        android:text="@string/current_highest_bid"
         android:id="@+id/txtHighestBid"
         android:textColor="@color/colorMainText"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="206dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cash:"
+        android:text="@string/cash"
         android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
@@ -53,22 +51,22 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bid + $50,000"
+        android:text="@string/increase_bid_by_50000"
         android:id="@+id/btn_privateauction_bid"
         android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText"
-        android:layout_marginLeft="260dp"
+        android:layout_marginLeft="240dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="370dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don&apos;t Bid"
+        android:text="@string/Do_not_bid"
         android:id="@+id/btn_privateauction_not_bidding"
         android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="370dp" />
 

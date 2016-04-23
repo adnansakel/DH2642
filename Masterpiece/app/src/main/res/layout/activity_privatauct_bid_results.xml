@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cash:"
+        android:text="@string/cash"
         android:textColor="@color/colorMainText"
         android:id="@+id/txtPlayerCash"
         android:layout_alignParentBottom="true"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Winning Bid Amount: "
+        android:text="@string/winning_bid_amount"
         android:id="@+id/txtHighestBid"
         android:textColor="@color/colorMainText"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="PlayerID"
+        android:text="@string/player_title"
         android:id="@+id/textView3"
         android:textColor="@color/colorMainText"
         android:layout_marginTop="43dp"
@@ -83,5 +83,17 @@
         android:textColor="@color/colorMainText"
         android:layout_above="@+id/btnAddPaintingToCollection"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Round"
+        android:id="@+id/btn_end_round"
+        android:textColor="@color/colorButtonText"
+        android:background="@drawable/custom_button"
+        android:layout_marginBottom="54dp"
+        android:layout_above="@+id/txtPlayerCash"
+        android:layout_alignRight="@+id/btnAddPaintingToCollection"
+        android:layout_alignEnd="@+id/btnAddPaintingToCollection" />
 
 </RelativeLayout>
