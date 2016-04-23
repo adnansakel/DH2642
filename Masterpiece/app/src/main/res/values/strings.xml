@@ -12,7 +12,7 @@
     <string name="cash">Cash: </string>
     <string name="winning_bid_amount">Winning Bid Amount: </string>
     <string name="increase_bid_by_50000">Bid + $50,000</string>
-    <string name="Do_not_bid">Don't Bid </string>
+    <string name="Do_not_bid">Don\'t Bid </string>
     <string name="current_highest_bid">Current Highest bid:  </string>
     <string name="painting_name">Painting Title </string>
     <string name="secret_value">Paintings Secret Value </string>
