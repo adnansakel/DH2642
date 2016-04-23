@@ -58,9 +58,9 @@
         android:id="@+id/btn_privateauction_bid"
         android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText"
-        android:layout_alignTop="@+id/btn_privateauction_not_bidding"
-        android:layout_toRightOf="@+id/txtPlayerCash"
-        android:layout_toEndOf="@+id/txtPlayerCash" />
+        android:layout_marginLeft="260dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="370dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -69,9 +69,8 @@
         android:id="@+id/btn_privateauction_not_bidding"
         android:background="@drawable/custom_button"
         android:textColor="@color/colorButtonText"
-        android:layout_above="@+id/txtPlayerCash"
-        android:layout_toRightOf="@+id/textView9"
-        android:layout_toEndOf="@+id/textView9"
-        android:layout_marginBottom="72dp" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="370dp" />
 
 </RelativeLayout>
