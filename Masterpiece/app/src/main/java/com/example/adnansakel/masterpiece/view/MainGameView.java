@@ -329,6 +329,8 @@ public class MainGameView implements Observer{
                             hideAllPopupContent();
                             layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
 
                     }
