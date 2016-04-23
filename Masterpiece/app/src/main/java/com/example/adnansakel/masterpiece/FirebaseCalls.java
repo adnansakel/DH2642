@@ -259,10 +259,9 @@ public class FirebaseCalls {
                     player.setName(dsplayer.child("Name").getValue().toString());
                     player.setPlayerpositionID(i);
                     player.setFirebaseid(dsplayer.getKey().toString());
-                    if(dsplayer.child("Bidding").getValue().toString().equals("true")){
+                    if (dsplayer.child("Bidding").getValue().toString().equals("true")) {
                         player.setBidding(true);
-                    }
-                    else{
+                    } else {
                         player.setBidding(false);
                     }
                     masterpieceGameModel.addPlayer(player);
@@ -399,6 +398,17 @@ public class FirebaseCalls {
                     masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
                 }
 
+                String biddingstatus = "";
+                if(masterpieceGameModel.getMyPlayer().isBidding())biddingstatus = "true";
+                else {biddingstatus = "false";}
+                if(!biddingstatus.equals(snapshot.child(AppConstants.PLAYERS).child(masterpieceGameModel.getMyPlayer().getFirebaseid()).child(AppConstants.BIDDING).getValue().toString())){
+                    if(biddingstatus.equals("true")){
+                        masterpieceGameModel.getMyPlayer().setBidding(false);
+                    }
+                    else{
+                        masterpieceGameModel.getMyPlayer().setBidding(true);
+                    }
+                }
 
             }
 
