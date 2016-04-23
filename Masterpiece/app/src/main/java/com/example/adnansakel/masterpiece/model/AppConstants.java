@@ -50,5 +50,6 @@ public class AppConstants {
     public static String TURN_ACTION_CHANGED = "turnActionChanged";
     public static String PRIVATE = "private";
     public static String BANK = "bank";
+    public static String WINNERFOUND = "WinnerFound";
 
 }

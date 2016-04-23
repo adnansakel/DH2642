@@ -296,6 +296,11 @@ public class MainGameView implements Observer{
                 textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
             }
 
+            if(data.toString().equals(AppConstants.WINNERFOUND)){
+                if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID())){
+                    //Make the btn_end_round visible
+                }
+            }
 
             if(model.getCountNonBidders().equals("3")){
                 //end round

@@ -48,7 +48,8 @@ public class MasterpieceGameModel extends Observable{
 
     private String CountNonBidders = "";
     //private String color;
-
+    private String winner = "";
+    private String winningbidamount;
 
     private String popupContent;
 
@@ -356,5 +357,23 @@ public class MasterpieceGameModel extends Observable{
     public void notifyViewToShowPopupBid(){
         setChanged();
         notifyObservers("ViewToShowPopupBid");
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public String getWinningbidamount() {
+        return winningbidamount;
+    }
+
+    public void setWinningbidamount(String winningbidamount) {
+        this.winningbidamount = winningbidamount;
+        setChanged();
+        notifyObservers(AppConstants.WINNERFOUND);
     }
 }

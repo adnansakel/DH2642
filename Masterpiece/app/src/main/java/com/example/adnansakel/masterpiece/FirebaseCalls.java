@@ -347,11 +347,35 @@ public class FirebaseCalls {
                // else {
                     //if current bidder value has changed
                 if(masterpieceGameModel.getCountNonBidders().equals("3")){
-                    if(AppConstants.IamCreator){
+                    /*if(AppConstants.IamCreator){
                         new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue(((Integer
                                 .valueOf(masterpieceGameModel.getTurnTaker())+1)%4)+"");
 
-                    }
+                    }*/
+                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS).addListenerForSingleValueEvent(
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    // do some stuff once
+                                    System.out.println(snapshot.getValue());
+                                    int i = 0;
+                                    for(DataSnapshot dplayer: snapshot.getChildren()){
+                                        //System.out.println("Player name: " + dplayer.child("Name").getValue().toString());
+                                        //System.out.println("Is bidding:" + dplayer.child("Bidding").getValue().toString());
+                                        if(dplayer.child(AppConstants.BIDDING).getValue().toString().equals("true")){
+                                            masterpieceGameModel.setWinner(i+"");
+                                        }
+
+                                        i++;
+
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(FirebaseError firebaseError) {
+                                    Toast.makeText(context,"Some error occured while finding winner",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                    );
                 }
                 else{
 
