@@ -10,4 +10,6 @@
     <string name="start_game">Start Game</string>
     <string name="player_title">Player X</string>
     <string name="cash">Cash: </string>
+    <string name="increase_bid_by_50000">Bid + $50,000</string>
+    <string name="Do_not_bid">Don't Bid </string>
 </resources>
