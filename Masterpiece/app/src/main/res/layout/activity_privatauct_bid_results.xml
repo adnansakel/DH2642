@@ -74,16 +74,6 @@
         android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Your Bid Amount:"
-        android:id="@+id/textView10"
-        android:textColor="@color/colorMainText"
-        android:layout_above="@+id/btnAddPaintingToCollection"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
