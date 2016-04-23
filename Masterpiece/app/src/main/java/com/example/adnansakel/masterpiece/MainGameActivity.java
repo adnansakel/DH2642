@@ -213,7 +213,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                     } else {
                         //System.out.println("Data saved successfully.");
                         //set current bidder as the next player
-                        new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((myPlayerID + 1) % 4);
+                        new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue(((myPlayerID + 1) % 4) + "");
                     }
                 }
             });
@@ -242,7 +242,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                             Toast.makeText(MainGameActivity.this,"Data could not be saved. " + firebaseError.getMessage(),Toast.LENGTH_LONG).show();
                                         } else {
                                             //set current bidder as the next player
-                                            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1) % 4);
+                                            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(((myPlayerID + 1) % 4) + "");
                                         }
                                     }
                                 });
@@ -365,7 +365,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                                             //set the current bidder to the playerID of the next player
                                             new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER)
-                                                    .setValue((myPlayerID + 1) % 4 + "");
+                                                    .setValue(((myPlayerID + 1) % 4) + "");
                                             //System.out.println();
                                         }
                                     }
