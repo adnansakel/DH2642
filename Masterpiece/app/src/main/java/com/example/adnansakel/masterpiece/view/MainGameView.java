@@ -59,10 +59,12 @@ public class MainGameView implements Observer{
     Button button_thirdPlayer;
     Button button_fourthPlayer;
     Button button_end_round;
+    Button button_status_bar;
 
 
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
+        button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
         initialize();
         model.addObserver(this);
         this.model = model;
@@ -196,6 +198,7 @@ public class MainGameView implements Observer{
         layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
         //layoutHomeViewInMainGameView.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setVisibility(View.INVISIBLE);
+        button_status_bar.setBackgroundResource(R.drawable.uparrow);
     }
 
     @Override

@@ -16,17 +16,16 @@
         android:background="#f88d53"
         android:gravity="center">
         <Button
-            android:layout_width="60dp"
-            android:layout_height="45dp"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
             android:id="@+id/buttonStatusBar"
             android:background="@drawable/downarrow"
             android:focusable="true"
-            android:rotation="180"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
             android:visibility="visible">
         </Button>
     </LinearLayout>
-
 
     <!-- Other Styling -->
 

@@ -151,6 +151,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                 //show the fullscreen popup
                 fullscreen_status_popup.setVisibility(View.VISIBLE);
+                button_status_bar.setBackgroundResource(R.drawable.uparrow);
+
 
                 //toggle the button to hide popup next time it's pressed
                 statusPopupIsVisible = true;
@@ -159,6 +161,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                 //hide the fullscreen popup
                 fullscreen_status_popup.setVisibility(View.INVISIBLE);
+                button_status_bar.setBackgroundResource(R.drawable.downarrow);
 
                 //toggle the button to show popup next time it's pressed
                 statusPopupIsVisible = false;
