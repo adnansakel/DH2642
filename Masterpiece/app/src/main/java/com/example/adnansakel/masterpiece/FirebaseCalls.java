@@ -330,24 +330,37 @@ public class FirebaseCalls {
                 masterpieceGameModel.setCountNonBidders(snapshot.child(AppConstants.COUNTNONBIDDERS).getValue().toString());
                 //masterpieceGameModel.setCountPlayers((Integer) snapshot.child("CountPlayers").getValue()); //maybe we don't need this
                 //masterpieceGameModel.setCurrentBid(snapshot.child("CurrentBid").getValue().toString());
-                System.out.println("here?");
+                //System.out.println("here?");
                 //if I'm the current bidder and Bidding is set to false on my player
-                if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
+                /*if (snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString() == String.valueOf(masterpieceGameModel.getMyPlayer().getPlayerpositionID()) && masterpieceGameModel.getMyPlayer().isBidding() == false) {
                     System.out.println("Set next player as current bidder");
                     //don't set current bidder. instead set next player as current bidder
                     setNextPlayerAsBidder();
-                }
+                }*/
 
                 //otherwise set the current bidder in the model
-                else {
+               // else {
                     //if current bidder value has changed
+                if(masterpieceGameModel.getCountNonBidders().equals("3")){
+                    if(AppConstants.IamCreator){
+                        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue((Integer
+                                .valueOf(masterpieceGameModel.getTurnTaker())+1)+"");
+                    }
+                }
                     if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
-                        System.out.println("Current bidder has changed and is greater than 0");
+                        //System.out.println("Current bidder has changed and is greater than 0");
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");
+                        if(masterpieceGameModel.getCurrentBidder().equals(masterpieceGameModel.getMyPlayer().getPlayerpositionID()+"")){
+                            if(!masterpieceGameModel.getMyPlayer().isBidding()){
+                                //increase current bidder by one in firebase
+                                new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((Integer
+                                        .valueOf(masterpieceGameModel.getCurrentBidder())+1)+"");
+                            }
+                        }
                     }
 
-                }
+               // }
                 //I skipped GameNumber, I don't think we need to set that from here
                 if(!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())){
                     masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());

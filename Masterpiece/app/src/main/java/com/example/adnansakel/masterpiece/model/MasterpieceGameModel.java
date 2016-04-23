@@ -112,7 +112,7 @@ public class MasterpieceGameModel extends Observable{
     public void setTurnTaker(String turnTaker){
         this.turnTaker = turnTaker;
         setChanged();
-        notifyObservers("turnTakerChanged");
+        notifyObservers(AppConstants.TURN_TAKER_CHANGED);
     }
 
     public String getTurnTaker(){
@@ -123,7 +123,7 @@ public class MasterpieceGameModel extends Observable{
     public void setTurnAction(String turnAction){
         this.turnAction = turnAction;
         setChanged();
-        notifyObservers("turnActionChanged");
+        notifyObservers(AppConstants.TURN_ACTION_CHANGED);
     }
     public String getTurnAction() {
         return turnAction;
@@ -141,7 +141,7 @@ public class MasterpieceGameModel extends Observable{
     public void setCurrentBidder(String currentBidder){
         this.currentBidder = currentBidder;
         setChanged();
-        notifyObservers("ViewToShowPopupBid");
+        notifyObservers(AppConstants.CURRENT_BIDDER_CHANGED);
     }
 
     public String getCurrentBidder(){
@@ -225,6 +225,8 @@ public class MasterpieceGameModel extends Observable{
     }
     public void setCountNonBidders(String countNonBidders) {
         CountNonBidders = countNonBidders;
+        setChanged();
+        notifyObservers();
     }
 
     public String getCurrentBid() {

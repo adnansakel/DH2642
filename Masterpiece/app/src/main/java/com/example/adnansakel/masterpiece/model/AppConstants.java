@@ -45,5 +45,10 @@ public class AppConstants {
     public static String MAINCOLOR = "#ffdab9";
     public static Integer MAINCOLORINT = Color.parseColor("#8B0000");
     public static String CURRENTBIDDER = "CurrentBidder";
+    public static String TURN_TAKER_CHANGED = "turnTakerChanged";
+    public static String CURRENT_BIDDER_CHANGED = "CurrentBidderChanged";
+    public static String TURN_ACTION_CHANGED = "turnActionChanged";
+    public static String PRIVATE = "private";
+    public static String BANK = "bank";
 
 }
