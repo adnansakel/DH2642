@@ -347,15 +347,20 @@ public class FirebaseCalls {
                                 .valueOf(masterpieceGameModel.getTurnTaker())+1)+"");
                     }
                 }
+                //if current bidder has changed
                 if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
                         //System.out.println("Current bidder has changed and is greater than 0");
+                        //set current bidder in model
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");
+                        //if I am the current bidder
                         if(masterpieceGameModel.getCurrentBidder().equals(masterpieceGameModel.getMyPlayer().getPlayerpositionID()+"")){
+                            //if my player is not set to Bidding
                             if(!masterpieceGameModel.getMyPlayer().isBidding()){
+                                System.out.println("increasing current bidder from FirebaseCalls");
                                 //increase current bidder by one in firebase
-                                new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((Integer
-                                        .valueOf(masterpieceGameModel.getCurrentBidder())+1)+"");
+                                new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue(((Integer
+                                        .valueOf(masterpieceGameModel.getCurrentBidder())+1) %4) +"");
                             }
                         }
                     }

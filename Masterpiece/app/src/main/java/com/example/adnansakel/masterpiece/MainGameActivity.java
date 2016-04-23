@@ -33,7 +33,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
     MasterpieceGameModel model;
     Player myPlayer;
-    Integer myPlayerID;
+    int myPlayerID;
     Integer secondPlayerID;
     Integer thirdPlayerID;
     Integer fourthPlayerID;
@@ -97,7 +97,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_thirdPlayer = (Button)findViewById(R.id.btnThirdPlayer);
         button_fourthPlayer = (Button)findViewById(R.id.btnFourthPlayer);
 
-        myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
+        myPlayerID = model.getMyPlayer().getPlayerpositionID();
         secondPlayerID = (myPlayerID + 1)%4;
         thirdPlayerID = (myPlayerID + 2)%4;
         fourthPlayerID = (myPlayerID + 3)%4;
@@ -224,25 +224,25 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
             //set my player's Bidding property to false
             new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+
-                    AppConstants.BIDDING).setValue("false",new Firebase.CompletionListener(){
+                    AppConstants.BIDDING).setValue("false", new Firebase.CompletionListener() {
                 @Override
                 public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                     if (firebaseError != null) {
-                        Toast.makeText(MainGameActivity.this,"Data could not be saved. " + firebaseError.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                     } else {
                         //System.out.println("Data saved successfully.");
                         //increase CountNonBidders, since I'm not bidding
                         int countNonBidders = Integer.parseInt(model.getCountNonBidders());
                         countNonBidders++;
-                        new Firebase(AppConstants.GameRef+"/"+AppConstants.COUNTNONBIDDERS)
-                                .setValue(Integer.toString(countNonBidders), new Firebase.CompletionListener(){
+                        new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS)
+                                .setValue(Integer.toString(countNonBidders), new Firebase.CompletionListener() {
                                     @Override
                                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                         if (firebaseError != null) {
-                                            Toast.makeText(MainGameActivity.this,"Data could not be saved. " + firebaseError.getMessage(),Toast.LENGTH_LONG).show();
+                                            Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                         } else {
                                             //set current bidder as the next player
-                                            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(((myPlayerID + 1) % 4) + "");
+                                            new Firebase(AppConstants.GameRef + "/" + "CurrentBidder").setValue(((myPlayerID + 1) % 4) + "");
                                         }
                                     }
                                 });
@@ -345,8 +345,8 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                 } else {
                     //System.out.println("Data saved successfully.");
 
-                    new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + model.getPlayer(myPlayerID)
-                            .getFirebaseid() + "/" + AppConstants.BIDDING).setValue("false", new Firebase.CompletionListener() {
+                    new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + model.getMyPlayer().getFirebaseid()
+                            + "/" + AppConstants.BIDDING).setValue("false", new Firebase.CompletionListener() {
                         @Override
                         public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                             if (firebaseError != null) {
@@ -361,11 +361,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                             Toast.makeText(MainGameActivity.this, "Data could not be saved. " +
                                                     firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                         } else {
-
+                                            System.out.println("Going to set current bidder...");
 
                                             //set the current bidder to the playerID of the next player
                                             new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER)
-                                                    .setValue(((myPlayerID + 1) % 4) + "");
+                                                    .setValue(((model.getMyPlayer().getPlayerpositionID() + 1) % 4) + "");
                                             //System.out.println();
                                         }
                                     }
