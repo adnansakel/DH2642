@@ -348,12 +348,15 @@ public class FirebaseCalls {
                     //if current bidder value has changed
                 if(masterpieceGameModel.getCountNonBidders().equals("3")){
                     if(AppConstants.IamCreator){
-                        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue((Integer
-                                .valueOf(masterpieceGameModel.getTurnTaker())+1)+"");
+                        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue(((Integer
+                                .valueOf(masterpieceGameModel.getTurnTaker())+1)%4)+"");
+
                     }
                 }
-                //if current bidder has changed
-                if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                else{
+
+                    //if current bidder has changed
+                    if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
                         //System.out.println("Current bidder has changed and is greater than 0");
                         //set current bidder in model
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
@@ -372,42 +375,44 @@ public class FirebaseCalls {
                         }
                     }
 
-               // }
-                //I skipped GameNumber, I don't think we need to set that from here
-                if(!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())){
-                    masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
-                }
-
-                if(!masterpieceGameModel.getTurnTaker().equals(snapshot.child(AppConstants.TURNTAKER).getValue().toString())){
-                    masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
-                    //System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
-                }
-
-                //strings
-                //I skipped GameState, maybe we won't need it?
-
-                //if turn action has changed
-                if(!masterpieceGameModel.getTurnAction().equals(snapshot.child(AppConstants.TURNACTION).getValue())) {
-                    masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
-                }
-
-
-                //reset playerNumber after each onDataChange
-                int playerNumber = 0;
-                if(!masterpieceGameModel.getCurrentBid().equals(snapshot.child(AppConstants.CURRENTBID).getValue().toString())){
-                    masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
-                }
-
-                String biddingstatus = "";
-                if(masterpieceGameModel.getMyPlayer().isBidding())biddingstatus = "true";
-                else {biddingstatus = "false";}
-                if(!biddingstatus.equals(snapshot.child(AppConstants.PLAYERS).child(masterpieceGameModel.getMyPlayer().getFirebaseid()).child(AppConstants.BIDDING).getValue().toString())){
-                    if(biddingstatus.equals("true")){
-                        masterpieceGameModel.getMyPlayer().setBidding(false);
+                    // }
+                    //I skipped GameNumber, I don't think we need to set that from here
+                    if(!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())){
+                        masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
                     }
-                    else{
-                        masterpieceGameModel.getMyPlayer().setBidding(true);
+
+                    if(!masterpieceGameModel.getTurnTaker().equals(snapshot.child(AppConstants.TURNTAKER).getValue().toString())){
+                        masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
+                        //System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                     }
+
+                    //strings
+                    //I skipped GameState, maybe we won't need it?
+
+                    //if turn action has changed
+                    if(!masterpieceGameModel.getTurnAction().equals(snapshot.child(AppConstants.TURNACTION).getValue())) {
+                        masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
+                    }
+
+
+                    //reset playerNumber after each onDataChange
+                    int playerNumber = 0;
+                    if(!masterpieceGameModel.getCurrentBid().equals(snapshot.child(AppConstants.CURRENTBID).getValue().toString())){
+                        masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
+                    }
+
+                    String biddingstatus = "";
+                    if(masterpieceGameModel.getMyPlayer().isBidding())biddingstatus = "true";
+                    else {biddingstatus = "false";}
+                    if(!biddingstatus.equals(snapshot.child(AppConstants.PLAYERS).child(masterpieceGameModel.getMyPlayer().getFirebaseid()).child(AppConstants.BIDDING).getValue().toString())){
+                        if(biddingstatus.equals("true")){
+                            masterpieceGameModel.getMyPlayer().setBidding(false);
+                        }
+                        else{
+                            masterpieceGameModel.getMyPlayer().setBidding(true);
+                        }
+                    }
+
                 }
 
             }
