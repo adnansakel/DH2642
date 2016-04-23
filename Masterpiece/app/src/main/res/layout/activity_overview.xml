@@ -84,7 +84,8 @@
                 android:layout_height="200dp"
                 android:id="@+id/hsvTopPanel"
                 android:fillViewport="false"
-                android:layout_marginLeft="5dp">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfOtherPlayers"
@@ -99,8 +100,21 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="2dp"
+            android:background="@android:color/holo_orange_dark"
+            android:id="@+id/seperatorline"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your paintings:"
+            android:textColor="@color/colorMainText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/seperatorline"/>
 
         <LinearLayout
             android:layout_width="match_parent"
