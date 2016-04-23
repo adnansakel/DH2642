@@ -111,6 +111,7 @@ public class MainGameView implements Observer{
         //set the popup and content views to invisible
         layoutStatusPopup.setVisibility(View.INVISIBLE);
         hideAllPopupContent();
+        button_status_bar.setBackgroundResource(R.drawable.downarrow);
 
         //layoutHomeViewInMainGameView.setVisibility(View.VISIBLE);
         //layoutStatusPopup.setVisibility(View.VISIBLE);
