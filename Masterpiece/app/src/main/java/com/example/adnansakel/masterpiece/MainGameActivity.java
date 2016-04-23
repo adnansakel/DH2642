@@ -166,12 +166,12 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             int roll = 0; // for testing only
 
             if(roll == 0) {
-                //PRIVATE AUCTION
-                startPrivateAuction();
+                //set TurnAction as Private Auction in Firebase
+                new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
             }
             else if(roll == 1) {
                 //BANK AUCTION
-                model.setPopupContent("bankAuctionBegin");
+                //model.setPopupContent("bankAuctionBegin");
             }
 
         } else if(v == button_secondPlayer) {
@@ -184,6 +184,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
         } else if(v == button_begin_bank_auction) {
 
+            /* not using this yet
             //TODO: the below code could be moved to its own function
 
             //set turn action
@@ -197,31 +198,34 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             model.setPaintingBeingAuctioned(String.valueOf(model.getNextBankPainting()));
 
             //set current bidder as the next person in allPlayers[]
-            //model.setCurrentBidder(model.getCurrentBidder());
+            //model.setCurrentBidder(model.getCurrentBidder());*/
 
         } else if(v == button_privateauction_bid) {
 
-            //increase current bid in Firebase
+            //increase current bid
             int currentBid = Integer.parseInt(model.getCurrentBid());
             currentBid += 50000;
-            new Firebase(AppConstants.GameRef+"/"+"CurrentBid").setValue(Integer.toString(currentBid));
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBID).setValue(Integer.toString(currentBid));
 
             //set current bidder as the next player
-            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
-
-            //change to private auction in progress screen
-            model.setPopupContent("privateAuctionInProgress");
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((myPlayerID + 1) % 4);
 
         } else if(v == button_privateauction_not_bidding) {
+
+            //set my player's Bidding property to false
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("false");
+
+            //increase CountNonBidders, since I'm not bidding
+            int countNonBidders = Integer.parseInt(model.getCountNonBidders());
+            countNonBidders++;
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.COUNTNONBIDDERS).setValue(Integer.toString(countNonBidders));
 
             //set current bidder as the next player
             new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1) % 4);
 
-            //change to private auction in progress screen
-            model.setPopupContent("privateAuctionInProgress");
-
         } else if(v == button_bankauction_bid) {
 
+            /* not using this yet
             //increase current bid in Firebase
             int currentBid = Integer.parseInt(model.getCurrentBid());
             currentBid += 50000;
@@ -231,20 +235,21 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
 
             //change to bank auction in progress screen
-            model.setPopupContent("bankAuctionInProgress");
+            model.setPopupContent("bankAuctionInProgress");*/
 
         } else if(v == button_bankauction_not_bidding) {
 
+            /* not using this yet
             //set current bidder as the next player
             new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue((myPlayerID + 1)%4);
 
             //change to bank auction in progress screen
-            model.setPopupContent("bankAuctionInProgress");
+            model.setPopupContent("bankAuctionInProgress");*/
 
         }
     }
 
-
+    /* moving this to onclick event to simplify the code
     public void startPrivateAuction () {
 
             //PRIVATE AUCTION
@@ -263,7 +268,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             //set painting being auctioned
             //model.setPaintingBeingAuctioned(chosenPaintingToAuction);
 
-           /* TODO DM SET BACK
+            //TODO DM SET BACK
             new Firebase(AppConstants.GameRef+"/"+"PaintingBeingAuctioned").setValue("");
             //TODO: set the value of my painting in the above
 
@@ -292,29 +297,26 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
         //}
 
-        */
-    }
+
+    }*/
 
     public void PaintingSelected(View v) {
         System.out.println("ID of Selected Painting: " + v.getId());
 
-        //TODO: move to firebase class
+        //TODO: move to firebase class?
 
-        //TODO: set the value of my painting in PaintingBeingAuctioned
+        //set the value of my painting in PaintingBeingAuctioned
         new Firebase(AppConstants.GameRef+"/"+AppConstants.PAINTINGBEINGAUCTIONED).setValue(v.getId());
 
-        //set my player's bidding property to false in Firebase (eg. It's my auction so I'm done bidding)
+        //set my player's Bidding property to false (It's my auction so I'm not bidding)
         new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("false");
 
-        //set TurnAction to privateAuction so that everybody receives the update of screens
-        //new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
+        //set CountNonBidders to 1, since I'm not bidding
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.COUNTNONBIDDERS).setValue("1");
 
         //set the current bidder to the playerID of the next player
         new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue((myPlayerID + 1)%4+"");
         System.out.println();
-
-        //bidding on private auction
-
     }
 
     @Override
