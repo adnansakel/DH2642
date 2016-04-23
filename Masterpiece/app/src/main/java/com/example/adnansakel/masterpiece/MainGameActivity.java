@@ -50,6 +50,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     Button button_bankauction_bid;
     Button button_privateauction_not_bidding;
     Button button_bankauction_not_bidding;
+    Button button_end_round;
 
     FirebaseCalls firebaseCalls;
 
@@ -60,6 +61,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     boolean myTurn = false;
     boolean statusPopupIsVisible = false;
     Sensor mAccelerometer;
+
+    int currentBid;
+
+    ProgressDialog progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,6 +91,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_bankauction_bid = (Button)findViewById(R.id.btn_bankauction_bid);
         button_privateauction_not_bidding = (Button)findViewById(R.id.btn_privateauction_not_bidding);
         button_bankauction_not_bidding = (Button)findViewById(R.id.btn_bankauction_not_bidding);
+        button_end_round = (Button)findViewById(R.id.btn_end_round);
 
         //setting
 
@@ -123,6 +130,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_privateauction_not_bidding.setOnClickListener(this);
         button_bankauction_not_bidding.setOnClickListener(this);
         button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
+        button_end_round.setOnClickListener(MainGameActivity.this);
 
 
         mSensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
@@ -201,17 +209,28 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         } else if(v == button_privateauction_bid) {
 
             //increase current bid
-            int currentBid = Integer.parseInt(model.getCurrentBid());
+            currentBid = Integer.parseInt(model.getCurrentBid());
             currentBid += 50000;
+            //1: set current bid
             new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBID).setValue(Integer.toString(currentBid),new Firebase.CompletionListener(){
                 @Override
                 public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                     if (firebaseError != null) {
                         Toast.makeText(MainGameActivity.this,"Data could not be saved. " + firebaseError.getMessage(),Toast.LENGTH_LONG).show();
                     } else {
-                        //System.out.println("Data saved successfully.");
-                        //set current bidder as the next player
-                        new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue(((myPlayerID + 1) % 4) + "");
+                        //2: set bid amount in my player
+                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+
+                                AppConstants.BIDAMOUNT).setValue(Integer.toString(currentBid), new Firebase.CompletionListener() {
+                            @Override
+                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                if (firebaseError != null) {
+                                    Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    //3: set current bidder as the next player
+                                    new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((myPlayerID + 1) % 4) + "");
+                                }
+                            }
+                        });
                     }
                 }
             });
@@ -275,6 +294,115 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             //change to bank auction in progress screen
             model.setPopupContent("bankAuctionInProgress");*/
 
+        } else if(v == button_end_round) {
+            model.setWinner("");
+            progress = ProgressDialog.show(MainGameActivity.this, "", "Loading next round...", true);
+            //reset a lot of Firebase values, increase turntaker, and finally reset countnonbidders at the end
+            //1: reset current bid
+            new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBID).setValue("0", new Firebase.CompletionListener() {
+                @Override
+                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                    if (firebaseError != null) {
+                        progress.dismiss();
+                        Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                    } else {
+                        //2: set turntaker to next player
+                        new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue(((Integer.valueOf(model.getTurnTaker())+1)%4)+"",new Firebase.CompletionListener() {
+                            @Override
+                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                if (firebaseError != null) {
+                                    progress.dismiss();
+                                    Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    //3: reset current bidder
+                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue("100",new Firebase.CompletionListener() {
+                                        @Override
+                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                            if (firebaseError != null) {
+                                                progress.dismiss();
+                                                Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                            } else {
+                                                //4: reset painting being auctioned
+                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.PAINTINGBEINGAUCTIONED).setValue("",new Firebase.CompletionListener() {
+                                                    @Override
+                                                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                        if (firebaseError != null) {
+                                                            progress.dismiss();
+                                                            Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                        } else {
+                                                            //5: reset turn action
+                                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("pending",new Firebase.CompletionListener() {
+                                                                @Override
+                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                    if (firebaseError != null) {
+                                                                        progress.dismiss();
+                                                                        Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                    } else {
+                                                                        //6: set bidding to true for player 0
+                                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(0).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                            @Override
+                                                                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                if (firebaseError != null) {
+                                                                                    progress.dismiss();
+                                                                                    Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                } else {
+                                                                                    //7: set bidding to true for player 1
+                                                                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(1).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                        @Override
+                                                                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                            if (firebaseError != null) {
+                                                                                                progress.dismiss();
+                                                                                                Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                            } else {
+                                                                                                //8: set bidding to true for player 2
+                                                                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(2).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                    @Override
+                                                                                                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                        if (firebaseError != null) {
+                                                                                                            progress.dismiss();
+                                                                                                            Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                        } else {
+                                                                                                            //9: set bidding to true for player 3
+                                                                                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(3).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                                @Override
+                                                                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                    if (firebaseError != null) {
+                                                                                                                        progress.dismiss();
+                                                                                                                        Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                    } else {
+                                                                                                                        //10: reset countnonbidders
+                                                                                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.COUNTNONBIDDERS).setValue("0");
+                                                                                                                        //hide progress dialog
+                                                                                                                        progress.dismiss();
+                                                                                                                        //hide end round button
+                                                                                                                        button_end_round.setVisibility(View.INVISIBLE);
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            });
+                                                                                                        }
+                                                                                                    }
+                                                                                                });
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 
