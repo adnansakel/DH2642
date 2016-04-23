@@ -259,6 +259,12 @@ public class FirebaseCalls {
                     player.setName(dsplayer.child("Name").getValue().toString());
                     player.setPlayerpositionID(i);
                     player.setFirebaseid(dsplayer.getKey().toString());
+                    if(dsplayer.child("Bidding").getValue().toString().equals("true")){
+                        player.setBidding(true);
+                    }
+                    else{
+                        player.setBidding(false);
+                    }
                     masterpieceGameModel.addPlayer(player);
                     System.out.println(player.getName() + "/" + player.getPlayerpositionID());
                     if (player.getName().equals(masterpieceGameModel.getUserName())) {
@@ -353,11 +359,13 @@ public class FirebaseCalls {
                         //set current bidder in model
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
                         //masterpieceGameModel.setPopupContent("privateAuctionBid");
+                        System.out.println("CurrentBidder: " + masterpieceGameModel.getCurrentBidder());
+                        System.out.println("getPlayerPositionID pointA: " + masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                         //if I am the current bidder
                         if(masterpieceGameModel.getCurrentBidder().equals(masterpieceGameModel.getMyPlayer().getPlayerpositionID()+"")){
                             //if my player is not set to Bidding
                             if(!masterpieceGameModel.getMyPlayer().isBidding()){
-                                System.out.println("increasing current bidder from FirebaseCalls");
+                                System.out.println("getPlayerPositionID pointB: " + masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                                 //increase current bidder by one in firebase
                                 new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue(((Integer
                                         .valueOf(masterpieceGameModel.getCurrentBidder())+1) %4) +"");
