@@ -548,18 +548,35 @@ public class MainGameView implements Observer{
     }
 
     private void ShowAnimatedView(View view){
-        hideAllPopupContent();
-        view.setVisibility(View.VISIBLE);
-        layoutStatusPopup.setVisibility(View.VISIBLE);
-        layoutStatusPopup.animate().translationY(0)
-                .setDuration(1000).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                layoutStatusPopup.setVisibility(View.VISIBLE);
-                button_status_bar.setBackgroundResource(R.drawable.uparrow);
-            }
-        });
+        if(layoutStatusPopup.getVisibility()==View.INVISIBLE){
+            hideAllPopupContent();
+            view.setVisibility(View.VISIBLE);
+            layoutStatusPopup.setVisibility(View.VISIBLE);
+            layoutStatusPopup.animate().translationY(0)
+                    .setDuration(1000).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    layoutStatusPopup.setVisibility(View.VISIBLE);
+                    button_status_bar.setBackgroundResource(R.drawable.uparrow);
+                }
+            });
+        }
+        else{
+            hideAllPopupContent();
+            view.setVisibility(View.VISIBLE);
+            layoutStatusPopup.setVisibility(View.VISIBLE);
+            layoutStatusPopup.animate().translationY(0)
+                    .setDuration(0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    layoutStatusPopup.setVisibility(View.VISIBLE);
+                    button_status_bar.setBackgroundResource(R.drawable.uparrow);
+                }
+            });
+        }
+
 
     }
 }
