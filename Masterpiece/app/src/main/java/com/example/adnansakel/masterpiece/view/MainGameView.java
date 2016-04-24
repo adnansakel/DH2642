@@ -309,7 +309,7 @@ public class MainGameView implements Observer{
             if(data.toString().equals(AppConstants.WINNERFOUND)){
                 System.out.println("Winner is player "+ model.getWinner());
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
-                if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID())){
+                if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){
                     //Make the btn_end_round visible
                     button_end_round.setVisibility(View.VISIBLE);
                 }
