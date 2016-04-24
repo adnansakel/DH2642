@@ -148,6 +148,7 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
+            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
             textSecretValue.setText(secretValueFormatted + " $");
             //textSecretValue.setWidth(200);
 
@@ -174,6 +175,7 @@ public class MainGameView implements Observer{
             image.setId(paintingID);
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
+            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
             textSecretValue.setText(secretValueFormatted + " $");
             textSecretValue.setWidth(200);
 
@@ -296,6 +298,7 @@ public class MainGameView implements Observer{
 
             //TODO cashChanged
             if(data.toString().equals("cashChanged")) {
+                String cashValueFormatted = formatter.format(Integer.valueOf(model.getMyPlayer().getCash()));
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
                 textCash.setText("Cash: " + cashValueFormatted + " $");
             }
@@ -306,6 +309,7 @@ public class MainGameView implements Observer{
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
                 TextView winningAmount = (TextView)view.findViewById(R.id.txtHighestBidResult);
 
+                String bidValueFormatted = formatter.format(Integer.valueOf(model.getCurrentBid()));
                 String strWinningAmount = "Winning Bid Amount: \n" +bidValueFormatted + " $";
                 winningAmount.setText(strWinningAmount);
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){
@@ -353,6 +357,7 @@ public class MainGameView implements Observer{
                             paintingTitle.setText(model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
                             TextView artist = (TextView)view.findViewById(R.id.txtArtist);
                             artist.setText("by " + model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getArtist());
+                            String currentBidValueFormatted = formatter.format(Integer.valueOf(model.getCurrentBid()));
                             TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
                             bidText.setText("Current Highest Bid: " + currentBidValueFormatted);
                         }
