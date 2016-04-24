@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
@@ -61,13 +62,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
 
-        // Creating the view class instance
-        HomeView homeView = new HomeView(findViewById(R.id.home_view),masterpieceGameModel);
-
         button_create_game = (Button)findViewById(R.id.buttonCreateGame);
         button_join_game = (Button)findViewById(R.id.buttonJoinGame);
         button_game_instructions = (Button)findViewById(R.id.buttonGameInstruction);
-
 
         button_create_game.setOnClickListener(this);
         button_join_game.setOnClickListener(this);
@@ -138,6 +135,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 masterpieceGameModel.getAllPlayers().clear();
                 startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
             }
+        }
+        else if(v == button_game_instructions){
+            startActivity(new Intent(HomeActivity.this, InstructionsActivity.class));
         }
     }
 }

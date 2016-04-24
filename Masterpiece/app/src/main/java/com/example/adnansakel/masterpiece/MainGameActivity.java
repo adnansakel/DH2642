@@ -4,20 +4,16 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
-import com.example.adnansakel.masterpiece.model.Painting;
 import com.example.adnansakel.masterpiece.model.Player;
 import com.example.adnansakel.masterpiece.view.MainGameView;
 import com.firebase.client.DataSnapshot;
@@ -39,7 +35,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     Integer secondPlayerID;
     Integer thirdPlayerID;
     Integer fourthPlayerID;
-    Player selectedPlayer = new Player();
     MainGameView mainGameView;
 
     Button button_status_bar;
@@ -95,9 +90,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_privateauction_not_bidding = (Button)findViewById(R.id.btn_privateauction_not_bidding);
         button_bankauction_not_bidding = (Button)findViewById(R.id.btn_bankauction_not_bidding);
         button_end_round = (Button)findViewById(R.id.btn_end_round);
-
-        //setting
-
 
         //find popup
         fullscreen_status_popup = findViewById(R.id.fullscreenStatusPopup);
@@ -161,7 +153,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                 fullscreen_status_popup.setVisibility(View.VISIBLE);
                 fullscreen_status_popup.animate().translationY(0)
-                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                        .setDuration(200).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
@@ -183,7 +175,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                 //AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
                 //animUtil.MakeVisibleWithSlideDown();
                 fullscreen_status_popup.animate().translationY(-fullscreen_status_popup.getHeight())
-                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                        .setDuration(200).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
@@ -195,7 +187,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                     }
                 });
                 //fullscreen_status_popup.setVisibility(View.INVISIBLE);
-
             }
         }
         else if(v == button_start_turn) {

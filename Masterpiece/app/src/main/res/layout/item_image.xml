@@ -2,23 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/llSinglePainting_view"
-    android:background="#2ecae6">
+    android:id="@+id/llSinglePainting_view">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="#744bef">
+        android:gravity="center">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#db53ed">
+            android:layout_height="match_parent">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:background="@drawable/monalisa"
                 android:id="@+id/imgPainting"
                 android:scaleType="centerCrop" />
 

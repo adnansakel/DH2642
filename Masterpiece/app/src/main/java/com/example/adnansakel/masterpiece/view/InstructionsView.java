@@ -1,5 +1,9 @@
 package com.example.adnansakel.masterpiece.view;
 
+/**
+ * Created by Daniel on 24/04/2016.
+ */
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -10,21 +14,16 @@ import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by Adnan Sakel on 3/28/2016.
- */
-public class HomeView implements Observer {
+public class InstructionsView implements Observer {
 
     View view;
 
-    Button button_create_game;
-    Button button_join_game;
+    Button button_back;
 
     MasterpieceGameModel masterpieceGameModel;
 
 
-
-    public HomeView(View view, MasterpieceGameModel masterpieceGameModel){// not passing model as this view will not change its data
+    public InstructionsView(View view, MasterpieceGameModel masterpieceGameModel){// not passing model as this view will not change its data
         masterpieceGameModel.addObserver(this);
         this.masterpieceGameModel = masterpieceGameModel;
         this.view = view;
@@ -32,11 +31,7 @@ public class HomeView implements Observer {
     }
 
     private void initialize(){
-        button_create_game = (Button)view.findViewById(R.id.buttonCreateGame);
-        button_join_game = (Button)view.findViewById(R.id.buttonJoinGame);
-
-        button_create_game.setText(R.string.create_game);
-        button_join_game.setText(R.string.join_game);
+        button_back = (Button)view.findViewById(R.id.button_back);
     }
 
     @Override
