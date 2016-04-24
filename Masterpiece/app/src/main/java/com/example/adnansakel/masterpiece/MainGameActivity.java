@@ -149,8 +149,11 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
             if(statusPopupIsVisible == false) {
 
+
                 //show the fullscreen popup
-                fullscreen_status_popup.setVisibility(View.VISIBLE);
+                AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
+                animUtil.MakeVisibleWithSlideDown();
+                //fullscreen_status_popup.setVisibility(View.VISIBLE);
                 button_status_bar.setBackgroundResource(R.drawable.uparrow);
 
 
@@ -160,7 +163,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             else {
 
                 //hide the fullscreen popup
-                fullscreen_status_popup.setVisibility(View.INVISIBLE);
+                AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
+                animUtil.MakeVisibleWithSlideDown();
+                //fullscreen_status_popup.setVisibility(View.INVISIBLE);
                 button_status_bar.setBackgroundResource(R.drawable.downarrow);
 
                 //toggle the button to show popup next time it's pressed
