@@ -307,11 +307,12 @@ public class MainGameView implements Observer{
             }
             
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
-                System.out.println("Winner is player "+ model.getWinner());
+                System.out.println("Winner is player " + model.getWinner());
 
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
-                TextView winningAmount = (TextView)view.findViewById(R.id.txtHighestBid);
-                winningAmount.setText("Winning Bid Amount: \n" + model.getCurrentBid() + " $");
+                TextView winningAmount = (TextView)view.findViewById(R.id.txtHighestBidResult);
+                String strWinningAmount = "Winning Bid Amount: \n" + model.getCurrentBid() + " $";
+                winningAmount.setText(strWinningAmount);
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){
                     //Make the btn_end_round visible
                     button_end_round.setVisibility(View.VISIBLE);

@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/winning_bid_amount"
-        android:id="@+id/txtHighestBid"
+        android:id="@+id/txtHighestBidResult"
         android:layout_below="@id/textViewWinnerName"
         android:textColor="@color/colorMainText"
         android:textStyle="bold"
