@@ -22,6 +22,7 @@ import com.example.adnansakel.masterpiece.model.Player;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,8 @@ public class MainGameView implements Observer{
     Button button_status_bar;
     TextView textWinnerName;
 
+    DecimalFormat formatter = new DecimalFormat("#,###,###");
+
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
         button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
@@ -70,7 +73,8 @@ public class MainGameView implements Observer{
 
         //set cash
         TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
-        textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
+        String cashFormatted = formatter.format(model.getMyPlayer().getCash());
+        textCash.setText("Cash: " + cashFormatted  + " $");
 
         //set currently selected player text
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
@@ -144,7 +148,7 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
+            textSecretValue.setText(secretValueFormatted + " $");
             //textSecretValue.setWidth(200);
 
             ll.addView(singlePainting, layoutParams);
@@ -170,7 +174,7 @@ public class MainGameView implements Observer{
             image.setId(paintingID);
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
+            textSecretValue.setText(secretValueFormatted + " $");
             textSecretValue.setWidth(200);
 
             ll.addView(singlePainting, layoutParams);
@@ -293,7 +297,7 @@ public class MainGameView implements Observer{
             //TODO cashChanged
             if(data.toString().equals("cashChanged")) {
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
-                textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
+                textCash.setText("Cash: " + cashValueFormatted + " $");
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
@@ -301,7 +305,8 @@ public class MainGameView implements Observer{
 
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
                 TextView winningAmount = (TextView)view.findViewById(R.id.txtHighestBidResult);
-                String strWinningAmount = "Winning Bid Amount: \n" + model.getCurrentBid() + " $";
+
+                String strWinningAmount = "Winning Bid Amount: \n" +bidValueFormatted + " $";
                 winningAmount.setText(strWinningAmount);
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){
                     //Make the btn_end_round visible
@@ -349,7 +354,7 @@ public class MainGameView implements Observer{
                             TextView artist = (TextView)view.findViewById(R.id.txtArtist);
                             artist.setText("by " + model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getArtist());
                             TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
-                            bidText.setText("Current Highest Bid: " + model.getCurrentBid());
+                            bidText.setText("Current Highest Bid: " + currentBidValueFormatted);
                         }
 
                     }
