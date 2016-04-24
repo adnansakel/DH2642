@@ -188,27 +188,27 @@ public class MainGameView implements Observer{
 
     public void hideAllPopupContent() {
         layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
-        layoutHomeViewInMainGameView.setTranslationY(-layoutHomeViewInMainGameView.getHeight());
+        //layoutHomeViewInMainGameView.setTranslationY(-layoutHomeViewInMainGameView.getHeight());
         layoutPopupPrivateAuctionInProgress.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupPrivateAuctionInProgress.getHeight());
+        //layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupPrivateAuctionInProgress.getHeight());
         layoutPopupBankAuctionInProgress.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupBankAuctionInProgress.getHeight());
+        //layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupBankAuctionInProgress.getHeight());
         layoutPopupPrivateAuctionSelectPainting.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionSelectPainting.setTranslationY(-layoutPopupPrivateAuctionSelectPainting.getHeight());
+        //layoutPopupPrivateAuctionSelectPainting.setTranslationY(-layoutPopupPrivateAuctionSelectPainting.getHeight());
         layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionBegin.setTranslationY(-layoutPopupBankAuctionBegin.getHeight());
+        //layoutPopupBankAuctionBegin.setTranslationY(-layoutPopupBankAuctionBegin.getHeight());
         layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
+        //layoutPopupPrivateAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
+        //layoutPopupBankAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupPrivateAuctionWon.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionWon.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
+        //layoutPopupPrivateAuctionWon.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupBankAuctionWon.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionWon.setTranslationY(-layoutPopupBankAuctionWon.getHeight());
+        //layoutPopupBankAuctionWon.setTranslationY(-layoutPopupBankAuctionWon.getHeight());
         layoutPopupPrivateAuctionLost.setVisibility(View.INVISIBLE);
-        layoutPopupPrivateAuctionLost.setTranslationY(-layoutPopupPrivateAuctionLost.getHeight());
+        //layoutPopupPrivateAuctionLost.setTranslationY(-layoutPopupPrivateAuctionLost.getHeight());
         layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
-        layoutPopupBankAuctionLost.setTranslationY(-layoutPopupBankAuctionLost.getHeight());
+        //layoutPopupBankAuctionLost.setTranslationY(-layoutPopupBankAuctionLost.getHeight());
         //layoutHomeViewInMainGameView.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
