@@ -387,12 +387,10 @@ public class FirebaseCalls {
                                                     Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
                                             masterpieceGameModel.getAllPlayers().get(i).addOenedPaintingValue(
                                                     masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
-                                            masterpieceGameModel.getAllPlayers().get(i).setCash(masterpieceGameModel.getMyPlayer().getCash()
-                                                    - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
-
                                             if(masterpieceGameModel.getMyPlayer().getPlayerpositionID() == i){
                                                 masterpieceGameModel.setMyPlayer(masterpieceGameModel.getAllPlayers().get(i));
-
+                                                masterpieceGameModel.getMyPlayer().setCash(masterpieceGameModel.getAllPlayers().get(i).getCash()
+                                                        - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
                                                 /*If winnner is myPlayer; update that as well
                                                 masterpieceGameModel.getMyPlayer().addOwnedPaintingID(
                                                         Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
@@ -402,24 +400,31 @@ public class FirebaseCalls {
                                                         - Integer.valueOf(masterpieceGameModel.getCurrentBid()));*/
 
                                             }
+                                            masterpieceGameModel.setCash(i, masterpieceGameModel.getAllPlayers().get(i).getCash()
+                                                    - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+
                                             //updating for loosing player or turn taker
                                             int loosingPlayerPosition = Integer.valueOf(masterpieceGameModel.getTurnTaker());
                                             int paintingAuctioned = Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned());
                                             int currentCashofTurntaker = masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).getCash();
                                             masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingID(paintingAuctioned);
                                            // masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingValues(paintingAuctioned);
-                                            masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).setCash(currentCashofTurntaker
-                                                            + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
-
                                             if(masterpieceGameModel.getMyPlayer().getPlayerpositionID()==loosingPlayerPosition){
                                                 //if turn taker is myPlayer update that as well
                                                 masterpieceGameModel.setMyPlayer(masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition));
+                                                masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
+                                                      + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
                                                 /*masterpieceGameModel.getMyPlayer().removePaintingIDandValue(paintingAuctioned);
                                                 masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
                                                         + Integer.valueOf(masterpieceGameModel.getCurrentBid()));*/
 
                                             }
+                                            masterpieceGameModel.setCash(loosingPlayerPosition, currentCashofTurntaker
+                                                    + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+
 
 
 
