@@ -138,7 +138,7 @@ public class MainGameView implements Observer{
     }
 
     public void populatePaintingsMyPlayer(Integer myPlayerID, LinearLayout ll){
-        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
         ll.removeAllViews();
@@ -305,7 +305,7 @@ public class MainGameView implements Observer{
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
                 textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
             }
-            
+
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
                 System.out.println("Winner is player " + model.getWinner());
 

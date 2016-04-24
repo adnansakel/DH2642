@@ -145,14 +145,16 @@
                 android:layout_height="match_parent"
                 android:id="@+id/hsvBottomPanel"
                 android:fillViewport="false"
-                android:layout_marginLeft="5dp">
+                android:layout_marginLeft="5dp"
+                android:background="#f6f678">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfMyPlayer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:background="#6cf457">
                 </LinearLayout>
 
             </HorizontalScrollView>
