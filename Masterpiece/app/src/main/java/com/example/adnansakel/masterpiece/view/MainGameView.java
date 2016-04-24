@@ -148,7 +148,7 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
+            String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
             //textSecretValue.setWidth(200);
 
@@ -175,7 +175,7 @@ public class MainGameView implements Observer{
             image.setId(paintingID);
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
+            String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
             textSecretValue.setWidth(200);
 
@@ -301,6 +301,8 @@ public class MainGameView implements Observer{
                 String cashValueFormatted = formatter.format(Integer.valueOf(model.getMyPlayer().getCash()));
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
                 textCash.setText("Cash: " + cashValueFormatted + " $");
+                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){

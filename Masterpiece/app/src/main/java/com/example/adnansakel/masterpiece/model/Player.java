@@ -77,12 +77,12 @@ public class Player {
     }
 
     // TODO: Once we have an interface, add @Override
-    public void removePaintingID(int paintingID) {
+    /*public void removePaintingID(int paintingID) {
 
 
-    }
+    }*/
 
-    public void removePaintingIDandValue(int paintingID){
+    public void removePaintingID(int paintingID){
         int i =0;
         for(; i < ownedPaintingIDs.size(); i++){
             if(ownedPaintingIDs.get(i) == paintingID){
@@ -90,7 +90,7 @@ public class Player {
                 break;
             }
         }
-        ownedPaintingValues.remove(i);
+        //ownedPaintingValues.remove(i);
     }
 
     public void removePaintingValues(int paintingID) {
