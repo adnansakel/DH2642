@@ -58,8 +58,7 @@ public class LobbyView implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         System.out.println("Observer worked");
-        if(observable instanceof  MasterpieceGameModel){
-            int i = 1;
+        if(observable instanceof  MasterpieceGameModel){int i = 1;
             System.out.println("Observer worked");
             for(Player player : ((MasterpieceGameModel) observable).getAllPlayers()){
                 if(i == 1){
@@ -73,7 +72,9 @@ public class LobbyView implements Observer {
                 }
                 else if(i == 4){
                     textViewPlayer4.setText(player.getName());
-                    button_start_game.setVisibility(View.VISIBLE);
+                    //if (AppConstants.IamCreator == true){
+                        button_start_game.setVisibility(View.VISIBLE);
+                    //}
                 }
 
                 i++;
