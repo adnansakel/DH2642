@@ -348,7 +348,9 @@ public class MainGameView implements Observer{
                 hideAllPopupContent();
                 layoutStatusPopup.setVisibility(View.VISIBLE);
                 layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);*/
-                ShowAnimatedView(layoutPopupPrivateAuctionWon);
+                if(!data.toString().equals("currentPlayerToDisplayChanged")){
+                    ShowAnimatedView(layoutPopupPrivateAuctionWon);
+                }
 
             }
             else{
