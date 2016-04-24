@@ -355,6 +355,7 @@ public class MainGameView implements Observer{
             }
             else{
                 if(data.toString().equals(AppConstants.TURN_TAKER_CHANGED)){
+                    model.setWinner("");
                     button_end_round.setVisibility(View.INVISIBLE);
                     if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
                         /*
