@@ -95,7 +95,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             public void run() {
                 // do your stuff - don't create a new runnable here!
                 if(checkConnection.isConnectedWithoutToastMessage()){
-                    firebaseCalls.downloadMasterpiecePaintings();
+                    if(masterpieceGameModel.getAllPaintings().size()==0)firebaseCalls.downloadMasterpiecePaintings();
                     handler.removeCallbacks(this);
                     mStopHandler = true;
 
@@ -130,6 +130,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             // check if connected to the internet = true
             if (checkConnection.isConnected()) {
                 // if it is connected, then go to join game activity
+                masterpieceGameModel.getAllPlayers().clear();
                 startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
             }
         }

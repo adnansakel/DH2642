@@ -1,5 +1,7 @@
 package com.example.adnansakel.masterpiece;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -65,6 +67,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     int currentBid;
 
     ProgressDialog progress;
+    AnimUtil animUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +141,10 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mShakeDetector = new ShakeDetector();
         mShakeDetector.setOnShakeListener(this);
+        fullscreen_status_popup.setVisibility(View.VISIBLE);
+        fullscreen_status_popup.setTranslationY(-fullscreen_status_popup.getHeight());
+        fullscreen_status_popup.setVisibility(View.INVISIBLE);
+        //animUtil = new AnimUtil(fullscreen_status_popup);
 
 
     }
@@ -151,25 +158,44 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
 
                 //show the fullscreen popup
-                AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
-                animUtil.MakeVisibleWithSlideDown();
+
+                fullscreen_status_popup.setVisibility(View.VISIBLE);
+                fullscreen_status_popup.animate().translationY(0)
+                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        fullscreen_status_popup.setVisibility(View.VISIBLE);
+                        button_status_bar.setBackgroundResource(R.drawable.uparrow);
+
+
+                        //toggle the button to hide popup next time it's pressed
+                        statusPopupIsVisible = true;
+                    }
+                });
+
                 //fullscreen_status_popup.setVisibility(View.VISIBLE);
-                button_status_bar.setBackgroundResource(R.drawable.uparrow);
 
-
-                //toggle the button to hide popup next time it's pressed
-                statusPopupIsVisible = true;
             }
             else {
 
                 //hide the fullscreen popup
-                AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
-                animUtil.MakeVisibleWithSlideDown();
-                //fullscreen_status_popup.setVisibility(View.INVISIBLE);
-                button_status_bar.setBackgroundResource(R.drawable.downarrow);
+                //AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
+                //animUtil.MakeVisibleWithSlideDown();
+                fullscreen_status_popup.animate().translationY(-fullscreen_status_popup.getHeight())
+                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        fullscreen_status_popup.setVisibility(View.INVISIBLE);
+                        button_status_bar.setBackgroundResource(R.drawable.downarrow);
 
-                //toggle the button to show popup next time it's pressed
-                statusPopupIsVisible = false;
+                        //toggle the button to show popup next time it's pressed
+                        statusPopupIsVisible = false;
+                    }
+                });
+                //fullscreen_status_popup.setVisibility(View.INVISIBLE);
+
             }
         }
         else if(v == button_start_turn) {

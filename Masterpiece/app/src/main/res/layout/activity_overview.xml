@@ -163,31 +163,35 @@
         android:textSize="20sp"
         android:textColor="@color/colorMainText"
         android:text="@string/player_cash" />
-
     </LinearLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffdab9"
-        android:id="@+id/fullscreenStatusPopup"
-        android:layout_below="@+id/llStatusBar"
-        android:visibility="visible"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp">
-        <include layout="@layout/activity_game_model_selection"/>
-        <include layout="@layout/activity_privatauct_ongoing"/>
-        <include layout="@layout/activity_bankauct_ongoing"/>
-        <include layout="@layout/activity_privatauct_selectpainting"/>
-        <include layout="@layout/activity_bankauct_begin"/>
-        <include layout="@layout/activity_privatauct_bid"/>
-        <include layout="@layout/activity_bankauct_bid"/>
-        <include layout="@layout/activity_privatauct_bid_results"/>
-        <include layout="@layout/activity_bankauct_bid_won"/>
-        <include layout="@layout/activity_privatauct_bid_lost"/>
-        <include layout="@layout/activity_bankauct_bid_lost"
-             />
+        android:layout_below="@+id/llStatusBar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffdab9"
+            android:id="@+id/fullscreenStatusPopup"
+
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <include layout="@layout/activity_game_model_selection"/>
+            <include layout="@layout/activity_privatauct_ongoing"/>
+            <include layout="@layout/activity_bankauct_ongoing"/>
+            <include layout="@layout/activity_privatauct_selectpainting"/>
+            <include layout="@layout/activity_bankauct_begin"/>
+            <include layout="@layout/activity_privatauct_bid"/>
+            <include layout="@layout/activity_bankauct_bid"/>
+            <include layout="@layout/activity_privatauct_bid_results"/>
+            <include layout="@layout/activity_bankauct_bid_won"/>
+            <include layout="@layout/activity_privatauct_bid_lost"/>
+            <include layout="@layout/activity_bankauct_bid_lost"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
