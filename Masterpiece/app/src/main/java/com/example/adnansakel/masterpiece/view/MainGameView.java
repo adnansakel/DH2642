@@ -330,11 +330,6 @@ public class MainGameView implements Observer{
                 layoutStatusPopup.setVisibility(View.VISIBLE);
                 layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);
             }
-            else if(model.getCountNonBidders().equals("4")){
-
-                    //Do nothing
-
-            }
             else{
                 if(data.toString().equals(AppConstants.TURN_TAKER_CHANGED)){
                     if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
