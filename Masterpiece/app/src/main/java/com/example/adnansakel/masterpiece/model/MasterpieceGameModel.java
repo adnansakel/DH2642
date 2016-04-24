@@ -291,6 +291,7 @@ public class MasterpieceGameModel extends Observable{
 
     public void setShuffledPaintingIDs(List<Integer> shuffledPaintingIDs) {
         this.shuffledPaintingIDs = shuffledPaintingIDs;
+        this.allPaintingIDs = shuffledPaintingIDs;
     }
 
 

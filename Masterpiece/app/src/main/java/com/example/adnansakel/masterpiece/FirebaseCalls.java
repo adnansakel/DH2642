@@ -257,10 +257,11 @@ public class FirebaseCalls {
                     //DataSnapshot dpl = (DataSnapshot)dsplayer.getValue();
                     //System.out.println(dsplayer.child("Name"));
                     Player player = new Player();
-                    player.setName(dsplayer.child("Name").getValue().toString());
+                    player.setName(dsplayer.child(AppConstants.NAME).getValue().toString());
                     player.setPlayerpositionID(i);
                     player.setFirebaseid(dsplayer.getKey().toString());
-                    if (dsplayer.child("Bidding").getValue().toString().equals("true")) {
+                    player.setCash(Integer.valueOf(dsplayer.child(AppConstants.CASH).getValue().toString()));
+                    if (dsplayer.child(AppConstants.BIDDING).getValue().toString().equals("true")) {
                         player.setBidding(true);
                     } else {
                         player.setBidding(false);
@@ -368,6 +369,46 @@ public class FirebaseCalls {
                                             masterpieceGameModel.setWinner(i + "");
 
                                             System.out.println("Winner:" + i);
+
+
+                                            //updating the cash and painting for winning player
+                                            masterpieceGameModel.getAllPlayers().get(i).addOwnedPaintingID(
+                                                    Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
+                                            masterpieceGameModel.getAllPlayers().get(i).addOenedPaintingValue(
+                                                    masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
+                                            masterpieceGameModel.getAllPlayers().get(i).setCash(masterpieceGameModel.getMyPlayer().getCash()
+                                                    - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+                                            if(masterpieceGameModel.getMyPlayer().getPlayerpositionID() == i){
+                                                //If winnner is myPlayer; update that as well
+                                                masterpieceGameModel.getMyPlayer().addOwnedPaintingID(
+                                                        Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
+                                                masterpieceGameModel.getMyPlayer().addOenedPaintingValue(
+                                                        masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
+                                                masterpieceGameModel.getMyPlayer().setCash(masterpieceGameModel.getMyPlayer().getCash()
+                                                        - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+                                            }
+                                            //updating for loosing player or turn taker
+                                            int loosingPlayerPosition = Integer.valueOf(masterpieceGameModel.getTurnTaker());
+                                            int paintingAuctioned = Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned());
+                                            int currentCashofTurntaker = masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).getCash();
+                                            masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingIDandValue(paintingAuctioned);
+                                           // masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingValues(paintingAuctioned);
+                                            masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).setCash(currentCashofTurntaker
+                                                            + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+                                            if(masterpieceGameModel.getMyPlayer().getPlayerpositionID()==loosingPlayerPosition){
+                                                //if turn taker is myPlayer update that as well
+
+                                                masterpieceGameModel.getMyPlayer().removePaintingIDandValue(paintingAuctioned);
+                                                masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
+                                                        + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
+
+                                            }
+
+
+
                                         }
 
                                         i++;
