@@ -303,7 +303,11 @@ public class FirebaseCalls {
                         // Distribute 2 paintings (e.g. first player gets the first in the list and the fifth, second gets the second and the sixth,...
                         for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {
                             masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i), shuffledpaintinvalueglist.get(i));
-                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i+AppConstants.TotalNumberofPlayers), shuffledpaintinvalueglist.get(i+AppConstants.TotalNumberofPlayers));
+                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i + AppConstants.TotalNumberofPlayers), shuffledpaintinvalueglist.get(i + AppConstants.TotalNumberofPlayers));
+                            if(i == masterpieceGameModel.getMyPlayer().getPlayerpositionID()){
+                                masterpieceGameModel.setMyPlayer(masterpieceGameModel.getAllPlayers().get(i));
+                            }
+
                         }
 
                         masterpieceGameModel.notifyAllPaintingsAdded();
