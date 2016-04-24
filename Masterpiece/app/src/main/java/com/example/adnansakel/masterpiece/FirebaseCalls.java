@@ -3,6 +3,7 @@ package com.example.adnansakel.masterpiece;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
@@ -344,47 +345,48 @@ public class FirebaseCalls {
                 }*/
 
                 //otherwise set the current bidder in the model
-               // else {
-                    //if current bidder value has changed
-                if(masterpieceGameModel.getCountNonBidders().equals("3")){
+                // else {
+                //if current bidder value has changed
+                if (masterpieceGameModel.getCountNonBidders().equals("3")) {
                     /*if(AppConstants.IamCreator){
                         new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue(((Integer
                                 .valueOf(masterpieceGameModel.getTurnTaker())+1)%4)+"");
 
                     }*/
-                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS).addListenerForSingleValueEvent(
+                    new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS).addListenerForSingleValueEvent(
                             new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
                                     // do some stuff once
                                     System.out.println(snapshot.getValue());
                                     int i = 0;
-                                    for(DataSnapshot dplayer: snapshot.getChildren()){
+                                    for (DataSnapshot dplayer : snapshot.getChildren()) {
                                         //System.out.println("Player name: " + dplayer.child("Name").getValue().toString());
                                         //System.out.println("Is bidding:" + dplayer.child("Bidding").getValue().toString());
-                                        if(dplayer.child(AppConstants.BIDDING).getValue().toString().equals("true")){
-                                            masterpieceGameModel.setWinningbidamount(dplayer.child(AppConstants.BIDAMOUNT).getValue().toString()+"");
-                                            masterpieceGameModel.setWinner(i+"");
+                                        if (dplayer.child(AppConstants.BIDDING).getValue().toString().equals("true")) {
+                                            masterpieceGameModel.setWinningbidamount(dplayer.child(AppConstants.BIDAMOUNT).getValue().toString() + "");
+                                            masterpieceGameModel.setWinner(i + "");
 
-                                            System.out.println("Winner:"+i);
+                                            System.out.println("Winner:" + i);
                                         }
 
                                         i++;
 
                                     }
                                 }
+
                                 @Override
                                 public void onCancelled(FirebaseError firebaseError) {
-                                    Toast.makeText(context,"Some error occured while finding winner",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Some error occured while finding winner", Toast.LENGTH_LONG).show();
                                 }
                             }
                     );
-                } else if(masterpieceGameModel.getCountNonBidders().equals("4")){
+                } else if (masterpieceGameModel.getCountNonBidders().equals("4")) {
                     //do nothing, since somebody won the game
-                } else{
+                } else {
 
                     //if current bidder has changed
-                    if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
+                    if (!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())) {
                         //System.out.println("Current bidder has changed and is greater than 0");
                         //set current bidder in model
                         masterpieceGameModel.setCurrentBidder(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString());
@@ -392,24 +394,24 @@ public class FirebaseCalls {
                         System.out.println("CurrentBidder: " + masterpieceGameModel.getCurrentBidder());
                         System.out.println("getPlayerPositionID pointA: " + masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                         //if I am the current bidder
-                        if(masterpieceGameModel.getCurrentBidder().equals(masterpieceGameModel.getMyPlayer().getPlayerpositionID()+"")){
+                        if (masterpieceGameModel.getCurrentBidder().equals(masterpieceGameModel.getMyPlayer().getPlayerpositionID() + "")) {
                             //if my player is not set to Bidding
-                            if(!masterpieceGameModel.getMyPlayer().isBidding()){
+                            if (!masterpieceGameModel.getMyPlayer().isBidding()) {
                                 System.out.println("getPlayerPositionID pointB: " + masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                                 //increase current bidder by one in firebase
-                                new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue(((Integer
-                                        .valueOf(masterpieceGameModel.getCurrentBidder())+1) %4) +"");
+                                new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((Integer
+                                        .valueOf(masterpieceGameModel.getCurrentBidder()) + 1) % 4) + "");
                             }
                         }
                     }
 
                     // }
                     //I skipped GameNumber, I don't think we need to set that from here
-                    if(!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())){
+                    if (!masterpieceGameModel.getPaintingBeingAuctioned().equals(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString())) {
                         masterpieceGameModel.setPaintingBeingAuctioned(snapshot.child(AppConstants.PAINTINGBEINGAUCTIONED).getValue().toString());
                     }
 
-                    if(!masterpieceGameModel.getTurnTaker().equals(snapshot.child(AppConstants.TURNTAKER).getValue().toString())){
+                    if (!masterpieceGameModel.getTurnTaker().equals(snapshot.child(AppConstants.TURNTAKER).getValue().toString())) {
                         masterpieceGameModel.setTurnTaker(snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                         //System.out.println("From firebasecalls: Turn taker set : " + snapshot.child(AppConstants.TURNTAKER).getValue().toString());
                     }
@@ -418,25 +420,26 @@ public class FirebaseCalls {
                     //I skipped GameState, maybe we won't need it?
 
                     //if turn action has changed
-                    if(!masterpieceGameModel.getTurnAction().equals(snapshot.child(AppConstants.TURNACTION).getValue())) {
+                    if (!masterpieceGameModel.getTurnAction().equals(snapshot.child(AppConstants.TURNACTION).getValue())) {
                         masterpieceGameModel.setTurnAction((String) snapshot.child(AppConstants.TURNACTION).getValue());
                     }
 
 
                     //reset playerNumber after each onDataChange
                     int playerNumber = 0;
-                    if(!masterpieceGameModel.getCurrentBid().equals(snapshot.child(AppConstants.CURRENTBID).getValue().toString())){
+                    if (!masterpieceGameModel.getCurrentBid().equals(snapshot.child(AppConstants.CURRENTBID).getValue().toString())) {
                         masterpieceGameModel.setCurrentBid(snapshot.child(AppConstants.CURRENTBID).getValue().toString());
                     }
 
                     String biddingstatus = "";
-                    if(masterpieceGameModel.getMyPlayer().isBidding())biddingstatus = "true";
-                    else {biddingstatus = "false";}
-                    if(!biddingstatus.equals(snapshot.child(AppConstants.PLAYERS).child(masterpieceGameModel.getMyPlayer().getFirebaseid()).child(AppConstants.BIDDING).getValue().toString())){
-                        if(biddingstatus.equals("true")){
+                    if (masterpieceGameModel.getMyPlayer().isBidding()) biddingstatus = "true";
+                    else {
+                        biddingstatus = "false";
+                    }
+                    if (!biddingstatus.equals(snapshot.child(AppConstants.PLAYERS).child(masterpieceGameModel.getMyPlayer().getFirebaseid()).child(AppConstants.BIDDING).getValue().toString())) {
+                        if (biddingstatus.equals("true")) {
                             masterpieceGameModel.getMyPlayer().setBidding(false);
-                        }
-                        else{
+                        } else {
                             masterpieceGameModel.getMyPlayer().setBidding(true);
                         }
                     }
@@ -454,6 +457,130 @@ public class FirebaseCalls {
 
     public void setNextPlayerAsBidder() {
         new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1) % 4));
+    }
+
+    public void resetFirebaseforNextRound(){
+        masterpieceGameModel.setWinner("");
+        progress = ProgressDialog.show(context, "", "Loading next round...", true);
+        //reset a lot of Firebase values, increase turntaker, and finally reset countnonbidders at the end
+        //1: reset current bid
+
+        new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS).setValue("4", new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError != null) {
+                    progress.dismiss();
+                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                else{
+                    new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBID).setValue("0", new Firebase.CompletionListener() {
+                        @Override
+                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                            if (firebaseError != null) {
+                                progress.dismiss();
+                                Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                            } else {
+                                //2: set turntaker to next player
+                                new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNTAKER).setValue(((Integer.valueOf(masterpieceGameModel.getTurnTaker())+1)%4)+"",new Firebase.CompletionListener() {
+                                    @Override
+                                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                        if (firebaseError != null) {
+                                            progress.dismiss();
+                                            Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                        } else {
+                                            //3: reset current bidder
+                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.CURRENTBIDDER).setValue("100",new Firebase.CompletionListener() {
+                                                @Override
+                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                    if (firebaseError != null) {
+                                                        progress.dismiss();
+                                                        Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                    } else {
+                                                        //4: reset painting being auctioned
+                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PAINTINGBEINGAUCTIONED).setValue("",new Firebase.CompletionListener() {
+                                                            @Override
+                                                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                if (firebaseError != null) {
+                                                                    progress.dismiss();
+                                                                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                } else {
+                                                                    //5: reset turn action
+                                                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("pending",new Firebase.CompletionListener() {
+                                                                        @Override
+                                                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                            if (firebaseError != null) {
+                                                                                progress.dismiss();
+                                                                                Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                            } else {
+                                                                                //6: set bidding to true for player 0
+                                                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+masterpieceGameModel.getAllPlayers().get(0).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                    @Override
+                                                                                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                        if (firebaseError != null) {
+                                                                                            progress.dismiss();
+                                                                                            Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                        } else {
+                                                                                            //7: set bidding to true for player 1
+                                                                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+masterpieceGameModel.getAllPlayers().get(1).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                @Override
+                                                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                    if (firebaseError != null) {
+                                                                                                        progress.dismiss();
+                                                                                                        Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                    } else {
+                                                                                                        //8: set bidding to true for player 2
+                                                                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+masterpieceGameModel.getAllPlayers().get(2).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                            @Override
+                                                                                                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                if (firebaseError != null) {
+                                                                                                                    progress.dismiss();
+                                                                                                                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                } else {
+                                                                                                                    //9: set bidding to true for player 3
+                                                                                                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+masterpieceGameModel.getAllPlayers().get(3).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                                        @Override
+                                                                                                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                            if (firebaseError != null) {
+                                                                                                                                progress.dismiss();
+                                                                                                                                Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                            } else {
+                                                                                                                                //10: reset countnonbidders
+                                                                                                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.COUNTNONBIDDERS).setValue("0");
+                                                                                                                                //hide progress dialog
+                                                                                                                                progress.dismiss();
+                                                                                                                                //hide end round button
+                                                                                                                                //button_end_round.setVisibility(View.INVISIBLE);
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                }
+                                                                                                            }
+                                                                                                        });
+                                                                                                    }
+                                                                                                }
+                                                                                            });
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
     }
 
 }
