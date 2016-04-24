@@ -373,7 +373,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                                                         Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                                     } else {
                                                                         //6: set bidding to true for player 0
-                                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(0).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(0).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
                                                                             @Override
                                                                             public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                                                                 if (firebaseError != null) {
@@ -381,7 +381,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                                                                     Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                                                 } else {
                                                                                     //7: set bidding to true for player 1
-                                                                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(1).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                    new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(1).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
                                                                                         @Override
                                                                                         public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                                                                             if (firebaseError != null) {
@@ -389,7 +389,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                                                                                 Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                                                             } else {
                                                                                                 //8: set bidding to true for player 2
-                                                                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(2).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(2).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
                                                                                                     @Override
                                                                                                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                                                                                         if (firebaseError != null) {
@@ -397,7 +397,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                                                                                             Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                                                                         } else {
                                                                                                             //9: set bidding to true for player 3
-                                                                                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(3).getFirebaseid()+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
+                                                                                                            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getAllPlayers().get(3).getFirebaseid()+"/"+AppConstants.BIDDING).setValue("true",new Firebase.CompletionListener() {
                                                                                                                 @Override
                                                                                                                 public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                                                                                                     if (firebaseError != null) {
