@@ -318,7 +318,7 @@ public class MainGameView implements Observer{
 
             }
             if(data.toString().equals(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH)){
-                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
+                populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
             }
 
