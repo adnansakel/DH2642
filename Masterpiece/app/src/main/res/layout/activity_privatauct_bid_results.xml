@@ -71,9 +71,9 @@
         android:layout_height="wrap_content"
         android:text="End Round"
         android:id="@+id/btn_end_round"
-        android:layout_below="@id/txtHighestBid"
         android:textColor="@color/colorButtonText"
         android:background="@drawable/custom_button"
-        android:layout_marginTop="60dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginTop="85dp"
+        android:layout_below="@+id/txtHighestBidResult"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

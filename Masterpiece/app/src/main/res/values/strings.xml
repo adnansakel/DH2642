@@ -16,5 +16,6 @@
     <string name="current_highest_bid">Current Highest bid:  </string>
     <string name="painting_name">Painting Title </string>
     <string name="secret_value">Paintings Secret Value </string>
+    <string name="game_instruction">Game Instructions </string>
 
 </resources>

@@ -38,6 +38,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     Button button_create_game;
     Button button_join_game;
+    Button button_game_instructions;
+
     Firebase masterpieceGameNumberRef;
     MasterpieceGameModel masterpieceGameModel;
     FirebaseCalls firebaseCalls;
@@ -64,9 +66,12 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         button_create_game = (Button)findViewById(R.id.buttonCreateGame);
         button_join_game = (Button)findViewById(R.id.buttonJoinGame);
+        button_game_instructions = (Button)findViewById(R.id.buttonGameInstruction);
+
 
         button_create_game.setOnClickListener(this);
         button_join_game.setOnClickListener(this);
+        button_game_instructions.setOnClickListener(this);
 
         Firebase.setAndroidContext(this);
 
