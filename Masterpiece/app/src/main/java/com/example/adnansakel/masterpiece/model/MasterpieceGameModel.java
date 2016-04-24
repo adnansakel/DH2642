@@ -16,7 +16,9 @@ import java.util.Set;
 public class MasterpieceGameModel extends Observable{
 
     private Integer currentPlayerToDisplay;
+
     private String gameNumber;
+
     private String userName;
 
     private List<Painting> allPaintings;
@@ -39,12 +41,16 @@ public class MasterpieceGameModel extends Observable{
     private String paintingBeingAuctioned = "";
     private String turnTaker = "";
     private String turnAction = "setup";
+
     private String currentBidder = "";
+
     private String currentBid = "";
+
     private String CountNonBidders = "";
     //private String color;
     private String winner = "";
     private String winningbidamount;
+
     private String popupContent;
 
 
@@ -52,6 +58,7 @@ public class MasterpieceGameModel extends Observable{
 
         allPlayers = new ArrayList<Player>();
         allPaintings = new ArrayList<Painting>();
+
         allPaintingValues = new ArrayList<Integer>();
         allPaintingIDs = new ArrayList<Integer>();
 
@@ -77,6 +84,7 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers("");
     }
+
     public String getGameNumber(){
         return gameNumber;
     }
@@ -107,7 +115,9 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers(AppConstants.TURN_TAKER_CHANGED);
     }
+
     public String getTurnTaker(){
+
         return turnTaker;
     }
 
@@ -134,6 +144,7 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers(AppConstants.CURRENT_BIDDER_CHANGED);
     }
+
     public String getCurrentBidder(){
         return currentBidder;
     }
@@ -283,6 +294,8 @@ public class MasterpieceGameModel extends Observable{
         this.allPaintingIDs = shuffledPaintingIDs;
     }
 
+
+
     public List<Integer> getAllPaintingIDs() {
         return allPaintingIDs;
     }
@@ -304,7 +317,6 @@ public class MasterpieceGameModel extends Observable{
         setChanged();
         notifyObservers("popupContentChanged");
     }
-
     public String getPopupContent(){
         return popupContent;
     }
