@@ -33,7 +33,6 @@ public class Player {
         this.cash = cash;
         ownedPaintingIDs = new ArrayList<Integer>();
         ownedPaintingValues = new ArrayList<Integer>();
-
     }
 
     public Player(){
@@ -47,12 +46,14 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getFirebaseid() {
         return firebaseid;
     }
     public void setFirebaseid(String firebaseid) {
         this.firebaseid = firebaseid;
     }
+
     public int getCash() {
         return cash;
     }
@@ -70,16 +71,12 @@ public class Player {
         ownedPaintingIDs.add(paintigID);
     }
 
-
-
     public void addOenedPaintingValue(int paintingValue){
         ownedPaintingValues.add(paintingValue);
     }
 
     // TODO: Once we have an interface, add @Override
     public void removePaintingID(int paintingID) {
-
-
     }
 
     public void removePaintingIDandValue(int paintingID){
@@ -105,7 +102,6 @@ public class Player {
     public int getPlayerpositionID() {
         return playerpositionID;
     }
-
     public void setPlayerpositionID(int playerpositionID) {
         this.playerpositionID = playerpositionID;
     }
@@ -113,7 +109,6 @@ public class Player {
     public boolean isBidding() {
         return bidding;
     }
-
     public void setBidding(boolean bidding) {
         this.bidding = bidding;
     }

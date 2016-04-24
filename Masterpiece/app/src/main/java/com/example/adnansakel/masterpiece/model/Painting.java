@@ -26,7 +26,6 @@ public class Painting {
     }
 
     public Painting(){
-
     }
 
     public String getName() {
@@ -35,6 +34,7 @@ public class Painting {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getImageURL() {
         return imageURL;
     }
@@ -47,16 +47,17 @@ public class Painting {
     public void setImage(Bitmap image) {
         this.image = image;
     }
+
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
+
     public int getValue() {
         return value;
     }
-
     // Can be used to set the value of the painting in the initial setup
     public void setValue(int value) {
         this.value = value;
@@ -65,7 +66,6 @@ public class Painting {
     public void setArtist(String artist){
         this.artist = artist;
     }
-
     public String getArtist(){
         return artist;
     }
@@ -73,7 +73,6 @@ public class Painting {
     public byte[] getImagebytearray() {
         return imagebytearray;
     }
-
     public void setImagebytearray(byte[] imagebytearray) {
         this.imagebytearray = imagebytearray;
     }
