@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.model.AppConstants;
@@ -39,6 +40,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Button button_create_game;
     Button button_join_game;
     Button button_game_instructions;
+
+    RelativeLayout instructionsPopup;
 
     Firebase masterpieceGameNumberRef;
     MasterpieceGameModel masterpieceGameModel;
@@ -138,6 +141,10 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 masterpieceGameModel.getAllPlayers().clear();
                 startActivity(new Intent(HomeActivity.this, JoinGameActivity.class));
             }
+        }
+        else if(v == button_game_instructions){
+            instructionsPopup = (RelativeLayout)v.findViewById(R.id.game_instructions_popup);
+            instructionsPopup.setVisibility(View.INVISIBLE);
         }
     }
 }

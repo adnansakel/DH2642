@@ -2,6 +2,7 @@ package com.example.adnansakel.masterpiece.view;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.example.adnansakel.masterpiece.R;
 import com.example.adnansakel.masterpiece.model.MasterpieceGameModel;
@@ -19,6 +20,8 @@ public class HomeView implements Observer {
     Button button_create_game;
     Button button_join_game;
 
+    RelativeLayout instructionsPopup;
+
     MasterpieceGameModel masterpieceGameModel;
 
 
@@ -28,6 +31,9 @@ public class HomeView implements Observer {
         this.masterpieceGameModel = masterpieceGameModel;
         this.view = view;
         initialize();
+
+        instructionsPopup = (RelativeLayout)view.findViewById(R.id.game_instructions_popup);
+        instructionsPopup.bringToFront();
     }
 
     private void initialize(){

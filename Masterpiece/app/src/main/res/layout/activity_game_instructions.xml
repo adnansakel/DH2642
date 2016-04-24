@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/game_instructions_view"
     android:background="@color/colorBackground"
     >
 
@@ -11,6 +10,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center"
+    android:id="@+id/llButtonBack"
     android:layout_alignParentBottom="true">
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/scrollView"
-        android:layout_above="@id/button_back">
+        android:layout_above="@id/llButtonBack">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -38,7 +38,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
         android:text="Preparation"
         android:textStyle="bold"
         android:layout_marginTop="1dp"
@@ -55,7 +54,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
             android:text="Gameplay"
             android:textStyle="bold"
             android:layout_marginTop="1dp"
@@ -64,7 +62,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
             android:text="The player who created the game will be the starting player. The order is then defined by the order in which they joined in the game lobby. At the moment the game focuses on the Private Auction game mode only.
 
 PRIVATE AUCTION game mode, any of the other players may, but are not required to, bid on the seller’s paintings. The seller selects which of the paintings he will sell, in the case of having more than one. The player who wins the bid will pay the former owner the high bid amount and he then receives the painting. Bids must be in increments of $50,000.
@@ -75,7 +72,6 @@ PRIVATE AUCTION game mode, any of the other players may, but are not required to
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
             android:text="Winning the Game"
             android:textStyle="bold"
             android:layout_marginTop="1dp"
