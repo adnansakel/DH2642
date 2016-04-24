@@ -299,9 +299,12 @@ public class FirebaseCalls {
                         shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
                         masterpieceGameModel.setShuffledPaintingValues(shuffledpaintinvalueglist);
 
-                        for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {//masterpiecegamemodel.getAllPlayers().size() should be used instead of 4
+                        // Distribute 2 paintings (e.g. first player gets the first in the list and the fifth, second gets the second and the sixth,...
+                        for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {
                             masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i), shuffledpaintinvalueglist.get(i));
+                            masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i+AppConstants.TotalNumberofPlayers), shuffledpaintinvalueglist.get(i+AppConstants.TotalNumberofPlayers));
                         }
+
                         masterpieceGameModel.notifyAllPaintingsAdded();
                         //masterpieceGameModel.setCurrentPlayerToDisplay(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                         shuffledpaintinglist.subList(0, AppConstants.TotalNumberofPlayers).clear();//removing distributed paintings
@@ -456,7 +459,7 @@ public class FirebaseCalls {
     }
 
     public void setNextPlayerAsBidder() {
-        new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1) % 4));
+        new Firebase(AppConstants.GameRef + "/" + "CurrentBidder").setValue(Integer.toString((masterpieceGameModel.getMyPlayer().getPlayerpositionID() + 1) % 4));
     }
 
     public void resetFirebaseforNextRound(){

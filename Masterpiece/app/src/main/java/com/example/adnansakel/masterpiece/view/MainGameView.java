@@ -4,9 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.text.Layout;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +59,12 @@ public class MainGameView implements Observer{
     Button button_status_bar;
     TextView textWinnerName;
 
-
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
         button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
         initialize();
         model.addObserver(this);
         this.model = model;
-
 
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -87,12 +82,9 @@ public class MainGameView implements Observer{
         button_end_round = (Button)view.findViewById(R.id.btn_end_round);
         textWinnerName = (TextView)view.findViewById(R.id.textViewWinnerName);
         button_end_round.setVisibility(View.INVISIBLE);
-
-
     }
 
     private void initialize(){
-
         //find the views that will be needed
         layoutStatusPopup = (RelativeLayout)view.findViewById(R.id.fullscreenStatusPopup);
         layoutPopupGameModelSelection = (RelativeLayout)view.findViewById(R.id.game_mode_selection_view);
@@ -185,8 +177,6 @@ public class MainGameView implements Observer{
             counter++;
         }
     }
-
-
 
     public void hideAllPopupContent() {
         layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);

@@ -41,8 +41,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     Button button_join_game;
     Button button_game_instructions;
 
-    RelativeLayout instructionsPopup;
-
     Firebase masterpieceGameNumberRef;
     MasterpieceGameModel masterpieceGameModel;
     FirebaseCalls firebaseCalls;
@@ -64,13 +62,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         masterpieceGameModel = ((MasterpieceApplication)this.getApplication()).getModel();
 
-        // Creating the view class instance
-        HomeView homeView = new HomeView(findViewById(R.id.home_view),masterpieceGameModel);
-
         button_create_game = (Button)findViewById(R.id.buttonCreateGame);
         button_join_game = (Button)findViewById(R.id.buttonJoinGame);
         button_game_instructions = (Button)findViewById(R.id.buttonGameInstruction);
-
 
         button_create_game.setOnClickListener(this);
         button_join_game.setOnClickListener(this);
@@ -143,8 +137,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             }
         }
         else if(v == button_game_instructions){
-            instructionsPopup = (RelativeLayout)v.findViewById(R.id.game_instructions_popup);
-            instructionsPopup.setVisibility(View.INVISIBLE);
+            startActivity(new Intent(HomeActivity.this, InstructionsActivity.class));
         }
     }
 }
