@@ -174,7 +174,8 @@
         android:id="@+id/fullscreenStatusPopup"
         android:layout_below="@+id/llStatusBar"
         android:visibility="visible"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp">
         <include layout="@layout/activity_game_model_selection"/>
         <include layout="@layout/activity_privatauct_ongoing"/>
         <include layout="@layout/activity_bankauct_ongoing"/>
@@ -185,7 +186,8 @@
         <include layout="@layout/activity_privatauct_bid_results"/>
         <include layout="@layout/activity_bankauct_bid_won"/>
         <include layout="@layout/activity_privatauct_bid_lost"/>
-        <include layout="@layout/activity_bankauct_bid_lost"/>
+        <include layout="@layout/activity_bankauct_bid_lost"
+             />
 
     </RelativeLayout>
 

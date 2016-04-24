@@ -350,6 +350,8 @@ public class MainGameView implements Observer{
                             image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
                                     model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
                                     model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
+                            TextView paintingTitle = (TextView)view.findViewById(R.id.txtPaintingTitle);
+                            paintingTitle.setText( model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
                             TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
                             bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }

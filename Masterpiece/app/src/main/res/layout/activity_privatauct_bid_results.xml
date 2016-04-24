@@ -21,22 +21,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="has Won the Auction!"
-        android:id="@+id/textView12"
+        android:text="@string/player_title"
+        android:id="@+id/textViewWinnerName"
         android:textColor="@color/colorMainText"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/cash"
+        android:text="has won the auction!"
+        android:id="@+id/textView12"
         android:textColor="@color/colorMainText"
-        android:id="@+id/txtPlayerCash"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/textView7"
-        android:layout_toStartOf="@+id/textView7" />
+        android:layout_below="@+id/textViewWinnerName"
+        android:layout_centerHorizontal="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,13 +46,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/winning_bid_amount"
         android:id="@+id/txtHighestBid"
+        android:layout_below="@id/textViewWinnerName"
         android:textColor="@color/colorMainText"
         android:textStyle="bold"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="60dp"
         android:layout_alignLeft="@+id/textView11"
         android:layout_alignStart="@+id/textView11" />
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Painting to My Collection"
@@ -61,29 +64,16 @@
         android:layout_above="@+id/txtPlayerCash"
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/player_title"
-        android:id="@+id/textViewWinnerName"
-        android:textColor="@color/colorMainText"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/textView11"
-        android:layout_centerHorizontal="true" />
+        android:visibility="invisible"/>-->
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="End Round"
         android:id="@+id/btn_end_round"
+        android:layout_below="@id/txtHighestBid"
         android:textColor="@color/colorButtonText"
         android:background="@drawable/custom_button"
-        android:layout_marginBottom="54dp"
-        android:layout_above="@+id/txtPlayerCash"
-        android:layout_alignRight="@+id/btnAddPaintingToCollection"
-        android:layout_alignEnd="@+id/btnAddPaintingToCollection" />
-
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
