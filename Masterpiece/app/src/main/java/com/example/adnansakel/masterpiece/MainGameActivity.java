@@ -161,7 +161,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                 fullscreen_status_popup.setVisibility(View.VISIBLE);
                 fullscreen_status_popup.animate().translationY(0)
-                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                        .setDuration(200).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
@@ -183,7 +183,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                 //AnimUtil animUtil = new AnimUtil(fullscreen_status_popup);
                 //animUtil.MakeVisibleWithSlideDown();
                 fullscreen_status_popup.animate().translationY(-fullscreen_status_popup.getHeight())
-                        .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                        .setDuration(200).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);

@@ -15,7 +15,7 @@ public class AnimUtil {
     }
     public void MakeInvisibleWithSlideUp(){
         view.animate().translationY(-view.getHeight())
-                .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                .setDuration(200).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
@@ -26,7 +26,7 @@ public class AnimUtil {
     public void MakeVisibleWithSlideDown(){
         view.setVisibility(View.VISIBLE);
         view.animate().translationY(0)
-                .setDuration(2000).setListener(new AnimatorListenerAdapter() {
+                .setDuration(200).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
