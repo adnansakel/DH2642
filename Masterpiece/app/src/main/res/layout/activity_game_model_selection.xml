@@ -25,7 +25,7 @@
         android:text="Roll"
         android:id="@+id/btnRoll"
         android:textColor="@color/colorButtonText"
-        android:background="@drawable/custom_button"
+        android:background="@color/colorButton"
         android:layout_gravity="right|bottom"
         android:layout_marginRight="27dp"
         android:layout_marginEnd="27dp"

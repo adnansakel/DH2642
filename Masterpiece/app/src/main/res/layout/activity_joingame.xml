@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:id="@+id/joingame_view"
-    android:background="@color/colorBackground">
+    android:background="@color/lightBackgroundColor">
 
 <EditText
     android:id="@+id/edittext_GameNumber"
@@ -43,7 +43,7 @@
         android:layout_marginTop="60dp"
         android:text="@string/join_game"
         android:textColor="@color/colorButtonText"
-        android:background="@drawable/custom_button"
+        android:background="@color/colorButton"
         android:textSize="23sp"
         android:layout_gravity="center"/>
 </LinearLayout>

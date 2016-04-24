@@ -22,14 +22,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Secret Value"
-                android:background="@color/colorSecretValue"
+                android:background="@color/colorBackground"
                 android:layout_weight="0"
                 android:id="@+id/txtSecretValue"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/colorButton" />
             </RelativeLayout>
 
     </LinearLayout>
