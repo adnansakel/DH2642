@@ -111,7 +111,7 @@ public class FirebaseCalls {
         //masterpieceGameModel.setUserName(editTextUserName.getText().toString());
         player.put("Name", masterpieceGameModel.getUserName().toString());
         player.put("Paintings", "");
-        player.put("Cash", "1500000"); //Initial cash
+        player.put("Cash", "800000"); //Initial cash
         player.put("BidAmount", "");
         player.put("Bidding", "true");
         progress = ProgressDialog.show(context, "", "joining game ...", true);
@@ -157,7 +157,7 @@ public class FirebaseCalls {
                 //String[]paintings = {"1","2","3","4"};
                 player.put("Name", masterpieceGameModel.getUserName());
                 player.put("Paintings", "");
-                player.put("Cash", "");
+                player.put("Cash", "800000");
                 player.put("BidAmount", "");
                 player.put("Bidding", "true");
 

@@ -76,7 +76,7 @@ public class MainGameView implements Observer{
         String cashFormatted = formatter.format(model.getMyPlayer().getCash());
         textCash.setText("Cash: " + cashFormatted  + " $");
 
-        //set currently selected player text
+        //set currently selected player text3
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
         textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%4).getName() + "'s paintings:");
 
