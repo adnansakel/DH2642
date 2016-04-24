@@ -56,7 +56,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     View fullscreen_status_popup;
 
     boolean myTurn = false;
-    //boolean statusPopupIsVisible = false;
     Sensor mAccelerometer;
 
     int currentBid;
@@ -209,8 +208,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         } else if(v == button_begin_bank_auction) {
 
             /* not using this yet
-            //TODO: the below code could be moved to its own function
-
             //set turn action
             //model.setTurnAction("bankAuction");
             new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("bankAuction");
@@ -317,56 +314,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         }
     }
 
-    /* moving this to onclick event to simplify the code
-    public void startPrivateAuction () {
 
-            //PRIVATE AUCTION
-
-            new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue("privateAuction");
-
-            //show the private auction select painting layout
-            model.setPopupContent("privateAuctionSelectPainting");
-
-            // load clickable pictures for myPlayer
-            mainGameView.populatePaintingsMyPlayerPrivateAuction(myPlayerID, (LinearLayout) findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
-
-        // player can
-            //TODO: allow my player to select a painting
-
-            //set painting being auctioned
-            //model.setPaintingBeingAuctioned(chosenPaintingToAuction);
-
-            //TODO DM SET BACK
-            new Firebase(AppConstants.GameRef+"/"+"PaintingBeingAuctioned").setValue("");
-            //TODO: set the value of my painting in the above
-
-            //TODO: set my player's bidding property to false in Firebase (eg. It's my auction so I'm done bidding)
-
-            //set turn action
-            //model.setTurnAction("privateAuction");
-            new Firebase(AppConstants.GameRef+"/"+"TurnAction").setValue("privateAuction");
-
-            //set current bidder as the next player
-            //model.setCurrentBidder(model.getNextPlayer());
-            //TODO: get the next player
-            new Firebase(AppConstants.GameRef+"/"+"CurrentBidder").setValue("");
-
-            //bidding on private auction
-
-
-       // } else if(roll == 1){
-
-            //BANK AUCTION
-
-            model.setPopupContent("bankAuctionBegin");
-
-            //start listener on begin auction button
-            button_begin_bank_auction.setOnClickListener(MainGameActivity.this);
-
-        //}
-
-
-    }*/
 
     public void PaintingSelected(View v) {
         System.out.println("ID of Selected Painting: " + v.getId());
