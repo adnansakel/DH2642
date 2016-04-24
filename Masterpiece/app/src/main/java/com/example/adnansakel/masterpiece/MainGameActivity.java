@@ -518,6 +518,19 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     @Override
     public void onShake(int count) {
         Toast.makeText(this,"Shake detected"+count,Toast.LENGTH_LONG).show();
+        //randomly select a turn type (roll the dice)
+        Random rn = new Random();
+        //int roll = rn.nextInt(1); //there are only 2 types so far
+        int roll = 0; // for testing only
+
+        if(roll == 0) {
+            //set TurnAction as Private Auction in Firebase
+            new Firebase(AppConstants.GameRef+"/"+AppConstants.TURNACTION).setValue(AppConstants.PRIVATE);
+        }
+        else if(roll == 1) {
+            //BANK AUCTION
+            //model.setPopupContent("bankAuctionBegin");
+        }
     }
 
     @Override
