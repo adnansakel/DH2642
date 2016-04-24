@@ -32,7 +32,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/scrollView"
-        android:layout_above="@id/llButtonBack">
+        android:layout_above="@id/llButtonBack"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -45,13 +46,14 @@
         android:text="Preparation"
         android:textStyle="bold"
         android:layout_marginTop="1dp"
-        />
+        android:autoText="false" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
         android:text="Magnum Opus, the mobile art auction game requires 4 players using android devices to play this game. Paintings and their secret values are shuffled at the start of every game. Every player, starts with $800,000. Each player, in turn, is handed two paintings and a value card for each painting. The secret value of the painting should not be shown to other players.
+
          "
 
 
@@ -70,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The player who created the game will be the starting player. The order is then defined by the order in which they joined in the game lobby. At the moment the game focuses on the Private Auction game mode only. Private Auction game mode, any of the other players may, but are not required to, bid on the seller’s paintings. The seller selects which of the paintings he will sell, in the case of having more than one. The player who wins the bid will pay the former owner the high bid amount and he then receives the painting. Bids must be in increments of $50,000.
+
             "
             android:layout_marginTop="1dp"
             />
