@@ -49,5 +49,6 @@ public class AppConstants {
     public static String PRIVATE = "private";
     public static String BANK = "bank";
     public static String WINNERFOUND = "WinnerFound";
+    public static String NOTIFY_FOR_UPDATED_PAINTING_AND_CASH = "notifyforupdatedpaintingandcash";
 
 }

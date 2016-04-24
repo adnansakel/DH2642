@@ -315,6 +315,9 @@ public class MainGameView implements Observer{
                 String cashValueFormatted = formatter.format(Integer.valueOf(model.getMyPlayer().getCash()));
                 TextView textCash = (TextView) view.findViewById(R.id.txtPlayerCash);
                 textCash.setText("Cash: " + cashValueFormatted + " $");
+
+            }
+            if(data.toString().equals(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH)){
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
             }

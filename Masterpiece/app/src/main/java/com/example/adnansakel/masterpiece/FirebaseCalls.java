@@ -433,6 +433,8 @@ public class FirebaseCalls {
                                         i++;
 
                                     }
+
+                                    masterpieceGameModel.notifyForUpdatedPaintingandCash();
                                 }
 
                                 @Override
