@@ -379,8 +379,9 @@ public class FirebaseCalls {
                                 }
                             }
                     );
-                }
-                else{
+                } else if(masterpieceGameModel.getCountNonBidders().equals("4")){
+                    //do nothing, since somebody won the game
+                } else{
 
                     //if current bidder has changed
                     if(!masterpieceGameModel.getCurrentBidder().equals(snapshot.child(AppConstants.CURRENTBIDDER).getValue().toString())){
