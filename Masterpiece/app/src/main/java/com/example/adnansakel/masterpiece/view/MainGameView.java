@@ -1,5 +1,7 @@
 package com.example.adnansakel.masterpiece.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -186,18 +188,30 @@ public class MainGameView implements Observer{
 
     public void hideAllPopupContent() {
         layoutPopupGameModelSelection.setVisibility(View.INVISIBLE);
+        layoutHomeViewInMainGameView.setTranslationY(-layoutHomeViewInMainGameView.getHeight());
         layoutPopupPrivateAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupPrivateAuctionInProgress.getHeight());
         layoutPopupBankAuctionInProgress.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionInProgress.setTranslationY(-layoutPopupBankAuctionInProgress.getHeight());
         layoutPopupPrivateAuctionSelectPainting.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionSelectPainting.setTranslationY(-layoutPopupPrivateAuctionSelectPainting.getHeight());
         layoutPopupBankAuctionBegin.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBegin.setTranslationY(-layoutPopupBankAuctionBegin.getHeight());
         layoutPopupPrivateAuctionBid.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupBankAuctionBid.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionBid.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupPrivateAuctionWon.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionWon.setTranslationY(-layoutPopupPrivateAuctionBid.getHeight());
         layoutPopupBankAuctionWon.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionWon.setTranslationY(-layoutPopupBankAuctionWon.getHeight());
         layoutPopupPrivateAuctionLost.setVisibility(View.INVISIBLE);
+        layoutPopupPrivateAuctionLost.setTranslationY(-layoutPopupPrivateAuctionLost.getHeight());
         layoutPopupBankAuctionLost.setVisibility(View.INVISIBLE);
+        layoutPopupBankAuctionLost.setTranslationY(-layoutPopupBankAuctionLost.getHeight());
         //layoutHomeViewInMainGameView.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setVisibility(View.INVISIBLE);
+        layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
         button_status_bar.setBackgroundResource(R.drawable.uparrow);
     }
 
@@ -292,7 +306,7 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals("PaintingAdded")) {
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+ 1) % 4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID() + 1) % 4);
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
@@ -327,17 +341,24 @@ public class MainGameView implements Observer{
                     //update turntaker remove painting add paiting to winner cash change in firebase
                     //then hide the result screen
                 }
+                /*
                 hideAllPopupContent();
                 layoutStatusPopup.setVisibility(View.VISIBLE);
-                layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);
+                layoutPopupPrivateAuctionWon.setVisibility(View.VISIBLE);*/
+                ShowAnimatedView(layoutPopupPrivateAuctionWon);
+
             }
             else{
                 if(data.toString().equals(AppConstants.TURN_TAKER_CHANGED)){
                     button_end_round.setVisibility(View.INVISIBLE);
                     if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
+                        /*
                         hideAllPopupContent();
                         layoutStatusPopup.setVisibility(View.VISIBLE);
                         layoutPopupGameModelSelection.setVisibility(View.VISIBLE);
+                        */
+                        ShowAnimatedView(layoutPopupGameModelSelection);
+
                     }
                     else{
                         //Any thing else if we wish to display
@@ -348,9 +369,11 @@ public class MainGameView implements Observer{
                     if(model.getCurrentBidder().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
                         if(model.getMyPlayer().isBidding()){
                             //Display bidding screen. Let's use same bidding screen for both type of auction
-                            hideAllPopupContent();
+                            /*hideAllPopupContent();
                             layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
+                            */
+                            ShowAnimatedView(layoutPopupPrivateAuctionBid);
                             ImageView image = (ImageView) view.findViewById(R.id.img_PrivateAuction_PaintingBeingAuctioned);
                             image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
                                     model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
@@ -366,24 +389,29 @@ public class MainGameView implements Observer{
 
                     }
                     else if(!model.getCurrentBidder().equals("100")){
-                        hideAllPopupContent();
+                        /*hideAllPopupContent();
                         layoutStatusPopup.setVisibility(View.VISIBLE);
-                        layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);
+                        layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);*/
+                        ShowAnimatedView(layoutPopupPrivateAuctionInProgress);
+
                     }
                 }
                 if(data.toString().equals(AppConstants.TURN_ACTION_CHANGED)){
                     if(model.getTurnAction().equals(AppConstants.PRIVATE)){
-                        if(model.getTurnTaker().equals(model.getMyPlayer().getPlayerpositionID() + "")){
+                        if (model.getTurnTaker().equals(model.getMyPlayer().getPlayerpositionID() + "")){
                             //Display screen for private auction
-                            hideAllPopupContent();
+                            /*hideAllPopupContent();
                             layoutStatusPopup.setVisibility(View.VISIBLE);
-                            layoutPopupPrivateAuctionSelectPainting.setVisibility(View.VISIBLE);
+                            layoutPopupPrivateAuctionSelectPainting.setVisibility(View.VISIBLE);*/
+                            ShowAnimatedView(layoutPopupPrivateAuctionSelectPainting);
                             populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(),(LinearLayout)view.findViewById(R.id.ll_PrivateAuction_PaintingsToSelect));
+
                         }
                         else{
                             //Display screen for private auction opn progress
-                            hideAllPopupContent();
-                            layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);
+                            /*hideAllPopupContent();
+                            layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);*/
+                            ShowAnimatedView(layoutPopupPrivateAuctionInProgress);
                         }
                     }
                     else if(model.getTurnAction().equals(AppConstants.BANK)){
@@ -516,6 +544,22 @@ public class MainGameView implements Observer{
             }
             */
         }
+
+    }
+
+    private void ShowAnimatedView(View view){
+        hideAllPopupContent();
+        view.setVisibility(View.VISIBLE);
+        layoutStatusPopup.setVisibility(View.VISIBLE);
+        layoutStatusPopup.animate().translationY(0)
+                .setDuration(1000).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                layoutStatusPopup.setVisibility(View.VISIBLE);
+                button_status_bar.setBackgroundResource(R.drawable.uparrow);
+            }
+        });
 
     }
 }
