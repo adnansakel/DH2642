@@ -99,7 +99,6 @@
                 android:fillViewport="false"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:background="#ebf86e"
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
@@ -107,8 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:background="#37d259">
+                    android:orientation="horizontal">
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -145,16 +143,14 @@
                 android:layout_height="match_parent"
                 android:id="@+id/hsvBottomPanel"
                 android:fillViewport="false"
-                android:layout_marginLeft="5dp"
-                android:background="#f6f678">
+                android:layout_marginLeft="5dp">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfMyPlayer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:background="#6cf457">
+                    android:orientation="horizontal">
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -175,7 +171,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_below="@+id/llStatusBar">
+        android:layout_below="@+id/llStatusBar"
+        android:visibility="invisible">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

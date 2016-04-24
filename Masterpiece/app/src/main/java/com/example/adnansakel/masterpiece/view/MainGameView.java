@@ -153,7 +153,7 @@ public class MainGameView implements Observer{
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
             textSecretValue.setText(String.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter) + " $"));
-            textSecretValue.setWidth(200);
+            //textSecretValue.setWidth(200);
 
             ll.addView(singlePainting, layoutParams);
             counter++;
