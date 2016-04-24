@@ -365,7 +365,7 @@ public class FirebaseCalls {
                                 .valueOf(masterpieceGameModel.getTurnTaker())+1)%4)+"");
 
                     }*/
-
+                    /*
                     new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS).addListenerForSingleValueEvent(
                             new ValueEventListener() {
                                 @Override
@@ -395,13 +395,13 @@ public class FirebaseCalls {
                                                 masterpieceGameModel.setMyPlayer(masterpieceGameModel.getAllPlayers().get(i));
                                                 System.out.println("MyPlayer" + i + " " + masterpieceGameModel.getMyPlayer().getCash());
 
-                                                /*If winnner is myPlayer; update that as well
-                                                masterpieceGameModel.getMyPlayer().addOwnedPaintingID(
-                                                        Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
-                                                masterpieceGameModel.getMyPlayer().addOenedPaintingValue(
-                                                        masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
-                                                masterpieceGameModel.getMyPlayer().setCash(masterpieceGameModel.getMyPlayer().getCash()
-                                                        - Integer.valueOf(masterpieceGameModel.getCurrentBid()));*/
+                                               // /*If winnner is myPlayer; update that as well
+                                               // masterpieceGameModel.getMyPlayer().addOwnedPaintingID(
+                                                 //       Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
+                                                //masterpieceGameModel.getMyPlayer().addOenedPaintingValue(
+                                                 //       masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
+                                                //masterpieceGameModel.getMyPlayer().setCash(masterpieceGameModel.getMyPlayer().getCash()
+                                                  //      - Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
                                             }
 
@@ -428,9 +428,9 @@ public class FirebaseCalls {
                                                 //masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
                                                 //      + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
-                                                /*masterpieceGameModel.getMyPlayer().removePaintingIDandValue(paintingAuctioned);
-                                                masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
-                                                        + Integer.valueOf(masterpieceGameModel.getCurrentBid()));*/
+                                               // /*masterpieceGameModel.getMyPlayer().removePaintingIDandValue(paintingAuctioned);
+                                                //masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
+                                                  //      + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
                                             }
                                         }
@@ -446,7 +446,7 @@ public class FirebaseCalls {
                                     Toast.makeText(context, "Some error occured while finding winner", Toast.LENGTH_LONG).show();
                                 }
                             }
-                    );
+                    );*/
                 } else if (masterpieceGameModel.getCountNonBidders().equals("4")) {
                     //do nothing, since somebody won the game
                 } else {
