@@ -121,7 +121,7 @@ public class MainGameView implements Observer{
     public void populatePaintingsOtherPlayers(Integer selectedPlayerID){
         LinearLayout layoutPaintingsOtherPlayers = (LinearLayout)view.findViewById(R.id.llPaintingsOfOtherPlayers);
         HorizontalScrollView hsvTopPanel = (HorizontalScrollView)view.findViewById(R.id.hsvTopPanel);
-        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
         layoutPaintingsOtherPlayers.removeAllViews();
@@ -306,7 +306,7 @@ public class MainGameView implements Observer{
                 textCash.setText("Cash: " + model.getMyPlayer().getCash() + " $");
             }
 
-            if(data.toString().equals(AppConstants.WINNERFOUND)){
+            if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
                 System.out.println("Winner is player "+ model.getWinner());
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){

@@ -94,18 +94,21 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:id="@+id/hsvTopPanel"
                 android:fillViewport="false"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:background="#ebf86e"
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfOtherPlayers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:background="#37d259">
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -134,19 +137,20 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/bottomPanel"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
                 android:id="@+id/hsvBottomPanel"
                 android:fillViewport="false"
                 android:layout_marginLeft="5dp">
 
                 <LinearLayout
                     android:id="@+id/llPaintingsOfMyPlayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal" >
                 </LinearLayout>
@@ -155,19 +159,20 @@
         </LinearLayout>
 
 
-      <TextView
-        android:id="@+id/txtPlayerCash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:textSize="20sp"
-        android:textColor="@color/colorMainText"
-        android:text="@string/player_cash" />
+        <TextView
+            android:id="@+id/txtPlayerCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorMainText"
+            android:text="@string/player_cash" />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:layout_below="@+id/llStatusBar">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -192,6 +197,7 @@
                 />
 
         </RelativeLayout>
+
 
     </RelativeLayout>
 
