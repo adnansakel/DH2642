@@ -56,7 +56,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     View fullscreen_status_popup;
 
     boolean myTurn = false;
-    boolean statusPopupIsVisible = false;
+    //boolean statusPopupIsVisible = false;
     Sensor mAccelerometer;
 
     int currentBid;
@@ -146,7 +146,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
     public void onClick(View v) {
         if(v == button_status_bar) {
 
-            if(statusPopupIsVisible == false) {
+            if(fullscreen_status_popup.getVisibility() == View.INVISIBLE) {
 
 
                 //show the fullscreen popup
@@ -159,10 +159,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                         super.onAnimationEnd(animation);
                         fullscreen_status_popup.setVisibility(View.VISIBLE);
                         button_status_bar.setBackgroundResource(R.drawable.uparrow);
-
-
-                        //toggle the button to hide popup next time it's pressed
-                        statusPopupIsVisible = true;
                     }
                 });
 
@@ -181,9 +177,6 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                         super.onAnimationEnd(animation);
                         fullscreen_status_popup.setVisibility(View.INVISIBLE);
                         button_status_bar.setBackgroundResource(R.drawable.downarrow);
-
-                        //toggle the button to show popup next time it's pressed
-                        statusPopupIsVisible = false;
                     }
                 });
                 //fullscreen_status_popup.setVisibility(View.INVISIBLE);
