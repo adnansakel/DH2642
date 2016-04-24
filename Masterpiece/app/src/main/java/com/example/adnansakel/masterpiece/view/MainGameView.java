@@ -307,8 +307,10 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND)){
-                System.out.println("Winner is player "+ model.getWinner());
+                System.out.println("Winner is player " + model.getWinner());
                 textWinnerName.setText(model.getAllPlayers().get(Integer.valueOf(model.getWinner())).getName());
+                TextView winningAmount = (TextView)view.findViewById(R.id.txtHighestBid);
+                winningAmount.setText("Winning Bid Amount: \n" + model.getCurrentBid() + " $");
                 if(model.getWinner().equals(model.getMyPlayer().getPlayerpositionID()+"")){
                     //Make the btn_end_round visible
                     button_end_round.setVisibility(View.VISIBLE);
@@ -351,7 +353,9 @@ public class MainGameView implements Observer{
                                     model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
                                     model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
                             TextView paintingTitle = (TextView)view.findViewById(R.id.txtPaintingTitle);
-                            paintingTitle.setText( model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
+                            paintingTitle.setText(model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
+                            TextView artist = (TextView)view.findViewById(R.id.txtArtist);
+                            artist.setText("by " + model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getArtist());
                             TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
                             bidText.setText("Current Highest Bid: " + model.getCurrentBid());
                         }
