@@ -116,7 +116,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/colorMainText"
+            android:background="@color/colorBackground"
             android:id="@+id/seperatorline"/>
 
         <TextView
@@ -174,7 +174,7 @@
         android:layout_height="match_parent"
 
         android:layout_below="@+id/llStatusBar"
-        android:visibility="invisible">
+        android:visibility="visible">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
