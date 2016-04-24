@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/maingame_overview_view"
-    android:background="@color/colorBackground"
+    android:background="#fef8f8"
     android:transitionGroup="false"
     android:visibility="visible">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/llStatusBar"
-        android:background="#f88d53"
+        android:background="#de6755"
         android:gravity="center">
         <Button
             android:layout_width="45dp"
@@ -23,7 +23,8 @@
             android:focusable="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="3dp"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:allowUndo="false">
         </Button>
     </LinearLayout>
 
@@ -115,7 +116,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@android:color/holo_orange_dark"
+            android:background="@color/colorBackground"
             android:id="@+id/seperatorline"/>
 
         <TextView
@@ -164,7 +165,8 @@
             android:layout_marginLeft="5dp"
             android:textSize="20sp"
             android:textColor="@color/colorMainText"
-            android:text="@string/player_cash" />
+            android:text="@string/player_cash"
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -176,12 +178,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffdab9"
             android:id="@+id/fullscreenStatusPopup"
 
             android:visibility="visible"
             android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="35dp"
+            android:background="@color/colorBackground">
             <include layout="@layout/activity_game_model_selection"/>
             <include layout="@layout/activity_privatauct_ongoing"/>
             <include layout="@layout/activity_bankauct_ongoing"/>
@@ -199,11 +201,9 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#220b0b0b"
+                android:background="#6adf7462"
                 android:layout_alignParentBottom="true"
                 android:layout_alignWithParentIfMissing="false"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentEnd="false"
                 android:layout_marginBottom="1dp"></LinearLayout>
 
         </RelativeLayout>

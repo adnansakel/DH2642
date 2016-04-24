@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:id="@+id/lobby_view"
-    android:background="@color/colorBackground">
+    android:background="@color/lightBackgroundColor">
 
     <TextView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#bbbbbb"
+        android:background="@color/colorBackground"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -46,7 +46,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#bbbbbb"
+        android:background="@color/colorBackground"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -65,7 +65,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#bbbbbb"
+        android:background="@color/colorBackground"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -84,7 +84,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#bbbbbb"
+        android:background="@color/colorBackground"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -104,7 +104,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#bbbbbb"
+        android:background="@color/colorBackground"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -118,7 +118,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="50dp"
         android:text="@string/start_game"
-        android:background="@drawable/custom_button"
+        android:background="@color/colorButton"
         android:textColor="@color/colorButtonText"
         android:textSize="23sp"
         android:layout_gravity="center"/>
