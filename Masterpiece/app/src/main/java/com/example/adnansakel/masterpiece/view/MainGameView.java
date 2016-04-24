@@ -148,7 +148,7 @@ public class MainGameView implements Observer{
                     model.getPaintingbyPosition(paintingID).getImagebytearray().length), 200, 200, true));
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
+            String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
             //textSecretValue.setWidth(200);
 
@@ -175,7 +175,7 @@ public class MainGameView implements Observer{
             image.setId(paintingID);
 
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
-            String secretValueFormatted = formatter.format(Integer.valueOf(model.getPlayer(myPlayerID).getOwnedPaintingValues().get(counter)));
+            String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
             textSecretValue.setWidth(200);
 

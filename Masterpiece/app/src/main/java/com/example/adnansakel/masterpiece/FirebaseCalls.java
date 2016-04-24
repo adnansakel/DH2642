@@ -300,6 +300,10 @@ public class FirebaseCalls {
                         shuffledpaintinvalueglist = dataSnapshot.child(AppConstants.SHUFFLEDPAINTINGVALUES).getValue(t);
                         masterpieceGameModel.setShuffledPaintingValues(shuffledpaintinvalueglist);
 
+                        for(int i = 0; i < shuffledpaintinglist.size(); i++){
+                            masterpieceGameModel.paintingValue.put(shuffledpaintinglist.get(i),shuffledpaintinvalueglist.get(i));
+                        }
+
                         // Distribute 2 paintings (e.g. first player gets the first in the list and the fifth, second gets the second and the sixth,...
                         for (int i = 0; i < AppConstants.TotalNumberofPlayers; i++) {
                             masterpieceGameModel.addPainting(i, shuffledpaintinglist.get(i), shuffledpaintinvalueglist.get(i));
@@ -402,7 +406,7 @@ public class FirebaseCalls {
                                             int loosingPlayerPosition = Integer.valueOf(masterpieceGameModel.getTurnTaker());
                                             int paintingAuctioned = Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned());
                                             int currentCashofTurntaker = masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).getCash();
-                                            masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingIDandValue(paintingAuctioned);
+                                            masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingID(paintingAuctioned);
                                            // masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).removePaintingValues(paintingAuctioned);
                                             masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition).setCash(currentCashofTurntaker
                                                             + Integer.valueOf(masterpieceGameModel.getCurrentBid()));

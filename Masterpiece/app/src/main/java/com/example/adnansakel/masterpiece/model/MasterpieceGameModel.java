@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
@@ -31,6 +33,7 @@ public class MasterpieceGameModel extends Observable{
     private List<Integer>shuffledPaintingValues;//a list to shuffle the paintings
     private List<Integer>shuffledPaintingIDs;
     private Integer nextBankPainting;
+    public Map<Integer,Integer> paintingValue;
 
     // private List<Integer>bankPaintingIDs;
     //private List<Integer>bankPaintingValues;
@@ -61,6 +64,7 @@ public class MasterpieceGameModel extends Observable{
 
         allPaintingValues = new ArrayList<Integer>();
         allPaintingIDs = new ArrayList<Integer>();
+        paintingValue = new HashMap<Integer, Integer>();
 
         //pre populated with fixed values
 
