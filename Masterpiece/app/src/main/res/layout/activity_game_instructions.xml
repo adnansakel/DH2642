@@ -57,7 +57,7 @@
 
 
         android:layout_marginTop="1dp"
-        android:textSize="15dp" />
+        android:textSize="14dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,9 +70,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The player who created the game will be the starting player. The order is then defined by the order in which they joined in the game lobby. At the moment the game focuses on the Private Auction game mode only. Private Auction game mode, any of the other players may, but are not required to, bid on the seller’s paintings. The seller selects which of the paintings he will sell, in the case of having more than one. The player who wins the bid will pay the former owner the high bid amount and he then receives the painting. Bids must be in increments of $50,000."
+            android:text="The player who created the game will be the starting player. The order is then defined by the order in which they joined in the game lobby. The first player will either press the 'roll' button or shake their phone in order to decide the game model. At the moment the game focuses on the Private Auction game mode only. Private Auction game mode, any of the other players may, but are not required to, bid on the seller’s paintings. The seller selects which of the paintings he will sell, in the case of having more than one. The player who wins the bid will pay the former owner the high bid amount and he then receives the painting. Bids must be in increments of $50,000."
             android:layout_marginTop="1dp"
-            android:textSize="15dp" />
+            android:textSize="14dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:id="@+id/editText"
             android:text="The game ends when the last painting and value card are drawn. Players add up their cash and the values of their paintings to determine their total assets. The player having the greatest total assets is the winner. Good luck!"
             android:layout_marginTop="1dp"
-            android:textSize="15dp" />
+            android:textSize="14dp" />
 
         </LinearLayout>
     </ScrollView>
