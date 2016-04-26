@@ -317,7 +317,7 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals("PaintingAdded")) {
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID() + 1) % 4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID() + 1) % AppConstants.TotalNumberofPlayers);
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
@@ -330,7 +330,7 @@ public class MainGameView implements Observer{
             }
             if(data.toString().equals(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH)){
                 populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%AppConstants.TotalNumberofPlayers);
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
