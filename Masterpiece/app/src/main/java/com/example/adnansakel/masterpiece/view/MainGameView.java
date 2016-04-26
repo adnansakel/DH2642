@@ -67,7 +67,6 @@ public class MainGameView implements Observer{
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
         button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
-        initialize();
         model.addObserver(this);
         this.model = model;
 
@@ -88,6 +87,8 @@ public class MainGameView implements Observer{
         button_end_round = (Button)view.findViewById(R.id.btn_end_round);
         textWinnerName = (TextView)view.findViewById(R.id.textViewWinnerName);
         button_end_round.setVisibility(View.INVISIBLE);
+
+        initialize();
     }
 
     private void initialize(){
@@ -105,6 +106,14 @@ public class MainGameView implements Observer{
         layoutPopupPrivateAuctionLost = (RelativeLayout)view.findViewById(R.id.privateauction_bidlost_view);
         layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
         layoutHomeViewInMainGameView = (LinearLayout)view.findViewById(R.id.linear_layout_homeview_in_MainGameView);
+
+        if(AppConstants.TotalNumberofPlayers==2){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+            button_thirdPlayer.setVisibility(view.INVISIBLE);
+        }
+        else if(AppConstants.TotalNumberofPlayers == 3){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+        }
 
         //set the popup and content views to invisible
         layoutStatusPopup.setVisibility(View.INVISIBLE);
@@ -214,13 +223,7 @@ public class MainGameView implements Observer{
         layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
         button_status_bar.setBackgroundResource(R.drawable.uparrow);
 
-        if(AppConstants.TotalNumberofPlayers==2){
-            button_fourthPlayer.setVisibility(view.INVISIBLE);
-            button_thirdPlayer.setVisibility(view.INVISIBLE);
-        }
-        else if(AppConstants.TotalNumberofPlayers == 3){
-            button_fourthPlayer.setVisibility(view.INVISIBLE);
-        }
+
     }
 
     @Override
