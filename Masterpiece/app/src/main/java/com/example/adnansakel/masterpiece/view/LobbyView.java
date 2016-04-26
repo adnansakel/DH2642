@@ -80,13 +80,13 @@ public class LobbyView implements Observer {
                 }
                 else if(i == 4){
                     textViewPlayer4.setText(player.getName());
-                    //if (AppConstants.IamCreator == true){
-                    button_start_game.setVisibility(View.VISIBLE);
-                    //}
                 }
 
                 if(i == AppConstants.TotalNumberofPlayers){
                     button_start_game.setVisibility(View.VISIBLE);
+                    /*if (AppConstants.IamCreator == true){
+                        button_start_game.setVisibility(View.VISIBLE);
+                    }*/
                 }
 
                 i++;

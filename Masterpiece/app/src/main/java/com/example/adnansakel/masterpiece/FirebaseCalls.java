@@ -74,6 +74,7 @@ public class FirebaseCalls {
                 game.put(AppConstants.COUNTNONBIDDERS, "0");
                 game.put("BankPaintings", "");
                 game.put(AppConstants.NUMBEROFPLAYERS, "");
+                game.put("GameStarted", "false");
 
                 Firebase gamesRef = masterpieceRef.child("Games");
                 final Firebase newGameRef = gamesRef.push();
@@ -257,6 +258,26 @@ public class FirebaseCalls {
                     }
                 });
     }
+
+    public void listenForGameStarted(){
+
+        new Firebase(AppConstants.GameRef+"/"+"GameStarted").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //if the game has started and I'm not the game creator
+                if (dataSnapshot.getValue() == "true" && AppConstants.IamCreator == false) {
+                    //execute the same code as create game button in LobbyActivity
+                    
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     public void listentoFirebaseforPlayers(){
 
