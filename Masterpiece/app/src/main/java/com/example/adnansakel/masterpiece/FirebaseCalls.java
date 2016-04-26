@@ -111,7 +111,7 @@ public class FirebaseCalls {
 
         progress = ProgressDialog.show(context, "", "joining game ...", true);
         //Set Number of players first then push player
-        new Firebase(AppConstants.GameRef + "/" + AppConstants.NUMBEROFPLAYERS).push().setValue(AppConstants.TotalNumberofPlayers,
+        new Firebase(AppConstants.GameRef + "/" + AppConstants.NUMBEROFPLAYERS).setValue(AppConstants.TotalNumberofPlayers,
                 new Firebase.CompletionListener() {
 
                     @Override
