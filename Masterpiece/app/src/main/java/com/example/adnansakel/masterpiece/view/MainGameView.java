@@ -160,7 +160,7 @@ public class MainGameView implements Observer{
     }
 
     public void populatePaintingsMyPlayerPrivateAuction(Integer myPlayerID, LinearLayout ll){
-        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
         ll.removeAllViews();
@@ -179,7 +179,7 @@ public class MainGameView implements Observer{
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
             String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
-            textSecretValue.setWidth(200);
+            //textSecretValue.setWidth(200);
 
             ll.addView(singlePainting, layoutParams);
             counter++;
