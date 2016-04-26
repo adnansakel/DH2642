@@ -85,17 +85,19 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View view){
 
-            if (view == buttonJoinGame) {
-                if (checkConnection.isConnected()) {
-                    masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
-                    if(masterpiecegamemodel.getUserName().length()>0){
-                        firebaseCalls.joinGamebyCreator();
-                    }
-                    else{
-                        Toast.makeText(this,"Please insert an username to join the game.",Toast.LENGTH_LONG);
-                    }
-
+        if (view == buttonJoinGame) {
+            if (checkConnection.isConnected()) {
+                masterpiecegamemodel.setUserName(editTextUserName.getText().toString());
+                AppConstants.TotalNumberofPlayers = Integer.valueOf(((TextView)findViewById(R.id.edittext_NumberofPlayers))
+                        .getText().toString());
+                if(masterpiecegamemodel.getUserName().length()>0){
+                    firebaseCalls.joinGamebyCreator();
                 }
+                else{
+                    Toast.makeText(this,"Please insert an username to join the game.",Toast.LENGTH_LONG);
+                }
+
             }
+        }
     }
 }

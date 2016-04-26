@@ -35,6 +35,21 @@
         android:textColor="@color/colorMainText"
         android:hint="@string/hint_choose_user_name"/>
 
+    <EditText
+        android:id="@+id/edittext_NumberofPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:maxLength="8"
+        android:textColor="@color/colorMainText"
+        android:hint="Number of players"
+        android:digits="234"
+        android:inputType="number"/>
+
     <Button
         android:id="@+id/buttonJoinGame"
         android:layout_width="300dp"

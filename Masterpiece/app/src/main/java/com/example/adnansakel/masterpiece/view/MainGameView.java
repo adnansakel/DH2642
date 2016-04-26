@@ -80,7 +80,7 @@ public class MainGameView implements Observer{
 
         //set currently selected player text3
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
-        textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%4).getName() + "'s paintings:");
+        textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%AppConstants.TotalNumberofPlayers).getName() + "'s paintings:");
 
         button_secondPlayer = (Button)view.findViewById(R.id.btnSecondPlayer);
         button_thirdPlayer = (Button)view.findViewById(R.id.btnThirdPlayer);
@@ -213,6 +213,14 @@ public class MainGameView implements Observer{
         layoutStatusPopup.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
         button_status_bar.setBackgroundResource(R.drawable.uparrow);
+
+        if(AppConstants.TotalNumberofPlayers==2){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+            button_thirdPlayer.setVisibility(view.INVISIBLE);
+        }
+        else if(AppConstants.TotalNumberofPlayers == 3){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+        }
     }
 
     @Override
@@ -221,9 +229,9 @@ public class MainGameView implements Observer{
 
             if(data.toString().equals("currentPlayerToDisplayChanged")){
                 int myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
-                int secondPlayerID = (myPlayerID + 1)%4;
-                int thirdPlayerID = (myPlayerID + 2)%4;
-                int fourthPlayerID = (myPlayerID + 3)%4;
+                int secondPlayerID = (myPlayerID + 1)%AppConstants.TotalNumberofPlayers;
+                int thirdPlayerID = (myPlayerID + 2)%AppConstants.TotalNumberofPlayers;
+                int fourthPlayerID = (myPlayerID + 3)%AppConstants.TotalNumberofPlayers;
 
                 if(model.getCurrentPlayerToDisplay()==secondPlayerID){
 
@@ -337,7 +345,7 @@ public class MainGameView implements Observer{
                 }
             }
 
-            if(model.getCountNonBidders().equals("3")){
+            if(model.getCountNonBidders().equals(""+(AppConstants.TotalNumberofPlayers-1))){
                 //end round
                 //Display result screen
                 if(AppConstants.IamCreator){
