@@ -643,34 +643,53 @@ public class FirebaseCalls {
                                                                                                         progress.dismiss();
                                                                                                         Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                                                                     } else {
-                                                                                                        //8: set bidding to true for player 2
-                                                                                                        new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + masterpieceGameModel.getAllPlayers().get(2).getFirebaseid() + "/" + AppConstants.BIDDING).setValue("true", new Firebase.CompletionListener() {
-                                                                                                            @Override
-                                                                                                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                                                                                                if (firebaseError != null) {
-                                                                                                                    progress.dismiss();
-                                                                                                                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                                                                                                } else {
-                                                                                                                    //9: set bidding to true for player 3
-                                                                                                                    new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + masterpieceGameModel.getAllPlayers().get(3).getFirebaseid() + "/" + AppConstants.BIDDING).setValue("true", new Firebase.CompletionListener() {
-                                                                                                                        @Override
-                                                                                                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                                                                                                            if (firebaseError != null) {
-                                                                                                                                progress.dismiss();
-                                                                                                                                Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                                                                                                            } else {
-                                                                                                                                //10: reset countnonbidders
-                                                                                                                                new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS).setValue("0");
-                                                                                                                                //hide progress dialog
-                                                                                                                                progress.dismiss();
-                                                                                                                                //hide end round button
-                                                                                                                                //button_end_round.setVisibility(View.INVISIBLE);
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
+                                                                                                        if (AppConstants.TotalNumberofPlayers == 3) {
+                                                                                                            //8: set bidding to true for player 2
+                                                                                                            new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + masterpieceGameModel.getAllPlayers().get(2).getFirebaseid() + "/" + AppConstants.BIDDING).setValue("true", new Firebase.CompletionListener() {
+                                                                                                                @Override
+                                                                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                    if (firebaseError != null) {
+                                                                                                                        progress.dismiss();
+                                                                                                                        Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                    } else {
+                                                                                                                        //10: reset countnonbidders
+                                                                                                                        new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS).setValue("0");
+                                                                                                                        //hide progress dialog
+                                                                                                                        progress.dismiss();
+                                                                                                                    }
                                                                                                                 }
-                                                                                                            }
-                                                                                                        });
+                                                                                                            });
+                                                                                                        }
+                                                                                                        if (AppConstants.TotalNumberofPlayers == 4) {
+                                                                                                            //8: set bidding to true for player 2
+                                                                                                            new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + masterpieceGameModel.getAllPlayers().get(2).getFirebaseid() + "/" + AppConstants.BIDDING).setValue("true", new Firebase.CompletionListener() {
+                                                                                                                @Override
+                                                                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                    if (firebaseError != null) {
+                                                                                                                        progress.dismiss();
+                                                                                                                        Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                    } else {
+                                                                                                                        //9: set bidding to true for player 3
+                                                                                                                        new Firebase(AppConstants.GameRef + "/" + AppConstants.PLAYERS + "/" + masterpieceGameModel.getAllPlayers().get(3).getFirebaseid() + "/" + AppConstants.BIDDING).setValue("true", new Firebase.CompletionListener() {
+                                                                                                                            @Override
+                                                                                                                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                                                                                if (firebaseError != null) {
+                                                                                                                                    progress.dismiss();
+                                                                                                                                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                                } else {
+                                                                                                                                    //10: reset countnonbidders
+                                                                                                                                    new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS).setValue("0");
+                                                                                                                                    //hide progress dialog
+                                                                                                                                    progress.dismiss();
+                                                                                                                                    //hide end round button
+                                                                                                                                    //button_end_round.setVisibility(View.INVISIBLE);
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            });
+                                                                                                        }
                                                                                                     }
                                                                                                 }
                                                                                             });
