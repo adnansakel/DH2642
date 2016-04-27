@@ -61,6 +61,7 @@ public class FirebaseCalls {
 
                 game.put("Players", "");
                 Random randomplayer = new Random(AppConstants.TotalNumberofPlayers);
+                int turntaker = randomplayer.nextInt();
                 game.put("TurnTaker", String.valueOf(turntaker));
                 //game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
                 game.put("TurnAction", "pending");
