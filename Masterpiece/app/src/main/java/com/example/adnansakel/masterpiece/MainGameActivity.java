@@ -253,9 +253,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
 
         } else if(v == button_privateauction_not_bidding) {
-
+            firebaseCalls.skipPlayerFromBidding(myPlayerID);
             //set my player's Bidding property to false
-            new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+
+            /*new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+model.getPlayer(myPlayerID).getFirebaseid()+"/"+
                     AppConstants.BIDDING).setValue("false", new Firebase.CompletionListener() {
                 @Override
                 public void onComplete(FirebaseError firebaseError, Firebase firebase) {
@@ -280,10 +280,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                 });
                     }
                 }
-            });
-
-
-
+            });*/
 
 
         } else if(v == button_bankauction_bid) {

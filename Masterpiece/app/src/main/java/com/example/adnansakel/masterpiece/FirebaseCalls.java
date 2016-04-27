@@ -125,7 +125,7 @@ public class FirebaseCalls {
                             //masterpieceGameModel.setUserName(editTextUserName.getText().toString());
                             player.put("Name", masterpieceGameModel.getUserName().toString());
                             player.put("Paintings", "");
-                            player.put("Cash", "800000"); //Initial cash
+                            player.put("Cash", AppConstants.STARTINGCASH); //Initial cash
                             player.put("BidAmount", "");
                             player.put("Bidding", "true");
                             new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
@@ -175,7 +175,7 @@ public class FirebaseCalls {
                 //String[]paintings = {"1","2","3","4"};
                 player.put("Name", masterpieceGameModel.getUserName());
                 player.put("Paintings", "");
-                player.put("Cash", "800000");
+                player.put("Cash", AppConstants.STARTINGCASH);
                 player.put("BidAmount", "");
                 player.put("Bidding", "true");
 
@@ -267,7 +267,7 @@ public class FirebaseCalls {
                 //if the game has started and I'm not the game creator
                 if (dataSnapshot.getValue() == "true" && AppConstants.IamCreator == false) {
                     //execute the same code as create game button in LobbyActivity
-                    
+
                 }
             }
 
@@ -318,6 +318,36 @@ public class FirebaseCalls {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void skipPlayerFromBidding(final int myPlayerID) {
+        //set my player's Bidding property to false
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.PLAYERS+"/"+masterpieceGameModel.getPlayer(myPlayerID).getFirebaseid()+"/"+
+                AppConstants.BIDDING).setValue("false", new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError != null) {
+                    Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    //System.out.println("Data saved successfully.");
+                    //increase CountNonBidders, since I'm not bidding
+                    int countNonBidders = Integer.parseInt(masterpieceGameModel.getCountNonBidders());
+                    countNonBidders++;
+                    new Firebase(AppConstants.GameRef + "/" + AppConstants.COUNTNONBIDDERS)
+                            .setValue(Integer.toString(countNonBidders), new Firebase.CompletionListener() {
+                                @Override
+                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                    if (firebaseError != null) {
+                                        Toast.makeText(context, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                    } else {
+                                        //set current bidder as the next player
+                                        new Firebase(AppConstants.GameRef + "/" + "CurrentBidder").setValue(((myPlayerID + 1) % AppConstants.TotalNumberofPlayers) + "");
+                                    }
+                                }
+                            });
+                }
             }
         });
     }
@@ -513,6 +543,10 @@ public class FirebaseCalls {
                                 //increase current bidder by one in firebase
                                 new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((Integer
                                         .valueOf(masterpieceGameModel.getCurrentBidder()) + 1) % AppConstants.TotalNumberofPlayers) + "");
+                            } else if (masterpieceGameModel.getMyPlayer().getCash() < Integer.valueOf(masterpieceGameModel.getCurrentBid()+AppConstants.BIDDINGINCREMENT)){
+                                skipPlayerFromBidding(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
+                                //new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((Integer
+                                //        .valueOf(masterpieceGameModel.getCurrentBidder()) + 1) % AppConstants.TotalNumberofPlayers) + "");
                             }
                         }
                     }
