@@ -42,12 +42,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:gravity="center"
-        android:maxLength="8"
+        android:maxLength="1"
         android:textColor="@color/colorMainText"
-        android:hint="Number of players"
-        android:digits="234"
+        android:hint="Number of players - 3 or 4"
+        android:digits="34"
         android:inputType="number"/>
 
     <Button
