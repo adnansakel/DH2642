@@ -60,8 +60,7 @@ public class FirebaseCalls {
                 //Map<String,Object>p1 = new HashMap<String, Object>();
 
                 game.put("Players", "");
-                Random randomplayer = new Random();
-                int turntaker = randomplayer.nextInt(AppConstants.TotalNumberofPainting);
+                Random randomplayer = new Random(AppConstants.TotalNumberofPlayers);
                 game.put("TurnTaker", String.valueOf(turntaker));
                 //game.put("TurnTaker", "3"); // for testing //TODO SET BACK TO Random
                 game.put("TurnAction", "pending");
