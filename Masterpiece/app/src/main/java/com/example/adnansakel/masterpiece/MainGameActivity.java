@@ -99,9 +99,9 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         button_fourthPlayer = (Button)findViewById(R.id.btnFourthPlayer);
 
         myPlayerID = model.getMyPlayer().getPlayerpositionID();
-        secondPlayerID = (myPlayerID + 1)%4;
-        thirdPlayerID = (myPlayerID + 2)%4;
-        fourthPlayerID = (myPlayerID + 3)%4;
+        secondPlayerID = (myPlayerID + 1)%AppConstants.TotalNumberofPlayers;
+        thirdPlayerID = (myPlayerID + 2)%AppConstants.TotalNumberofPlayers;
+        fourthPlayerID = (myPlayerID + 3)%AppConstants.TotalNumberofPlayers;
 
         button_secondPlayer.setText(model.getAllPlayers().get(secondPlayerID).getName());
         button_thirdPlayer.setText(model.getAllPlayers().get(thirdPlayerID).getName());
@@ -242,7 +242,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                     Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                 } else {
                                     //3: set current bidder as the next player
-                                    new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((myPlayerID + 1) % 4) + "");
+                                    new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((myPlayerID + 1) % AppConstants.TotalNumberofPlayers) + "");
                                 }
                             }
                         });
@@ -274,7 +274,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
                                             Toast.makeText(MainGameActivity.this, "Data could not be saved. " + firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                         } else {
                                             //set current bidder as the next player
-                                            new Firebase(AppConstants.GameRef + "/" + "CurrentBidder").setValue(((myPlayerID + 1) % 4) + "");
+                                            new Firebase(AppConstants.GameRef + "/" + "CurrentBidder").setValue(((myPlayerID + 1) % AppConstants.TotalNumberofPlayers) + "");
                                         }
                                     }
                                 });
@@ -310,7 +310,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
             model.setPopupContent("bankAuctionInProgress");*/
 
         } else if(v == button_end_round) {
-                firebaseCalls.resetFirebaseforNextRound();
+            firebaseCalls.resetFirebaseforNextRound();
         }
     }
 
@@ -350,7 +350,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
 
                                             //set the current bidder to the playerID of the next player
                                             new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER)
-                                                    .setValue(((model.getMyPlayer().getPlayerpositionID() + 1) % 4) + "");
+                                                    .setValue(((model.getMyPlayer().getPlayerpositionID() + 1) % AppConstants.TotalNumberofPlayers) + "");
                                             //System.out.println();
                                         }
                                     }

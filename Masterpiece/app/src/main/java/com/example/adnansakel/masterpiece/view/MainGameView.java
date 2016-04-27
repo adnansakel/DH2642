@@ -67,7 +67,6 @@ public class MainGameView implements Observer{
     public MainGameView(View view, MasterpieceGameModel model) {
         this.view = view;
         button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
-        initialize();
         model.addObserver(this);
         this.model = model;
 
@@ -80,7 +79,7 @@ public class MainGameView implements Observer{
 
         //set currently selected player text3
         TextView textPlayerTitle = (TextView) view.findViewById(R.id.txtPlayerTitle);
-        textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%4).getName() + "'s paintings:");
+        textPlayerTitle.setText(model.getPlayer((model.getMyPlayer().getPlayerpositionID() + 1)%AppConstants.TotalNumberofPlayers).getName() + "'s paintings:");
 
         button_secondPlayer = (Button)view.findViewById(R.id.btnSecondPlayer);
         button_thirdPlayer = (Button)view.findViewById(R.id.btnThirdPlayer);
@@ -88,6 +87,8 @@ public class MainGameView implements Observer{
         button_end_round = (Button)view.findViewById(R.id.btn_end_round);
         textWinnerName = (TextView)view.findViewById(R.id.textViewWinnerName);
         button_end_round.setVisibility(View.INVISIBLE);
+
+        initialize();
     }
 
     private void initialize(){
@@ -105,6 +106,14 @@ public class MainGameView implements Observer{
         layoutPopupPrivateAuctionLost = (RelativeLayout)view.findViewById(R.id.privateauction_bidlost_view);
         layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
         layoutHomeViewInMainGameView = (LinearLayout)view.findViewById(R.id.linear_layout_homeview_in_MainGameView);
+
+        if(AppConstants.TotalNumberofPlayers==2){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+            button_thirdPlayer.setVisibility(view.INVISIBLE);
+        }
+        else if(AppConstants.TotalNumberofPlayers == 3){
+            button_fourthPlayer.setVisibility(view.INVISIBLE);
+        }
 
         //set the popup and content views to invisible
         layoutStatusPopup.setVisibility(View.INVISIBLE);
@@ -160,7 +169,7 @@ public class MainGameView implements Observer{
     }
 
     public void populatePaintingsMyPlayerPrivateAuction(Integer myPlayerID, LinearLayout ll){
-        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
         ll.removeAllViews();
@@ -179,7 +188,7 @@ public class MainGameView implements Observer{
             TextView textSecretValue = (TextView) singlePainting.findViewById(R.id.txtSecretValue);
             String secretValueFormatted = formatter.format(model.paintingValue.get(paintingID));
             textSecretValue.setText(secretValueFormatted + " $");
-            textSecretValue.setWidth(200);
+            //textSecretValue.setWidth(200);
 
             ll.addView(singlePainting, layoutParams);
             counter++;
@@ -213,6 +222,8 @@ public class MainGameView implements Observer{
         layoutStatusPopup.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
         button_status_bar.setBackgroundResource(R.drawable.uparrow);
+
+
     }
 
     @Override
@@ -221,9 +232,9 @@ public class MainGameView implements Observer{
 
             if(data.toString().equals("currentPlayerToDisplayChanged")){
                 int myPlayerID = Integer.valueOf(model.getMyPlayer().getPlayerpositionID());
-                int secondPlayerID = (myPlayerID + 1)%4;
-                int thirdPlayerID = (myPlayerID + 2)%4;
-                int fourthPlayerID = (myPlayerID + 3)%4;
+                int secondPlayerID = (myPlayerID + 1)%AppConstants.TotalNumberofPlayers;
+                int thirdPlayerID = (myPlayerID + 2)%AppConstants.TotalNumberofPlayers;
+                int fourthPlayerID = (myPlayerID + 3)%AppConstants.TotalNumberofPlayers;
 
                 if(model.getCurrentPlayerToDisplay()==secondPlayerID){
 
@@ -306,7 +317,7 @@ public class MainGameView implements Observer{
             }
 
             if(data.toString().equals("PaintingAdded")) {
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID() + 1) % 4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID() + 1) % AppConstants.TotalNumberofPlayers);
                 populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
             }
 
@@ -319,7 +330,7 @@ public class MainGameView implements Observer{
             }
             if(data.toString().equals(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH)){
                 populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
-                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%4);
+                populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%AppConstants.TotalNumberofPlayers);
             }
 
             if(data.toString().equals(AppConstants.WINNERFOUND) && model.getWinner().length()>0){
@@ -337,7 +348,7 @@ public class MainGameView implements Observer{
                 }
             }
 
-            if(model.getCountNonBidders().equals("3")){
+            if(model.getCountNonBidders().equals(""+(AppConstants.TotalNumberofPlayers-1))){
                 //end round
                 //Display result screen
                 if(AppConstants.IamCreator){

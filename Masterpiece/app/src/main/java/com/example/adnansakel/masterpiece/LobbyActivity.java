@@ -87,7 +87,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
                 startActivity(new Intent(LobbyActivity.this, MainGameActivity.class));
                 LobbyActivity.this.finish();
                 //tell other players that the game has started
-                //new Firebase(AppConstants.GameRef+"/"+AppConstants.GAMESTARTED).setValue(true);
+                new Firebase(AppConstants.GameRef+"/"+AppConstants.GAMESTARTED).setValue("true");
                 //now other players need to listen for this and run the code above too
             }
 

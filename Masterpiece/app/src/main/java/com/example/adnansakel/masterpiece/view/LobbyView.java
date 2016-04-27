@@ -52,6 +52,14 @@ public class LobbyView implements Observer {
 
         button_start_game.setVisibility(View.INVISIBLE);
 
+        if(AppConstants.TotalNumberofPlayers==2){
+            textViewPlayer4.setVisibility(view.INVISIBLE);
+            textViewPlayer3.setVisibility(view.INVISIBLE);
+        }
+        else if(AppConstants.TotalNumberofPlayers == 3){
+            textViewPlayer4.setVisibility(view.INVISIBLE);
+        }
+
     }
 
 
@@ -72,9 +80,13 @@ public class LobbyView implements Observer {
                 }
                 else if(i == 4){
                     textViewPlayer4.setText(player.getName());
-                    //if (AppConstants.IamCreator == true){
+                }
+
+                if(i == AppConstants.TotalNumberofPlayers){
+                    button_start_game.setVisibility(View.VISIBLE);
+                    /*if (AppConstants.IamCreator == true){
                         button_start_game.setVisibility(View.VISIBLE);
-                    //}
+                    }*/
                 }
 
                 i++;
