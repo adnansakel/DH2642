@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by Daniel on 02/04/2016.
  */
-public class Player {
+public class Player implements Comparable<Player>{
     //TODO: Please set up according to Firebase (e.g. Name + ID)
     //TODO: Should this be an observable
 
@@ -19,6 +19,7 @@ public class Player {
 
     int cash;
     private int playerpositionID;
+    private int finalScore;
 
     //TODO: Question: Should this be private?
 
@@ -117,5 +118,26 @@ public class Player {
 
     public void setBidding(boolean bidding) {
         this.bidding = bidding;
+    }
+
+    @Override
+    public int compareTo(Player another) {
+        if(finalScore > another.getFinalScore()){
+            return 1;
+        }
+        else if(finalScore < another.getFinalScore()){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public int getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
     }
 }

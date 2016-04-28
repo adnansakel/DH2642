@@ -34,6 +34,7 @@ public class MasterpieceGameModel extends Observable{
     private List<Integer>shuffledPaintingIDs;
     private Integer nextBankPainting;
     public Map<Integer,Integer> paintingValue;
+    public int roundCounter = 0;
 
     // private List<Integer>bankPaintingIDs;
     //private List<Integer>bankPaintingValues;

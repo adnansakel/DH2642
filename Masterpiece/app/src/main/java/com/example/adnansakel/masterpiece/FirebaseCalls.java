@@ -56,6 +56,7 @@ public class FirebaseCalls {
                 Map<String, Object> game = new HashMap<String, Object>();
                 game.put("GameNr", masterpieceGameModel.getGameNumber());
                 game.put("CountPlayers", "");
+                game.put(AppConstants.TOTAL_ROUNDS,"");
 
                 //Map<String,Object>p1 = new HashMap<String, Object>();
 
@@ -110,59 +111,72 @@ public class FirebaseCalls {
     public void joinGamebyCreator(){
 
         progress = ProgressDialog.show(context, "", "joining game ...", true);
-        Random random = new Random();
+
         //Set Number of players first then push player
-        new Firebase(AppConstants.GameRef + "/" + AppConstants.TURNTAKER).setValue(1+"",//for testing turn taker set to 1
-                new Firebase.CompletionListener() {
+        new Firebase(AppConstants.GameRef+"/"+AppConstants.TOTAL_ROUNDS).setValue(AppConstants.TotalNumberofRounds+"", new Firebase.CompletionListener(){
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError != null) {
+                    progress.dismiss();
+                    Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
+                }
+                else {
+                    Random random = new Random();
+                    new Firebase(AppConstants.GameRef + "/" + AppConstants.TURNTAKER).setValue(random.nextInt(AppConstants.TotalNumberofPlayers)+"",//for testing turn taker set to 1
+                            new Firebase.CompletionListener() {
 
-                    @Override
-                    public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                        if (firebaseError != null) {
-                            progress.dismiss();
-                            Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-                        } else {
-                            new Firebase(AppConstants.GameRef + "/" + AppConstants.NUMBEROFPLAYERS).setValue(AppConstants.TotalNumberofPlayers,
-                                    new Firebase.CompletionListener() {
+                                @Override
+                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                    if (firebaseError != null) {
+                                        progress.dismiss();
+                                        Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
+                                    } else {
+                                        new Firebase(AppConstants.GameRef + "/" + AppConstants.NUMBEROFPLAYERS).setValue(AppConstants.TotalNumberofPlayers,
+                                                new Firebase.CompletionListener() {
 
-                                        @Override
-                                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                            if (firebaseError != null) {
-                                                progress.dismiss();
-                                                Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
-                                            } else {
-                                                Map<String, Object> player = new HashMap<String, Object>();
-                                                //String[]paintings = {"1","2","3","4"};
-                                                //masterpieceGameModel.setUserName(editTextUserName.getText().toString());
-                                                player.put("Name", masterpieceGameModel.getUserName().toString());
-                                                player.put("Paintings", "");
-                                                player.put("Cash", AppConstants.STARTINGCASH); //Initial cash
-                                                player.put("BidAmount", "");
-                                                player.put("Bidding", "true");
-                                                new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
                                                     @Override
                                                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                                        //progress.dismiss();
                                                         if (firebaseError != null) {
-                                                            //textViewGameNumber.setText(firebaseError.getMessage().toString());
                                                             progress.dismiss();
                                                             Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
                                                         } else {
-                                                            progress.dismiss();
-                                                            //textViewGameNumber.setText(game_number);
-                                                            //lobby activity should come here
-                                                            context.startActivity(new Intent(context, LobbyActivity.class));
+                                                            Map<String, Object> player = new HashMap<String, Object>();
+                                                            //String[]paintings = {"1","2","3","4"};
+                                                            //masterpieceGameModel.setUserName(editTextUserName.getText().toString());
+                                                            player.put("Name", masterpieceGameModel.getUserName().toString());
+                                                            player.put("Paintings", "");
+                                                            player.put("Cash", AppConstants.STARTINGCASH); //Initial cash
+                                                            player.put("BidAmount", "");
+                                                            player.put("Bidding", "true");
+                                                            new Firebase(AppConstants.GameRef + "/" + "Players").push().setValue(player, new Firebase.CompletionListener() {
+                                                                @Override
+                                                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                                                    //progress.dismiss();
+                                                                    if (firebaseError != null) {
+                                                                        //textViewGameNumber.setText(firebaseError.getMessage().toString());
+                                                                        progress.dismiss();
+                                                                        Toast.makeText(context, firebaseError.getMessage().toString(), Toast.LENGTH_LONG);
+                                                                    } else {
+                                                                        progress.dismiss();
+                                                                        //textViewGameNumber.setText(game_number);
+                                                                        //lobby activity should come here
+                                                                        context.startActivity(new Intent(context, LobbyActivity.class));
+                                                                    }
+                                                                }
+                                                            });
                                                         }
                                                     }
                                                 });
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
+                                    }
+                                }
+                            });
+                }
+            }
+
+        });
 
 
-                        }
+    }
     public void joinGame() {
                         progress = ProgressDialog.show(context, "", "joining game ...", true);
                 /*
@@ -427,7 +441,7 @@ public class FirebaseCalls {
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
                                 System.out.println("Some data changed in Firebase: " + snapshot.getValue());
-
+                                AppConstants.TotalNumberofRounds = Integer.valueOf(snapshot.child(AppConstants.TOTAL_ROUNDS).getValue().toString());
                                 //integers
                                 masterpieceGameModel.setCountNonBidders(snapshot.child(AppConstants.COUNTNONBIDDERS).getValue().toString());
                                 //masterpieceGameModel.setCountPlayers((Integer) snapshot.child("CountPlayers").getValue()); //maybe we don't need this

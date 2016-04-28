@@ -14,6 +14,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import com.example.adnansakel.masterpiece.model.Player;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -424,7 +427,11 @@ public class MainGameView implements Observer{
 
                 }
                 if(data.toString().equals(AppConstants.TURN_ACTION_CHANGED)){
-                    if(model.getTurnAction().equals(AppConstants.PRIVATE)){
+                    model.roundCounter++;
+                    if(model.roundCounter > AppConstants.TotalNumberofRounds){
+                        //Show end game screen and populate data
+                    }
+                    else if(model.getTurnAction().equals(AppConstants.PRIVATE)){
                         if (model.getTurnTaker().equals(model.getMyPlayer().getPlayerpositionID() + "")){
                             //Display screen for private auction
                             /*hideAllPopupContent();
@@ -572,6 +579,35 @@ public class MainGameView implements Observer{
             */
         }
 
+    }
+
+    private void populateFinalScore(){
+        List<Player> playersFinalScores = new ArrayList<Player>();
+        for(Player player:model.getAllPlayers()){
+            int totalPaintingValue = 0;
+            for(int i = 0; i < player.getOwnedPaintingIDs().size(); i++){
+                totalPaintingValue += model.paintingValue.get(player.getOwnedPaintingIDs().get(i));
+            }
+            player.setFinalScore(totalPaintingValue + player.getCash());
+            playersFinalScores.add(player);
+        }
+        Collections.sort(playersFinalScores);
+
+        LinearLayout llFinalScores = (LinearLayout)view.findViewById(R.id.llfinalScores);
+        ScrollView scrollViewFinalScore = (ScrollView)view.findViewById(R.id.scrollViewFinalScore);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(2, 0, 2, 0);
+
+        llFinalScores.removeAllViews();
+
+        for (Player player : playersFinalScores) {
+            View endgame_score = layoutInflater.inflate(R.layout.item_end_game_score, null);
+            TextView playerName = (TextView) endgame_score.findViewById(R.id.txtPlayerName);
+            TextView playerScore = (TextView) endgame_score.findViewById(R.id.txtPlayerScore);
+            playerName.setText(player.getName());
+            playerScore.setText(""+player.getFinalScore());
+            llFinalScores.addView(endgame_score, layoutParams);
+        }
     }
 
     private void ShowAnimatedView(View view){

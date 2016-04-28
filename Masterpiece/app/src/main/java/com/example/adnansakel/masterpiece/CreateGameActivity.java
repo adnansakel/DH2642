@@ -92,6 +92,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                         .getText().toString());
                 if(masterpiecegamemodel.getUserName().length()>0){
                     firebaseCalls.joinGamebyCreator();
+                    masterpiecegamemodel.roundCounter = 0;
+                    AppConstants.TotalNumberofRounds = Integer.valueOf(((EditText)findViewById(R.id.edittext_NumberofRounds)).getText().toString());
                 }
                 else{
                     Toast.makeText(this,"Please insert an username to join the game.",Toast.LENGTH_LONG);

@@ -196,6 +196,7 @@
             <include layout="@layout/activity_privatauct_bid_lost"/>
             <include layout="@layout/activity_bankauct_bid_lost"
                 />
+            <include layout="@layout/end_game_view"/>
 
             <LinearLayout
                 android:orientation="vertical"

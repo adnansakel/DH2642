@@ -36,6 +36,20 @@
         android:hint="@string/hint_choose_user_name"/>
 
     <EditText
+        android:id="@+id/edittext_NumberofRounds"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:maxLength="1"
+        android:textColor="@color/colorMainText"
+        android:hint="Number of rounds"
+        android:digits="34"
+        android:inputType="number"/>
+    <EditText
         android:id="@+id/edittext_NumberofPlayers"
         android:layout_width="match_parent"
         android:layout_height="50dp"
