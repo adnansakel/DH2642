@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1."
-        android:id="@+id/txtWinningPlayer"
+        android:id="@+id/txtFirstPlace"
         android:textColor="@color/colorMainText"
         android:layout_below="@+id/textView22"
         android:layout_alignParentLeft="true"
@@ -37,23 +37,23 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="2."
-        android:id="@+id/txtRunnerUpPlayer"
+        android:id="@+id/txtSecondPlace"
         android:textColor="@color/colorMainText"
         android:layout_marginTop="38dp"
-        android:layout_below="@+id/txtWinningPlayer"
-        android:layout_alignLeft="@+id/txtWinningPlayer"
-        android:layout_alignStart="@+id/txtWinningPlayer" />
+        android:layout_below="@+id/txtFirstPlace"
+        android:layout_alignLeft="@+id/txtFirstPlace"
+        android:layout_alignStart="@+id/txtFirstPlace" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="3."
-        android:id="@+id/txtThirdPlayer"
+        android:id="@+id/txtThirdPlace"
         android:textColor="@color/colorMainText"
-        android:layout_below="@+id/txtRunnerUpPlayer"
-        android:layout_alignLeft="@+id/txtRunnerUpPlayer"
-        android:layout_alignStart="@+id/txtRunnerUpPlayer"
+        android:layout_below="@+id/txtSecondPlace"
+        android:layout_alignLeft="@+id/txtSecondPlace"
+        android:layout_alignStart="@+id/txtSecondPlace"
         android:layout_marginTop="38dp" />
 
     <TextView
@@ -61,11 +61,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="4."
-        android:id="@+id/txtLastPlayer"
+        android:id="@+id/txtFourthPlace"
         android:textColor="@color/colorMainText"
-        android:layout_below="@+id/txtThirdPlayer"
-        android:layout_alignLeft="@+id/txtThirdPlayer"
-        android:layout_alignStart="@+id/txtThirdPlayer"
+        android:layout_below="@+id/txtThirdPlace"
+        android:layout_alignLeft="@+id/txtThirdPlace"
+        android:layout_alignStart="@+id/txtThirdPlace"
         android:layout_marginTop="43dp" />
 
     <Button
@@ -77,7 +77,6 @@
         android:background="@drawable/custom_button"
         android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView22"
-        android:layout_alignEnd="@+id/textView22" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

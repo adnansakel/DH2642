@@ -86,6 +86,7 @@ public class Player {
         int i =0;
         for(; i < ownedPaintingIDs.size(); i++){
             if(ownedPaintingIDs.get(i) == paintingID){
+                System.out.println("removing owned painting ID");
                 ownedPaintingIDs.remove(i);
                 break;
             }

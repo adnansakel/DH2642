@@ -343,7 +343,7 @@ public class MasterpieceGameModel extends Observable{
 
     public void notifyForUpdatedPaintingandCash(){
         setChanged();
-        notifyObservers("");
+        notifyObservers(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH);
     }
 
     public void addPainting(int playerPositionID, int paintingID, int value) {

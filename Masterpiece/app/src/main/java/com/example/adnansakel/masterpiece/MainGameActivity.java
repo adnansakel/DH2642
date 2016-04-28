@@ -78,7 +78,7 @@ public class MainGameActivity extends Activity implements View.OnClickListener, 
         firebaseCalls.listentoFireBaseForGameLogic();
 
         myPlayer = model.getMyPlayer();
-        mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model);
+        mainGameView = new MainGameView(findViewById(R.id.maingame_overview_view),model, this);
 
         //find views of buttons
         button_status_bar = (Button)findViewById(R.id.buttonStatusBar);

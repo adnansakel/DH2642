@@ -110,8 +110,9 @@ public class FirebaseCalls {
     public void joinGamebyCreator(){
 
         progress = ProgressDialog.show(context, "", "joining game ...", true);
+        Random random = new Random();
         //Set Number of players first then push player
-        new Firebase(AppConstants.GameRef + "/" + AppConstants.TURNTAKER).setValue(AppConstants.TotalNumberofPlayers,
+        new Firebase(AppConstants.GameRef + "/" + AppConstants.TURNTAKER).setValue(1+"",//for testing turn taker set to 1
                 new Firebase.CompletionListener() {
 
                     @Override
@@ -463,7 +464,6 @@ public class FirebaseCalls {
 
                                                             System.out.println("Winner:" + i);
 
-
                                                             if (masterpieceGameModel.getWinner().length() == 0) {
                                                                 //only update cash when a winner is found
 
@@ -489,8 +489,7 @@ public class FirebaseCalls {
 
                                                                 }
 
-
-                                                                if (i == Integer.valueOf(masterpieceGameModel.getTurnTaker())) {
+                                                                //if (i == Integer.valueOf(masterpieceGameModel.getTurnTaker())) {
                                                                     //updating for loosing player or turn taker
                                                                     int loosingPlayerPosition = Integer.valueOf(masterpieceGameModel.getTurnTaker());
                                                                     int paintingAuctioned = Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned());
@@ -500,12 +499,12 @@ public class FirebaseCalls {
                                                                     masterpieceGameModel.setCash(currentCashofTurntaker
                                                                             + Integer.valueOf(masterpieceGameModel.getCurrentBid()), loosingPlayerPosition);
 
-                                                                    System.out.println("LoosingPlayer" + i + " " + masterpieceGameModel.getAllPlayers().get(i).getCash());
+                                                                    System.out.println("LoosingPlayer" + loosingPlayerPosition + " " + masterpieceGameModel.getAllPlayers().get(i).getCash());
 
                                                                     if (masterpieceGameModel.getMyPlayer().getPlayerpositionID() == loosingPlayerPosition) {
                                                                         //if turn taker is myPlayer update that as well
                                                                         masterpieceGameModel.setMyPlayer(masterpieceGameModel.getAllPlayers().get(loosingPlayerPosition));
-                                                                        System.out.println("MyPlayer" + i + " " + masterpieceGameModel.getMyPlayer().getCash());
+                                                                        System.out.println("MyPlayer" + loosingPlayerPosition + " " + masterpieceGameModel.getMyPlayer().getCash());
                                                                         //masterpieceGameModel.getMyPlayer().setCash(currentCashofTurntaker
                                                                         //      + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
@@ -514,15 +513,14 @@ public class FirebaseCalls {
                                                                         //      + Integer.valueOf(masterpieceGameModel.getCurrentBid()));
 
                                                                     }
+                                                                //}
+
+
                                                                 }
 
                                                                 masterpieceGameModel.setWinningbidamount(dplayer.child(AppConstants.BIDAMOUNT).getValue().toString() + "");
                                                                 masterpieceGameModel.setWinner(i + "");
                                                             }
-
-
-                                                        }
-
 
                                                         i++;
 
@@ -556,7 +554,7 @@ public class FirebaseCalls {
                                                 //increase current bidder by one in firebase
                                                 new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((Integer
                                                         .valueOf(masterpieceGameModel.getCurrentBidder()) + 1) % AppConstants.TotalNumberofPlayers) + "");
-                                            } else if (masterpieceGameModel.getMyPlayer().getCash() < Integer.valueOf(masterpieceGameModel.getCurrentBid() + AppConstants.BIDDINGINCREMENT)) {
+                                            } else if (masterpieceGameModel.getMyPlayer().getCash() < Integer.valueOf(masterpieceGameModel.getCurrentBid()) + Integer.valueOf(AppConstants.BIDDINGINCREMENT)) {
                                                 skipPlayerFromBidding(masterpieceGameModel.getMyPlayer().getPlayerpositionID());
                                                 //new Firebase(AppConstants.GameRef + "/" + AppConstants.CURRENTBIDDER).setValue(((Integer
                                                 //        .valueOf(masterpieceGameModel.getCurrentBidder()) + 1) % AppConstants.TotalNumberofPlayers) + "");
@@ -622,6 +620,7 @@ public class FirebaseCalls {
                     public void resetFirebaseforNextRound() {
                         progress = ProgressDialog.show(context, "", "Loading next round...", true);
 
+                        //TODO not calling anything?
                         masterpieceGameModel.notifyForUpdatedPaintingandCash();
 
                         masterpieceGameModel.setWinner("");

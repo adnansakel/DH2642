@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adnansakel.masterpiece.R;
 import com.example.adnansakel.masterpiece.model.AppConstants;
@@ -37,6 +38,7 @@ import java.util.Observer;
 public class MainGameView implements Observer{
     View view;
     MasterpieceGameModel model;
+    Context context;//for debugging
     //Map<String, View> PaintingNameToViewMap = new HashMap<>();
     LinearLayout.LayoutParams layoutParams;
     LayoutInflater layoutInflater;
@@ -64,10 +66,11 @@ public class MainGameView implements Observer{
 
     DecimalFormat formatter = new DecimalFormat("#,###,###");
 
-    public MainGameView(View view, MasterpieceGameModel model) {
+    public MainGameView(View view, MasterpieceGameModel model, Context context) {
         this.view = view;
         button_status_bar = (Button)view.findViewById(R.id.buttonStatusBar);
         model.addObserver(this);
+        this.context = context;
         this.model = model;
 
         layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -148,6 +151,7 @@ public class MainGameView implements Observer{
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(2, 0, 2, 0);
 
+        System.out.println("Removing all views");
         ll.removeAllViews();
 
         int counter = 0;
@@ -329,7 +333,7 @@ public class MainGameView implements Observer{
 
             }
             if(data.toString().equals(AppConstants.NOTIFY_FOR_UPDATED_PAINTING_AND_CASH)){
-                populatePaintingsMyPlayerPrivateAuction(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
+                populatePaintingsMyPlayer(model.getMyPlayer().getPlayerpositionID(), (LinearLayout) view.findViewById(R.id.llPaintingsOfMyPlayer));
                 populatePaintingsOtherPlayers((model.getMyPlayer().getPlayerpositionID()+1)%AppConstants.TotalNumberofPlayers);
             }
 
@@ -382,36 +386,42 @@ public class MainGameView implements Observer{
                     }
                 }
                 if(data.toString().equals(AppConstants.CURRENT_BIDDER_CHANGED)){
-
-                    if(model.getCurrentBidder().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
-                        if(model.getMyPlayer().isBidding()){
-                            //Display bidding screen. Let's use same bidding screen for both type of auction
+                    try{
+                        if(model.getCurrentBidder().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
+                            if(model.getMyPlayer().isBidding()){
+                                //Display bidding screen. Let's use same bidding screen for both type of auction
                             /*hideAllPopupContent();
                             layoutStatusPopup.setVisibility(View.VISIBLE);
                             layoutPopupPrivateAuctionBid.setVisibility(View.VISIBLE);
                             */
-                            ShowAnimatedView(layoutPopupPrivateAuctionBid);
-                            ImageView image = (ImageView) view.findViewById(R.id.img_PrivateAuction_PaintingBeingAuctioned);
-                            image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
-                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
-                                    model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
-                            TextView paintingTitle = (TextView)view.findViewById(R.id.txtPaintingTitle);
-                            paintingTitle.setText(model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
-                            TextView artist = (TextView)view.findViewById(R.id.txtArtist);
-                            artist.setText("by " + model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getArtist());
-                            String currentBidValueFormatted = formatter.format(Integer.valueOf(model.getCurrentBid()));
-                            TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
-                            bidText.setText("Current Highest Bid: " + currentBidValueFormatted);
-                        }
+                                ShowAnimatedView(layoutPopupPrivateAuctionBid);
+                                ImageView image = (ImageView) view.findViewById(R.id.img_PrivateAuction_PaintingBeingAuctioned);
+                                image.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(
+                                        model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray(), 0,
+                                        model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getImagebytearray().length), 200, 200, true));
+                                TextView paintingTitle = (TextView)view.findViewById(R.id.txtPaintingTitle);
+                                paintingTitle.setText(model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getName());
+                                TextView artist = (TextView)view.findViewById(R.id.txtArtist);
+                                artist.setText("by " + model.getPaintingbyPosition(Integer.valueOf(model.getPaintingBeingAuctioned())).getArtist());
+                                String currentBidValueFormatted = formatter.format(Integer.valueOf(model.getCurrentBid()));
+                                TextView bidText = (TextView)view.findViewById(R.id.txtHighestBid);
+                                bidText.setText("Current Highest Bid: " + currentBidValueFormatted);
+                            }
 
-                    }
-                    else if(!model.getCurrentBidder().equals("100")){
+                        }
+                        else if(!model.getCurrentBidder().equals("100")){
                         /*hideAllPopupContent();
                         layoutStatusPopup.setVisibility(View.VISIBLE);
                         layoutPopupPrivateAuctionInProgress.setVisibility(View.VISIBLE);*/
-                        ShowAnimatedView(layoutPopupPrivateAuctionInProgress);
+                            ShowAnimatedView(layoutPopupPrivateAuctionInProgress);
 
+                        }
+
+                    }catch(Exception ex){
+                        Toast.makeText(context,ex.getMessage().toString(),Toast.LENGTH_LONG);
                     }
+
+
                 }
                 if(data.toString().equals(AppConstants.TURN_ACTION_CHANGED)){
                     if(model.getTurnAction().equals(AppConstants.PRIVATE)){
