@@ -486,7 +486,7 @@ public class FirebaseCalls {
                                                                         Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned()));
                                                                 //masterpieceGameModel.getAllPlayers().get(i).addOenedPaintingValue(
                                                                 //      masterpieceGameModel.getAllPaintingValues().get(Integer.valueOf(masterpieceGameModel.getPaintingBeingAuctioned())));
-                                                                masterpieceGameModel.setCash(masterpieceGameModel.getMyPlayer().getCash()
+                                                                masterpieceGameModel.setCash(masterpieceGameModel.getAllPlayers().get(i).getCash()
                                                                         - Integer.valueOf(masterpieceGameModel.getCurrentBid()), i);
                                                                 System.out.println("WinningPlayer" + i + " " + masterpieceGameModel.getAllPlayers().get(i).getCash());
                                                                 if (masterpieceGameModel.getMyPlayer().getPlayerpositionID() == i) {

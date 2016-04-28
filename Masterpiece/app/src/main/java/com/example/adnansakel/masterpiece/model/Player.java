@@ -122,10 +122,10 @@ public class Player implements Comparable<Player>{
 
     @Override
     public int compareTo(Player another) {
-        if(finalScore > another.getFinalScore()){
+        if(finalScore < another.getFinalScore()){
             return 1;
         }
-        else if(finalScore < another.getFinalScore()){
+        else if(finalScore > another.getFinalScore()){
             return -1;
         }
         else{

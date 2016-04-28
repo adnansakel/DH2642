@@ -36,7 +36,7 @@ public class AppConstants {
     public static String GAMES = "Games";
     public static String GAMESTARTED = "GameStarted";
     public static String BIDDINGINCREMENT = "50000";
-    public static String STARTINGCASH = "250000";
+    public static String STARTINGCASH = "600000";
 
     public static String ARTIST = "Artist";
     public static String IMAGE = "Image";

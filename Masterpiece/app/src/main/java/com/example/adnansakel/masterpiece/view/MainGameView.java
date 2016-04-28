@@ -380,10 +380,12 @@ public class MainGameView implements Observer{
                     model.roundCounter++;
                     model.setWinner("");
                     button_end_round.setVisibility(View.INVISIBLE);
+
                     if(model.roundCounter > AppConstants.TotalNumberofRounds){
                         //Show end game screen and populate data
                         hideAllPopupContent();
-                        llEndGameView.setVisibility(View.VISIBLE);
+                        //llEndGameView.setVisibility(View.VISIBLE);
+                        ShowAnimatedView(llEndGameView);
                         populateFinalScore();
                     }
                     else if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){

@@ -44,10 +44,10 @@
         android:layout_marginTop="30dp"
         android:textSize="20sp"
         android:gravity="center"
-        android:maxLength="1"
+        android:maxLength="2"
         android:textColor="@color/colorMainText"
         android:hint="Number of rounds"
-        android:digits="34"
+        android:digits="0123456789"
         android:inputType="number"/>
     <EditText
         android:id="@+id/edittext_NumberofPlayers"
@@ -61,7 +61,7 @@
         android:maxLength="1"
         android:textColor="@color/colorMainText"
         android:hint="Add number of players - 3 or 4"
-        android:digits="0123456789"
+        android:digits="34"
         android:inputType="number"/>
 
     <Button
