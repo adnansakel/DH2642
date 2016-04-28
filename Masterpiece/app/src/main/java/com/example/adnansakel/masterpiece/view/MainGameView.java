@@ -59,6 +59,7 @@ public class MainGameView implements Observer{
     RelativeLayout layoutPopupPrivateAuctionLost;
     RelativeLayout layoutPopupBankAuctionLost;
     LinearLayout layoutHomeViewInMainGameView;
+    LinearLayout llEndGameView;
 
     Button button_secondPlayer;
     Button button_thirdPlayer;
@@ -112,6 +113,7 @@ public class MainGameView implements Observer{
         layoutPopupPrivateAuctionLost = (RelativeLayout)view.findViewById(R.id.privateauction_bidlost_view);
         layoutPopupBankAuctionLost = (RelativeLayout)view.findViewById(R.id.bankauction_bidlost_view);
         layoutHomeViewInMainGameView = (LinearLayout)view.findViewById(R.id.linear_layout_homeview_in_MainGameView);
+        llEndGameView = (LinearLayout)view.findViewById(R.id.llEndGameVIew);
 
         if(AppConstants.TotalNumberofPlayers==2){
             button_fourthPlayer.setVisibility(view.INVISIBLE);
@@ -229,6 +231,8 @@ public class MainGameView implements Observer{
         layoutStatusPopup.setVisibility(View.INVISIBLE);
         layoutStatusPopup.setTranslationY(-layoutStatusPopup.getHeight());
         button_status_bar.setBackgroundResource(R.drawable.uparrow);
+
+        llEndGameView.setVisibility(View.INVISIBLE);
 
 
     }
@@ -373,9 +377,16 @@ public class MainGameView implements Observer{
             }
             else{
                 if(data.toString().equals(AppConstants.TURN_TAKER_CHANGED)){
+                    model.roundCounter++;
                     model.setWinner("");
                     button_end_round.setVisibility(View.INVISIBLE);
-                    if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
+                    if(model.roundCounter > AppConstants.TotalNumberofRounds){
+                        //Show end game screen and populate data
+                        hideAllPopupContent();
+                        llEndGameView.setVisibility(View.VISIBLE);
+                        populateFinalScore();
+                    }
+                    else if(model.getTurnTaker().equals(String.valueOf(model.getMyPlayer().getPlayerpositionID()))){
                         /*
                         hideAllPopupContent();
                         layoutStatusPopup.setVisibility(View.VISIBLE);
@@ -427,11 +438,8 @@ public class MainGameView implements Observer{
 
                 }
                 if(data.toString().equals(AppConstants.TURN_ACTION_CHANGED)){
-                    model.roundCounter++;
-                    if(model.roundCounter > AppConstants.TotalNumberofRounds){
-                        //Show end game screen and populate data
-                    }
-                    else if(model.getTurnAction().equals(AppConstants.PRIVATE)){
+
+                    if(model.getTurnAction().equals(AppConstants.PRIVATE)){
                         if (model.getTurnTaker().equals(model.getMyPlayer().getPlayerpositionID() + "")){
                             //Display screen for private auction
                             /*hideAllPopupContent();
