@@ -10,10 +10,10 @@ Our game is inspired by the 1970 board game "Masterpiece" (pictured below). Our 
 
 ## Architecture
 
-Firebase:
+Firebase:  
 We are using Firebase as our database for game events and logic synchronization. The communication with Firebase happens both ways. The application makes changes in the Firebase database and listens to it in order to synchronize gameplay and apply game logic.
 
-Cloudinary:
+Cloudinary:  
 Images required for the game are downloaded from Cloudinary using REST API.
 
 ![Architecure](/Documentation/architecture.jpg?raw=true)
@@ -22,7 +22,7 @@ The Controller classes communicate with Firebase using Firebase APIs and with Cl
 
 ## Team
 
-Daniel Delgado
-Daniel Meusberger
-Geoffrey Cooper
-Jahidul Adnan Sakel
+Daniel Delgado  
+Daniel Meusberger  
+Geoffrey Cooper  
+Jahidul Adnan Sakel  
